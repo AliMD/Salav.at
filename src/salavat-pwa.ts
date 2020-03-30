@@ -1,7 +1,15 @@
-import { html, css, customElement, LitElement, TemplateResult } from 'lit-element';
+import { html, css, customElement, property, TemplateResult, query, PropertyValues } from 'lit-element';
+import { AppDrawerElement } from '@polymer/app-layout/app-drawer/app-drawer';
+import '@polymer/app-layout/app-drawer/app-drawer';
+
+import './director';
+import { BaseElement } from './base-element';
+import { chatRoom } from './chat-room';
 
 @customElement('salavat-pwa')
-export class SalavatPWA extends LitElement {
+export class SalavatPWA extends BaseElement {
+  @property({ type: String })
+  protected page: string = '';
 
   static styles = css`
     :host {
@@ -105,7 +113,41 @@ export class SalavatPWA extends LitElement {
     }
   `;
 
+  @query('app-drawer')
+  protected appDrawer: AppDrawerElement | undefined;
+
   protected render(): TemplateResult {
-    return html`Under Develope`;
+    return html`
+      <app-drawer
+        .align="left"
+        @opened-changed="${(event: Event) => chatRoom.setProperty('sideMenuOpened', (event.target as AppDrawerElement).opened)}"
+      >
+        Side menu ...
+      </app-drawer>
+
+      <main role="main" class="main-content">
+        <!-- <page-home class="page" ?active="${this.page === 'home'}"></page-home> -->
+        Content page ${this.page} ...
+      </main>
+
+      <footer>
+        Made with love ;)
+      </footer>
+    `;
+  }
+
+  protected firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
+    this._log('firstUpdated');
+
+    chatRoom.onPropertyChanged('page', (pageName: string | unknown) => {
+      if (!(typeof pageName === 'string')) return;
+      this.page = pageName;
+    });
+
+    chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
+      if (!this.appDrawer) return;
+      this.appDrawer.opened = Boolean(sideMenuOpened);
+    });
   }
 }
