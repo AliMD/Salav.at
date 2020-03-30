@@ -5,13 +5,11 @@
   "scripts": {
     "s": "yarn build:ts && yarn serve:dev",
     "b": "yarn build",
-    "fu": "yarn full-upgrade",
-    "full-upgrade": "yarn upgrade-interactive --latest",
     "build": "tsc && polymer build --auto-base-path && gulp prpl-server",
     "build:ts": "tsc",
     "build:static": "tsc && polymer build",
     "serve": "prpl-server --root dist --host 0.0.0.0 --port 8080",
-    "serve:dev": "polymer serve --npm"
+    "serve:dev": "gulp serve"
   },
   "dependencies": {
     "@pazh/app-room": "^0.8.3",
