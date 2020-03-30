@@ -5,9 +5,10 @@
   "scripts": {
     "s": "yarn build:ts && yarn serve:dev",
     "b": "yarn build",
-    "build": "tsc && polymer build --auto-base-path && gulp prpl-server",
+    "build": "yarn build:ts && yarn build:polymer && yarn build:gulp",
     "build:ts": "rm -rf js && tsc",
-    "build:static": "tsc && polymer build",
+    "build:polymer": "polymer build --auto-base-path",
+    "build:gulp": "gulp build",
     "serve": "prpl-server --root dist --host 0.0.0.0 --port 8080",
     "serve:dev": "gulp serve"
   },
