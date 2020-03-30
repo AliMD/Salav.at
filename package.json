@@ -1,0 +1,35 @@
+{
+  "name": "salavat-pwa",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "s": "yarn build:ts && yarn serve:dev",
+    "b": "yarn build",
+    "fu": "yarn full-upgrade",
+    "full-upgrade": "yarn upgrade-interactive --latest",
+    "build": "tsc && polymer build --auto-base-path && gulp prpl-server",
+    "build:ts": "tsc",
+    "build:static": "tsc && polymer build",
+    "serve": "prpl-server --root dist --host 0.0.0.0 --port 8080",
+    "serve:dev": "polymer serve --npm"
+  },
+  "dependencies": {
+    "@pazh/app-room": "^0.8.3",
+    "@pazh/element": "^0.6.17",
+    "@polymer/app-layout": "^3.0.0",
+    "@polymer/polymer": "^3.1.0",
+    "@webcomponents/webcomponentsjs": "^2.4.2",
+    "lit-element": "^2.2.1",
+    "pwa-helpers": "^0.9.0"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.3.0",
+    "gulp-replace": "^1.0.0",
+    "polymer-cli": "^1.9.3",
+    "polyserve": "^0.27.0",
+    "prpl-server": "^1.4.0",
+    "typescript": "^3.8.3"
+  }
+}
