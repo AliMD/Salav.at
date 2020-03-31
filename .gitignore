@@ -19,6 +19,7 @@ npm-debug.log*
 /build
 /dist
 /data/**/*.js
+.tsbuildinfo
 
 # Optional npm cache directory
 /.npm

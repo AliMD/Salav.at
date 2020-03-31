@@ -4,6 +4,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "lib": ["es2017", "dom"],
+    "declaration": false,
+    "sourceMap": false,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -11,6 +13,10 @@
     "noFallthroughCasesInSwitch": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
     "outDir": "js"
   },
   "include": [
