@@ -6,11 +6,9 @@ const pageListObject: {
     externalFilePath?: string;
   }
 } = {
+  'home': {},
   '404': {
     // externalFilePath: './page-404',
-  },
-  test: {
-    externalFilePath: './page-test',
   },
 };
 

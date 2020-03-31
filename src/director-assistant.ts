@@ -24,4 +24,3 @@ installRouter(location => {
   const locationPath: string = window.decodeURIComponent(location.pathname);
   chatRoom.setProperty('locationPath', locationPath);
 });
-
