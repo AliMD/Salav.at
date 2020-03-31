@@ -1,6 +1,4 @@
-import { html, css, customElement, property, TemplateResult, query, PropertyValues } from 'lit-element';
-import { AppDrawerElement } from '@polymer/app-layout/app-drawer/app-drawer';
-import '@polymer/app-layout/app-drawer/app-drawer';
+import { html, css, customElement, property, TemplateResult } from 'lit-element';
 
 import './director';
 import { BaseElement } from './base-element';
@@ -113,18 +111,18 @@ export class SalavatPWA extends BaseElement {
     }
   `;
 
-  // @query('app-drawer')
-  // protected appDrawer: AppDrawerElement | undefined;
+  constructor () {
+    super();
+
+    chatRoom.onPropertyChanged('page', (pageName: string | unknown) => {
+      if (!(typeof pageName === 'string')) return;
+      this.page = pageName;
+    });
+  }
 
   protected render(): TemplateResult {
     return html`
-      <!-- <app-drawer
-        .align="left"
-        @opened-changed="${(event: Event) => chatRoom.setProperty('sideMenuOpened', (event.target as AppDrawerElement).opened)}"
-      >
-        Side menu ...
-      </app-drawer> -->
-      <div class="test">j fkjf kj fj</div>
+      <div class="test">j ali kj fj</div>
       <main role="main" class="main-content">
         <!-- <page-home class="page" ?active="${this.page === 'home'}"></page-home> -->
         Content page ${this.page} ...
@@ -136,18 +134,12 @@ export class SalavatPWA extends BaseElement {
     `;
   }
 
-  protected firstUpdated(_changedProperties: PropertyValues) {
-    super.firstUpdated(_changedProperties);
-    this._log('firstUpdated');
+  // protected firstUpdated(_changedProperties: PropertyValues) {
+  //   super.firstUpdated(_changedProperties);
+  //   this._log('firstUpdated');
 
-    chatRoom.onPropertyChanged('page', (pageName: string | unknown) => {
-      if (!(typeof pageName === 'string')) return;
-      this.page = pageName;
-    });
-
-    // chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
-    //   if (!this.appDrawer) return;
-    //   this.appDrawer.opened = Boolean(sideMenuOpened);
-    // });
-  }
+  //   chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
+  //     TODO:
+  //   });
+  // }
 }
