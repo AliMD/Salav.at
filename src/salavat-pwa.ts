@@ -113,18 +113,18 @@ export class SalavatPWA extends BaseElement {
     }
   `;
 
-  @query('app-drawer')
-  protected appDrawer: AppDrawerElement | undefined;
+  // @query('app-drawer')
+  // protected appDrawer: AppDrawerElement | undefined;
 
   protected render(): TemplateResult {
     return html`
-      <app-drawer
+      <!-- <app-drawer
         .align="left"
         @opened-changed="${(event: Event) => chatRoom.setProperty('sideMenuOpened', (event.target as AppDrawerElement).opened)}"
       >
         Side menu ...
-      </app-drawer>
-
+      </app-drawer> -->
+      <div class="test">j fkjf kj fj</div>
       <main role="main" class="main-content">
         <!-- <page-home class="page" ?active="${this.page === 'home'}"></page-home> -->
         Content page ${this.page} ...
@@ -145,9 +145,9 @@ export class SalavatPWA extends BaseElement {
       this.page = pageName;
     });
 
-    chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
-      if (!this.appDrawer) return;
-      this.appDrawer.opened = Boolean(sideMenuOpened);
-    });
+    // chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
+    //   if (!this.appDrawer) return;
+    //   this.appDrawer.opened = Boolean(sideMenuOpened);
+    // });
   }
 }
