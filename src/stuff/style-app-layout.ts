@@ -1,10 +1,33 @@
 import { css } from "lit-element";
-import { appConfig } from './config';
+import { appConfig } from '../config';
 
 const mainImageMargin = 60;
 const borderRadius = Math.round((appConfig.maxWith - (mainImageMargin * 2)) / 2);
 
 export const styleAppLayout = css`
+  /* salavat-pwa */
+  :host {
+    display: block;
+    font-size: 1rem;
+    box-sizing: border-box;
+    height: 100vh;
+    user-select: none;
+    overflow: hidden;
+    background-color: var(--app-primary-color);
+    color: var(--app-primary-text-color);
+  }
+
+  @media screen and (min-width: ${appConfig.maxWith + 1}px) {
+    :host {
+      /* position: relative; FIXME: more test */
+      max-width: ${appConfig.maxWith}px;
+      height: 850px;
+      margin: 1em auto;
+      border-radius: 15px;
+      /* box-shadow: 1px 2px 4px 0px black; */
+    }
+  }
+
   .drawer-content {
     color: var(--app-primary-color);
   }

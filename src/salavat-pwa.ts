@@ -1,13 +1,13 @@
-import { html, css, customElement, property, TemplateResult, query, PropertyValues } from 'lit-element';
+import { html, customElement, property, TemplateResult, query, PropertyValues } from 'lit-element';
 import '@material/mwc-icon-button';
 import { IconButton } from '@material/mwc-icon-button';
 import '@material/mwc-drawer';
 import { Drawer } from '@material/mwc-drawer';
 
 import './director';
-import { BaseElement } from './base-element';
-import { chatRoom } from './chat-room';
-import { styleConfig, appConfig } from './stuff/config';
+import { BaseElement } from './stuff/base-element';
+import { chatRoom } from './stuff/chat-room';
+import { styleConfig } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
 import { menuIcon, heartIcon, getAppIcon } from './stuff/icon';
 
@@ -19,29 +19,7 @@ export class SalavatPWA extends BaseElement {
   @query('mwc-drawer')
   drawer: Drawer | undefined;
 
-  static styles = [styleConfig, styleAppLayout, css`
-    :host {
-      display: block;
-      font-size: 1rem;
-      box-sizing: border-box;
-      height: 100vh;
-      background-color: var(--app-primary-color);
-      overflow: hidden;
-      user-select: none;
-    }
-
-    @media screen and (min-width: ${appConfig.maxWith}px) {
-      :host {
-        /* position: relative; FIXME: more test */
-        max-width: ${appConfig.maxWith}px;
-        height: 850px;
-        margin: 1em auto;
-        border-radius: 15px;
-        /* box-shadow: 1px 2px 4px 0px black; */
-        animation-direction: alternate;
-      }
-    }
-  `];
+  static styles = [styleConfig, styleAppLayout];
 
   constructor () {
     super();
@@ -65,12 +43,9 @@ export class SalavatPWA extends BaseElement {
             <div class="submit-button"></div>
           </div>
           <main role="main">
-            <!-- <page-home class="page" ?active="${this.page === 'home'}"></page-home> -->
-            Content page ${this.page} ...
           </main>
           <div class="footer-text"><span>Made with love</span>${heartIcon}</div>
           <mwc-icon-button class="get-app-button">${getAppIcon}</mwc-icon-button>
-
         </div>
       </mwc-drawer>
     `;

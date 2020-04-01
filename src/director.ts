@@ -1,6 +1,6 @@
-import './director-assistant';
-import { chatRoom } from './chat-room';
-import { pageListObject } from './stuff/config';
+import './stuff/director-assistant';
+import { chatRoom } from './stuff/chat-room';
+import { pageListObject } from './config';
 
 chatRoom.onPropertyChanged('locationPath', async (locationPath: string | unknown) => {
   if (!(typeof locationPath === 'string')) return;
