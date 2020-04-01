@@ -37,7 +37,7 @@ export const styleAppLayout = css`
 
   .menu-button {
     position: absolute;
-    left: 0;
+    left: ${(mainImageMargin - appConfig.iconButtonSize) / 2}px;
     top: 0;
   }
 

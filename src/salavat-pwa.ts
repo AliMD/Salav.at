@@ -60,11 +60,7 @@ export class SalavatPWA extends BaseElement {
           <p>Drawer content ...</p>
         </div>
         <div slot="appContent">
-
-          <mwc-icon-button
-            class="menu-button"
-            @click="${() => { chatRoom.setProperty('sideMenuOpened', true); }}"
-            >${menuIcon}</mwc-icon-button>
+          <mwc-icon-button class="menu-button" @click="${() => { chatRoom.setProperty('sideMenuOpened', true); }}">${menuIcon}</mwc-icon-button>
           <div class="main-image">
             <div class="submit-button"></div>
           </div>

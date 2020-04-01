@@ -14,6 +14,7 @@ export const pageListObject: {
 export const appConfig = {
   maxWith: 540,
   iconSize: 28,
+  iconButtonSize: 56,
 };
 
 export const styleConfig = css`
@@ -23,6 +24,6 @@ export const styleConfig = css`
     --mdc-theme-primary: var(--app-primary-color);
     --mdc-theme-on-primary: var(--app-primary-text-color);
     --mdc-icon-size: ${appConfig.iconSize}px;
-    --mdc-icon-button-size: ${appConfig.iconSize*2}px;
+    --mdc-icon-button-size: ${appConfig.iconButtonSize}px;
   }
 `;
