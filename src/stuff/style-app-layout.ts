@@ -5,6 +5,10 @@ const mainImageMargin = 60;
 const borderRadius = Math.round((appConfig.maxWith - (mainImageMargin * 2)) / 2);
 
 export const styleAppLayout = css`
+  .drawer-content {
+    color: var(--app-primary-color);
+  }
+
   main {
     /* Workaround for IE11 displaying <main> as inline */
     display: block;
@@ -39,8 +43,8 @@ export const styleAppLayout = css`
 
   .get-app-button {
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: 1px;
+    bottom: 1px;
   }
 
   .footer-text {

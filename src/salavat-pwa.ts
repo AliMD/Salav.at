@@ -1,5 +1,8 @@
-import { html, css, customElement, property, TemplateResult } from 'lit-element';
+import { html, css, customElement, property, TemplateResult, query, PropertyValues } from 'lit-element';
 import '@material/mwc-icon-button';
+import { IconButton } from '@material/mwc-icon-button';
+import '@material/mwc-drawer';
+import { Drawer } from '@material/mwc-drawer';
 
 import './director';
 import { BaseElement } from './base-element';
@@ -13,12 +16,15 @@ export class SalavatPWA extends BaseElement {
   @property({ type: String })
   protected page: string = '';
 
+  @query('mwc-drawer')
+  drawer: Drawer | undefined;
+
   static styles = [styleConfig, styleAppLayout, css`
     :host {
       display: block;
       font-size: 1rem;
       box-sizing: border-box;
-      min-height: 100vh;
+      height: 100vh;
       background-color: var(--app-primary-color);
       overflow: hidden;
       user-select: none;
@@ -26,9 +32,9 @@ export class SalavatPWA extends BaseElement {
 
     @media screen and (min-width: ${appConfig.maxWith}px) {
       :host {
-        position: relative;
+        /* position: relative; FIXME: more test */
         max-width: ${appConfig.maxWith}px;
-        min-height: 800px;
+        height: 850px;
         margin: 1em auto;
         border-radius: 15px;
         /* box-shadow: 1px 2px 4px 0px black; */
@@ -49,17 +55,28 @@ export class SalavatPWA extends BaseElement {
   protected render(): TemplateResult {
     this._log('render');
     return html`
-      <mwc-icon-button class="menu-button">${menuIcon}</mwc-icon-button>
-      <div class="main-image">
-        <div class="submit-button"></div>
-      </div>
-      <main role="main">
-        <!-- <page-home class="page" ?active="${this.page === 'home'}"></page-home> -->
-        Content page ${this.page} ...
-      </main>
+      <mwc-drawer type="modal" @MDCDrawer:closed="${() => { chatRoom.setProperty('sideMenuOpened', false); }}">
+        <div class="drawer-content">
+          <p>Drawer content ...</p>
+        </div>
+        <div slot="appContent">
 
-      <div class="footer-text"><span>Made with love</span>${heartIcon}</div>
-      <mwc-icon-button class="get-app-button">${getAppIcon}</mwc-icon-button>
+          <mwc-icon-button
+            class="menu-button"
+            @click="${() => { chatRoom.setProperty('sideMenuOpened', true); }}"
+            >${menuIcon}</mwc-icon-button>
+          <div class="main-image">
+            <div class="submit-button"></div>
+          </div>
+          <main role="main">
+            <!-- <page-home class="page" ?active="${this.page === 'home'}"></page-home> -->
+            Content page ${this.page} ...
+          </main>
+          <div class="footer-text"><span>Made with love</span>${heartIcon}</div>
+          <mwc-icon-button class="get-app-button">${getAppIcon}</mwc-icon-button>
+
+        </div>
+      </mwc-drawer>
     `;
   }
 
@@ -75,8 +92,13 @@ export class SalavatPWA extends BaseElement {
     }
   }
 
-  //   chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
-  //     TODO:
-  //   });
-  // }
+  protected firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
+    this._log('firstUpdated');
+
+    chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
+      if (!(this.drawer && this.drawer.open != sideMenuOpened)) return;
+      this.drawer.open = Boolean(sideMenuOpened);
+    });
+  }
 }
