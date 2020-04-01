@@ -1,115 +1,41 @@
 import { html, css, customElement, property, TemplateResult } from 'lit-element';
+import '@material/mwc-icon-button';
 
 import './director';
 import { BaseElement } from './base-element';
 import { chatRoom } from './chat-room';
+import { styleConfig, appConfig } from './stuff/config';
+import { styleAppLayout } from './stuff/style-app-layout';
+import { menuIcon, heartIcon, getAppIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
   @property({ type: String })
   protected page: string = '';
 
-  static styles = css`
+  static styles = [styleConfig, styleAppLayout, css`
     :host {
       display: block;
-
-      --app-primary-color: #E91E63;
-      --app-section-even-color: #f7f7f7;
-      --app-section-odd-color: white;
-      --app-header-background-color: white;
-      --app-header-text-color: var(--app-dark-text-color);
-      --app-header-selected-color: var(--app-primary-color);
-      --app-drawer-background-color: var(--app-secondary-color);
-      --app-drawer-text-color: var(--app-light-text-color);
-      --app-drawer-selected-color: #78909C;
-
-      --drawer-menu-background-color: #FAFAFA;
-    }
-
-    * {
+      font-size: 1rem;
       box-sizing: border-box;
+      min-height: 100vh;
+      background-color: var(--app-primary-color);
+      overflow: hidden;
+      user-select: none;
     }
 
-    app-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 10;
-      background-color: var(--app-header-background-color);
-      color: var(--app-header-text-color);
-      /* border-bottom: 1px solid #eee; */
-    }
-
-    app-toolbar {
-      display: flex;
-      height: 112px;
-      padding: 0;
-    }
-
-    app-toolbar pazh-header-1 {
-      flex-grow: 1;
-    }
-
-    [main-title] {
-      font-family: 'Pacifico';
-      text-transform: lowercase;
-      font-size: 30px;
-      /* In the narrow layout, the toolbar is offset by the width of the
-      drawer button, and the text looks not centered. Add a padding to
-      match that button */
-      padding-right: 44px;
-    }
-
-    /* Workaround for IE11 displaying <main> as inline */
-    main {
-      display: block;
-    }
-
-    .page {
-      display: none;
-      height: inherit;
-    }
-
-    .page[active] {
-      display: block;
-    }
-
-    .main-content {
-      padding-top: 112px;
-    }
-
-    footer {
-      padding: 0 24px 68px;
-    }
-
-    app-drawer {
-      z-index: 1000;
-      transition: 1s ease-in;
-    }
-
-    /* Wide layout: when the viewport width is bigger than 460px, layout
-    changes to a wide layout */
-    @media (min-width: 600px) {
+    @media screen and (min-width: ${appConfig.maxWith}px) {
       :host {
-        --app-drawer-width: 320px;
-      }
-
-      /* The drawer button isn't shown in the wide layout, so we don't
-      need to offset the title */
-      [main-title] {
-        padding-right: 0px;
-      }
-
-      app-toolbar {
-        height: 58px;
-      }
-
-      .main-content {
-        padding-top: 56px;
+        position: relative;
+        max-width: ${appConfig.maxWith}px;
+        min-height: 800px;
+        margin: 1em auto;
+        border-radius: 15px;
+        /* box-shadow: 1px 2px 4px 0px black; */
+        animation-direction: alternate;
       }
     }
-  `;
+  `];
 
   constructor () {
     super();
