@@ -1,18 +1,6 @@
-import './director-assistant';
-import { chatRoom } from './chat-room';
-
-const pageListObject: {
-  [pageName: string]: {
-    externalFilePath?: string;
-  }
-} = {
-  '404': {
-    // externalFilePath: './page-404',
-  },
-  test: {
-    externalFilePath: './page-test',
-  },
-};
+import './stuff/director-assistant';
+import { chatRoom } from './stuff/chat-room';
+import { pageListObject } from './config';
 
 chatRoom.onPropertyChanged('locationPath', async (locationPath: string | unknown) => {
   if (!(typeof locationPath === 'string')) return;

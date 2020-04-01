@@ -1,6 +1,5 @@
 import { LitElement, property } from 'lit-element';
 import { animationFrame } from '@polymer/polymer/lib/utils/async';
-import 'request-animation-frame-polyfill-es6';
 
 export abstract class BaseElement extends LitElement {
   @property({ type: Boolean, reflect: true }) debug = true;

@@ -1,7 +1,6 @@
 import { AsyncInterface } from '@polymer/polymer/interfaces';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce';
 import { animationFrame } from '@polymer/polymer/lib/utils/async';
-import 'request-animation-frame-polyfill-es6';
 
 export const eventTarget: EventTarget = 'EventTarget' in window ? new EventTarget() : document.createElement('span');
 const dispatchEventHistory: Record<string, unknown> = {};
@@ -15,7 +14,7 @@ const _log = (message: unknown, ...restParam: unknown[]) => {
 };
 
 const onMessage = (eventName: string, callback: (detail?: unknown) => void, option: { preserve: boolean } = { preserve: false }) => {
-  _log('onMessage on %s %s', eventName, option.preserve ? '(preserve)' : '');
+  _log('onMessage: %s %s', eventName, option.preserve ? '(preserve)' : '');
   eventTarget.addEventListener(eventName, (event: Event) => callback(event['detail']));
   if (option.preserve && dispatchEventHistory[eventName] !== undefined) {
     callback(dispatchEventHistory[eventName]);
@@ -24,7 +23,7 @@ const onMessage = (eventName: string, callback: (detail?: unknown) => void, opti
 
 const postMessage = (eventName: string, detail?: string | boolean | unknown, option: { preserve: boolean } = { preserve: false }) => {
   dispatchJobList[eventName] = Debouncer.debounce(dispatchJobList[eventName], animationFrame as AsyncInterface, () => {
-    _log('postMessage %s with %o %s', eventName, detail, option.preserve ? '(preserve)' : '');
+    _log('postMessage: %s with %o %s', eventName, detail, option.preserve ? '(preserve)' : '');
     eventTarget.dispatchEvent(new CustomEvent(eventName, { detail }));
     if (option.preserve) {
       dispatchEventHistory[eventName] = detail;

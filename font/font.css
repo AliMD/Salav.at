@@ -4,6 +4,14 @@
 @font-face {
   font-family: 'Iran Sans';
   font-style: normal;
+  font-weight: 200;
+  src: url('iran-sans/iran-sans-ultra-light.woff') format('woff');
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Iran Sans';
+  font-style: normal;
   font-weight: 300;
   src: url('iran-sans/iran-sans-light.woff') format('woff');
   font-display: fallback;
@@ -20,8 +28,24 @@
 @font-face {
   font-family: 'Iran Sans';
   font-style: normal;
+  font-weight: 500;
+  src: url('iran-sans/iran-sans-medium.woff') format('woff');
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Iran Sans';
+  font-style: normal;
   font-weight: 700;
   src: url('iran-sans/iran-sans-bold.woff') format('woff');
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'Iran Sans';
+  font-style: normal;
+  font-weight: 900;
+  src: url('iran-sans/iran-sans-black.woff') format('woff');
   font-display: fallback;
 }
 

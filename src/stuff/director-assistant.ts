@@ -8,8 +8,8 @@ import { installOfflineWatcher } from 'pwa-helpers/network';
 // });
 
 chatRoom.onMessage('scrollTop', () => {
-  // @TODO: scrollTo polyfills if needed
-  idlePeriod.run(() => window.scrollTo({
+  if (!(window.scrollTo && window.scrollY > 0)) return;
+  idlePeriod.run(() => scrollTo({
     top: 0,
     left: 0,
     behavior: 'smooth'
@@ -24,4 +24,3 @@ installRouter(location => {
   const locationPath: string = window.decodeURIComponent(location.pathname);
   chatRoom.setProperty('locationPath', locationPath);
 });
-
