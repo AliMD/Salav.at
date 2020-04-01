@@ -13,8 +13,12 @@ export const styleAppLayout = css`
     height: 100vh;
     user-select: none;
     overflow: hidden;
-    background-color: var(--app-primary-color);
     color: var(--app-primary-text-color);
+    background-color: var(--app-primary-color);
+    background-image: url('image/background.jpg');
+    background-position-x: right;
+    background-position-y: bottom;
+    background-size: cover;
   }
 
   @media screen and (min-width: ${appConfig.maxWith + 1}px) {
@@ -42,9 +46,9 @@ export const styleAppLayout = css`
     margin: 0 ${mainImageMargin}px;
     height: ${appConfig.mainImageHeight}px;
     border-radius: 0 0 ${borderRadius}px ${borderRadius}px;
-    background-image: url('/design/splash.png');
+    background-image: url('image/main-image.jpg');
     background-position-x: center;
-    background-position-y: bottom;
+    background-position-y: top;
     box-shadow: 2px 4px 50px #37474F;
     background-size: cover;
     transform: translate3d(0,0,0);
