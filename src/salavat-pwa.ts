@@ -63,9 +63,17 @@ export class SalavatPWA extends BaseElement {
     `;
   }
 
-  // protected firstUpdated(_changedProperties: PropertyValues) {
-  //   super.firstUpdated(_changedProperties);
-  //   this._log('firstUpdated');
+  protected updated() {
+    this._log('updated');
+    const iconButtonList: NodeListOf<IconButton> = this.renderRoot.querySelectorAll('mwc-icon-button');
+    for (let i = iconButtonList.length-1; i >= 0; i--) {
+      const internalIcon = iconButtonList.item(i).renderRoot.querySelector<HTMLElement>('.material-icons');
+      if (internalIcon) {
+        internalIcon.style.display = 'none';
+        this._log('Remove mwc-icon-button internal material-icon element!');
+      }
+    }
+  }
 
   //   chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
   //     TODO:
