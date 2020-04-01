@@ -12,6 +12,7 @@ export const pageListObject: {
 };
 
 export const appConfig = {
+  // unit: px
   maxWith: 450,
   mainImageHeight: 500,
   iconSize: 28,
