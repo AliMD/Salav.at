@@ -50,6 +50,10 @@ export class SalavatPWA extends BaseElement {
     this._log('render');
     return html`
       <mwc-icon-button class="menu-button">${menuIcon}</mwc-icon-button>
+      <div class="main-image">
+        <div class="submit-button"></div>
+      </div>
+      <main role="main">
         <!-- <page-home class="page" ?active="${this.page === 'home'}"></page-home> -->
         Content page ${this.page} ...
       </main>
