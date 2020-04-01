@@ -49,8 +49,7 @@ export class SalavatPWA extends BaseElement {
   protected render(): TemplateResult {
     this._log('render');
     return html`
-      <div class="test">j ali kj fj</div>
-      <main role="main" class="main-content">
+      <mwc-icon-button class="menu-button">${menuIcon}</mwc-icon-button>
         <!-- <page-home class="page" ?active="${this.page === 'home'}"></page-home> -->
         Content page ${this.page} ...
       </main>
