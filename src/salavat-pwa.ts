@@ -55,6 +55,7 @@ export class SalavatPWA extends BaseElement {
       </main>
 
       <div class="footer-text"><span>Made with love</span>${heartIcon}</div>
+      <mwc-icon-button class="get-app-button">${getAppIcon}</mwc-icon-button>
     `;
   }
 
