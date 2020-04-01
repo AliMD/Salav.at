@@ -13,8 +13,7 @@ export const pageListObject: {
 
 export const appConfig = {
   maxWith: 540,
-  primaryColor: '#3277b9',
-  textColor: '#ffffff',
+  iconSize: 28,
 };
 
 export const styleConfig = css`
@@ -23,5 +22,6 @@ export const styleConfig = css`
     --app-primary-text-color: #3277b9;
     --mdc-theme-primary: var(--app-primary-color);
     --mdc-theme-on-primary: var(--app-primary-text-color);
+    --mdc-icon-size: ${appConfig.iconSize}px;
   }
 `;

@@ -1,8 +1,8 @@
 import { css } from "lit-element";
 import { appConfig } from './config';
 
-const margin = 100;
-const borderRadius = Math.round((appConfig.maxWith - (margin * 2)) / 2);
+const mainImageMargin = 60;
+const borderRadius = Math.round((appConfig.maxWith - (mainImageMargin * 2)) / 2);
 
 export const styleAppLayout = css`
   main {
@@ -12,7 +12,7 @@ export const styleAppLayout = css`
 
   .main-image {
     width: auto;
-    margin: 0 ${margin}px;
+    margin: 0 ${mainImageMargin}px;
     height: 500px;
     border-radius: 0 0 ${borderRadius}px ${borderRadius}px;
     background-image: url('/design/splash.png');
