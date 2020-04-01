@@ -22,7 +22,7 @@ export const appConfig = {
 export const styleConfig = css`
   :host {
     --app-primary-color: #3277b9;
-    --app-primary-text-color: #3277b9;
+    --app-primary-text-color: #ffffff;
     --mdc-theme-primary: var(--app-primary-color);
     --mdc-theme-on-primary: var(--app-primary-text-color);
     --mdc-icon-size: ${appConfig.iconSize}px;
