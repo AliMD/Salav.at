@@ -54,9 +54,7 @@ export class SalavatPWA extends BaseElement {
         Content page ${this.page} ...
       </main>
 
-      <footer>
-        Made with love ;)
-      </footer>
+      <div class="footer-text"><span>Made with love</span>${heartIcon}</div>
     `;
   }
 
