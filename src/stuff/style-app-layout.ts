@@ -40,7 +40,7 @@ export const styleAppLayout = css`
   .main-image {
     width: auto;
     margin: 0 ${mainImageMargin}px;
-    height: 500px;
+    height: ${appConfig.mainImageHeight}px;
     border-radius: 0 0 ${borderRadius}px ${borderRadius}px;
     background-image: url('/design/splash.png');
     background-position-x: center;
