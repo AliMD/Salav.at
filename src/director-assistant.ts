@@ -8,7 +8,7 @@ import { installOfflineWatcher } from 'pwa-helpers/network';
 // });
 
 chatRoom.onMessage('scrollTop', () => {
-  if (!(typeof window.scrollTo === 'function' && window.scrollX > 0 && window.scrollY > 0)) return;
+  if (!(window.scrollTo && window.scrollY > 0)) return;
   idlePeriod.run(() => scrollTo({
     top: 0,
     left: 0,

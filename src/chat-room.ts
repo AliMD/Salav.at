@@ -1,7 +1,6 @@
 import { AsyncInterface } from '@polymer/polymer/interfaces';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce';
 import { animationFrame } from '@polymer/polymer/lib/utils/async';
-import 'request-animation-frame-polyfill-es6';
 
 export const eventTarget: EventTarget = 'EventTarget' in window ? new EventTarget() : document.createElement('span');
 const dispatchEventHistory: Record<string, unknown> = {};
