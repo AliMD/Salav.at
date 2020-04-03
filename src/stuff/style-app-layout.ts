@@ -7,6 +7,7 @@ const borderRadius = Math.round((appConfig.maxWith - (mainImageMargin * 2)) / 2)
 export const styleAppLayout = css`
   /* salavat-pwa */
   :host {
+    position: relative; /* TODO: more test */
     display: block;
     font-size: 1rem;
     box-sizing: border-box;
@@ -23,7 +24,6 @@ export const styleAppLayout = css`
 
   @media screen and (min-width: ${appConfig.maxWith + 1}px) {
     :host {
-      /* position: relative; FIXME: more test */
       max-width: ${appConfig.maxWith}px;
       height: 850px;
       margin: 1em auto;
@@ -60,6 +60,14 @@ export const styleAppLayout = css`
 
   .submit-button {
 
+  }
+
+  curve-slider {
+    position: absolute;
+    top: ${appConfig.mainImageHeight-105}px;;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
 
   .menu-button {

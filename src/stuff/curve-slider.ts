@@ -2,9 +2,10 @@ import { html, css, customElement, property, TemplateResult } from 'lit-element'
 import { BaseElement } from './base-element';
 
 const layoutConfig = {
-  radius: 150,
-  stroke: 3,
-  circleRadius: 7,
+  radius: 200,
+  stroke: 5,
+  circleRadius: 14,
+  topCrop: 50,
 };
 
 @customElement('curve-slider')
@@ -24,15 +25,15 @@ export class CurveSlider extends BaseElement {
       position: relative;
       box-sizing: border-box;
       width: ${layoutConfig.radius*2}px;
-      height: ${layoutConfig.radius}px;
+      overflow: visible;
     }
 
     .curve-line-mask {
       position: relative;
-      width: inherit;
-      height: inherit;
-      overflow: hidden;
       box-sizing: border-box;
+      width: inherit;
+      height: ${layoutConfig.radius-layoutConfig.topCrop}px;
+      overflow: hidden;
     }
 
     .curve-line-back,
@@ -40,7 +41,7 @@ export class CurveSlider extends BaseElement {
     .circle {
       display: block;
       position: absolute;
-      top: 0;
+      top: ${-layoutConfig.topCrop}px;
       left: 0;
       border-style: solid;
       border-width: ${layoutConfig.stroke}px;
@@ -50,7 +51,7 @@ export class CurveSlider extends BaseElement {
     .curve-line-back,
     .curve-line-progress {
       width: inherit;
-      height: inherit;
+      height: ${layoutConfig.radius}px;
 
       border-top: none;
       border-radius: 0 0 ${layoutConfig.radius}px ${layoutConfig.radius}px;
@@ -60,38 +61,35 @@ export class CurveSlider extends BaseElement {
       border-color: var(--curve-line-back-color, #eeeeee);
     }
 
+    .circle,
     .curve-line-progress {
-      transform-origin: ${layoutConfig.radius}px 0;
-      transform: rotate3d(0, 0, 1, 180deg);
-
       border-color: var(--curve-line-progress-color, #cf7a59);
-      transition: transform 1s;
-      will-change: transform;
-
-      animation-name: ani;
-      animation-duration: 5s;
+      animation-duration: 10s;
       animation-timing-function: ease-in-out;
       animation-iteration-count: infinite;
       animation-direction: alternate;
     }
 
+    .curve-line-progress {
+      transform-origin: ${layoutConfig.radius}px 0;
+      transform: rotate3d(0, 0, 1, 180deg);
+
+      transition: transform 1s;
+      will-change: transform;
+      animation-name: ani;
+    }
+
     .circle {
-      left: ${-layoutConfig.circleRadius}px;
+      left: ${-layoutConfig.circleRadius+1}px;
       width: ${layoutConfig.circleRadius*2}px;
       height: ${layoutConfig.circleRadius*2}px;
 
       border-radius: ${layoutConfig.circleRadius}px;
-      border-color: var(--curve-line-progress-color, #cf7a59);
       background-color: var(--curve-line-back-color, #eeeeee);
 
-      transform-origin: ${layoutConfig.radius + layoutConfig.circleRadius}px 0;
+      transform-origin: ${layoutConfig.radius+layoutConfig.circleRadius-2}px 0;
       transform: rotate3d(0, 0, 1, 1deg);
-
       animation-name: ani2;
-      animation-duration: 5s;
-      animation-timing-function: ease-in-out;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
     }
 
     @keyframes ani {
