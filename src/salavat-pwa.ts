@@ -5,6 +5,7 @@ import '@material/mwc-drawer';
 import { Drawer } from '@material/mwc-drawer';
 
 import './director';
+import './stuff/curve-slider';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig } from './config';
@@ -42,6 +43,7 @@ export class SalavatPWA extends BaseElement {
           <div class="main-image">
             <div class="submit-button"></div>
           </div>
+          <curve-slider></curve-slider>
           <main role="main">
           </main>
           <div class="footer-text"><span>Made with love</span>${heartIcon}</div>

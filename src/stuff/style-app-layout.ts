@@ -7,19 +7,23 @@ const borderRadius = Math.round((appConfig.maxWith - (mainImageMargin * 2)) / 2)
 export const styleAppLayout = css`
   /* salavat-pwa */
   :host {
+    position: relative; /* TODO: more test */
     display: block;
     font-size: 1rem;
     box-sizing: border-box;
     height: 100vh;
     user-select: none;
     overflow: hidden;
-    background-color: var(--app-primary-color);
     color: var(--app-primary-text-color);
+    background-color: var(--app-primary-color);
+    background-image: url('image/background.jpg');
+    background-position-x: right;
+    background-position-y: bottom;
+    background-size: cover;
   }
 
   @media screen and (min-width: ${appConfig.maxWith + 1}px) {
     :host {
-      /* position: relative; FIXME: more test */
       max-width: ${appConfig.maxWith}px;
       height: 850px;
       margin: 1em auto;
@@ -42,9 +46,9 @@ export const styleAppLayout = css`
     margin: 0 ${mainImageMargin}px;
     height: ${appConfig.mainImageHeight}px;
     border-radius: 0 0 ${borderRadius}px ${borderRadius}px;
-    background-image: url('/design/splash.png');
+    background-image: url('image/main-image.jpg');
     background-position-x: center;
-    background-position-y: bottom;
+    background-position-y: top;
     box-shadow: 2px 4px 50px #37474F;
     background-size: cover;
     transform: translate3d(0,0,0);
@@ -56,6 +60,14 @@ export const styleAppLayout = css`
 
   .submit-button {
 
+  }
+
+  curve-slider {
+    position: absolute;
+    top: ${appConfig.mainImageHeight-105}px;;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
 
   .menu-button {
