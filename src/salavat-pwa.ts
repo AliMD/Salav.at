@@ -7,6 +7,7 @@ import '@material/mwc-snackbar';
 
 import './director';
 import './stuff/snack-bar';
+import './stuff/salavat-counter';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig } from './config';
@@ -45,6 +46,12 @@ export class SalavatPWA extends BaseElement {
             <div class="submit-button"></div>
           </div>
           <main role="main">
+            <salavat-counter
+              .value="${Math.floor(Math.random()*1_000_000)}"
+              label-first="تا این‌لحظه"
+              label-end="صلوات نذر شده"
+            >
+            </salavat-counter>
           </main>
           <div class="footer-text" @click="${() => chatRoom.setProperty('snackbar', { open: true, text: 'ساخته شده با عشق' })}"><span>Made with love</span>${heartIcon}</div>
           <mwc-icon-button class="get-app-button">${getAppIcon}</mwc-icon-button>
