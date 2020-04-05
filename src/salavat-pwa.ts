@@ -3,8 +3,10 @@ import '@material/mwc-icon-button';
 import { IconButton } from '@material/mwc-icon-button';
 import '@material/mwc-drawer';
 import { Drawer } from '@material/mwc-drawer';
+import '@material/mwc-snackbar';
 
 import './director';
+import './stuff/snack-bar';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig } from './config';
@@ -21,7 +23,7 @@ export class SalavatPWA extends BaseElement {
 
   static styles = [styleConfig, styleAppLayout];
 
-  constructor () {
+  constructor() {
     super();
 
     chatRoom.onPropertyChanged('page', (pageName: string | unknown) => {
@@ -33,21 +35,22 @@ export class SalavatPWA extends BaseElement {
   protected render(): TemplateResult {
     this._log('render');
     return html`
-      <mwc-drawer type="modal" @MDCDrawer:closed="${() => { chatRoom.setProperty('sideMenuOpened', false); }}">
+      <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false) }">
         <div class="drawer-content">
           <p>Drawer content ...</p>
         </div>
         <div slot="appContent">
-          <mwc-icon-button class="menu-button" @click="${() => { chatRoom.setProperty('sideMenuOpened', true); }}">${menuIcon}</mwc-icon-button>
+          <mwc-icon-button class="menu-button" @click="${() => chatRoom.setProperty('sideMenuOpened', true) }">${menuIcon}</mwc-icon-button>
           <div class="main-image">
             <div class="submit-button"></div>
           </div>
           <main role="main">
           </main>
-          <div class="footer-text"><span>Made with love</span>${heartIcon}</div>
+          <div class="footer-text" @click="${() => chatRoom.setProperty('snackbar', { open: true, text: 'ساخته شده با عشق' })}"><span>Made with love</span>${heartIcon}</div>
           <mwc-icon-button class="get-app-button">${getAppIcon}</mwc-icon-button>
         </div>
       </mwc-drawer>
+      <snack-bar></snack-bar>
     `;
   }
 

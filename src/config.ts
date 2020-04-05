@@ -12,11 +12,12 @@ export const pageListObject: {
 };
 
 export const appConfig = {
-  // unit: px
-  maxWith: 450,
-  mainImageHeight: 500,
-  iconSize: 28,
-  iconButtonSize: 56,
+  snackbarTimeout: 5000, //ms
+  // UI
+  maxWith: 450, //px
+  mainImageHeight: 500, //px
+  iconSize: 28, //px
+  iconButtonSize: 56, //px
 };
 
 export const styleConfig = css`
