@@ -1,4 +1,4 @@
-import { html, css, customElement, property, TemplateResult } from 'lit-element';
+import { html, css, customElement, property, TemplateResult, PropertyValues } from 'lit-element';
 import { styleMap } from 'lit-html/directives/style-map';
 import { BaseElement } from './base-element';
 import { idlePeriod } from '@polymer/polymer/lib/utils/async';
@@ -86,6 +86,22 @@ export class SalavatCounter extends BaseElement {
     valueArrayHtml.push(valueArrayString.pop() as string);
     return valueArrayHtml;
   }
+
+  firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
+    this._computeValueInterval();
+  }
+
+  protected _computeValueInterval () {
+    this._log('_computeValueInterval');
+    idlePeriod.run(() => {
+      this.value += Math.floor(Math.random() * 100);
+      this._computeValueInterval();
     });
+  }
+
+  computeValue() {
+    this._log('computeValue');
+    this.value += Math.floor(Math.random() * 100);
   }
 }
