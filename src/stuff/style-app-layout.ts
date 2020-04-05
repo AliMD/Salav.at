@@ -40,6 +40,7 @@ export const styleAppLayout = css`
   main {
     /* Workaround for IE11 displaying <main> as inline */
     display: block;
+    padding-top: 2em;
   }
 
   .main-image {
