@@ -3,7 +3,6 @@ import '@material/mwc-icon-button';
 import { IconButton } from '@material/mwc-icon-button';
 import '@material/mwc-drawer';
 import { Drawer } from '@material/mwc-drawer';
-// import '@material/mwc-button';
 import '@material/mwc-snackbar';
 
 import './director';
