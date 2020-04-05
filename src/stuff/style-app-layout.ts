@@ -16,10 +16,11 @@ export const styleAppLayout = css`
     overflow: hidden;
     color: var(--app-primary-text-color);
     background-color: var(--app-primary-color);
-    background-image: url('image/background.jpg');
+    background-image: url("image/background.jpg");
     background-position-x: right;
     background-position-y: bottom;
     background-size: cover;
+    background-repeat: no-repeat;
   }
 
   @media screen and (min-width: ${appConfig.maxWith + 1}px) {
@@ -48,20 +49,45 @@ export const styleAppLayout = css`
     margin: 0 ${mainImageMargin}px;
     height: ${appConfig.mainImageHeight}px;
     border-radius: 0 0 ${borderRadius}px ${borderRadius}px;
-    background-image: url('image/main-image.jpg');
+    background-image: url("image/main-image.jpg");
     background-position-x: center;
     background-position-y: top;
-    box-shadow: 2px 4px 50px #37474F;
+    background-repeat: no-repeat;
     background-size: cover;
+    box-shadow: 2px 4px 50px #37474F;
     transform: translate3d(0,0,0);
     will-change: transform;
     transition-property: transform;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
+
+    /* style submit-button */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
   }
 
   .submit-button {
+    background-color: var(--app-primary-color);
+    border-radius: 100px 100px 0 0;
+    padding: 5px 45px 15px;
+    opacity: 0.9;
+    transform: translate3d(0px, 80px, 0px);
+    will-change: transform;
+    transition: 1s transform ease-out;
 
+  }
+
+  .submit-button[show] {
+    transform: translate3d(0, 20px, 0);
+  }
+
+  .submit-button svg {
+    fill: white;
+    width: ${appConfig.iconSize * 1.5}px;
+    height: ${appConfig.iconSize * 1.5}px;
   }
 
   .menu-button {

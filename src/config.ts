@@ -15,7 +15,7 @@ export const appConfig = {
   snackbarTimeout: 5000, //ms
   // UI
   maxWith: 450, //px
-  mainImageHeight: 500, //px
+  mainImageHeight: 430, //px
   iconSize: 28, //px
   iconButtonSize: 56, //px
 };
