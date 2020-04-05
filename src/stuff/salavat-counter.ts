@@ -1,11 +1,8 @@
-import { html, css, customElement, property, TemplateResult, PropertyValues } from 'lit-element';
-import { styleMap } from 'lit-html/directives/style-map';
+import { html, css, customElement, property, TemplateResult, PropertyValues, query } from 'lit-element';
 import { BaseElement } from './base-element';
 import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 
-const oneDigitWith = 42;
-const minWidth = 150;
-const commaSeparator = (1000).toLocaleString('fa').charAt(1);
+const commaSeparator: string = (1000).toLocaleString('fa').charAt(1);
 
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
@@ -16,10 +13,19 @@ export class SalavatCounter extends BaseElement {
   labelAfter: string = '';
 
   @property({ type: Number, attribute: false })
-  protected _value: number = 8888;
+  protected _value: number = 10000;
 
   @property({ type: Number })
   rate: number = 3;
+
+  @property({ type: Number })
+  minWidth: number = 110;
+
+  @property({ type: Number })
+  updateInterval: number = 500;
+
+  @query('.value')
+  protected _valueElement?: HTMLElement;
 
   get value (): number {
     return this._value;
@@ -29,8 +35,18 @@ export class SalavatCounter extends BaseElement {
     :host {
       display: block;
       line-height: 1;
+      box-sizing: border-box;
       white-space: nowrap;
       text-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
+      text-align: left;
+      will-change: padding;
+      transition-property: padding;
+      transition-duration: 0;
+      transition-timing-function: ease-in-out;
+    }
+
+    :host([animate]) {
+      transition-duration: 2s;
     }
 
     .label {
@@ -42,6 +58,7 @@ export class SalavatCounter extends BaseElement {
 
     .label.before {
       text-align: right;
+      margin-right: 15px;
     }
 
     .label.after {
@@ -49,11 +66,12 @@ export class SalavatCounter extends BaseElement {
     }
 
     .value {
-      text-align: left;
+      display: inline-block;
       font-size: 5rem;
       font-size: 1.8rem;
       font-size: 5rem;
       font-weight: 500;
+      /* border: 1px dashed gray; */
     }
 
     .comma {
@@ -63,14 +81,12 @@ export class SalavatCounter extends BaseElement {
 
   protected render(): TemplateResult {
     this._log('render');
-    const value: string = this._value.toLocaleString('fa');
-    const width = value.length * oneDigitWith;
-    const marginLeft = width < minWidth ? (minWidth - width) / 2 + 'px' : '0';
-    this.style.width = `${width < minWidth ? minWidth : width}px`;
     return html`
       <div class="label before">${this.labelBefore}</div>
-      <div class="value" style="${styleMap({ marginLeft })}">
+      <div class="value">
+        <!--  -->
         ${this._styledValue}
+        <!--  -->
       </div>
       <div class="label after">${this.labelAfter}</div>
     `;
@@ -90,21 +106,51 @@ export class SalavatCounter extends BaseElement {
     return valueArrayHtml;
   }
 
-  protected firstUpdated(_changedProperties: PropertyValues) {
+  protected async firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
+    this._log('firstUpdated');
     this._computeValueInterval();
+    await this.updateComplete;
+    setTimeout(() => this.setAttribute('animate', ''), this.updateInterval*2);
   }
 
-  protected _computeValueInterval () {
+  protected _computeValueInterval() {
     this._log('_computeValueInterval');
-    idlePeriod.run(() => {
-      this._value += Math.floor(Math.random() * 100);
-      this._computeValueInterval();
-    });
+    this.computeValue();
+    idlePeriod.run(() => setTimeout(() => this._computeValueInterval(), this.updateInterval))
   }
 
   computeValue() {
     this._log('computeValue');
-    this._value += Math.floor(Math.random() * 100);
+    this._value ++;
+  }
+
+  updated(_changedProperties: PropertyValues) {
+    super.updated(_changedProperties);
+    this._log('updated');
+    this.computeMargin();
+  }
+
+  async computeMargin(): Promise<void> {
+    if (!this._valueElement) return;
+    this._log('computeWidth');
+
+    const elementWidth: number = this.getBoundingClientRect().width;
+    let valueWidth: number = this._valueElement.getBoundingClientRect().width;
+    valueWidth = this._round(valueWidth);
+
+    if (valueWidth < this.minWidth) {
+      valueWidth = this.minWidth;
+    }
+    else if (valueWidth > elementWidth) {
+      valueWidth = elementWidth;
+    }
+
+    const margin = (elementWidth - valueWidth) / 2;
+    this.style.paddingLeft = this.style.paddingRight = margin > 0 ? `${margin}px` : '0';
+  }
+
+  _round (number, step: number = 20) {
+    return Math.ceil(number / step) * step;
   }
 }
