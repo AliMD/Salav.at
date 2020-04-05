@@ -37,13 +37,9 @@ export class SalavatPWA extends BaseElement {
     return html`
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false) }">
         <div class="drawer-content">
-          <ul>
-              <li>کمپین</li>
-              <li>داستان ما</li>
-              <li>دانلود اپلیکیشن</li>
-              <li>دانلود والپیپر</li>
-
-            </ul>
+          <mwc-icon-button>کمپین ${getAppIcon}</mwc-icon-button>
+          <mwc-icon-button>داستان من ${getAppIcon}</mwc-icon-button>
+          <mwc-icon-button>دانلود اپلیکیشن ${getAppIcon}</mwc-icon-button>
         </div>
         <div slot="appContent">
           <mwc-icon-button class="menu-button" @click="${() => chatRoom.setProperty('sideMenuOpened', true) }">${menuIcon}</mwc-icon-button>
