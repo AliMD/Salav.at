@@ -9,6 +9,7 @@ export const styleAppLayout = css`
   :host {
     display: block;
     font-size: 1rem;
+    font-weight: 300;
     box-sizing: border-box;
     height: 100vh;
     user-select: none;

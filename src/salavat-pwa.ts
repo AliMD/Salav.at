@@ -47,13 +47,12 @@ export class SalavatPWA extends BaseElement {
           </div>
           <main role="main">
             <salavat-counter
-              .value="${Math.floor(Math.random()*1_000_000)}"
-              label-first="تا این‌لحظه"
-              label-end="صلوات نذر شده"
+              label-before="تا این لحظه"
+              label-after="صلوات نذر شده"
             >
             </salavat-counter>
           </main>
-          <div class="footer-text" @click="${() => chatRoom.setProperty('snackbar', { open: true, text: 'ساخته شده با عشق' })}"><span>Made with love</span>${heartIcon}</div>
+          <div class="footer-text" @click="${() => chatRoom.setProperty('snackbar', { open: true, text: 'ساخته شده با عشق' })}"><span>Made with</span>${heartIcon}</div>
           <mwc-icon-button class="get-app-button">${getAppIcon}</mwc-icon-button>
         </div>
       </mwc-drawer>
