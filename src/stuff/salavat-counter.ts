@@ -5,6 +5,7 @@ import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 
 const oneDigitWith = 42;
 const minWidth = 150;
+const commaSeparator = (1000).toLocaleString('fa').charAt(1);
 
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
@@ -51,6 +52,10 @@ export class SalavatCounter extends BaseElement {
       font-size: 5rem;
       font-weight: 500;
     }
+
+    .comma {
+      color: var(--app-accent-color, #a11);
+    }
   `];
 
   protected render(): TemplateResult {
@@ -62,15 +67,25 @@ export class SalavatCounter extends BaseElement {
     return html`
       <div class="label before">${this.labelFirst}</div>
       <div class="value" style="${styleMap({ marginLeft })}">
-        ${value}
+        ${this.styleValue()}
       </div>
       <div class="label after">${this.labelEnd}</div>
     `;
   }
 
-  updated () {
-    idlePeriod.run(()=>{
-      this.value += Math.random() * 1000;
+  styleValue(): Array<TemplateResult | string> {
+    const valueArrayString: string[] = this.value.toLocaleString('fa').split(commaSeparator);
+    if (valueArrayString.length < 2) {
+      return valueArrayString;
+    }
+    const valueArrayHtml: Array<TemplateResult | string> = []
+    for (let i=0; i < valueArrayString.length-1; i++) {
+      valueArrayHtml.push(valueArrayString[i]);
+      valueArrayHtml.push(html`<span class="comma">${commaSeparator}</span>`);
+    }
+    valueArrayHtml.push(valueArrayString.pop() as string);
+    return valueArrayHtml;
+  }
     });
   }
 }
