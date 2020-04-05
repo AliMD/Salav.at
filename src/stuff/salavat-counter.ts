@@ -10,21 +10,24 @@ const commaSeparator = (1000).toLocaleString('fa').charAt(1);
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
   @property({ type: String, attribute: 'label-before' })
-  protected labelFirst: string = '';
+  labelBefore: string = '';
 
   @property({ type: String, attribute: 'label-after' })
-  protected labelEnd: string = '';
+  labelAfter: string = '';
+
+  @property({ type: Number, attribute: false })
+  protected _value: number = 8888;
 
   @property({ type: Number })
-  protected value: number = 8888;
+  rate: number = 3;
 
-  @property({ type: Number })
-  protected rate: number = 3;
+  get value (): number {
+    return this._value;
+  }
 
   static styles = [css`
     :host {
       display: block;
-      margin: 0 auto;
       line-height: 1;
       white-space: nowrap;
       text-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
@@ -60,21 +63,21 @@ export class SalavatCounter extends BaseElement {
 
   protected render(): TemplateResult {
     this._log('render');
-    const value: string = this.value.toLocaleString('fa');
+    const value: string = this._value.toLocaleString('fa');
     const width = value.length * oneDigitWith;
     const marginLeft = width < minWidth ? (minWidth - width) / 2 + 'px' : '0';
     this.style.width = `${width < minWidth ? minWidth : width}px`;
     return html`
-      <div class="label before">${this.labelFirst}</div>
+      <div class="label before">${this.labelBefore}</div>
       <div class="value" style="${styleMap({ marginLeft })}">
-        ${this.styleValue()}
+        ${this._styledValue}
       </div>
-      <div class="label after">${this.labelEnd}</div>
+      <div class="label after">${this.labelAfter}</div>
     `;
   }
 
-  styleValue(): Array<TemplateResult | string> {
-    const valueArrayString: string[] = this.value.toLocaleString('fa').split(commaSeparator);
+  protected get _styledValue(): Array<TemplateResult | string> {
+    const valueArrayString: string[] = this._value.toLocaleString('fa').split(commaSeparator);
     if (valueArrayString.length < 2) {
       return valueArrayString;
     }
@@ -87,7 +90,7 @@ export class SalavatCounter extends BaseElement {
     return valueArrayHtml;
   }
 
-  firstUpdated(_changedProperties: PropertyValues) {
+  protected firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._computeValueInterval();
   }
@@ -95,13 +98,13 @@ export class SalavatCounter extends BaseElement {
   protected _computeValueInterval () {
     this._log('_computeValueInterval');
     idlePeriod.run(() => {
-      this.value += Math.floor(Math.random() * 100);
+      this._value += Math.floor(Math.random() * 100);
       this._computeValueInterval();
     });
   }
 
   computeValue() {
     this._log('computeValue');
-    this.value += Math.floor(Math.random() * 100);
+    this._value += Math.floor(Math.random() * 100);
   }
 }
