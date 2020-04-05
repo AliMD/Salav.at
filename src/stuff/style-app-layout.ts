@@ -90,4 +90,8 @@ export const styleAppLayout = css`
     width: 1rem;
     height: 1rem;
   }
+
+  .drawer-content{
+    
+  }
 `;
