@@ -20,6 +20,7 @@
   "dependencies": {
     "@material/mwc-drawer": "^0.14.1",
     "@material/mwc-icon-button": "^0.14.1",
+    "@material/mwc-snackbar": "^0.14.1",
     "@polymer/polymer": "^3.1.0",
     "@webcomponents/webcomponentsjs": "^2.4.2",
     "lit-element": "^2.2.1",
