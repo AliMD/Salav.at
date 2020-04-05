@@ -26,7 +26,7 @@ chatRoom.onPropertyChanged('page', async (pageName: string | unknown) => {
     }
     catch (err) {
       chatRoom.postMessage('invalidUri');
-      console.error('<director> Eror in importing file %s for page %s: %o', page?.externalFilePath, pageName, err);
+      console.error('<director> Error in importing file %s for page %s: %o', page?.externalFilePath, pageName, err);
     }
   }
 });
