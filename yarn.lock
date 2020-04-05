@@ -784,7 +784,7 @@
   dependencies:
     tslib "^1.9.3"
 
-"@material/button@6.0.0-canary.35a32aaea.0":
+"@material/button@6.0.0-canary.35a32aaea.0", "@material/button@=6.0.0-canary.35a32aaea.0":
   version "6.0.0-canary.35a32aaea.0"
   resolved "https://registry.yarnpkg.com/@material/button/-/button-6.0.0-canary.35a32aaea.0.tgz#bc47f32f98516353400eca03108a9d1a812d5e90"
   integrity sha512-iPQlUT+ku4q2KWeMp+IQEp+ejVQY1dKubblLwi6yfOdhlTkPvnf983LD+Iols3OeFELzEYsPOiV8/Iv9O09ZaA==
@@ -881,6 +881,19 @@
     "@material/dom" "=6.0.0-canary.35a32aaea.0"
     "@material/ripple" "=6.0.0-canary.35a32aaea.0"
     lit-element "^2.3.0"
+    tslib "^1.10.0"
+
+"@material/mwc-button@^0.14.1":
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/@material/mwc-button/-/mwc-button-0.14.1.tgz#9823c874f4a10fbe551bf148ea0270f443a6385c"
+  integrity sha512-yXJDWsg1fdVp0afbLvtf7VbeWNhePlzK5oYZIaFzP7dmCWW8GvLK+04h/7mYMMSZeRTCcNJuRlM3Yi0S8P2YEQ==
+  dependencies:
+    "@material/button" "=6.0.0-canary.35a32aaea.0"
+    "@material/mwc-base" "^0.14.1"
+    "@material/mwc-icon" "^0.14.1"
+    "@material/mwc-ripple" "^0.14.1"
+    lit-element "^2.3.0"
+    lit-html "^1.1.2"
     tslib "^1.10.0"
 
 "@material/mwc-drawer@^0.14.1":

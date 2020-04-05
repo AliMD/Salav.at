@@ -1,6 +1,8 @@
 import { customElement, query, TemplateResult, html, PropertyValues } from 'lit-element';
-import { BaseElement } from './base-element';
 import { Snackbar } from '@material/mwc-snackbar';
+import '@material/mwc-button';
+
+import { BaseElement } from './base-element';
 import { appConfig } from '../config';
 import { chatRoom } from './chat-room';
 import { closeIcon } from './icon';
