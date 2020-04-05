@@ -92,6 +92,6 @@ export const styleAppLayout = css`
   }
 
   .drawer-content{
-    
+    background-image: url()
   }
 `;

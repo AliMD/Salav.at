@@ -40,6 +40,7 @@ export class SalavatPWA extends BaseElement {
           <mwc-icon-button>کمپین ${getAppIcon}</mwc-icon-button>
           <mwc-icon-button>داستان من ${getAppIcon}</mwc-icon-button>
           <mwc-icon-button>دانلود اپلیکیشن ${getAppIcon}</mwc-icon-button>
+          <mwc-icon-button>دانلود والپیپر ${getAppIcon}</mwc-icon-button>
         </div>
         <div slot="appContent">
           <mwc-icon-button class="menu-button" @click="${() => chatRoom.setProperty('sideMenuOpened', true) }">${menuIcon}</mwc-icon-button>
