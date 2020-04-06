@@ -32,10 +32,11 @@ export const styleAppLayout = css`
     }
   }
   .counter {
-    height: 175px;
+    height: 10rem;
     border-radius: 0px 90px 90px 0px;
-    width: 87%;
+    width: 14rem;
     float: left;
+    padding-top: 1rem;
     background-color: #102f4b;
 
     display: flex;
@@ -48,41 +49,22 @@ export const styleAppLayout = css`
     -moz-box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
     box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
   }
-  .options {
-    padding-top:200px;
+  .drawer-items-div {
+    padding-top: 5rem;
     width: 100%;
     color: white;
     font-size: 15pt;
-  }
-  .options ul {
-    padding-left: 45px;
-    padding-right: 10px;
-  }
-  .options ul li {
     display: flex;
-    float:left;
-    margin:1rem;
-  }
-  .options ul li p {
-    margin: 0;
-  }
-  .options ul li svg {
-    fill: white;
-  }
-  .menuBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
   }
   .drawer-content {
+    padding-top: 4rem;
     box-sizing: border-box;
     height: 100vh;
-    width:100%;
     background-image: url('image/background.jpg');
     background-position: center;
     background-position: left;
     background-size: cover;
-    padding-top: 30%;
   }
   .my-salavat-title {
     margin:0;
@@ -90,6 +72,17 @@ export const styleAppLayout = css`
   .my-salavat-number {
     margin: 1rem 0rem 0rem 0rem;
     font-size: 35pt;
+  }
+  mwc-button {
+    padding-left: 3.5rem;
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  mwc-button svg {
+    fill: white;
+    margin-right: 0.5rem;
   }
   main {
     /* Workaround for IE11 displaying <main> as inline */

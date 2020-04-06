@@ -10,7 +10,7 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon } from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, getWallpaperIcon, getSatisfiedIcon, getForumIcon, getCampainIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -40,29 +40,12 @@ export class SalavatPWA extends BaseElement {
             <p class="my-salavat-title"> صلوات های من: </p>
             <h1 class="my-salavat-number"> ۱۰۰ </h1>
           </div>
-          <div class="options">
-            <ul style="list-style-type:none;text-align:left">
-              <li>
-                <p>کمپین</p>
-                <mwc-button class="menuBtn">${getAppIcon}</mwc-button>
-              </li>
-              <li>
-                <p>داستان ما</p>
-                <mwc-button class="menuBtn">${getAppIcon}</mwc-button>
-              </li>
-              <li>
-                <p>حمایت</p>
-                <mwc-button class="menuBtn">${getAppIcon}</mwc-button>
-              </li>
-              <li>
-                <p>دانلود والپیپر</p>
-                <mwc-button class="menuBtn">${getAppIcon}</mwc-button>
-              </li>
-              <li>
-                <p>دانلود اپلیکیشن</p>
-                <mwc-button class="menuBtn">${getAppIcon}</mwc-button>
-              </li>
-            </ul>
+          <div class="drawer-items-div">
+                <mwc-button>کمپین ${getCampainIcon}</mwc-button>
+                <mwc-button>داستان ما ${getForumIcon}</mwc-button>
+                <mwc-button>حمایت ${getSatisfiedIcon}</mwc-button>
+                <mwc-button>دانلود والپیپر ${getWallpaperIcon}</mwc-button>
+                <mwc-button>دانلود اپلیکیشن${getAppIcon}</mwc-button>
           </div>
         </div>
         <div slot="appContent">
