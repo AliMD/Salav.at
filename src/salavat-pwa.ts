@@ -6,8 +6,12 @@ import { Drawer } from '@material/mwc-drawer';
 import '@material/mwc-snackbar';
 
 import './director';
+<<<<<<< HEAD
+import './stuff/curve-slider';
+=======
 import './stuff/snack-bar';
 import './stuff/salavat-counter';
+>>>>>>> develop
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig } from './config';
