@@ -4,6 +4,8 @@ import { IconButton } from '@material/mwc-icon-button';
 import '@material/mwc-drawer';
 import { Drawer } from '@material/mwc-drawer';
 import '@material/mwc-snackbar';
+import { ripple } from '@material/mwc-ripple/ripple-directive.js';
+import { style as rippleStyle } from '@material/mwc-ripple/mwc-ripple-css';
 
 import './director';
 import './stuff/snack-bar';
@@ -17,22 +19,22 @@ import { menuIcon, heartIcon, getAppIcon, plusIcon } from './stuff/icon';
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
   @property({ type: String })
-  protected page: string = '';
+  protected _page: string = '';
 
   @property({ type: Boolean })
-  protected showSubmit: boolean = false;
+  protected _showSubmit: boolean = false;
 
   @query('mwc-drawer')
-  drawer: Drawer | undefined;
+  protected _drawer!: Drawer;
 
-  static styles = [styleConfig, styleAppLayout];
+  static styles = [styleConfig, styleAppLayout, rippleStyle];
 
   constructor() {
     super();
 
     chatRoom.onPropertyChanged('page', (pageName: string | unknown) => {
       if (!(typeof pageName === 'string')) return;
-      this.page = pageName;
+      this._page = pageName;
     });
   }
 
@@ -51,10 +53,11 @@ export class SalavatPWA extends BaseElement {
             ${menuIcon}
           </mwc-icon-button>
           <div class="main-image">
-            <div class="submit-button" ?show="${this.showSubmit}">${plusIcon}</div>
+            <div class="submit-button" ?show="${this._showSubmit}" .ripple="${ripple()}">${plusIcon}</div>
           </div>
           <main role="main">
             <salavat-counter
+              .debug="${false}"
               label-before="تا این لحظه"
               label-after="صلوات نذر شده"
             >
@@ -66,7 +69,7 @@ export class SalavatPWA extends BaseElement {
           >
             <span>Made with</span>${heartIcon}
           </div>
-          <mwc-icon-button class="get-app-button" @click="${() => this.showSubmit = !this.showSubmit}">${getAppIcon}</mwc-icon-button>
+          <mwc-icon-button class="get-app-button" @click="${() => this._showSubmit = !this._showSubmit}">${getAppIcon}</mwc-icon-button>
         </div>
       </mwc-drawer>
       <snack-bar></snack-bar>
@@ -88,11 +91,11 @@ export class SalavatPWA extends BaseElement {
   protected firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
-    this.showSubmit = true;
+    this._showSubmit = true;
 
     chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
-      if (!(this.drawer && this.drawer.open != sideMenuOpened)) return;
-      this.drawer.open = Boolean(sideMenuOpened);
+      if (!(this._drawer && this._drawer.open != sideMenuOpened)) return;
+      this._drawer.open = Boolean(sideMenuOpened);
     });
   }
 }
