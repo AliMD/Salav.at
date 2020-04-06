@@ -36,7 +36,7 @@ export class SalavatPWA extends BaseElement {
     return html`
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => { chatRoom.setProperty('sideMenuOpened', false); }}">
         <div class="drawer-content">
-          <p>Drawer content ...</p>
+          <p> this is where we start </p>
         </div>
         <div slot="appContent">
           <mwc-icon-button class="menu-button" @click="${() => { chatRoom.setProperty('sideMenuOpened', true); }}">${menuIcon}</mwc-icon-button>
