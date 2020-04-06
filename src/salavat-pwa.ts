@@ -6,17 +6,14 @@ import { Drawer } from '@material/mwc-drawer';
 import '@material/mwc-snackbar';
 
 import './director';
-<<<<<<< HEAD
-import './stuff/curve-slider';
-=======
+// import './stuff/curve-slider';
 import './stuff/snack-bar';
 import './stuff/salavat-counter';
->>>>>>> develop
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon } from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, plusIcon, getCampainIcon, getForumIcon, getSatisfiedIcon, getWallpaperIcon} from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -45,7 +42,17 @@ export class SalavatPWA extends BaseElement {
     return html`
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false) }">
         <div class="drawer-content">
-          <p>Drawer content ...</p>
+          <div class="counter">
+            <p class="my-salavat-title"> صلوات های من: </p>
+            <h1 class="my-salavat-number"> ۱۰۰ </h1>
+          </div>
+          <div class="drawer-items-div">
+                <mwc-button><P>کمپین</P> ${getCampainIcon}</mwc-button>
+                <mwc-button><P>داستان ما</P> ${getForumIcon}</mwc-button>
+                <mwc-button><P>حمایت</P> ${getSatisfiedIcon}</mwc-button>
+                <mwc-button><P>دانلود والپیپر</P> ${getWallpaperIcon}</mwc-button>
+                <mwc-button><P>دانلود اپلیکیشن</P>${getAppIcon}</mwc-button>
+          </div>
         </div>
         <div slot="appContent">
           <mwc-icon-button
@@ -59,6 +66,7 @@ export class SalavatPWA extends BaseElement {
               <mwc-icon-button>${plusIcon}</mwc-icon-button>
             </div>
           </div>
+          <curve-slider></curve-slider>
           <main role="main">
             <salavat-counter
               .debug="${false}"
