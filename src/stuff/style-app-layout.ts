@@ -111,5 +111,6 @@ export const styleAppLayout = css`
     margin-left: 0.375rem;
     width: 1rem;
     height: 1rem;
+    fill: white;
   }
 `;
