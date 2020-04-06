@@ -61,7 +61,7 @@ export class SalavatCounter extends BaseElement {
 
     .label.before {
       text-align: right;
-      margin-right: 15px;
+      margin-right: 10px;
     }
 
     .label.after {
@@ -113,13 +113,14 @@ export class SalavatCounter extends BaseElement {
   protected async firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
+
     this._computeDisplayCountInterval();
 
-    chatRoom.onMessage('window-resized', () => {
+    chatRoom.onMessage('window-resized', () => this.computePadding());
+    chatRoom.onMessage('window-loaded', () => {
       this.computePadding();
+      setTimeout(() => this.setAttribute('animate', ''), this.updateInterval);
     });
-
-    setTimeout(() => this.setAttribute('animate', ''), this.updateInterval*2);
   }
 
   protected _computeDisplayCountInterval() {
@@ -141,11 +142,12 @@ export class SalavatCounter extends BaseElement {
   }
 
   computePadding(): void {
-    if (!this._displayCountElement) return;
+    const displayCountElement = this._displayCountElement;
+    if (!displayCountElement) return;
     this._log('computeWidth');
 
     const elementWidth: number = this.getBoundingClientRect().width;
-    let countWidth: number = this._displayCountElement.getBoundingClientRect().width;
+    let countWidth: number = displayCountElement.getBoundingClientRect().width;
     countWidth = this._round(countWidth);
 
     if (countWidth < this.minWidth) {

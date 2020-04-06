@@ -7,6 +7,10 @@ window.addEventListener('resize', () => {
   chatRoom.postMessage('window-resized'); // _dispatch debounce with animationFrame automatically
 });
 
+window.addEventListener('load', () => {
+  chatRoom.postMessage('window-loaded'); // _dispatch debounce with animationFrame automatically
+});
+
 chatRoom.onMessage('scrollTop', () => {
   if (!(window.scrollTo && window.scrollY > 0)) return;
   idlePeriod.run(() => scrollTo({
