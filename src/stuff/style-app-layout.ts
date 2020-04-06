@@ -72,16 +72,16 @@ export const styleAppLayout = css`
   .submit-button {
     background-color: var(--app-primary-color);
     border-radius: 100px 100px 0 0;
-    padding: 0 45px 15px;
+    padding: 0 45px 20px;
     opacity: 0.9;
-    transform: translate3d(0px, 80px, 0px);
+    transform: translate3d(0px, 85px, 0px);
     will-change: transform;
     transition: 1s transform ease-out;
     --mdc-icon-size: ${appConfig.iconSize * 1.6}px;
   }
 
   .submit-button[show] {
-    transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 25px, 0);
   }
 
   display-count {
