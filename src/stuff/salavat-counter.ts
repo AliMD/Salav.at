@@ -124,7 +124,6 @@ export class SalavatCounter extends BaseElement {
 
   computeDisplayCount() {
     this._log('computeDisplayCount');
-    this.displayCount ++;
     const now = Date.now();
     this.displayCount = Math.round(this.count * (now - this.startTim) / (now - this.startTim + this.futureTimePeriod));
   }
@@ -132,10 +131,10 @@ export class SalavatCounter extends BaseElement {
   updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties);
     this._log('updated');
-    this.computeMargin();
+    this.computePadding();
   }
 
-  async computeMargin(): Promise<void> {
+  computePadding(): void {
     if (!this._displayCountElement) return;
     this._log('computeWidth');
 
@@ -150,8 +149,8 @@ export class SalavatCounter extends BaseElement {
       countWidth = elementWidth;
     }
 
-    const margin = (elementWidth - countWidth) / 2;
-    this.style.paddingLeft = this.style.paddingRight = margin > 0 ? `${margin}px` : '0';
+    const padding = (elementWidth - countWidth) / 2;
+    this.style.paddingLeft = this.style.paddingRight = padding > 0 ? `${padding}px` : '0';
   }
 
   _round (number, step: number = 20) {
