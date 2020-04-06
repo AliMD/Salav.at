@@ -84,6 +84,10 @@ export const styleAppLayout = css`
     transform: translate3d(0, 20px, 0);
   }
 
+  display-count {
+    margin: 2rem 1rem 0;
+  }
+
   .menu-button {
     position: absolute;
     left: ${(mainImageMargin - appConfig.iconButtonSize) / 2}px;

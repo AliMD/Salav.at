@@ -1,6 +1,7 @@
 import { html, css, customElement, property, TemplateResult, PropertyValues, query } from 'lit-element';
 import { BaseElement } from './base-element';
 import { idlePeriod } from '@polymer/polymer/lib/utils/async';
+import { chatRoom } from './chat-room';
 
 const commaSeparator: string = (1000).toLocaleString('fa').charAt(1);
 
@@ -78,6 +79,7 @@ export class SalavatCounter extends BaseElement {
 
     .comma {
       color: var(--app-accent-color, #a11);
+      padding: 0 5px;
     }
   `];
 
@@ -112,7 +114,11 @@ export class SalavatCounter extends BaseElement {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
     this._computeDisplayCountInterval();
-    await this.updateComplete;
+
+    chatRoom.onMessage('window-resized', () => {
+      this.computePadding();
+    });
+
     setTimeout(() => this.setAttribute('animate', ''), this.updateInterval*2);
   }
 

@@ -3,9 +3,9 @@ import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 import { installRouter } from 'pwa-helpers/router';
 import { installOfflineWatcher } from 'pwa-helpers/network';
 
-// window.addEventListener('resize', () => {
-//   chatRoom.postMessage('window-resized'); // _dispatch debounce with animationFrame automatically
-// });
+window.addEventListener('resize', () => {
+  chatRoom.postMessage('window-resized'); // _dispatch debounce with animationFrame automatically
+});
 
 chatRoom.onMessage('scrollTop', () => {
   if (!(window.scrollTo && window.scrollY > 0)) return;
