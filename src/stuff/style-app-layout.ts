@@ -94,6 +94,26 @@ export const styleAppLayout = css`
   }
 
   .drawer-content{
-    background-image: url()
+    width:257px;
+    height:736px;
+    background-image: url('image/background.jpg');
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    padding-top:1px;
+
+  }
+
+  .sideMenu{
+    margin-top:250px;
+
+  }
+
+  .menuBtn{
+    display:block;
+    text-align:center;
+    color:#fff;
+    margin-top:50px;
+    --mdc-icon-size: 1.5rem;
   }
 `;
