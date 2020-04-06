@@ -70,7 +70,7 @@ export class SalavatCounter extends BaseElement {
       font-size: 5rem;
       font-size: 1.8rem;
       font-size: 5rem;
-      font-weight: 500;
+      font-weight: 700;
       /* border: 1px dashed gray; */
     }
 
