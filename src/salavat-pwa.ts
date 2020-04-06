@@ -4,6 +4,7 @@ import { IconButton } from '@material/mwc-icon-button';
 import '@material/mwc-drawer';
 import { Drawer } from '@material/mwc-drawer';
 import '@material/mwc-snackbar';
+import '@material/mwc-slider';
 
 import './director';
 import './stuff/snack-bar';
@@ -56,6 +57,7 @@ export class SalavatPWA extends BaseElement {
             </div>
           </div>
           <main role="main">
+            <mwc-slider value="10" min="1" max="114" step="1" pin dir="ltr"></mwc-slider>
             <salavat-counter
               .debug="${false}"
               label-before="تا این لحظه"

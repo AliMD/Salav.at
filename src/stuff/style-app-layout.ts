@@ -41,7 +41,6 @@ export const styleAppLayout = css`
   main {
     /* Workaround for IE11 displaying <main> as inline */
     display: block;
-    padding-top: 2em;
   }
 
   .main-image {
@@ -55,7 +54,7 @@ export const styleAppLayout = css`
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 2px 4px 50px #37474F;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
     will-change: transform;
     transition-property: transform;
     transition-duration: 200ms;
@@ -84,8 +83,13 @@ export const styleAppLayout = css`
     transform: translate3d(0, 25px, 0);
   }
 
+  mwc-slider {
+    display: block;
+    margin: 1rem ${mainImageMargin}px;
+  }
+
   display-count {
-    margin: 2rem 1rem 0;
+    margin: 0 1rem;
   }
 
   .menu-button {
