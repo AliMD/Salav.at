@@ -12,14 +12,20 @@ export class SalavatCounter extends BaseElement {
   @property({ type: String, attribute: 'label-after' })
   labelAfter: string = '';
 
-  @property({ type: Number, attribute: false })
-  displayCount: number = 10000;
-
-  @property({ type: Number })
-  rate: number = 3;
-
   @property({ type: Number })
   minWidth: number = 110;
+
+  @property({ type: Number })
+  startTim: number = 1586082944419; // Apr 05 2020 15:05:44
+
+  @property({ type: Number })
+  futureTimePeriod: number = 3 * 60 * 60 * 1000; // 3 hours
+
+  @property({ type: Number })
+  count: number = 100000; // Real salavat count
+
+  @property({ type: Number, attribute: false })
+  displayCount: number = 0;
 
   @property({ type: Number })
   updateInterval: number = 500;
@@ -119,6 +125,8 @@ export class SalavatCounter extends BaseElement {
   computeDisplayCount() {
     this._log('computeDisplayCount');
     this.displayCount ++;
+    const now = Date.now();
+    this.displayCount = Math.round(this.count * (now - this.startTim) / (now - this.startTim + this.futureTimePeriod));
   }
 
   updated(_changedProperties: PropertyValues) {
