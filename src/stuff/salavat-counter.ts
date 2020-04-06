@@ -12,24 +12,26 @@ export class SalavatCounter extends BaseElement {
   @property({ type: String, attribute: 'label-after' })
   labelAfter: string = '';
 
-  @property({ type: Number, attribute: false })
-  protected _value: number = 10000;
-
-  @property({ type: Number })
-  rate: number = 3;
-
   @property({ type: Number })
   minWidth: number = 110;
 
   @property({ type: Number })
+  startTim: number = 1586082944419; // Apr 05 2020 15:05:44
+
+  @property({ type: Number })
+  futureTimePeriod: number = 3 * 60 * 60 * 1000; // 3 hours
+
+  @property({ type: Number })
+  count: number = 100000; // Real salavat count
+
+  @property({ type: Number, attribute: false })
+  displayCount: number = 0;
+
+  @property({ type: Number })
   updateInterval: number = 500;
 
-  @query('.value')
-  protected _valueElement?: HTMLElement;
-
-  get value (): number {
-    return this._value;
-  }
+  @query('.display-count')
+  protected _displayCountElement?: HTMLElement;
 
   static styles = [css`
     :host {
@@ -65,7 +67,7 @@ export class SalavatCounter extends BaseElement {
       text-align: left;
     }
 
-    .value {
+    .display-count {
       display: inline-block;
       font-size: 5rem;
       font-size: 1.8rem;
@@ -83,46 +85,48 @@ export class SalavatCounter extends BaseElement {
     this._log('render');
     return html`
       <div class="label before">${this.labelBefore}</div>
-      <div class="value">
+      <div class="display-count">
         <!--  -->
-        ${this._styledValue}
+        ${this._styledDisplayCount}
         <!--  -->
       </div>
       <div class="label after">${this.labelAfter}</div>
     `;
   }
 
-  protected get _styledValue(): Array<TemplateResult | string> {
-    const valueArrayString: string[] = this._value.toLocaleString('fa').split(commaSeparator);
-    if (valueArrayString.length < 2) {
-      return valueArrayString;
+  protected get _styledDisplayCount(): Array<TemplateResult | string> {
+    const countArrayString: string[] = this.displayCount.toLocaleString('fa').split(commaSeparator);
+    if (countArrayString.length < 2) {
+      return countArrayString;
     }
-    const valueArrayHtml: Array<TemplateResult | string> = []
-    for (let i=0; i < valueArrayString.length-1; i++) {
-      valueArrayHtml.push(valueArrayString[i]);
-      valueArrayHtml.push(html`<span class="comma">${commaSeparator}</span>`);
+    const countArrayHtml: Array<TemplateResult | string> = []
+    for (let i=0; i < countArrayString.length-1; i++) {
+      countArrayHtml.push(countArrayString[i]);
+      countArrayHtml.push(html`<span class="comma">${commaSeparator}</span>`);
     }
-    valueArrayHtml.push(valueArrayString.pop() as string);
-    return valueArrayHtml;
+    countArrayHtml.push(countArrayString.pop() as string);
+    return countArrayHtml;
   }
 
   protected async firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
-    this._computeValueInterval();
+    this._computeDisplayCountInterval();
     await this.updateComplete;
     setTimeout(() => this.setAttribute('animate', ''), this.updateInterval*2);
   }
 
-  protected _computeValueInterval() {
-    this._log('_computeValueInterval');
-    this.computeValue();
-    idlePeriod.run(() => setTimeout(() => this._computeValueInterval(), this.updateInterval))
+  protected _computeDisplayCountInterval() {
+    this._log('_computeDisplayCountInterval');
+    this.computeDisplayCount();
+    idlePeriod.run(() => setTimeout(() => this._computeDisplayCountInterval(), this.updateInterval))
   }
 
-  computeValue() {
-    this._log('computeValue');
-    this._value ++;
+  computeDisplayCount() {
+    this._log('computeDisplayCount');
+    this.displayCount ++;
+    const now = Date.now();
+    this.displayCount = Math.round(this.count * (now - this.startTim) / (now - this.startTim + this.futureTimePeriod));
   }
 
   updated(_changedProperties: PropertyValues) {
@@ -132,21 +136,21 @@ export class SalavatCounter extends BaseElement {
   }
 
   async computeMargin(): Promise<void> {
-    if (!this._valueElement) return;
+    if (!this._displayCountElement) return;
     this._log('computeWidth');
 
     const elementWidth: number = this.getBoundingClientRect().width;
-    let valueWidth: number = this._valueElement.getBoundingClientRect().width;
-    valueWidth = this._round(valueWidth);
+    let countWidth: number = this._displayCountElement.getBoundingClientRect().width;
+    countWidth = this._round(countWidth);
 
-    if (valueWidth < this.minWidth) {
-      valueWidth = this.minWidth;
+    if (countWidth < this.minWidth) {
+      countWidth = this.minWidth;
     }
-    else if (valueWidth > elementWidth) {
-      valueWidth = elementWidth;
+    else if (countWidth > elementWidth) {
+      countWidth = elementWidth;
     }
 
-    const margin = (elementWidth - valueWidth) / 2;
+    const margin = (elementWidth - countWidth) / 2;
     this.style.paddingLeft = this.style.paddingRight = margin > 0 ? `${margin}px` : '0';
   }
 
