@@ -31,11 +31,66 @@ export const styleAppLayout = css`
       /* box-shadow: 1px 2px 4px 0px black; */
     }
   }
+  .counter {
+    height: 175px;
+    border-radius: 0px 90px 90px 0px;
+    width: 87%;
+    float: left;
+    background-color: #102f4b;
 
-  .drawer-content {
-    color: var(--app-primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    -webkit-box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
   }
-
+  .options {
+    padding-top:200px;
+    width: 100%;
+    color: white;
+    font-size: 15pt;
+  }
+  .options ul {
+    padding-left: 45px;
+    padding-right: 10px;
+  }
+  .options ul li {
+    display: flex;
+    float:left;
+    margin:1rem;
+  }
+  .options ul li p {
+    margin: 0;
+  }
+  .options ul li svg {
+    fill: white;
+  }
+  .menuBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .drawer-content {
+    box-sizing: border-box;
+    height: 100vh;
+    width:100%;
+    background-image: url('image/background.jpg');
+    background-position: center;
+    background-position: left;
+    background-size: cover;
+    padding-top: 30%;
+  }
+  .my-salavat-title {
+    margin:0;
+  }
+  .my-salavat-number {
+    margin: 1rem 0rem 0rem 0rem;
+    font-size: 35pt;
+  }
   main {
     /* Workaround for IE11 displaying <main> as inline */
     display: block;
