@@ -4,8 +4,6 @@ import { IconButton } from '@material/mwc-icon-button';
 import '@material/mwc-drawer';
 import { Drawer } from '@material/mwc-drawer';
 import '@material/mwc-snackbar';
-import { ripple } from '@material/mwc-ripple/ripple-directive.js';
-import { style as rippleStyle } from '@material/mwc-ripple/mwc-ripple-css';
 
 import './director';
 import './stuff/snack-bar';
@@ -27,7 +25,7 @@ export class SalavatPWA extends BaseElement {
   @query('mwc-drawer')
   protected _drawer!: Drawer;
 
-  static styles = [styleConfig, styleAppLayout, rippleStyle];
+  static styles = [styleConfig, styleAppLayout];
 
   constructor() {
     super();
@@ -53,7 +51,9 @@ export class SalavatPWA extends BaseElement {
             ${menuIcon}
           </mwc-icon-button>
           <div class="main-image">
-            <div class="submit-button" ?show="${this._showSubmit}" .ripple="${ripple()}">${plusIcon}</div>
+            <div class="submit-button" ?show="${this._showSubmit}">
+              <mwc-icon-button>${plusIcon}</mwc-icon-button>
+            </div>
           </div>
           <main role="main">
             <salavat-counter
