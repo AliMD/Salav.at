@@ -34,8 +34,62 @@ export const styleAppLayout = css`
     }
   }
 
+  .counter {
+    height: 10rem;
+    border-radius: 0px 90px 90px 0px;
+    width: 14rem;
+    float: left;
+    padding-top: 1rem;
+    background-color: #102f4b;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    -webkit-box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+  }
+  .drawer-items-div {
+    padding-top: 5rem;
+    width: 100%;
+    color: white;
+    font-size: 15pt;
+    display: flex;
+    flex-direction: column;
+  }
   .drawer-content {
-    color: var(--app-primary-color);
+    padding-top: 4rem;
+    box-sizing: border-box;
+    height: 100vh;
+    background-image: url('image/background.jpg');
+    background-position: center;
+    background-position: left;
+    background-size: cover;
+  }
+  .my-salavat-title {
+    margin:0;
+  }
+  .my-salavat-number {
+    margin: 1rem 0rem 0rem 0rem;
+    font-size: 35pt;
+  }
+  mwc-button {
+    padding-left: 3.5rem;
+    margin-top: 0.75rem; */
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+  }
+  mwc-button svg {
+    fill: white;
+    margin-right: 0.5rem;
+  }
+  mwc-button p {
+    color: white;
   }
 
   main {
