@@ -13,7 +13,7 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon } from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, plusIcon, salavatIcon, qrCode } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -42,6 +42,20 @@ export class SalavatPWA extends BaseElement {
   protected render(): TemplateResult {
     this._log('render');
     return html`
+      <!-- HTML structure for desktop -->
+      <div class="desktop-page">
+        <div class="salavat-icon">
+          ${salavatIcon}
+        </div>
+        <div class="message">
+          <P>این صفحه فعلا برای موبایل طراحی شده است.</p>
+          <P>لطفا <span>QR Code</span> را با موبایل اسکن کنید.</p>
+        </div>
+        <div class="qr-code">
+          ${qrCode}
+        </div>
+      </div>
+
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false) }">
         <div class="drawer-content">
           <div class="salavat-badge">

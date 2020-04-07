@@ -22,10 +22,46 @@ export const styleAppLayout = css`
     background-repeat: no-repeat;
     background-size: cover;
   }
-
+  /* disable desktop message for smaller devices */
+  .desktop-page {
+    display: none;
+  }
   @media screen and (min-width: ${appConfig.maxWith + 1}px) {
+    mwc-drawer {
+      display: none;
+    }
     :host {
       /* TODO: desktop design */
+      background-image: url("image/desktop-BG.jpg");
+      background-position-x: right;
+      background-position-y: bottom;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .desktop-page {
+      fill: var(--app-primary-text-color);
+      font-weight: 200;
+      display: block;
+      height: 100vh;
+      text-align: center;
+    }
+    .desktop-page p {
+      font-size: 1.6rem;
+      margin: 1rem 0rem 1rem 0rem;
+    }
+    .salavat-icon {
+      display: flex;
+      padding: 3rem 2rem 0rem 2rem;
+      justify-content: center;
+      align-items: center;
+      fill: var(--app-primary-text-color);
+    }
+    .message {
+      margin-bottom: 5.6rem;
+    }
+    .message span {
+      color: var(--app-accent-color);
+      font-weight: 400;
     }
   }
 
