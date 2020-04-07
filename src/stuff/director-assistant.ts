@@ -3,6 +3,12 @@ import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 import { installRouter } from 'pwa-helpers/router';
 import { installOfflineWatcher } from 'pwa-helpers/network';
 
+
+const lockOrientation: (orientation: OrientationLockType) => Promise<void> = screen['lockOrientation'] || screen['mozLockOrientation'] || screen['msLockOrientation'] || screen.orientation?.lock;
+if (lockOrientation) {
+  lockOrientation('portrait');
+}
+
 window.addEventListener('resize', () => {
   chatRoom.postMessage('window-resized'); // _dispatch debounce with animationFrame automatically
 });

@@ -1,4 +1,5 @@
 import { html, customElement, property, TemplateResult, query, PropertyValues } from 'lit-element';
+import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import { IconButton } from '@material/mwc-icon-button';
 import '@material/mwc-drawer';
@@ -11,7 +12,7 @@ import './stuff/snack-bar';
 import './stuff/salavat-counter';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
-import { styleConfig } from './config';
+import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
 import { menuIcon, heartIcon, getAppIcon, plusIcon } from './stuff/icon';
 
@@ -26,6 +27,8 @@ export class SalavatPWA extends BaseElement {
   @query('mwc-drawer')
   protected _drawer!: Drawer;
 
+  protected _menuListArray: MenuItem[] = pageListArray.filter(menuItem => menuItem.sideMenu) as MenuItem[];
+
   static styles = [styleConfig, styleAppLayout];
 
   constructor() {
@@ -35,6 +38,10 @@ export class SalavatPWA extends BaseElement {
       if (!(typeof pageName === 'string')) return;
       this._page = pageName;
     });
+
+    chatRoom.onPropertyChanged('showSubmit', (showSubmit: boolean | unknown) => {
+      this._showSubmit = Boolean(showSubmit);
+    });
   }
 
   protected render(): TemplateResult {
@@ -42,9 +49,23 @@ export class SalavatPWA extends BaseElement {
     return html`
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false) }">
         <div class="drawer-content">
-          <p>Drawer content ...</p>
+          <div class="salavat-badge">
+            <div class="title">صلوات های من:</div>
+            <div class="number">${(114).toLocaleString('fa')}</div>
+          </div>
+          <div class="menu">
+            ${this._menuListArray.map((menuItem) => html`
+              <a href="/${menuItem.slug}">
+                <mwc-button fullwidth>
+                  <div class="button-content">${menuItem.title} ${menuItem.icon}</div>
+                </mwc-button>
+              </a>
+            `)}
+          </div>
+          <div class="gap"></div>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at Beta v0.5</a>
         </div>
-        <div slot="appContent">
+        <div slot="appContent" page="${this._page}">
           <mwc-icon-button
             class="menu-button"
             @click="${() => chatRoom.setProperty('sideMenuOpened', true) }"
@@ -57,13 +78,24 @@ export class SalavatPWA extends BaseElement {
             </div>
           </div>
           <main role="main">
-            <mwc-slider value="10" min="1" max="114" step="1" pin dir="ltr"></mwc-slider>
-            <salavat-counter
-              .debug="${false}"
-              label-before="تا این لحظه"
-              label-after="صلوات نذر شده"
-            >
-            </salavat-counter>
+            <div class="page" ?active="${this._page === 'home'}">
+              <mwc-slider value="10" min="1" max="114" step="1" pin dir="ltr"></mwc-slider>
+              <salavat-counter
+                .debug="${false}"
+                label-before="تا این لحظه"
+                label-after="صلوات نذر شده"
+              >
+              </salavat-counter>
+            </div>
+            <div class="page" ?active="${this._page === 'about'}">
+              About page ....
+              <!-- TODO: design about page -->
+            </div>
+            <!-- TODO: add other page like about ... -->
+            <div class="page" ?active="${this._page === '404'}">
+              Page not found ...
+              <!-- TODO: design simple 404 page -->
+            </div>
           </main>
           <div
             class="footer-text"
@@ -93,7 +125,6 @@ export class SalavatPWA extends BaseElement {
   protected firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
-    this._showSubmit = true;
 
     chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
       if (!(this._drawer && this._drawer.open != sideMenuOpened)) return;

@@ -19,28 +19,108 @@ export const styleAppLayout = css`
     background-image: url("image/background.jpg");
     background-position-x: right;
     background-position-y: bottom;
-    background-size: cover;
     background-repeat: no-repeat;
+    background-size: cover;
   }
 
   @media screen and (min-width: ${appConfig.maxWith + 1}px) {
     :host {
-      /* position: relative; FIXME: more test */
-      max-width: ${appConfig.maxWith}px;
-      height: 850px;
-      margin: 1em auto;
-      border-radius: 15px;
-      /* box-shadow: 1px 2px 4px 0px black; */
+      /* TODO: desktop design */
     }
   }
 
   .drawer-content {
-    color: var(--app-primary-color);
+    display: flex; /* for gap and footer */
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-top: 4rem;
+    height: 100%;
+    color: var(--app-primary-text-color);
+    background-color: var(--app-primary-color);
+    background-image: url("image/background.jpg");
+    background-position-x: left;
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: left;
+    --mdc-theme-primary: var(--app-primary-text-color);
+    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+
+  .drawer-content .salavat-badge {
+    border-radius: 0px 100px 100px 0px;
+    margin-right: 1.8rem;
+    padding: 1.8rem 3rem;
+    background-color: var(--app-dark-background-color);
+    box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+  }
+
+  .drawer-content .salavat-badge .title {
+    font-size: 1.2rem;
+    word-spacing: -4px;
+  }
+
+  .drawer-content .salavat-badge .number {
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+
+  .drawer-content .menu {
+    padding: 1rem;
+    --mdc-typography-button-font-weight: 300;
+    --mdc-typography-button-letter-spacing: normal;
+    --mdc-typography-button-font-size: 1.2rem;
+  }
+
+  .drawer-content .menu a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .drawer-content .menu mwc-button {
+    margin-top: 1rem;
+    /* --mdc-button-horizontal-padding: 3rem; */
+  }
+
+  .drawer-content .menu mwc-button .button-content {
+    padding-left: 1.8rem;
+    flex-grow: 1;
+    word-wrap: nowrap;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .drawer-content .menu svg {
+    margin-right: 0.5rem;
+    width: 24px;
+    height: 24px;
+    fill: var(--app-primary-text-color); /* svg icons */
+  }
+
+  .drawer-content .gap {
+    flex-grow: 1;
+  }
+
+  .drawer-footer {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    margin-left: 3rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+    font-size: 14px;
+    /* opacity: 0.9; */
   }
 
   main {
     /* Workaround for IE11 displaying <main> as inline */
     display: block;
+  }
+
+  .page:not([active]) {
+    display: none;
   }
 
   .main-image {
@@ -54,10 +134,16 @@ export const styleAppLayout = css`
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 2px 4px 50px #37474F;
-    transform: translate3d(0, 0, 0);
+
+    /* transform: translate3d(0, 0, 0);
     will-change: transform;
-    transition-property: transform;
-    transition-duration: 200ms;
+    transition-property: transform; */
+    /* TODO: refactor to translate3d for animation performance */
+    margin-top: -200px;
+    will-change: margin-top;
+    transition-property: margin-top;
+
+    transition-duration: 250ms;
     transition-timing-function: ease-out;
 
     /* style submit-button */
@@ -68,6 +154,10 @@ export const styleAppLayout = css`
     overflow: hidden;
   }
 
+  [page="home"] .main-image {
+    margin-top: 0px;
+  }
+
   .submit-button {
     background-color: var(--app-primary-color);
     border-radius: 100px 100px 0 0;
@@ -75,7 +165,7 @@ export const styleAppLayout = css`
     opacity: 0.9;
     transform: translate3d(0px, 85px, 0px);
     will-change: transform;
-    transition: 1s transform ease-out;
+    transition: 500ms transform ease-out;
     --mdc-icon-size: ${appConfig.iconSize * 1.6}px;
   }
 
