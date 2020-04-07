@@ -31,11 +31,13 @@ chatRoom.onPropertyChanged('page', async (pageName: string | unknown) => {
   // }
 });
 
-chatRoom.onPropertyChanged('page', () => {
+chatRoom.onPropertyChanged('page', (pageName: string | unknown) => {
   // Close side menu on page changed
   chatRoom.setProperty('sideMenuOpened', false);
   // Scroll to top on page changed
   chatRoom.postMessage('scrollTop');
+
+  chatRoom.setProperty('showSubmit', pageName === 'home');
 });
 
 chatRoom.onMessage('invalidUri', () => {
