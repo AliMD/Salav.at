@@ -1,9 +1,6 @@
 import { css } from "lit-element";
 import { appConfig } from '../config';
 
-const mainImageMargin = 60;
-const borderRadius = Math.round((appConfig.maxWith - (mainImageMargin * 2)) / 2);
-
 export const styleAppLayout = css`
   /* salavat-pwa */
   :host {
@@ -125,9 +122,9 @@ export const styleAppLayout = css`
 
   .main-image {
     width: auto;
-    margin: 0 ${mainImageMargin}px;
+    margin: 0 ${appConfig.mainImageMargin}px;
     height: ${appConfig.mainImageHeight}px;
-    border-radius: 0 0 ${borderRadius}px ${borderRadius}px;
+    border-radius: 0 0 200px 200px;
     background-image: url("image/main-image.jpg");
     background-position-x: center;
     background-position-y: top;
@@ -173,18 +170,9 @@ export const styleAppLayout = css`
     transform: translate3d(0, 25px, 0);
   }
 
-  mwc-slider {
-    display: block;
-    margin: 1rem ${mainImageMargin}px;
-  }
-
-  display-count {
-    margin: 0 1rem;
-  }
-
   .menu-button {
     position: absolute;
-    left: ${(mainImageMargin - appConfig.iconButtonSize) / 2}px;
+    left: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
     top: 0;
   }
 

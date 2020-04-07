@@ -66,6 +66,7 @@ export const appConfig = {
   // UI
   maxWith: 450, //px
   mainImageHeight: 430, //px
+  mainImageMargin: 60, //px
   iconSize: 28, //px
   iconButtonSize: 56, //px
 };
