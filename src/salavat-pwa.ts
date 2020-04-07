@@ -4,11 +4,10 @@ import '@material/mwc-icon-button';
 import { IconButton } from '@material/mwc-icon-button';
 import '@material/mwc-drawer';
 import { Drawer } from '@material/mwc-drawer';
-import '@material/mwc-snackbar';
 
 import './director';
 import './stuff/snack-bar';
-import './stuff/salavat-counter';
+import './stuff/page-home';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
@@ -91,14 +90,7 @@ export class SalavatPWA extends BaseElement {
             </div>
           </div>
           <main role="main">
-            <div class="page" ?active="${this._page === 'home'}">
-              <salavat-counter
-                .debug="${false}"
-                label-before="تا این لحظه"
-                label-after="صلوات نذر شده"
-              >
-              </salavat-counter>
-            </div>
+            <page-home ?active="${this._page === 'home'}"></page-home>
             <div class="page" ?active="${this._page === 'about'}">
               About page ....
               <!-- TODO: design about page -->
