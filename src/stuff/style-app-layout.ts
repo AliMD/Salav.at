@@ -104,9 +104,14 @@ export const styleAppLayout = css`
   }
 
   .drawer-footer {
+    display: block;
+    color: inherit;
+    text-decoration: none;
     margin-left: 3rem;
     margin-bottom: 0.5rem;
-    opacity: 0.8;
+    letter-spacing: 1px;
+    font-size: 14px;
+    /* opacity: 0.9; */
   }
 
   main {

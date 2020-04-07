@@ -48,23 +48,23 @@ export class SalavatPWA extends BaseElement {
           </div>
           <div class="menu">
             <mwc-button fullwidth>
-              <div class="button-content">کمپین${campaignIcon}</div>
+              <div class="button-content">کمپین ${campaignIcon}</div>
             </mwc-button>
             <mwc-button fullwidth>
-              <div class="button-content">داستان ما${aboutUsIcon}</div>
+              <div class="button-content">داستان ما ${aboutUsIcon}</div>
             </mwc-button>
             <mwc-button fullwidth>
-              <div class="button-content">حمایت${smileIcon}</div>
+              <div class="button-content">حمایت ${smileIcon}</div>
             </mwc-button>
             <mwc-button fullwidth>
-              <div class="button-content">دانلود والپیپر${imageIcon}</div>
+              <div class="button-content">دانلود والپیپر ${imageIcon}</div>
             </mwc-button>
             <mwc-button fullwidth>
-              <div class="button-content">دانلود اپلیکیشن${getAppIcon}</div>
+              <div class="button-content">دانلود اپلیکیشن ${getAppIcon}</div>
             </mwc-button>
           </div>
           <div class="gap"></div>
-          <div class="drawer-footer">Salav.at Beta v0.5</div>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at Beta v0.5</a>
         </div>
         <div slot="appContent">
           <mwc-icon-button
