@@ -1,15 +1,65 @@
-import { css } from "lit-element";
+import { css, SVGTemplateResult } from "lit-element";
+import { campaignIcon, aboutUsIcon, supportIcon, imageIcon, getAppIcon, helpIcon } from './stuff/icon';
 
-export const pageListObject: {
-  [pageName: string]: {
-    externalFilePath?: string;
-  }
-} = {
-  'home': {},
-  '404': {
-    // externalFilePath: './page-404',
+export interface MenuItem {
+  slug: string;
+  sideMenu: true;
+  title: string;
+  icon: SVGTemplateResult;
+}
+
+export interface MenuItemHidden {
+  slug: string;
+  sideMenu: false;
+}
+
+export const pageListArray: Array<MenuItem | MenuItemHidden> = [
+  {
+    slug: 'campaign', // display in url
+    sideMenu: true, // display in side menu
+    title: 'کمپین', // menu label
+    icon: campaignIcon, // svg icon object from icon.ts
   },
-};
+  {
+    slug: 'about',
+    sideMenu: true,
+    title: 'داستان ما',
+    icon: aboutUsIcon,
+  },
+  {
+    slug: 'support',
+    sideMenu: true,
+    title: 'حمایت',
+    icon: supportIcon,
+  },
+  {
+    slug: 'download-wallpaper',
+    sideMenu: true,
+    title: 'دانلود والپیپر',
+    icon: imageIcon,
+  },
+  {
+    slug: 'install',
+    sideMenu: true,
+    title: 'نصب برنامه',
+    icon: getAppIcon,
+  },
+  {
+    slug: 'help',
+    sideMenu: true,
+    title: 'راهنما',
+    icon: helpIcon,
+  },
+  {
+    slug: 'home',
+    sideMenu: false,
+  },
+  {
+    slug: '404',
+    sideMenu: false,
+  },
+]
+
 
 export const appConfig = {
   snackbarTimeout: 5000, //ms

@@ -1,6 +1,6 @@
 import './stuff/director-assistant';
 import { chatRoom } from './stuff/chat-room';
-import { pageListObject } from './config';
+import { pageListArray } from './config';
 
 chatRoom.onPropertyChanged('locationPath', async (locationPath: string | unknown) => {
   if (!(typeof locationPath === 'string')) return;
@@ -13,7 +13,7 @@ chatRoom.onPropertyChanged('locationPath', async (locationPath: string | unknown
 chatRoom.onPropertyChanged('page', async (pageName: string | unknown) => {
   if (!(typeof pageName === 'string')) return;
 
-  const page = pageListObject[pageName]
+  const page = pageListArray.find(pageItem => pageItem.slug === pageName);
 
   if (!page) {
     chatRoom.postMessage('invalidUri');

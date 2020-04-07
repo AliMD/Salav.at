@@ -45,7 +45,6 @@ export const styleAppLayout = css`
     text-align: left;
     --mdc-theme-primary: var(--app-primary-text-color);
     --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    fill: var(--app-primary-text-color); /* svg icons */
   }
 
   .drawer-content .salavat-badge {
@@ -73,6 +72,11 @@ export const styleAppLayout = css`
     --mdc-typography-button-font-size: 1.2rem;
   }
 
+  .drawer-content .menu a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   .drawer-content .menu mwc-button {
     margin-top: 1rem;
     /* --mdc-button-horizontal-padding: 3rem; */
@@ -92,6 +96,7 @@ export const styleAppLayout = css`
     margin-right: 0.5rem;
     width: 24px;
     height: 24px;
+    fill: var(--app-primary-text-color); /* svg icons */
   }
 
   .drawer-content .gap {

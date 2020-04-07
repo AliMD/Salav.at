@@ -11,9 +11,9 @@ import './stuff/snack-bar';
 import './stuff/salavat-counter';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
-import { styleConfig } from './config';
+import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, guideIcon, heartIcon, getAppIcon, plusIcon, campaignIcon, aboutUsIcon, supportIcon, imageIcon } from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, plusIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -25,6 +25,8 @@ export class SalavatPWA extends BaseElement {
 
   @query('mwc-drawer')
   protected _drawer!: Drawer;
+
+  protected _menuListArray: MenuItem[] = pageListArray.filter(menuItem => menuItem.sideMenu) as MenuItem[];
 
   static styles = [styleConfig, styleAppLayout];
 
@@ -47,24 +49,13 @@ export class SalavatPWA extends BaseElement {
             <div class="number">${(114).toLocaleString('fa')}</div>
           </div>
           <div class="menu">
-            <mwc-button fullwidth>
-              <div class="button-content">کمپین ${campaignIcon}</div>
-            </mwc-button>
-            <mwc-button fullwidth>
-              <div class="button-content">داستان ما ${aboutUsIcon}</div>
-            </mwc-button>
-            <mwc-button fullwidth>
-              <div class="button-content">حمایت ${supportIcon}</div>
-            </mwc-button>
-            <!--<mwc-button fullwidth>
-              <div class="button-content">دانلود والپیپر ${imageIcon}</div>
-            </mwc-button>-->
-            <mwc-button fullwidth>
-              <div class="button-content">نصب برنامه ${getAppIcon}</div>
-            </mwc-button>
-            <mwc-button fullwidth>
-              <div class="button-content">راهنما ${guideIcon}</div>
-            </mwc-button>
+            ${this._menuListArray.map((menuItem) => html`
+              <a href="/${menuItem.slug}">
+                <mwc-button fullwidth>
+                  <div class="button-content">${menuItem.title} ${menuItem.icon}</div>
+                </mwc-button>
+              </a>
+            `)}
           </div>
           <div class="gap"></div>
           <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at Beta v0.5</a>
@@ -83,12 +74,12 @@ export class SalavatPWA extends BaseElement {
           </div>
           <main role="main">
             <div class="page" ?active="${this._page === 'home'}">
-            <salavat-counter
-              .debug="${false}"
-              label-before="تا این لحظه"
-              label-after="صلوات نذر شده"
-            >
-            </salavat-counter>
+              <salavat-counter
+                .debug="${false}"
+                label-before="تا این لحظه"
+                label-after="صلوات نذر شده"
+              >
+              </salavat-counter>
             </div>
             <div class="page" ?active="${this._page === 'about'}">
               About page ....
