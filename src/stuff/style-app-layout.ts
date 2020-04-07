@@ -135,10 +135,16 @@ export const styleAppLayout = css`
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 2px 4px 50px #37474F;
-    transform: translate3d(0,0,0);
+
+    /* transform: translate3d(0, 0, 0);
     will-change: transform;
-    transition-property: transform;
-    transition-duration: 200ms;
+    transition-property: transform; */
+    /* TODO: refactor to translate3d for animation performance */
+    margin-top: -200px;
+    will-change: margin-top;
+    transition-property: margin-top;
+
+    transition-duration: 250ms;
     transition-timing-function: ease-out;
 
     /* style submit-button */
@@ -149,6 +155,10 @@ export const styleAppLayout = css`
     overflow: hidden;
   }
 
+  [page="home"] .main-image {
+    margin-top: 0px;
+  }
+
   .submit-button {
     background-color: var(--app-primary-color);
     border-radius: 100px 100px 0 0;
@@ -156,7 +166,7 @@ export const styleAppLayout = css`
     opacity: 0.9;
     transform: translate3d(0px, 85px, 0px);
     will-change: transform;
-    transition: 1s transform ease-out;
+    transition: 500ms transform ease-out;
     --mdc-icon-size: ${appConfig.iconSize * 1.6}px;
   }
 

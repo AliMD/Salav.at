@@ -69,7 +69,7 @@ export class SalavatPWA extends BaseElement {
           <div class="gap"></div>
           <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at Beta v0.5</a>
         </div>
-        <div slot="appContent">
+        <div slot="appContent" page="${this._page}">
           <mwc-icon-button
             class="menu-button"
             @click="${() => chatRoom.setProperty('sideMenuOpened', true) }"
