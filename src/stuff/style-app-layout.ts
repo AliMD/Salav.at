@@ -25,12 +25,7 @@ export const styleAppLayout = css`
 
   @media screen and (min-width: ${appConfig.maxWith + 1}px) {
     :host {
-      /* position: relative; FIXME: more test */
-      max-width: ${appConfig.maxWith}px;
-      height: 850px;
-      margin: 1em auto;
-      border-radius: 15px;
-      /* box-shadow: 1px 2px 4px 0px black; */
+      /* TODO: desktop design */
     }
   }
 
