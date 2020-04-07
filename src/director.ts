@@ -20,15 +20,15 @@ chatRoom.onPropertyChanged('page', async (pageName: string | unknown) => {
     return;
   }
 
-  if (page.externalFilePath) {
-    try {
-      await import(page.externalFilePath);
-    }
-    catch (err) {
-      chatRoom.postMessage('invalidUri');
-      console.error('<director> Error in importing file %s for page %s: %o', page?.externalFilePath, pageName, err);
-    }
-  }
+  // if (page.externalFilePath) {
+  //   try {
+  //     await import(page.externalFilePath);
+  //   }
+  //   catch (err) {
+  //     chatRoom.postMessage('invalidUri');
+  //     console.error('<director> Error in importing file %s for page %s: %o', page?.externalFilePath, pageName, err);
+  //   }
+  // }
 });
 
 chatRoom.onPropertyChanged('page', () => {
