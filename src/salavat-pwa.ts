@@ -1,4 +1,5 @@
 import { html, customElement, property, TemplateResult, query, PropertyValues } from 'lit-element';
+import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import { IconButton } from '@material/mwc-icon-button';
 import '@material/mwc-drawer';
@@ -6,14 +7,13 @@ import { Drawer } from '@material/mwc-drawer';
 import '@material/mwc-snackbar';
 
 import './director';
-// import './stuff/curve-slider';
 import './stuff/snack-bar';
 import './stuff/salavat-counter';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon, getCampainIcon, getForumIcon, getSatisfiedIcon, getWallpaperIcon} from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, plusIcon, campaignIcon, aboutUsIcon, smileIcon, imageIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -42,17 +42,29 @@ export class SalavatPWA extends BaseElement {
     return html`
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false) }">
         <div class="drawer-content">
-          <div class="counter">
-            <p class="my-salavat-title"> صلوات های من: </p>
-            <h1 class="my-salavat-number"> ۱۰۰ </h1>
+          <div class="salavat-badge">
+            <div class="title">صلوات های من:</div>
+            <div class="number">${(114).toLocaleString('fa')}</div>
           </div>
-          <div class="drawer-items-div">
-                <mwc-button><P>کمپین</P> ${getCampainIcon}</mwc-button>
-                <mwc-button><P>داستان ما</P> ${getForumIcon}</mwc-button>
-                <mwc-button><P>حمایت</P> ${getSatisfiedIcon}</mwc-button>
-                <mwc-button><P>دانلود والپیپر</P> ${getWallpaperIcon}</mwc-button>
-                <mwc-button><P>دانلود اپلیکیشن</P>${getAppIcon}</mwc-button>
+          <div class="menu">
+            <mwc-button fullwidth>
+              <div class="button-content">کمپین${campaignIcon}</div>
+            </mwc-button>
+            <mwc-button fullwidth>
+              <div class="button-content">داستان ما${aboutUsIcon}</div>
+            </mwc-button>
+            <mwc-button fullwidth>
+              <div class="button-content">حمایت${smileIcon}</div>
+            </mwc-button>
+            <mwc-button fullwidth>
+              <div class="button-content">دانلود والپیپر${imageIcon}</div>
+            </mwc-button>
+            <mwc-button fullwidth>
+              <div class="button-content">دانلود اپلیکیشن${getAppIcon}</div>
+            </mwc-button>
           </div>
+          <div class="gap"></div>
+          <div class="drawer-footer">Salav.at Beta v0.5</div>
         </div>
         <div slot="appContent">
           <mwc-icon-button
@@ -66,7 +78,6 @@ export class SalavatPWA extends BaseElement {
               <mwc-icon-button>${plusIcon}</mwc-icon-button>
             </div>
           </div>
-          <curve-slider></curve-slider>
           <main role="main">
             <salavat-counter
               .debug="${false}"

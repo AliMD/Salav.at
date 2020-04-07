@@ -19,8 +19,8 @@ export const styleAppLayout = css`
     background-image: url("image/background.jpg");
     background-position-x: right;
     background-position-y: bottom;
-    background-size: cover;
     background-repeat: no-repeat;
+    background-size: cover;
   }
 
   @media screen and (min-width: ${appConfig.maxWith + 1}px) {
@@ -34,62 +34,79 @@ export const styleAppLayout = css`
     }
   }
 
-  .counter {
-    height: 10rem;
-    border-radius: 0px 90px 90px 0px;
-    width: 14rem;
-    float: left;
-    padding-top: 1rem;
-    background-color: #102f4b;
-
-    display: flex;
+  .drawer-content {
+    display: flex; /* for gap and footer */
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    box-sizing: border-box;
+    padding-top: 4rem;
+    height: 100%;
+    color: var(--app-primary-text-color);
+    background-color: var(--app-primary-color);
+    background-image: url("image/background.jpg");
+    background-position-x: left;
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: left;
+    --mdc-theme-primary: var(--app-primary-text-color);
+    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    fill: var(--app-primary-text-color); /* svg icons */
+  }
 
-    color: white;
-    -webkit-box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
-    -moz-box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+  .drawer-content .salavat-badge {
+    border-radius: 0px 100px 100px 0px;
+    margin-right: 1.8rem;
+    padding: 1.8rem 3rem;
+    background-color: var(--app-dark-background-color);
     box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
   }
-  .drawer-items-div {
-    padding-top: 5rem;
-    width: 100%;
-    color: white;
-    font-size: 15pt;
-    display: flex;
-    flex-direction: column;
-  }
-  .drawer-content {
-    padding-top: 4rem;
-    box-sizing: border-box;
-    height: 100vh;
-    background-image: url('image/background.jpg');
-    background-position: center;
-    background-position: left;
-    background-size: cover;
-  }
-  .my-salavat-title {
-    margin:0;
-  }
-  .my-salavat-number {
-    margin: 1rem 0rem 0rem 0rem;
-    font-size: 35pt;
-  }
-  mwc-button {
-    padding-left: 3.5rem;
-    margin-top: 0.75rem; */
-    display: flex;
-    justify-content: start;
-    align-items: center;
 
+  .drawer-content .salavat-badge .title {
+    font-size: 1.2rem;
+    word-spacing: -4px;
   }
-  mwc-button svg {
-    fill: white;
+
+  .drawer-content .salavat-badge .number {
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+
+  .drawer-content .menu {
+    padding: 1rem;
+    --mdc-typography-button-font-weight: 300;
+    --mdc-typography-button-letter-spacing: normal;
+    --mdc-typography-button-font-size: 1.2rem;
+  }
+
+  .drawer-content .menu mwc-button {
+    margin-top: 1rem;
+    /* --mdc-button-horizontal-padding: 3rem; */
+  }
+
+  .drawer-content .menu mwc-button .button-content {
+    padding-left: 1.8rem;
+    flex-grow: 1;
+    word-wrap: nowrap;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .drawer-content .menu svg {
     margin-right: 0.5rem;
+    width: 24px;
+    height: 24px;
   }
-  mwc-button p {
-    color: white;
+
+  .drawer-content .gap {
+    flex-grow: 1;
+  }
+
+  .drawer-footer {
+    margin-left: 3rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
   }
 
   main {
