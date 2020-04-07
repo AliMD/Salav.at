@@ -37,6 +37,10 @@ export class SalavatPWA extends BaseElement {
       if (!(typeof pageName === 'string')) return;
       this._page = pageName;
     });
+
+    chatRoom.onPropertyChanged('showSubmit', (showSubmit: boolean | unknown) => {
+      this._showSubmit = Boolean(showSubmit);
+    });
   }
 
   protected render(): TemplateResult {
@@ -119,7 +123,6 @@ export class SalavatPWA extends BaseElement {
   protected firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
-    this._showSubmit = true;
 
     chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
       if (!(this._drawer && this._drawer.open != sideMenuOpened)) return;
