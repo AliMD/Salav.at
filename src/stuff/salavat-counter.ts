@@ -7,6 +7,9 @@ const commaSeparator: string = (1000).toLocaleString('fa').charAt(1);
 
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
+  @property({ type: Boolean })
+  protected active: boolean = false;
+
   @property({ type: String, attribute: 'label-before' })
   labelBefore: string = '';
 
@@ -83,6 +86,10 @@ export class SalavatCounter extends BaseElement {
     }
   `];
 
+  protected shouldUpdate(_changedProperties: PropertyValues) {
+    return super.shouldUpdate(_changedProperties) && this.active;
+  }
+
   protected render(): TemplateResult {
     this._log('render');
     return html`
@@ -130,6 +137,7 @@ export class SalavatCounter extends BaseElement {
   }
 
   computeDisplayCount() {
+    if (!this.active) return;
     this._log('computeDisplayCount');
     const now = Date.now();
     this.displayCount = Math.round(this.count * (now - this.startTim) / (now - this.startTim + this.futureTimePeriod));

@@ -66,6 +66,7 @@ export const appConfig = {
   // UI
   maxWith: 450, //px
   mainImageHeight: 430, //px
+  mainImageMargin: 60, //px
   iconSize: 28, //px
   iconButtonSize: 56, //px
 };
@@ -81,7 +82,9 @@ export const styleConfig = css`
 
     --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --mdc-theme-primary: var(--app-primary-color);
+    --mdc-theme-secondary: var(--app-accent-color);
     --mdc-theme-on-primary: var(--app-primary-text-color);
+    --mdc-theme-text-primary-on-dark: var(--app-primary-text-color);
     --mdc-icon-size: ${appConfig.iconSize}px;
     --mdc-icon-button-size: ${appConfig.iconButtonSize}px;
   }
