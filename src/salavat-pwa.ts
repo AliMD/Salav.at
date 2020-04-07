@@ -82,12 +82,23 @@ export class SalavatPWA extends BaseElement {
             </div>
           </div>
           <main role="main">
+            <div class="page" ?active="${this._page === 'home'}">
             <salavat-counter
               .debug="${false}"
               label-before="تا این لحظه"
               label-after="صلوات نذر شده"
             >
             </salavat-counter>
+            </div>
+            <div class="page" ?active="${this._page === 'about'}">
+              About page ....
+              <!-- TODO: design about page -->
+            </div>
+            <!-- TODO: add other page like about ... -->
+            <div class="page" ?active="${this._page === '404'}">
+              Page not found ...
+              <!-- TODO: design simple 404 page -->
+            </div>
           </main>
           <div
             class="footer-text"

@@ -120,6 +120,10 @@ export const styleAppLayout = css`
     padding-top: 2em;
   }
 
+  .page:not([active]) {
+    display: none;
+  }
+
   .main-image {
     width: auto;
     margin: 0 ${mainImageMargin}px;
