@@ -13,7 +13,7 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon, campaignIcon, aboutUsIcon, smileIcon, imageIcon } from './stuff/icon';
+import { menuIcon, guideIcon, heartIcon, getAppIcon, plusIcon, campaignIcon, aboutUsIcon, supportIcon, imageIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -54,13 +54,16 @@ export class SalavatPWA extends BaseElement {
               <div class="button-content">داستان ما ${aboutUsIcon}</div>
             </mwc-button>
             <mwc-button fullwidth>
-              <div class="button-content">حمایت ${smileIcon}</div>
+              <div class="button-content">حمایت ${supportIcon}</div>
             </mwc-button>
-            <mwc-button fullwidth>
+            <!--<mwc-button fullwidth>
               <div class="button-content">دانلود والپیپر ${imageIcon}</div>
+            </mwc-button>-->
+            <mwc-button fullwidth>
+              <div class="button-content">نصب برنامه ${getAppIcon}</div>
             </mwc-button>
             <mwc-button fullwidth>
-              <div class="button-content">دانلود اپلیکیشن ${getAppIcon}</div>
+              <div class="button-content">راهنما ${guideIcon}</div>
             </mwc-button>
           </div>
           <div class="gap"></div>
