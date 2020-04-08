@@ -49,7 +49,7 @@ export class SalavatPWA extends BaseElement {
         <div class="drawer-content">
           <div class="salavat-badge">
             <div class="title">صلوات های من:</div>
-            <div class="number">${(114).toLocaleString('fa')}</div>
+            <div class="number">${(chatRoom.getProperty('userSalavatCountIncrease') as number || 0).toLocaleString('fa')}</div>
           </div>
           <div class="menu">
             ${this._menuListArray.map((menuItem) => html`
@@ -71,7 +71,7 @@ export class SalavatPWA extends BaseElement {
             ${menuIcon}
           </mwc-icon-button>
           <div class="main-image">
-            <div class="submit-button" ?show="${this._showSubmit}">
+            <div class="submit-button" ?show="${this._showSubmit}" @click=${() => chatRoom.postMessage('submit-salavat')}>
               <mwc-icon-button>${plusIcon}</mwc-icon-button>
             </div>
           </div>
