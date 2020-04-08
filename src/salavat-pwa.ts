@@ -13,6 +13,7 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
+import { styleAppResponsive } from './stuff/style-app-responsive';
 import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
@@ -31,7 +32,7 @@ export class SalavatPWA extends BaseElement {
 
   protected _menuListArray: MenuItem[] = pageListArray.filter(menuItem => menuItem.sideMenu) as MenuItem[];
 
-  static styles = [styleConfig, styleAppLayout];
+  static styles = [styleConfig, styleAppLayout, styleAppResponsive];
 
   constructor() {
     super();
@@ -138,7 +139,7 @@ export class SalavatPWA extends BaseElement {
           >
             <span>Made with</span>${heartIcon}
           </div>
-          <mwc-icon-button class="get-app-button" @click="${() => this._showSubmit = !this._showSubmit}">${getAppIcon}</mwc-icon-button>
+          <mwc-icon-button class="get-app-button" @click="${() => chatRoom.postMessage('request-install')}">${getAppIcon}</mwc-icon-button>
         </div>
       </mwc-drawer>
       <page-desktop></page-desktop>

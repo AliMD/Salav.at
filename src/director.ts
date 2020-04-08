@@ -1,7 +1,11 @@
 import './stuff/director-assistant';
 import { chatRoom } from './stuff/chat-room';
 import { pageListArray } from './config';
+import { SnackbarOption } from './stuff/snack-bar';
 
+/*
+  routing ....
+*/
 chatRoom.onPropertyChanged('locationPath', async (locationPath: string | unknown) => {
   if (!(typeof locationPath === 'string')) return;
   const splitPath = locationPath.slice(1).split('/');
@@ -44,6 +48,28 @@ chatRoom.onMessage('invalidUri', () => {
   chatRoom.setProperty('page', '404');
 });
 
+/*
+  app install ...
+*/
+chatRoom.onMessage('app-installed', () => {
+  chatRoom.setProperty('snackbar', <SnackbarOption>{
+    open: true,
+    text: 'این برنامه با موفقیت نصب و به لیست برنامه های شما اضافه شد.',
+  });
+});
+
+chatRoom.onMessage('request-install-manually', () => {
+  chatRoom.setProperty('snackbar', <SnackbarOption>{
+    open: true,
+    text: 'به منظور نصب برنامه، از منوی تنظیمات، گزینه‌ی Add to Home screen را انتخاب کنید.',
+    // @TODO: iOS
+  });
+});
+
+
+/*
+  user salavat count ....
+*/
 chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
   chatRoom.setProperty('showSubmit', !!userSalavatCountIncrease);
 });
