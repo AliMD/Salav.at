@@ -3,6 +3,7 @@ import '@material/mwc-slider';
 
 import { BaseElement } from './base-element';
 import { salavatIcon, qrCode } from './icon';
+import { chatRoom } from './chat-room';
 
 @customElement('page-desktop')
 export class PageDesktop extends BaseElement {
@@ -71,6 +72,7 @@ export class PageDesktop extends BaseElement {
       <div class="message">
         <p>این برنامه <span>فعلا</span> تنها برای موبایل طراحی شده است.</p>
         <p>لطفا این سایت را در <span>موبایل</span> باز کنید.</p>
+        <p>بیا <span @click="${() => chatRoom.postMessage('request-install')}">نصب</span> کن حالشو ببر.</p>
       </div>
       <div class="qr-code">
         ${qrCode}

@@ -64,7 +64,7 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
 export const appConfig = {
   snackbarTimeout: 5000, //ms
   // UI
-  maxWith: 450, //px
+  maxWith: 768, //px
   mainImageHeight: 430, //px
   mainImageMargin: 60, //px
   iconSize: 28, //px

@@ -1,4 +1,5 @@
 import { css } from "lit-element";
+import { appConfig } from '../config';
 
 export const styleAppResponsive = css`
 
@@ -9,7 +10,7 @@ export const styleAppResponsive = css`
      }
   }
 
-  @media screen and (min-width: 769px) {
+@media screen and (min-width: ${appConfig.maxWith+1}px) {
     page-desktop {
       display: flex;
     }
