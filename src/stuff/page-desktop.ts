@@ -59,7 +59,7 @@ export class PageDesktop extends BaseElement {
 
     .qr-code svg {
       width: 120px;
-      height: 120px;
+      height: auto;
     }
 
   `;
