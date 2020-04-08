@@ -1,0 +1,13 @@
+{
+  "name": "salavat-pwa",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "serve": "prpl-server --host 0.0.0.0 --port 8080"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "prpl-server": "^1.4.0"
+  }
+}
