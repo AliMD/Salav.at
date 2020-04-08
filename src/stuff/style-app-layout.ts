@@ -200,6 +200,13 @@ export const styleAppLayout = css`
     left: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
     top: 0;
   }
+  .salavat-small-icon {
+    text-decoration: none ;
+    color: var(--app-primary-text-color);
+    position: absolute;
+    right: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
+    top: 0;
+  }
 
   .get-app-button {
     position: absolute;
