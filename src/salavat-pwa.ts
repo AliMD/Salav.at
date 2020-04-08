@@ -13,8 +13,8 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon } from './stuff/icon';
 import { styleAppResponsive } from './stuff/style-app-responsive';
+import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -79,6 +79,10 @@ export class SalavatPWA extends BaseElement {
             <a href="https://twitter.com/salav_at_/" target="_blank">
               <mwc-icon-button>${twitterIcon}</mwc-icon-button>
             </a>
+
+            <a href="https://t.me/joinchat/Aw16XEemR8ZuuXgZXdTR1w/" target="_blank">
+              <mwc-icon-button>${telegramIcon}</mwc-icon-button>
+            </a>
           </div>
 
           <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.5.0-demo.1</a>
@@ -113,6 +117,15 @@ export class SalavatPWA extends BaseElement {
               تقدیم به حجه بن الحسن (عجه الله تعالی فرجه الشریف)
               و
               تموم شهدایی که با فدا کردن جونشون، امروز رو برای بردن اسم اماممون امن کردن...
+            </div>
+            <div class="page campaign text-mode" ?active="${this._page === 'campaign'}">
+              گاهی آن قدر تلخی روزگار  زیاد می شود،
+              که سال جدید هم به رنگ خاکستری می زند!
+              اما ما یاد گرفته ایم تا دهانمان را با سلام و صلوات بر محمد و آل او شیرین کنیم تا همه چیز با نشاط شود و غم، از زندگی مان رخت بربندد.
+              سلامی به شیرینی با تو بودن...
+              به مناسبت ایام پر برکت نیمه شعبان تصمیم گرفتیم  کمپین نذر 100 هزار صلوات به نیت دعا برای سلامتی و ظهور امام زمان (عج الله تعالی فرجه الشریف) را راه اندازی کنیم، این کمپین از روز ... (دو روز مانده به میلاد حضرت نور) آغاز به کار کرده و در انتهای غروب نیمه شعبان خاتمه می یابد.
+              برای هماهنگی و رسیدن به عدد ذکر شده خواهشمندیم تعداد صلوات‌های فرستاده شده را در شمارنده وارد نمایید...
+              در ضمن برای حمایت از کمپین می توانید پوستر زیر را دانلود کرده و با اشتراک گذاری در صفحات و گروه های مجازی خود، حامی این کمپین معنوی باشید...
             </div>
             <!-- TODO: add other page like about ... -->
             <div class="page" ?active="${this._page === '404'}">
