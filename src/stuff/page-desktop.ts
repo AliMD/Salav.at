@@ -18,7 +18,7 @@ export class PageDesktop extends BaseElement {
       font-weight: 300;
       text-align: center;
 
-      background-image: url("image/desktop-BG.jpg");
+      background-image: url("image/background-desktop.jpg");
       background-position-x: right;
       background-position-y: bottom;
       background-repeat: no-repeat;
@@ -59,7 +59,7 @@ export class PageDesktop extends BaseElement {
 
     .qr-code svg {
       width: 120px;
-      height: 120px;
+      height: auto;
     }
 
   `;
