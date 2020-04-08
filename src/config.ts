@@ -1,5 +1,5 @@
 import { css, SVGTemplateResult } from "lit-element";
-import { campaignIcon, aboutUsIcon, supportIcon, imageIcon, getAppIcon, helpIcon } from './stuff/icon';
+import { campaignIcon, aboutUsIcon, imageIcon, getAppIcon, helpIcon } from './stuff/icon';
 
 export interface MenuItem {
   slug: string;
@@ -26,12 +26,12 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
     title: 'داستان ما',
     icon: aboutUsIcon,
   },
-  {
-    slug: 'support',
-    sideMenu: true,
-    title: 'حمایت',
-    icon: supportIcon,
-  },
+//  {
+//    slug: 'support',
+//    sideMenu: true,
+//    title: 'حمایت',
+//    icon: supportIcon,
+//  },
   {
     slug: 'download-wallpaper',
     sideMenu: true,
@@ -78,7 +78,7 @@ export const styleConfig = css`
     --app-accent-color: #f57c00;
     --app-primary-text-color: #ffffff;
     --app-light-back-color: #eeeeee;
-    --app-dark-background-color: #102f4b;
+    --app-dark-background-color: #090b2a;
 
     --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --mdc-theme-primary: var(--app-primary-color);

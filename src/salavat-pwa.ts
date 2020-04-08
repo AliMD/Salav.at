@@ -8,6 +8,7 @@ import { Drawer } from '@material/mwc-drawer';
 import './director';
 import './stuff/snack-bar';
 import './stuff/page-home';
+import './stuff/page-desktop';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
@@ -52,20 +53,6 @@ export class SalavatPWA extends BaseElement {
   protected render(): TemplateResult {
     this._log('render');
     return html`
-      <!-- HTML structure for desktop -->
-      <div class="desktop-page">
-        <div class="salavat-icon">
-          ${salavatIcon}
-        </div>
-        <div class="message">
-          <P>این صفحه فعلا برای موبایل طراحی شده است.</p>
-          <P>لطفا <span>QR Code</span> را با موبایل اسکن کنید.</p>
-        </div>
-        <div class="qr-code">
-          ${qrCode}
-        </div>
-      </div>
-
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false) }">
         <div class="drawer-content">
           <div class="salavat-badge">
@@ -142,6 +129,7 @@ export class SalavatPWA extends BaseElement {
           <mwc-icon-button class="get-app-button" @click="${() => this._showSubmit = !this._showSubmit}">${getAppIcon}</mwc-icon-button>
         </div>
       </mwc-drawer>
+      <page-desktop></page-desktop>
       <snack-bar></snack-bar>
     `;
   }
