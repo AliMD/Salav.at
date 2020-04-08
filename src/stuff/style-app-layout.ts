@@ -172,9 +172,9 @@ export const styleAppLayout = css`
     will-change: transform;
     transition-property: transform; */
     /* TODO: refactor to translate3d for animation performance */
-    margin-top: -200px;
-    will-change: margin-top;
-    transition-property: margin-top;
+    height: 250px;
+    will-change: height;
+    transition-property: height;
 
     transition-duration: 250ms;
     transition-timing-function: ease-out;
@@ -188,7 +188,7 @@ export const styleAppLayout = css`
   }
 
   [page="home"] .main-image {
-    margin-top: 0px;
+    height: 400px;
   }
 
   .submit-button {
