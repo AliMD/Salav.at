@@ -1,4 +1,5 @@
 import { customElement, query, TemplateResult, html, PropertyValues } from 'lit-element';
+import '@material/mwc-snackbar';
 import { Snackbar } from '@material/mwc-snackbar';
 import '@material/mwc-button';
 
