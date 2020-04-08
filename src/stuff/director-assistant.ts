@@ -14,7 +14,17 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener('load', () => {
-  chatRoom.postMessage('window-loaded'); // _dispatch debounce with animationFrame automatically
+  chatRoom.postMessage('window-loaded');
+
+  if (navigator['standalone']) {
+    chatRoom.postMessage('window-loaded-standalone', { ios: true }); // Launched: Installed (iOS)
+  }
+  else if (matchMedia('(display-mode: standalone)').matches) {
+    chatRoom.postMessage('window-loaded-standalone', { ios: false }); // 'Launched: Installed'
+  }
+  else {
+    chatRoom.postMessage('window-loaded-browser-tap', { ios: true }); // Launched: Browser Tab
+  }
 });
 
 chatRoom.onMessage('scrollTop', () => {
@@ -34,3 +44,31 @@ installRouter(location => {
   const locationPath: string = window.decodeURIComponent(location.pathname);
   chatRoom.setProperty('locationPath', locationPath);
 });
+
+// Install PWA
+let deferredPrompt;
+
+window.addEventListener('appinstalled', () => {
+  chatRoom.postMessage('app-installed');
+});
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  // Prevent the mini-info-bar from appearing on mobile
+  event.preventDefault();
+  // Stash the event so it can be triggered later.
+  deferredPrompt = event;
+  // Update UI notify the user they can install the PWA
+  // @TODO: install request
+});
+
+chatRoom.onMessage('request-install', async () => {
+  if (deferredPrompt?.prompt) {
+    deferredPrompt.prompt();
+    const choiceResult = await deferredPrompt.userChoice;
+    chatRoom.postMessage(`request-install-${choiceResult.outcome === 'accepted' ? 'accepted' : 'dismissed'}`);
+  }
+  else {
+    chatRoom.postMessage('request-install-manually');
+  }
+});
+
