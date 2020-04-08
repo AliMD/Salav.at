@@ -86,7 +86,7 @@ export class PageHome extends BaseElement {
     return html`
       <mwc-slider
         dir="ltr"
-        ?pin="${this._userSalavatCount > 99}"
+        ?pin="${this._userSalavatCount < 100}"
         .value="${this._userSalavatCount}"
         min="1"
         max="${this._sliderMax}"
