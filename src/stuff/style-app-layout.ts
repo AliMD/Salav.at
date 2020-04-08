@@ -141,6 +141,10 @@ export const styleAppLayout = css`
     display: flex;
     flex-direction: row;
   }
+  .drawer-content .social-media a {
+    color: var(--app-primary-text-color);
+    text-decoration: none;
+  }
   .drawer-footer {
     display: block;
     color: inherit;
