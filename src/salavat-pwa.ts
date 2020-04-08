@@ -13,7 +13,7 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, salavatSmallIcon } from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
