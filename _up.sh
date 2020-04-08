@@ -7,15 +7,11 @@ thisPath="$(dirname "$0")"
 
 cd $thisPath; # chnage PWD if thisPath != "."
 
-if [[ ${1:-} == '--pull' ]]
-then
-  docker-compose pull
-  docker-compose build --pull
-fi
+docker-compose build --no-cache
 
 docker-compose up \
   --detach \
   --remove-orphans \
-  --force-recreate \
-  --build \
-&& docker-compose logs --follow --tail 100
+  --force-recreate
+
+docker-compose logs --follow --tail 100

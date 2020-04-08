@@ -10,7 +10,7 @@ COPY package-docker.json package.json
 RUN npm install
 
 # Bundle app source
-COPY dist/* ./
+COPY dist/ ./
 
 EXPOSE 8080
 
