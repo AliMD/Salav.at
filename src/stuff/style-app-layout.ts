@@ -73,7 +73,7 @@ export const styleAppLayout = css`
     --mdc-typography-button-font-size: 1.2rem;
   }
 
-  .drawer-content .menu a {
+  .drawer-content a {
     color: inherit;
     text-decoration: none;
   }
@@ -103,20 +103,21 @@ export const styleAppLayout = css`
   .drawer-content .gap {
     flex-grow: 1;
   }
+
   .drawer-content .social-media {
-    padding-right: 5.5rem;
-    padding-bottom: .2rem;
-    display: flex;
-    flex-direction: row;
+    margin-left: 3rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    --mdc-icon-button-size: 30px;
   }
-  .drawer-content .social-media a {
-    color: var(--app-primary-text-color);
-    text-decoration: none;
+
+  .drawer-content .social-media svg {
+    width: 24px;
+    height: 24px;
   }
+
   .drawer-footer {
     display: block;
-    color: inherit;
-    text-decoration: none;
     margin-left: 3rem;
     margin-bottom: 0.5rem;
     letter-spacing: 1px;
