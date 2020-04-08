@@ -53,7 +53,7 @@ export class SalavatPWA extends BaseElement {
   protected render(): TemplateResult {
     this._log('render');
     return html`
-      <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false) }">
+      <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false)}">
         <div class="drawer-content">
           <div class="salavat-badge">
             <div class="title">صلوات های من:</div>
@@ -80,12 +80,12 @@ export class SalavatPWA extends BaseElement {
             </a>
           </div>
 
-          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at Beta v0.5</a>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.5.0-demo.1</a>
         </div>
         <div slot="appContent" page="${this._page}">
           <mwc-icon-button
             class="menu-button"
-            @click="${() => chatRoom.setProperty('sideMenuOpened', true) }"
+            @click="${() => chatRoom.setProperty('sideMenuOpened', true)}"
           >
             ${menuIcon}
           </mwc-icon-button>
@@ -136,7 +136,7 @@ export class SalavatPWA extends BaseElement {
   protected updated() {
     this._log('updated');
     const iconButtonList: NodeListOf<IconButton> = this.renderRoot.querySelectorAll('mwc-icon-button');
-    for (let i = iconButtonList.length-1; i >= 0; i--) {
+    for (let i = iconButtonList.length - 1; i >= 0; i--) {
       const internalIcon = iconButtonList.item(i).renderRoot.querySelector<HTMLElement>('.material-icons');
       if (internalIcon) {
         internalIcon.style.display = 'none';
