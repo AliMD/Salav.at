@@ -12,7 +12,7 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon, salavatIcon, qrCode } from './stuff/icon';
+import { menuIcon, salavatSmallIcon, heartIcon, getAppIcon, plusIcon, salavatIcon, qrCode } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -89,6 +89,13 @@ export class SalavatPWA extends BaseElement {
               <mwc-icon-button>${plusIcon}</mwc-icon-button>
             </div>
           </div>
+          <mwc-icon-button
+            class="salavat-small-icon"
+            @click=""
+          >
+            ${salavatSmallIcon}
+            <a href="/"></a>
+          </mwc-icon-button>
           <main role="main">
             <page-home ?active="${this._page === 'home'}"></page-home>
             <div class="page" ?active="${this._page === 'about'}">
