@@ -13,7 +13,7 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon } from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -77,6 +77,10 @@ export class SalavatPWA extends BaseElement {
             </a>
             <a href="https://twitter.com/salav_at_/" target="_blank">
               <mwc-icon-button>${twitterIcon}</mwc-icon-button>
+            </a>
+
+            <a href="https://t.me/joinchat/Aw16XEemR8ZuuXgZXdTR1w/" target="_blank">
+              <mwc-icon-button>${telegramIcon}</mwc-icon-button>
             </a>
           </div>
 
