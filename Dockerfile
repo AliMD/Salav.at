@@ -4,16 +4,13 @@ FROM node:13-alpine
 WORKDIR /app
 
 # Install app dependencies
-COPY package.json yarn.lock ./
+COPY package-docker.json package.json
 
 # Install dependency
-RUN yarn install
+RUN npm install
 
 # Bundle app source
-COPY . .
-
-# Build project
-RUN yarn build
+COPY dist/* ./
 
 EXPOSE 8080
 

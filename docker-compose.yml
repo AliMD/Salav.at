@@ -1,19 +1,22 @@
 version: '2.4'
 
-networks:
-  web:
-    external:
-      name: web-proxy
+# networks:
+#   web:
+#     external:
+#       name: web-proxy
 
 services:
   pwa:
     build: .
 
-    networks:
-      - web
+    # networks:
+    #   - web
 
-    cpu_shares: 1024
-    mem_limit: 1g
+    ports:
+      - 80:8080
+
+    cpu_shares: 512
+    mem_limit: 256m
 
     restart: unless-stopped
     tty: true
@@ -24,10 +27,3 @@ services:
         max-size: '12m'
         max-file: '2'
 
-    labels:
-      traefik.enable: true
-      traefik.backend: salavat-pwa
-      traefik.port: 8080
-      traefik.frontend.rule: Host:salav.at
-      traefik.frontend.entryPoints: http, https
-      traefik.frontend.redirect.entryPoint: https
