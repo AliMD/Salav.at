@@ -54,6 +54,11 @@ export class SalavatPWA extends BaseElement {
   protected render(): TemplateResult {
     this._log('render');
     return html`
+    <div class="guide">
+      <img src="../image/menu-guide.png" id="menu">
+      <img src="../image/submit-guide.png" id="submit">
+      <img src="../image/install-app-guide.png" id="install">
+    </div>
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false)}">
         <div class="drawer-content">
           <a href="/" class="salavat-badge">
