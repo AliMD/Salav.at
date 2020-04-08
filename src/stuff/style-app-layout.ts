@@ -20,6 +20,11 @@ export const styleAppLayout = css`
     background-size: cover;
   }
 
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   .drawer-content {
     display: flex; /* for gap and footer */
     flex-direction: column;
@@ -38,7 +43,8 @@ export const styleAppLayout = css`
     --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
 
-  .drawer-content .salavat-badge {
+  .drawer-content a.salavat-badge {
+    display: block;
     border-radius: 0px 100px 100px 0px;
     margin-right: 1.8rem;
     padding: 1.8rem 3rem;
@@ -46,12 +52,12 @@ export const styleAppLayout = css`
     box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
   }
 
-  .drawer-content .salavat-badge .title {
+  .drawer-content a.salavat-badge .title {
     font-size: 1.2rem;
     word-spacing: -4px;
   }
 
-  .drawer-content .salavat-badge .number {
+  .drawer-content a.salavat-badge .number {
     font-size: 2.5rem;
     font-weight: 500;
   }
@@ -61,11 +67,6 @@ export const styleAppLayout = css`
     --mdc-typography-button-font-weight: 300;
     --mdc-typography-button-letter-spacing: normal;
     --mdc-typography-button-font-size: 1.2rem;
-  }
-
-  .drawer-content a {
-    color: inherit;
-    text-decoration: none;
   }
 
   .drawer-content .menu mwc-button {
@@ -167,14 +168,6 @@ export const styleAppLayout = css`
     text-justify: inter-word;
   }
 
-  /* Special styles for special page */
-  .page.about {
-  }
-
-    /* Special styles for campaign page */
-    .page.campaign {
-  }
-
   .submit-button {
     background-color: var(--app-primary-color);
     border-radius: 100px 100px 0 0;
@@ -192,15 +185,16 @@ export const styleAppLayout = css`
 
   .menu-button {
     position: absolute;
+    top: 0;
     left: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
-    top: 0;
   }
-  .salavat-small-icon {
-    text-decoration: none ;
-    color: var(--app-primary-text-color);
+
+  a.salavat-small-icon {
+    display: block;
     position: absolute;
-    right: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
     top: 0;
+    right: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
+    --mdc-icon-size: 30px;
   }
 
   .get-app-button {

@@ -14,7 +14,7 @@ import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
 import { styleAppResponsive } from './stuff/style-app-responsive';
-import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon } from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -56,10 +56,10 @@ export class SalavatPWA extends BaseElement {
     return html`
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false)}">
         <div class="drawer-content">
-          <div class="salavat-badge">
+          <a href="/" class="salavat-badge">
             <div class="title">صلوات های من:</div>
             <div class="number">${(this._userSalavatCount || 0).toLocaleString('fa')}</div>
-          </div>
+          </a>
           <div class="menu">
             ${this._menuListArray.map((menuItem) => html`
               <a href="/${menuItem.slug}">
@@ -94,6 +94,11 @@ export class SalavatPWA extends BaseElement {
           >
             ${menuIcon}
           </mwc-icon-button>
+
+          <a href="/" class="salavat-small-icon">
+            <mwc-icon-button>${salavatSmallIcon}</mwc-icon-button>
+          </a>
+
           <div class="main-image">
             <div class="submit-button" ?show="${this._showSubmit}" @click=${() => chatRoom.postMessage('submit-salavat')}>
               <mwc-icon-button>${plusIcon}</mwc-icon-button>
@@ -127,7 +132,6 @@ export class SalavatPWA extends BaseElement {
               برای هماهنگی و رسیدن به عدد ذکر شده خواهشمندیم تعداد صلوات‌های فرستاده شده را در شمارنده وارد نمایید...
               در ضمن برای حمایت از کمپین می توانید پوستر زیر را دانلود کرده و با اشتراک گذاری در صفحات و گروه های مجازی خود، حامی این کمپین معنوی باشید...
             </div>
-            <!-- TODO: add other page like about ... -->
             <div class="page" ?active="${this._page === '404'}">
               Page not found ...
               <!-- TODO: design simple 404 page -->
