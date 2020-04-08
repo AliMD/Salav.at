@@ -135,7 +135,12 @@ export const styleAppLayout = css`
   .drawer-content .gap {
     flex-grow: 1;
   }
-
+  .drawer-content .social-media {
+    padding-right: 5.5rem;
+    padding-bottom: .2rem;
+    display: flex;
+    flex-direction: row;
+  }
   .drawer-footer {
     display: block;
     color: inherit;

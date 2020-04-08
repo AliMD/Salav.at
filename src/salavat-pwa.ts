@@ -12,7 +12,7 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon, salavatIcon, qrCode } from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, plusIcon, salavatIcon, qrCode, twitterIcon, instagramIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -82,6 +82,18 @@ export class SalavatPWA extends BaseElement {
             `)}
           </div>
           <div class="gap"></div>
+          <div class="social-media">
+            <mwc-icon-button
+              @click="${() => chatRoom.setProperty('sideMenuOpened', true) }"
+            >
+              ${twitterIcon}
+            </mwc-icon-button>
+            <mwc-icon-button
+              @click="${() => chatRoom.setProperty('sideMenuOpened', true) }"
+            >
+              ${instagramIcon}
+            </mwc-icon-button>
+          </div>
           <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at Beta v0.5</a>
         </div>
         <div slot="appContent" page="${this._page}">
