@@ -155,14 +155,17 @@ export const styleAppLayout = css`
     height: 400px;
   }
 
-  /* about page styles */
-  .about-text{
-    padding:20px 40px;
-    font-size:0.75rem;
+    /* All text mode pages */
+  .page.text-mode {
+    padding: 20px ${appConfig.mainImageMargin}px;
+    font-size: 0.75rem;
     text-align: justify;
     text-justify: inter-word;
   }
 
+  /* Special styles for special page */
+  .page.about {
+  }
 
   .submit-button {
     background-color: var(--app-primary-color);
