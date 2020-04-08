@@ -181,6 +181,10 @@ export const styleAppLayout = css`
   .page.about {
   }
 
+    /* Special styles for campaign page */
+    .page.campaign {
+  }
+
   .submit-button {
     background-color: var(--app-primary-color);
     border-radius: 100px 100px 0 0;
