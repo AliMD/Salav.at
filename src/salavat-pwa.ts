@@ -68,19 +68,17 @@ export class SalavatPWA extends BaseElement {
               </a>
             `)}
           </div>
+
           <div class="gap"></div>
-            <div class="social-media">
-              <a href="https://instagram.com/salav_at_/">
-                <mwc-icon-button>
-                  ${instagramIcon}
-                </mwc-icon-button>
-              </a>
-              <a href="https://twitter.com/salav_at_/">
-              <mwc-icon-button >
-                ${twitterIcon}
-              </mwc-icon-button>
-              </a>
-            </div>
+
+          <div class="social-media">
+            <a href="https://instagram.com/salav_at_/" target="_blank">
+              <mwc-icon-button>${instagramIcon}</mwc-icon-button>
+            </a>
+            <a href="https://twitter.com/salav_at_/" target="_blank">
+              <mwc-icon-button>${twitterIcon}</mwc-icon-button>
+            </a>
+          </div>
 
           <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at Beta v0.5</a>
         </div>

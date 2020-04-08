@@ -50,8 +50,8 @@ export class PageDesktop extends BaseElement {
     .qr-code {
       display: block;
       background-color: #fafafa;
-      color: var(--app-dark-background-color);
-      fill: var(--app-dark-background-color);
+      color: #090b2a;
+      fill: #090b2a;
       line-height: 14px;
       font-weight: 400;
       padding-bottom: 10px;
