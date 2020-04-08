@@ -123,7 +123,7 @@ export class PageHome extends BaseElement {
       this._sliderElement.value = this._userSalavatCount;
       chatRoom.setProperty('snackbar', <SnackbarOption>{
         open: true,
-        text: 'امیرمهدی یک متن خوب اینجا بزار'
+        text: 'شما قبلا این تعداد صلوات را نذر کرده‌اید'
       });
     }
     this._onSliderInput();
