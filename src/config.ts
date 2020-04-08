@@ -1,5 +1,5 @@
 import { css, SVGTemplateResult } from "lit-element";
-import { campaignIcon, aboutUsIcon, supportIcon, imageIcon, getAppIcon, helpIcon } from './stuff/icon';
+import { campaignIcon, aboutUsIcon, imageIcon, getAppIcon, helpIcon } from './stuff/icon';
 
 export interface MenuItem {
   slug: string;
@@ -26,12 +26,12 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
     title: 'داستان ما',
     icon: aboutUsIcon,
   },
-  {
-    slug: 'support',
-    sideMenu: true,
-    title: 'حمایت',
-    icon: supportIcon,
-  },
+//  {
+//    slug: 'support',
+//    sideMenu: true,
+//    title: 'حمایت',
+//    icon: supportIcon,
+//  },
   {
     slug: 'download-wallpaper',
     sideMenu: true,
