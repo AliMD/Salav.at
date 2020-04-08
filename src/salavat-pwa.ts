@@ -22,6 +22,9 @@ export class SalavatPWA extends BaseElement {
   @property({ type: Boolean })
   protected _showSubmit: boolean = false;
 
+  @property({ type: Number })
+  protected _userSalavatCount: number = 0;
+
   @query('mwc-drawer')
   protected _drawer!: Drawer;
 
@@ -40,6 +43,10 @@ export class SalavatPWA extends BaseElement {
     chatRoom.onPropertyChanged('showSubmit', (showSubmit: boolean | unknown) => {
       this._showSubmit = Boolean(showSubmit);
     });
+
+    chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
+      this._userSalavatCount = userSalavatCount as number;
+    });
   }
 
   protected render(): TemplateResult {
@@ -49,7 +56,7 @@ export class SalavatPWA extends BaseElement {
         <div class="drawer-content">
           <div class="salavat-badge">
             <div class="title">صلوات های من:</div>
-            <div class="number">${(chatRoom.getProperty('userSalavatCountIncrease') as number || 0).toLocaleString('fa')}</div>
+            <div class="number">${(this._userSalavatCount || 0).toLocaleString('fa')}</div>
           </div>
           <div class="menu">
             ${this._menuListArray.map((menuItem) => html`
