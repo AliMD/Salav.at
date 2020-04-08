@@ -13,7 +13,7 @@ import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
-import { menuIcon, heartIcon, getAppIcon, plusIcon } from './stuff/icon';
+import { menuIcon, heartIcon, getAppIcon, plusIcon, salavatIcon, qrCode, twitterIcon, instagramIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -69,6 +69,19 @@ export class SalavatPWA extends BaseElement {
             `)}
           </div>
           <div class="gap"></div>
+            <div class="social-media">
+              <a href="https://instagram.com/salav_at_/">
+                <mwc-icon-button>
+                  ${instagramIcon}
+                </mwc-icon-button>
+              </a>
+              <a href="https://twitter.com/salav_at_/">
+              <mwc-icon-button >
+                ${twitterIcon}
+              </mwc-icon-button>
+              </a>
+            </div>
+
           <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at Beta v0.5</a>
         </div>
         <div slot="appContent" page="${this._page}">
