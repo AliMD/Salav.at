@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint",
+    "bierner.lit-html",
+    "christian-kohler.path-intellisense",
+    "wayou.vscode-todo-highlight",
+    "jpoissonnier.vscode-styled-components",
+    "redhat.vscode-yaml"
+  ]
+}

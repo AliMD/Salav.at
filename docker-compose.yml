@@ -1,0 +1,29 @@
+version: '2.4'
+
+# networks:
+#   web:
+#     external:
+#       name: web-proxy
+
+services:
+  pwa:
+    build: .
+
+    # networks:
+    #   - web
+
+    ports:
+      - 80:8080
+
+    cpu_shares: 512
+    mem_limit: 256m
+
+    restart: unless-stopped
+    tty: true
+
+    logging:
+      driver: json-file
+      options:
+        max-size: '12m'
+        max-file: '2'
+

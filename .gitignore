@@ -1,0 +1,35 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+# OSX
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Compiled
+/js
+/build
+/dist
+/data/**/*.js
+.tsbuildinfo
+
+# Optional npm cache directory
+/.npm
+
+# temp
+/.tmp
+
+# Dependencies
+node_modules
+bower_components
+
+# Design
+*.psd
