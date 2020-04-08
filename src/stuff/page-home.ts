@@ -19,6 +19,9 @@ export class PageHome extends BaseElement {
   @property({ type: Number })
   protected _userSalavatCountIncrease: number = 0;
 
+  @property({ type: Number })
+  protected _sliderMax: number = 100;
+
   @query('mwc-slider')
   protected _sliderElement!: Slider;
 
@@ -64,6 +67,9 @@ export class PageHome extends BaseElement {
 
     chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
       this._userSalavatCount = userSalavatCount as number;
+      if (this._userSalavatCount === this._sliderMax) {
+        this._sliderMax *= 3;
+      }
     });
 
     chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
@@ -80,8 +86,11 @@ export class PageHome extends BaseElement {
     return html`
       <mwc-slider
         dir="ltr"
+        ?pin="${this._userSalavatCount > 99}"
         .value="${this._userSalavatCount}"
-        min="1" max="114" step="1" pin
+        min="1"
+        max="${this._sliderMax}"
+        step="1"
         @input="${this._onSliderInput}"
         @change="${this._onSliderChange}"
       ></mwc-slider>
