@@ -37,10 +37,22 @@ chatRoom.onPropertyChanged('page', (pageName: string | unknown) => {
   // Scroll to top on page changed
   chatRoom.postMessage('scrollTop');
 
-  chatRoom.setProperty('showSubmit', pageName === 'home');
+  chatRoom.setProperty('showSubmit', pageName === 'home' && chatRoom.getProperty('userSalavatCountIncrease'));
 });
 
 chatRoom.onMessage('invalidUri', () => {
   chatRoom.setProperty('page', '404');
 });
 
+chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
+  chatRoom.setProperty('showSubmit', !!userSalavatCountIncrease);
+});
+
+chatRoom.setProperty('userSalavatCount', 10);
+chatRoom.setProperty('userSalavatCountIncrease', 0);
+chatRoom.onMessage('submit-salavat', () => {
+  const userSalavatCount: number = chatRoom.getProperty('userSalavatCount') as number || 0;
+  const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number || 0;
+  chatRoom.setProperty('userSalavatCount', userSalavatCount + userSalavatCountIncrease);
+  chatRoom.setProperty('userSalavatCountIncrease', 0);
+});
