@@ -20,16 +20,6 @@ export const styleAppLayout = css`
     background-size: cover;
   }
 
-  @media screen and (min-width: ${appConfig.maxWith + 1}px) {
-    page-desktop {
-      display: flex;
-    }
-
-    mwc-drawer {
-      display: none;
-    }
-  }
-
   .drawer-content {
     display: flex; /* for gap and footer */
     flex-direction: column;
