@@ -94,7 +94,13 @@ export class SalavatPWA extends BaseElement {
               <mwc-icon-button>${plusIcon}</mwc-icon-button>
             </div>
           </div>
-
+          <a href="/">
+            <mwc-icon-button
+              class="salavat-small-icon"
+              @click="">
+              ${salavatSmallIcon}
+            </mwc-icon-button>
+          </a>
           <main role="main">
             <page-home ?active="${this._page === 'home'}"></page-home>
             <div class="page about text-mode" ?active="${this._page === 'about'}">
