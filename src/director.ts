@@ -2,6 +2,7 @@ import './stuff/director-assistant';
 import { chatRoom } from './stuff/chat-room';
 import { pageListArray, appConfig } from './config';
 import { SnackbarOption } from './stuff/snack-bar';
+import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 
 /*
   routing ....
@@ -69,6 +70,9 @@ chatRoom.onMessage('request-install-manually', () => {
 chatRoom.onMessage('window-loaded-standalone', () => {
   if (window.innerWidth > appConfig.maxWith) {
     window.resizeTo(414, 736); // iPhone 8 plus
+    idlePeriod.run(() => {
+      window.resizeTo(414, 736); // iPhone 8 plus
+    });
   }
 });
 
