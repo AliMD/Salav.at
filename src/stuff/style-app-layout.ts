@@ -191,6 +191,15 @@ export const styleAppLayout = css`
     height: 400px;
   }
 
+  /* about page styles */
+  .about-text{
+    padding:20px 40px;
+    font-size:0.75rem;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+
   .submit-button {
     background-color: var(--app-primary-color);
     border-radius: 100px 100px 0 0;

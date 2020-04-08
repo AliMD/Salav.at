@@ -22,6 +22,9 @@ export class SalavatPWA extends BaseElement {
   @property({ type: Boolean })
   protected _showSubmit: boolean = false;
 
+  @property({ type: Number })
+  protected _userSalavatCount: number = 0;
+
   @query('mwc-drawer')
   protected _drawer!: Drawer;
 
@@ -39,6 +42,10 @@ export class SalavatPWA extends BaseElement {
 
     chatRoom.onPropertyChanged('showSubmit', (showSubmit: boolean | unknown) => {
       this._showSubmit = Boolean(showSubmit);
+    });
+
+    chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
+      this._userSalavatCount = userSalavatCount as number;
     });
   }
 
@@ -63,7 +70,7 @@ export class SalavatPWA extends BaseElement {
         <div class="drawer-content">
           <div class="salavat-badge">
             <div class="title">صلوات های من:</div>
-            <div class="number">${(114).toLocaleString('fa')}</div>
+            <div class="number">${(this._userSalavatCount || 0).toLocaleString('fa')}</div>
           </div>
           <div class="menu">
             ${this._menuListArray.map((menuItem) => html`
@@ -85,14 +92,29 @@ export class SalavatPWA extends BaseElement {
             ${menuIcon}
           </mwc-icon-button>
           <div class="main-image">
-            <div class="submit-button" ?show="${this._showSubmit}">
+            <div class="submit-button" ?show="${this._showSubmit}" @click=${() => chatRoom.postMessage('submit-salavat')}>
               <mwc-icon-button>${plusIcon}</mwc-icon-button>
             </div>
           </div>
           <main role="main">
             <page-home ?active="${this._page === 'home'}"></page-home>
             <div class="page" ?active="${this._page === 'about'}">
-              About page ....
+              <p class="about-text">
+به نظر ما یه سری اتفاقات تو تاریخ موندگار میشه، به این جهت که می تونه کل دنیا رو درگیر خودش کنه. مثل بیماری کرونا که مدتیه درگیرش هستیم.
+هر سال به نیمه شعبان که می‌رسیدیم دور هم جمع می‌شدیم تا بتونیم با گرفتن یه جشن کوچیک،
+شاد باشیم از بودنش
+شادی کنیم برای داشتنش
+و یادمون بمونه که وظیفه داریم تلاش کنیم برای اومدنش
+اما کرونا امسال رو برامون متفاوت کرد.
+واسه همین تصمیم گرفتیم نیمه شعبان 99 در بستر فضای مجازی فعالیت کنیم و نتیجه شد همین صلوات شماری که می بینید.
+خط به خط کدهای برنامه نویسی "صلوات"
+پیکسل به پیکسل طراحی های گرافیکی "صلوات"
+و ثانیه به ثانیه زمان هایی که برای ایجاد این بستر گذاشته شده،
+با عشق و به یاد کسی بوده که منتظریم با اومدنش تمام روزهای بعد از بودنش رو برامون، "با خاطره خوش"، به یادموندنی کنه...
+تقدیم به حجه بن الحسن (عجه الله تعالی فرجه الشریف)
+و
+تموم شهدایی که با فدا کردن جونشون، امروز رو برای بردن اسم اماممون امن کردن...
+              </p>
               <!-- TODO: design about page -->
             </div>
             <!-- TODO: add other page like about ... -->

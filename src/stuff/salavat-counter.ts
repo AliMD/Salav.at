@@ -20,13 +20,13 @@ export class SalavatCounter extends BaseElement {
   minWidth: number = 110;
 
   @property({ type: Number })
-  startTim: number = 1586082944419; // Apr 05 2020 15:05:44
+  startTim: number = (new Date()).setHours(0, 0, 0, 0);
 
   @property({ type: Number })
   futureTimePeriod: number = 3 * 60 * 60 * 1000; // 3 hours
 
   @property({ type: Number })
-  count: number = 100000; // Real salavat count
+  count: number = 10000; // Real salavat count
 
   @property({ type: Number, attribute: false })
   displayCount: number = 0;
