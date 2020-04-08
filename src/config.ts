@@ -78,7 +78,7 @@ export const styleConfig = css`
     --app-accent-color: #f57c00;
     --app-primary-text-color: #ffffff;
     --app-light-back-color: #eeeeee;
-    --app-dark-background-color: #102f4b;
+    --app-dark-background-color: #090b2a;
 
     --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --mdc-theme-primary: var(--app-primary-color);
