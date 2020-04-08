@@ -51,8 +51,8 @@ chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease
 chatRoom.setProperty('userSalavatCount', 10);
 chatRoom.setProperty('userSalavatCountIncrease', 0);
 chatRoom.onMessage('submit-salavat', () => {
-  const userSalavatCount: number = chatRoom.getProperty('userSalavatCount') as number | 0;
-  const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number | 0;
+  const userSalavatCount: number = chatRoom.getProperty('userSalavatCount') as number || 0;
+  const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number || 0;
   chatRoom.setProperty('userSalavatCount', userSalavatCount + userSalavatCountIncrease);
   chatRoom.setProperty('userSalavatCountIncrease', 0);
 });
