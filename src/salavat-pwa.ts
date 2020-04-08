@@ -85,7 +85,7 @@ export class SalavatPWA extends BaseElement {
             </a>
           </div>
 
-          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.5.0-demo.3</a>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.5.0</a>
         </div>
         <div slot="appContent" page="${this._page}">
           <mwc-icon-button
