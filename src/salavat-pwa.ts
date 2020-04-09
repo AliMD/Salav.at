@@ -80,12 +80,12 @@ export class SalavatPWA extends BaseElement {
             <a href="https://twitter.com/salav_at_/" target="_blank">
               <mwc-icon-button>${twitterIcon}</mwc-icon-button>
             </a>
-            <a href="https://t.me/joinchat/Aw16XEemR8ZuuXgZXdTR1w/" target="_blank">
+            <a href="https://t.me/joinchat/Aw16XEemR8ZuuXgZXdTR1w" target="_blank">
               <mwc-icon-button>${telegramIcon}</mwc-icon-button>
             </a>
           </div>
 
-          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.6.1</a>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.7.0</a>
         </div>
         <div slot="appContent" page="${this._page}">
           <mwc-icon-button
