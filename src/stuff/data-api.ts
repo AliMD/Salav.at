@@ -5,7 +5,7 @@ import { appConfig } from '../config';
 const debug = true;
 const _log = (message: unknown, ...restParam: unknown[]) => {
   if (debug) {
-    console.log(`%cChatRoom%c ${message}`, "color: #4CAF50; font-size: 1.2em;", "color: inherit;font-size: 1em", ...restParam);
+    console.log(`%DataAPI%c ${message}`, "color: #4CAF50; font-size: 1.2em;", "color: inherit;font-size: 1em", ...restParam);
   }
 };
 
@@ -13,7 +13,7 @@ const _fetch = async <T>(path: string, option: RequestInit): Promise<T> => {
   _log('fetch: %s', path);
   const fetchResponse: Response = await fetch(path, option);
   if(!fetchResponse.ok) throw 'Cannot load data! ' + await fetchResponse.text()
-  return await fetchResponse.json() as T;
+  return fetchResponse.json() as Promise<T>;
 };
 
 export const loadData = async <T>(docId: string): Promise<T> => {
@@ -22,8 +22,8 @@ export const loadData = async <T>(docId: string): Promise<T> => {
   try {
     dataListObject = await _fetch<T>(`${appConfig.apiUri}/data/${docId}.json`, { method: 'GET' });
   }
-  catch (error) {
-    _log('ERROR: %o', error);
+  catch (err) {
+    _log('ERROR: %o', err);
   }
   return dataListObject;
 };

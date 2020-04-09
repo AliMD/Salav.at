@@ -101,7 +101,7 @@ export class SalavatCounter extends BaseElement {
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues) {
-    return super.shouldUpdate(_changedProperties) && this.active && this.count != undefined && this.startTime != undefined;
+    return super.shouldUpdate(_changedProperties) && this.active && this.count != undefined && this.startTime != undefined && this.lastUpdatedTime != undefined;
   }
 
   protected render(): TemplateResult {

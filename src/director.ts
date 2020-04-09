@@ -95,14 +95,17 @@ chatRoom.onMessage('submit-salavat', async () => {
 
   const userSalavatCount: number = chatRoom.getProperty('userSalavatCount') as number || 0;
   const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number || 0;
-  chatRoom.setProperty('userSalavatCountIncrease', 0);
 
   if (userSalavatCountIncrease > 0) {
     const result = await updateData<SalavatCountInterface>(appConfig.apiSalavatCountDocId, {count: userSalavatCountIncrease})
     if (result.ok) {
-      chatRoom.setProperty('slavatCount', result.data);
+      chatRoom.setProperty('salavatCount', result.data);
+      chatRoom.setProperty('userSalavatCountIncrease', 0);
       chatRoom.setProperty('userSalavatCount', userSalavatCount + userSalavatCountIncrease);
       localStorage.setItem('userSalavatCount', userSalavatCount + '');
+    }
+    else {
+      console.error('updateData: %s', result.description);
     }
     chatRoom.setProperty('snackbar', <SnackbarOption>{
       open: true,
@@ -114,11 +117,11 @@ chatRoom.onMessage('submit-salavat', async () => {
 });
 
 /*
-  API slavatCount
+  API salavatCount
 */
 const loadSalavatCountInterval = async () => {
-  const slavatCount = await loadData<SalavatCountDataApiInterface>(appConfig.apiSalavatCountDocId);
-  if (slavatCount.salavatCount) chatRoom.setProperty('slavatCount', slavatCount.salavatCount);
+  const salavatCount = await loadData<SalavatCountDataApiInterface>(appConfig.apiSalavatCountDocId);
+  if (salavatCount.salavatCount) chatRoom.setProperty('salavatCount', salavatCount.salavatCount);
   idlePeriod.run(() => setTimeout(() => loadSalavatCountInterval(), appConfig.loadSalavatInterval));
 };
 idlePeriod.run(() => loadSalavatCountInterval()); // load on startup
@@ -139,14 +142,10 @@ const parseJSON = <T>(str: string): T | null => {
 
 const localStorageGetItem = <T>(str: string, defaultValue: T): T => {
   const item: string | null = localStorage.getItem(str);
-  if (!item) return defaultValue;
+  if (item == null) return defaultValue;
   const parsed: T | null = parseJSON<T>(item);
-  if (parsed != null) {
-    return parsed;
-  }
-  else {
-    return defaultValue;
-  }
+  if (parsed == null) return defaultValue;
+  else return parsed;
 };
 
 const loadFromLocalStorage = () => {
