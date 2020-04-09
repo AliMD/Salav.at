@@ -20,7 +20,7 @@ export class PageHome extends BaseElement {
   protected _userSalavatCountIncrease: number = 0;
 
   @property({ type: Number })
-  protected _sliderMax: number = 100;
+  protected _sliderMax: number = 1000;
 
   @query('mwc-slider')
   protected _sliderElement!: Slider;
@@ -67,9 +67,9 @@ export class PageHome extends BaseElement {
 
     chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
       this._userSalavatCount = userSalavatCount as number;
-      if (this._userSalavatCount === this._sliderMax) {
-        this._sliderMax *= 3;
-      }
+      // if (this._userSalavatCount === this._sliderMax) {
+      //   this._sliderMax *= 3;
+      // }
     });
 
     chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
@@ -90,7 +90,7 @@ export class PageHome extends BaseElement {
         .value="${this._userSalavatCount}"
         min="1"
         max="${this._sliderMax}"
-        step="1"
+        step="10"
         @input="${this._onSliderInput}"
         @change="${this._onSliderChange}"
       ></mwc-slider>

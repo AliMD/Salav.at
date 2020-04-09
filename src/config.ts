@@ -1,5 +1,5 @@
 import { css, SVGTemplateResult } from "lit-element";
-import { campaignIcon, aboutUsIcon, imageIcon, getAppIcon, helpIcon } from './stuff/icon';
+import { campaignIcon, aboutUsIcon } from './stuff/icon';
 
 export interface MenuItem {
   slug: string;
@@ -26,30 +26,30 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
     title: 'داستان ما',
     icon: aboutUsIcon,
   },
-//  {
-//    slug: 'support',
-//    sideMenu: true,
-//    title: 'حمایت',
-//    icon: supportIcon,
-//  },
-  {
-    slug: 'download-wallpaper',
-    sideMenu: true,
-    title: 'دانلود والپیپر',
-    icon: imageIcon,
-  },
-  {
-    slug: 'install',
-    sideMenu: true,
-    title: 'نصب برنامه',
-    icon: getAppIcon,
-  },
-  {
-    slug: 'help',
-    sideMenu: true,
-    title: 'راهنما',
-    icon: helpIcon,
-  },
+  // {
+  //   slug: 'support',
+  //   sideMenu: true,
+  //   title: 'حمایت',
+  //   icon: supportIcon,
+  // },
+  // {
+  //   slug: 'download-wallpaper',
+  //   sideMenu: true,
+  //   title: 'دانلود والپیپر',
+  //   icon: imageIcon,
+  // },
+  // {
+  //   slug: 'install',
+  //   sideMenu: true,
+  //   title: 'نصب برنامه',
+  //   icon: getAppIcon,
+  // },
+  // {
+  //   slug: 'help',
+  //   sideMenu: true,
+  //   title: 'راهنما',
+  //   icon: helpIcon,
+  // },
   {
     slug: 'home',
     sideMenu: false,
@@ -62,7 +62,11 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
 
 
 export const appConfig = {
-  snackbarTimeout: 5000, //ms
+  apiUri: 'https://api.salav.at',
+  apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',
+  apiSalavatCountDocId: 'salavat/count',
+  loadSalavatInterval: 30_000, //ms
+  snackbarTimeout: 5_000, //ms
   // UI
   maxWith: 768, //px
   mainImageHeight: 430, //px
@@ -89,3 +93,16 @@ export const styleConfig = css`
     --mdc-icon-button-size: ${appConfig.iconButtonSize}px;
   }
 `;
+
+export interface SalavatCountInterface {
+  _id: string;
+  _owner: string;
+  _createdTime: number;
+  _lastEditedTime: number;
+  _lastEditedBy: string;
+  count: number;
+}
+
+export interface SalavatCountDataApiInterface {
+  salavatCount: SalavatCountInterface;
+}

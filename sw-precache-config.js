@@ -27,6 +27,16 @@ module.exports = {
           maxEntries: 2,
         }
       }
+    },
+    {
+      urlPattern: /^https:\/\/api.salav.at\//,
+      handler: 'fastest',
+      options: {
+        cache: {
+          name: 'api',
+          maxEntries: 10,
+        }
+      }
     }
   ]
 };

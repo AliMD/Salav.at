@@ -14,7 +14,7 @@ import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
 import { styleAppResponsive } from './stuff/style-app-responsive';
-import { menuIcon, heartIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon } from './stuff/icon';
+import { menuIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -54,6 +54,11 @@ export class SalavatPWA extends BaseElement {
   protected render(): TemplateResult {
     this._log('render');
     return html`
+    <!-- <div class="guide">
+      <img src="../image/menu-guide.png" id="menu">
+      <img src="../image/submit-guide.png" id="submit">
+      <img src="../image/install-app-guide.png" id="install">
+    </div> -->
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false)}">
         <div class="drawer-content">
           <a href="/" class="salavat-badge">
@@ -85,7 +90,7 @@ export class SalavatPWA extends BaseElement {
             </a>
           </div>
 
-          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.5.0</a>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.6.0</a>
         </div>
         <div slot="appContent" page="${this._page}">
           <mwc-icon-button
@@ -137,12 +142,6 @@ export class SalavatPWA extends BaseElement {
               <!-- TODO: design simple 404 page -->
             </div>
           </main>
-          <div
-            class="footer-text"
-            @click="${() => chatRoom.setProperty('snackbar', { open: true, text: 'ساخته شده با عشق' })}"
-          >
-            <span>Made with</span>${heartIcon}
-          </div>
           <mwc-icon-button class="get-app-button" @click="${() => chatRoom.postMessage('request-install')}">${getAppIcon}</mwc-icon-button>
         </div>
       </mwc-drawer>
