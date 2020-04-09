@@ -10,14 +10,14 @@ export const styleAppResponsive = css`
      }
   }
   /* mobile */
-  @media screen and (max-width: 426px){
+  @media screen and (max-width: 426px) {
     .page.text-mode {
       padding: 1rem 2rem;
       font-size: 0.74rem;
     }
   }
   /* tablet */
-  @media screen and (min-width: 427px){
+  @media screen and (min-width: 427px) {
     .page.text-mode {
       font-size: 1.1rem;
     }
