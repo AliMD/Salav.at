@@ -67,7 +67,7 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
 ]
 
 export const appConfig = {
-  appVersion: '0.8.0',
+  appVersion: '0.8.1',
   apiUri: 'https://api.salav.at',
   apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',
   apiSalavatCountDocId: 'salavat/count',
