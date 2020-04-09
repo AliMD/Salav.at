@@ -161,7 +161,7 @@ export class SalavatCounter extends BaseElement {
     //   c      dc
     // ----- = -----
     //  l-s     n-s
-    this.displayCount = Math.round(this.count * (now - this.startTime) / (this.lastUpdatedTime - this.startTime));
+    this.displayCount = Math.round(this.count * (now - this.startTime) / (this.lastUpdatedTime - this.startTime + 1));
   }
 
   updated(_changedProperties: PropertyValues) {

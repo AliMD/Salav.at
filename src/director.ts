@@ -98,6 +98,7 @@ chatRoom.onMessage('submit-salavat', async () => {
     return;
   }
 
+  let sliderMax: number = chatRoom.getProperty('sliderMax') as number || appConfig.sliderMaxRangeList[0];
   let userSalavatCount: number = chatRoom.getProperty('userSalavatCount') as number || 0;
   const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number || 0;
 
@@ -105,10 +106,20 @@ chatRoom.onMessage('submit-salavat', async () => {
     const result = await updateData<SalavatCountInterface>(appConfig.apiSalavatCountDocId, { _id: 'salavatCount', count: userSalavatCountIncrease })
     if (result.ok) {
       userSalavatCount += userSalavatCountIncrease;
+
+      for (const max of appConfig.sliderMaxRangeList) {
+        if (userSalavatCount >= max * 0.8) continue;
+        sliderMax = max;
+        break;
+      }
+
       chatRoom.setProperty('salavatCount', result.data);
       chatRoom.setProperty('userSalavatCountIncrease', 0);
+
       chatRoom.setProperty('userSalavatCount', userSalavatCount);
       localStorage.setItem('userSalavatCount', userSalavatCount + '');
+      chatRoom.setProperty('sliderMax', sliderMax);
+      localStorage.setItem('sliderMax', sliderMax + '');
     }
     else {
       console.error('updateData: %s', result.description);
@@ -160,6 +171,7 @@ const localStorageGetItem = <T>(str: string, defaultValue: T): T => {
 
 const loadFromLocalStorage = () => {
   chatRoom.setProperty('userSalavatCount', localStorageGetItem<number>('userSalavatCount', 0));
+  chatRoom.setProperty('sliderMax', localStorageGetItem<number>('sliderMax', appConfig.sliderMaxRangeList[0]));
 
   if (localStorageGetItem<Boolean>('service-worker-updated', false)) {
     localStorage.removeItem('service-worker-updated');
