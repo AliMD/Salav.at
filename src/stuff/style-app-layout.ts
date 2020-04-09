@@ -166,8 +166,37 @@ export const styleAppLayout = css`
     font-size: 0.75rem;
     text-align: justify;
     text-justify: inter-word;
+    z-index: 100;
   }
-
+  .guide {
+    position: absolute;
+    height:100vh;
+    width: 100vw;
+    background-color:black;
+    opacity: 0.6;
+  }
+  .guide #menu {
+    position:absolute;
+    width:15rem;
+    height:15rem;
+    left: 2.2rem;
+    top: 0.1rem;
+  }
+  .guide #submit {
+    position:absolute;
+    width:15rem;
+    height:15rem;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+  }
+  .guide #install {
+    position: absolute;
+    width: 12rem;
+    height:12rem;
+    right: 2.2rem;
+    bottom: 0.1rem;
+  }
   .submit-button {
     background-color: var(--app-primary-color);
     border-radius: 100px 100px 0 0;
