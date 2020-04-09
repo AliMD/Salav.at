@@ -133,7 +133,7 @@ export class SalavatPWA extends BaseElement {
                 برای حمایت از کمپین با دانلود و اشتراک گذاری پوستر زیر به همراه منشن کردن بیچ اینستاگرامی صلوات همراه این کمپین باشید...
               </div>
               <div class="center">
-                <a href="/image/salavat-story.jpg" target="_blank" download>
+                <a href="image/salavat-story.jpg" target="_blank" download>
                   <mwc-button>
                     <div class="button-content">${downloadIconOutlined} دانلود استوری</div>
                   </mwc-button>
