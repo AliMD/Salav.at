@@ -154,6 +154,7 @@ export class SalavatCounter extends BaseElement {
     if (!(this.active && this.count != undefined && this.startTime != undefined && this.lastUpdatedTime != undefined)) return;
     this._log('computeDisplayCount');
     const now = Date.now();
+    if (now - this.lastUpdatedTime > 15 * 60 * 1000) return; // 15 min
     //   c      dc
     // ----- = -----
     //  l-s     n-s
