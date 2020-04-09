@@ -14,7 +14,7 @@ import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
 import { styleAppResponsive } from './stuff/style-app-responsive';
-import { menuIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon } from './stuff/icon';
+import { menuIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon, downloadIconOutlined } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -80,12 +80,12 @@ export class SalavatPWA extends BaseElement {
             <a href="https://twitter.com/salav_at_/" target="_blank">
               <mwc-icon-button>${twitterIcon}</mwc-icon-button>
             </a>
-            <a href="https://t.me/joinchat/Aw16XEemR8ZuuXgZXdTR1w/" target="_blank">
+            <a href="https://t.me/joinchat/Aw16XEemR8ZuuXgZXdTR1w" target="_blank">
               <mwc-icon-button>${telegramIcon}</mwc-icon-button>
             </a>
           </div>
 
-          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.6.1</a>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.7.0</a>
         </div>
         <div slot="appContent" page="${this._page}">
           <mwc-icon-button
@@ -124,12 +124,21 @@ export class SalavatPWA extends BaseElement {
               تموم شهدایی که با فدا کردن جونشون، امروز رو برای بردن اسم اماممون امن کردن...
             </div>
             <div class="page campaign text-mode" ?active="${this._page === 'campaign'}">
-              گاهی آن قدر تلخی زندگی‌مان زیاد می شود،که رنگِ خوشِ شادی روزهایمان، در قرنطینه تلخِ روزگار به خاکستری می زند.
-              اما ما یاد گرفته ایم تا دهانمان را با سلام و صلوات بر محمد و آل او شیرین کنیم تا همه چیز با نشاط شود و غم، از زندگی‌مان رخت ببندد.
-              سلامی به شیرینی با تو بودن...
-              به مناسبت ایام پر برکت شعبان و رمضان، تصمیم گرفتیم کمپین نذر "یک میلیون" صلوات به نیت دعا برای سلامتی و ظهور امام زمان (عج الله تعالی فرجه الشریف) را از میلاد حضرتش تا میلاد کریم اهل‌بیت، حضرت امام حسن مجتبی ( علیه السلام) در نیمه رمضان آغاز کنیم.
-              برای هماهنگی و رسیدن به عدد یک میلیون صلوات، خواهشمندیم تعداد صلوات‌های فرستاده شده را در شمارنده وارد کنید.
-              برای حمایت از کمپین با دانلود و اشتراک گذاری پوستر زیر، همراه این کمپین باشید...
+              <div>
+                گاهی آن قدر تلخی زندگی‌مان زیاد می شود،که رنگِ خوشِ شادی روزهایمان، در قرنطینه تلخِ روزگار به خاکستری می زند.
+                اما ما یاد گرفته ایم تا دهانمان را با سلام و صلوات بر محمد و آل او شیرین کنیم تا همه چیز با نشاط شود و غم، از زندگی‌مان رخت ببندد.
+                سلامی به شیرینی با تو بودن...
+                به مناسبت ایام پر برکت شعبان و رمضان، تصمیم گرفتیم کمپین نذر "یک میلیون" صلوات به نیت دعا برای سلامتی و ظهور امام زمان (عج الله تعالی فرجه الشریف) را از میلاد حضرتش تا میلاد کریم اهل‌بیت، حضرت امام حسن مجتبی ( علیه السلام) در نیمه رمضان آغاز کنیم.
+                برای هماهنگی و رسیدن به عدد یک میلیون صلوات، خواهشمندیم تعداد صلوات‌های فرستاده شده را در شمارنده وارد کنید.
+                برای حمایت از کمپین با دانلود و اشتراک گذاری پوستر زیر به همراه منشن کردن بیچ اینستاگرامی صلوات همراه این کمپین باشید...
+              </div>
+              <div class="center">
+                <a href="image/salavat-story.jpg" target="_blank" download>
+                  <mwc-button>
+                    <div class="button-content">${downloadIconOutlined} دانلود استوری</div>
+                  </mwc-button>
+                </a>
+              </div>
             </div>
             <div class="page" ?active="${this._page === '404'}">
               Page not found ...
