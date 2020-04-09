@@ -54,17 +54,13 @@ export class SalavatPWA extends BaseElement {
   protected render(): TemplateResult {
     this._log('render');
     return html`
-    <!-- <div class="guide">
-      <img src="../image/menu-guide.png" id="menu">
-      <img src="../image/submit-guide.png" id="submit">
-      <img src="../image/install-app-guide.png" id="install">
-    </div> -->
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false)}">
         <div class="drawer-content">
           <a href="/" class="salavat-badge">
             <div class="title">صلوات های من:</div>
             <div class="number">${(this._userSalavatCount || 0).toLocaleString('fa')}</div>
           </a>
+
           <div class="menu">
             ${this._menuListArray.map((menuItem) => html`
               <a href="/${menuItem.slug}">
@@ -84,13 +80,12 @@ export class SalavatPWA extends BaseElement {
             <a href="https://twitter.com/salav_at_/" target="_blank">
               <mwc-icon-button>${twitterIcon}</mwc-icon-button>
             </a>
-
             <a href="https://t.me/joinchat/Aw16XEemR8ZuuXgZXdTR1w/" target="_blank">
               <mwc-icon-button>${telegramIcon}</mwc-icon-button>
             </a>
           </div>
 
-          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.6.0</a>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.6.1</a>
         </div>
         <div slot="appContent" page="${this._page}">
           <mwc-icon-button
@@ -129,13 +124,12 @@ export class SalavatPWA extends BaseElement {
               تموم شهدایی که با فدا کردن جونشون، امروز رو برای بردن اسم اماممون امن کردن...
             </div>
             <div class="page campaign text-mode" ?active="${this._page === 'campaign'}">
-              گاهی آن قدر تلخی روزگار  زیاد می شود،
-              که سال جدید هم به رنگ خاکستری می زند!
-              اما ما یاد گرفته ایم تا دهانمان را با سلام و صلوات بر محمد و آل او شیرین کنیم تا همه چیز با نشاط شود و غم، از زندگی مان رخت بربندد.
+              گاهی آن قدر تلخی زندگی‌مان زیاد می شود،که رنگِ خوشِ شادی روزهایمان، در قرنطینه تلخِ روزگار به خاکستری می زند.
+              اما ما یاد گرفته ایم تا دهانمان را با سلام و صلوات بر محمد و آل او شیرین کنیم تا همه چیز با نشاط شود و غم، از زندگی‌مان رخت ببندد.
               سلامی به شیرینی با تو بودن...
-              به مناسبت ایام پر برکت نیمه شعبان تصمیم گرفتیم  کمپین نذر 100 هزار صلوات به نیت دعا برای سلامتی و ظهور امام زمان (عج الله تعالی فرجه الشریف) را راه اندازی کنیم، این کمپین از روز ... (دو روز مانده به میلاد حضرت نور) آغاز به کار کرده و در انتهای غروب نیمه شعبان خاتمه می یابد.
-              برای هماهنگی و رسیدن به عدد ذکر شده خواهشمندیم تعداد صلوات‌های فرستاده شده را در شمارنده وارد نمایید...
-              در ضمن برای حمایت از کمپین می توانید پوستر زیر را دانلود کرده و با اشتراک گذاری در صفحات و گروه های مجازی خود، حامی این کمپین معنوی باشید...
+              به مناسبت ایام پر برکت شعبان و رمضان، تصمیم گرفتیم کمپین نذر "یک میلیون" صلوات به نیت دعا برای سلامتی و ظهور امام زمان (عج الله تعالی فرجه الشریف) را از میلاد حضرتش تا میلاد کریم اهل‌بیت، حضرت امام حسن مجتبی ( علیه السلام) در نیمه رمضان آغاز کنیم.
+              برای هماهنگی و رسیدن به عدد یک میلیون صلوات، خواهشمندیم تعداد صلوات‌های فرستاده شده را در شمارنده وارد کنید.
+              برای حمایت از کمپین با دانلود و اشتراک گذاری پوستر زیر، همراه این کمپین باشید...
             </div>
             <div class="page" ?active="${this._page === '404'}">
               Page not found ...
@@ -143,6 +137,11 @@ export class SalavatPWA extends BaseElement {
             </div>
           </main>
           <mwc-icon-button class="get-app-button" @click="${() => chatRoom.postMessage('request-install')}">${getAppIcon}</mwc-icon-button>
+          <!-- <div class="guide">
+            <img src="../image/menu-guide.png" id="menu">
+            <img src="../image/submit-guide.png" id="submit">
+            <img src="../image/install-app-guide.png" id="install">
+          </div> -->
         </div>
       </mwc-drawer>
       <page-desktop></page-desktop>

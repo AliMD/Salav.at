@@ -1,5 +1,5 @@
 import { css, SVGTemplateResult } from "lit-element";
-import { campaignIcon, aboutUsIcon } from './stuff/icon';
+import { campaignIcon, aboutUsIcon, salavatIcon } from './stuff/icon';
 
 export interface MenuItem {
   slug: string;
@@ -14,6 +14,12 @@ export interface MenuItemHidden {
 }
 
 export const pageListArray: Array<MenuItem | MenuItemHidden> = [
+  {
+    slug: 'home', // display in url
+    sideMenu: true, // display in side menu
+    title: 'Salav.at', // menu label
+    icon: salavatIcon, // svg icon object from icon.ts
+  },
   {
     slug: 'campaign', // display in url
     sideMenu: true, // display in side menu
@@ -85,6 +91,7 @@ export const styleConfig = css`
     --app-dark-background-color: #102f4b;
 
     --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
     --mdc-theme-primary: var(--app-primary-color);
     --mdc-theme-secondary: var(--app-accent-color);
     --mdc-theme-on-primary: var(--app-primary-text-color);

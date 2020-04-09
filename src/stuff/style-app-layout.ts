@@ -71,7 +71,7 @@ export const styleAppLayout = css`
 
   .drawer-content .menu mwc-button {
     margin-top: 1rem;
-    /* --mdc-button-horizontal-padding: 3rem; */
+    --mdc-typography-button-text-transform: none;
   }
 
   .drawer-content .menu mwc-button .button-content {

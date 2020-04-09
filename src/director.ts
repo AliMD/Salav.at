@@ -93,15 +93,16 @@ chatRoom.onMessage('submit-salavat', async () => {
     return;
   }
 
-  const userSalavatCount: number = chatRoom.getProperty('userSalavatCount') as number || 0;
+  let userSalavatCount: number = chatRoom.getProperty('userSalavatCount') as number || 0;
   const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number || 0;
 
   if (userSalavatCountIncrease > 0) {
     const result = await updateData<SalavatCountInterface>(appConfig.apiSalavatCountDocId, { _id: 'salavatCount', count: userSalavatCountIncrease })
     if (result.ok) {
+      userSalavatCount += userSalavatCountIncrease;
       chatRoom.setProperty('salavatCount', result.data);
       chatRoom.setProperty('userSalavatCountIncrease', 0);
-      chatRoom.setProperty('userSalavatCount', userSalavatCount + userSalavatCountIncrease);
+      chatRoom.setProperty('userSalavatCount', userSalavatCount);
       localStorage.setItem('userSalavatCount', userSalavatCount + '');
     }
     else {
