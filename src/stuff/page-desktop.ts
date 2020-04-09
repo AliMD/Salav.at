@@ -63,6 +63,10 @@ export class PageDesktop extends BaseElement {
       height: auto;
     }
 
+    .link {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   `;
 
   protected render(): TemplateResult {
@@ -72,7 +76,7 @@ export class PageDesktop extends BaseElement {
       <div class="message">
         <p>این برنامه <span>فعلا</span> تنها برای موبایل طراحی شده است.</p>
         <p>لطفا این سایت را در <span>موبایل</span> باز کنید.</p>
-        <p>درضمن امکان <span @click="${() => chatRoom.postMessage('request-install')}">نصب در دسکتاپ</span> را نیز تست کنید.</p>
+        <p>درضمن امکان <span class="link" @click="${() => chatRoom.postMessage('request-install')}">نصب در دسکتاپ</span> را نیز تست کنید.</p>
       </div>
       <div class="qr-code">
         ${qrCode}

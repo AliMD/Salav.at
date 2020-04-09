@@ -53,6 +53,12 @@ chatRoom.onMessage('invalidUri', () => {
 /*
   app install ...
 */
+chatRoom.onMessage('app-installable', () => {
+  if (window.innerWidth > appConfig.maxWith) {
+    chatRoom.postMessage('request-install');
+  }
+});
+
 chatRoom.onMessage('app-installed', () => {
   chatRoom.setProperty('snackbar', <SnackbarOption>{
     open: true,

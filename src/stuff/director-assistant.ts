@@ -77,12 +77,9 @@ window.addEventListener('appinstalled', () => {
 });
 
 window.addEventListener('beforeinstallprompt', (event) => {
-  // Prevent the mini-info-bar from appearing on mobile
-  event.preventDefault();
-  // Stash the event so it can be triggered later.
-  deferredPrompt = event;
-  // Update UI notify the user they can install the PWA
-  // @TODO: install request
+  event.preventDefault(); // Prevent the mini-info-bar from appearing on mobile
+  deferredPrompt = event; // Stash the event so it can be triggered later.
+  chatRoom.postMessage('app-installable');
 });
 
 chatRoom.onMessage('request-install', async () => {

@@ -7,6 +7,7 @@
       "crossorigin",
       "entrypoint",
       "fullwidth",
+      "installable",
       "msapplication",
       "nowrap",
       "polyserve",

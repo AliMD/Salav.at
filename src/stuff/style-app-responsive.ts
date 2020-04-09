@@ -9,6 +9,7 @@ export const styleAppResponsive = css`
        display: none;
      }
   }
+
   /* mobile */
   @media screen and (max-width: 426px) {
     .page.text-mode {
@@ -22,13 +23,24 @@ export const styleAppResponsive = css`
       font-size: 1.1rem;
     }
   }
-  @media screen and (min-width: ${appConfig.maxWith+1}px) {
-      page-desktop {
-        display: flex;
-      }
 
-      mwc-drawer {
-        display: none;
-      }
+  @media screen and (min-width: ${appConfig.maxWith + 1}px) {
+    page-desktop {
+      display: flex;
     }
+
+    mwc-drawer {
+      display: none;
+    }
+  }
+
+  @media screen and (display-mode: standalone) and (min-width: ${appConfig.maxWith + 1}px) {
+    page-desktop {
+      display: none;
+    }
+
+    mwc-drawer {
+      display: flex;
+    }
+  }
 `;
