@@ -1,8 +1,9 @@
 import './stuff/director-assistant';
 import { chatRoom } from './stuff/chat-room';
-import { pageListArray, appConfig } from './config';
+import { pageListArray, appConfig, SalavatCountInterface, SalavatCountDataApiInterface } from './config';
 import { SnackbarOption } from './stuff/snack-bar';
 import { idlePeriod } from '@polymer/polymer/lib/utils/async';
+import { loadData, updateData } from './stuff/data-api';
 
 /*
   routing ....
@@ -83,11 +84,72 @@ chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease
   chatRoom.setProperty('showSubmit', !!userSalavatCountIncrease);
 });
 
-chatRoom.setProperty('userSalavatCount', 10);
-chatRoom.setProperty('userSalavatCountIncrease', 0);
-chatRoom.onMessage('submit-salavat', () => {
+chatRoom.onMessage('submit-salavat', async () => {
+  if (chatRoom.getProperty('offline')) {
+    chatRoom.setProperty('snackbar', <SnackbarOption>{
+      open: true,
+      text: 'لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
+    });
+    return;
+  }
+
   const userSalavatCount: number = chatRoom.getProperty('userSalavatCount') as number || 0;
   const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number || 0;
-  chatRoom.setProperty('userSalavatCount', userSalavatCount + userSalavatCountIncrease);
   chatRoom.setProperty('userSalavatCountIncrease', 0);
+
+  if (userSalavatCountIncrease > 0) {
+    const result = await updateData<SalavatCountInterface>(appConfig.apiSalavatCountDocId, {count: userSalavatCountIncrease})
+    if (result.ok) {
+      chatRoom.setProperty('slavatCount', result.data);
+      chatRoom.setProperty('userSalavatCount', userSalavatCount + userSalavatCountIncrease);
+      localStorage.setItem('userSalavatCount', userSalavatCount + '');
+    }
+    chatRoom.setProperty('snackbar', <SnackbarOption>{
+      open: true,
+      text: result.ok ?
+        'ذر شما با موفقیت ثبت و اعمال شد.' :
+        'خطا در ذخیره اصلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
+    });
+  }
 });
+
+/*
+  API slavatCount
+*/
+const loadSalavatCountInterval = async () => {
+  const slavatCount = await loadData<SalavatCountDataApiInterface>(appConfig.apiSalavatCountDocId);
+  if (slavatCount.salavatCount) chatRoom.setProperty('slavatCount', slavatCount.salavatCount);
+  idlePeriod.run(() => setTimeout(() => loadSalavatCountInterval(), appConfig.loadSalavatInterval));
+};
+idlePeriod.run(() => loadSalavatCountInterval()); // load on startup
+
+/*
+  Localstorage
+*/
+const parseJSON = <T>(str: string): T | null => {
+  let parsed: T | null = null;
+  try {
+    parsed = JSON.parse(str) as T;
+  }
+  catch (err) {
+    console.error('parseJSON: %s', str);
+  }
+  return parsed;
+};
+
+const localStorageGetItem = <T>(str: string, defaultValue: T): T => {
+  const item: string | null = localStorage.getItem(str);
+  if (!item) return defaultValue;
+  const parsed: T | null = parseJSON<T>(item);
+  if (parsed != null) {
+    return parsed;
+  }
+  else {
+    return defaultValue;
+  }
+};
+
+const loadFromLocalStorage = () => {
+  chatRoom.setProperty('userSalavatCount', localStorageGetItem<number>('userSalavatCount', 0));
+};
+loadFromLocalStorage();
