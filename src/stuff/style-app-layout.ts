@@ -25,6 +25,26 @@ export const styleAppLayout = css`
     text-decoration: none;
   }
 
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--app-primary-text-color); /* svg icons */
+  }
+
+  mwc-button {
+    --mdc-theme-primary: var(--app-primary-text-color);
+    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --mdc-typography-button-text-transform: none;
+    --mdc-typography-button-font-weight: 300;
+    --mdc-typography-button-letter-spacing: normal;
+    --mdc-typography-button-font-size: 1em;
+  }
+
+  mwc-button .button-content {
+    display: inline-flex;
+    align-items: center;
+  }
+
   .drawer-content {
     display: flex; /* for gap and footer */
     flex-direction: column;
@@ -39,8 +59,6 @@ export const styleAppLayout = css`
     background-repeat: no-repeat;
     background-size: cover;
     text-align: left;
-    --mdc-theme-primary: var(--app-primary-text-color);
-    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
 
   .drawer-content a.salavat-badge {
@@ -71,7 +89,7 @@ export const styleAppLayout = css`
 
   .drawer-content .menu mwc-button {
     margin-top: 1rem;
-    --mdc-typography-button-text-transform: none;
+    --mdc-typography-button-font-size: 1.2rem;
   }
 
   .drawer-content .menu mwc-button .button-content {
@@ -86,9 +104,6 @@ export const styleAppLayout = css`
 
   .drawer-content .menu svg {
     margin-right: 0.5rem;
-    width: 24px;
-    height: 24px;
-    fill: var(--app-primary-text-color); /* svg icons */
   }
 
   .drawer-content .gap {
@@ -100,11 +115,6 @@ export const styleAppLayout = css`
     margin-bottom: 0.5rem;
     text-align: left;
     --mdc-icon-button-size: 30px;
-  }
-
-  .drawer-content .social-media svg {
-    width: 24px;
-    height: 24px;
   }
 
   .drawer-footer {
@@ -160,6 +170,10 @@ export const styleAppLayout = css`
     height: 400px;
   }
 
+  .center {
+    text-align: center;
+  }
+
     /* All text mode pages */
   .page.text-mode {
     padding: 20px ${appConfig.mainImageMargin}px;
@@ -168,6 +182,18 @@ export const styleAppLayout = css`
     text-justify: inter-word;
     z-index: 100;
   }
+
+  .page.campaign a {
+    margin-top: 1rem;
+    display: inline-block;
+  }
+
+  .page.campaign a svg {
+    margin-left: 0.5em;
+    width: 1.5em;
+    height: 1.5em;
+  }
+
   .guide {
     position: absolute;
     height:100vh;
@@ -175,6 +201,7 @@ export const styleAppLayout = css`
     background-color:black;
     opacity: 0.6;
   }
+
   .guide #menu {
     position:absolute;
     width:15rem;
@@ -182,6 +209,7 @@ export const styleAppLayout = css`
     left: 2.2rem;
     top: 0.1rem;
   }
+
   .guide #submit {
     position:absolute;
     width:15rem;
@@ -190,6 +218,7 @@ export const styleAppLayout = css`
     left:50%;
     transform: translate(-50%,-50%);
   }
+
   .guide #install {
     position: absolute;
     width: 12rem;
@@ -197,6 +226,7 @@ export const styleAppLayout = css`
     right: 2.2rem;
     bottom: 0.1rem;
   }
+
   .submit-button {
     background-color: var(--app-primary-color);
     border-radius: 100px 100px 0 0;
@@ -247,6 +277,5 @@ export const styleAppLayout = css`
     margin-left: 0.375rem;
     width: 1rem;
     height: 1rem;
-    fill: white;
   }
 `;
