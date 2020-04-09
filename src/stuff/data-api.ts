@@ -1,7 +1,5 @@
 import { appConfig } from '../config';
 
-
-
 const debug = true;
 const _log = (message: unknown, ...restParam: unknown[]) => {
   if (debug) {
