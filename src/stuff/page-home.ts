@@ -45,6 +45,7 @@ export class PageHome extends BaseElement {
     }
 
     .label {
+      margin-top: 1rem;
       text-align: center;
       text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12);
     }
@@ -67,10 +68,16 @@ export class PageHome extends BaseElement {
 
   protected render(): TemplateResult {
     this._log('render');
+    const countSum: number = (this._userSalavatCount || 0) + (this._userSalavatCountIncrease || 0);
     return html`
+      <div class="label">
+        <span class="title">صلوات های من:</span>
+        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">(${this._userSalavatCountIncrease?.toLocaleString('fa')})</span>
+        <span class="salavat-count">${countSum.toLocaleString('fa')}</span>
+      </div>
+
       <mwc-slider
         dir="ltr"
-        ?pin="${this._sliderMax && this._sliderMax <= 1_000}"
         .value="${this._userSalavatCount}"
         .min="${1}"
         .max="${this._sliderMax}"
@@ -78,18 +85,13 @@ export class PageHome extends BaseElement {
         @input="${this._onSliderInput}"
         @change="${this._onSliderChange}"
       ></mwc-slider>
-      <div class="label">
-        <span class="title">صلوات های من:</span>
-        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">${this._userSalavatCountIncrease?.toLocaleString('fa')}<span class="plus">+</span></span>
-        <span class="salavat-count">${this._userSalavatCount?.toLocaleString('fa')}</span>
-      </div>
+
       <salavat-counter
         .debug="${false}"
         .active="${this.active}"
         label-before="تا این لحظه"
         label-after="صلوات نذر شده"
-      >
-      </salavat-counter>
+      ></salavat-counter>
     `;
   }
 
