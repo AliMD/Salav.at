@@ -20,7 +20,7 @@ export const loadData = async <T>(docId: string): Promise<T> => {
   _log('loadData: %s', docId);
   let dataListObject: T = {} as T;
   try {
-    dataListObject = await _fetch<T>(`${appConfig.apiUri}/data/${docId}.json`, { method: 'GET' });
+    dataListObject = await _fetch<T>(`${appConfig.apiUri}/data/${docId}.json?pwa`, { method: 'GET' });
   }
   catch (err) {
     _log('ERROR: %o', err);
