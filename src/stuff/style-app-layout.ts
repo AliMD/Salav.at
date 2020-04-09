@@ -26,8 +26,6 @@ export const styleAppLayout = css`
   }
 
   svg {
-    width: 24px;
-    height: 24px;
     fill: var(--app-primary-text-color); /* svg icons */
   }
 
@@ -85,6 +83,11 @@ export const styleAppLayout = css`
     --mdc-typography-button-font-weight: 300;
     --mdc-typography-button-letter-spacing: normal;
     --mdc-typography-button-font-size: 1.2rem;
+  }
+
+  .drawer-content svg {
+    width: 28px;
+    height: 28px;
   }
 
   .drawer-content .menu mwc-button {
@@ -192,6 +195,8 @@ export const styleAppLayout = css`
     margin-left: 0.5em;
     width: 1.5em;
     height: 1.5em;
+    width: 28px;
+    height: 28px;
   }
 
   .guide {
