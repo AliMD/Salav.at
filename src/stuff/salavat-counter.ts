@@ -5,6 +5,7 @@ import { chatRoom } from './chat-room';
 import { SalavatCountInterface } from '../config';
 
 const commaSeparator: string = (1000).toLocaleString('fa').charAt(1);
+const timeCalc = 15 * 60 * 1000;
 
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
@@ -153,7 +154,10 @@ export class SalavatCounter extends BaseElement {
   computeDisplayCount() {
     if (!(this.active && this.count != undefined && this.startTime != undefined && this.lastUpdatedTime != undefined)) return;
     this._log('computeDisplayCount');
-    const now = Date.now();
+    let now = Date.now();
+    if (now - this.lastUpdatedTime > timeCalc) {
+      now = this.lastUpdatedTime + timeCalc;
+    }; // 15 min
     //   c      dc
     // ----- = -----
     //  l-s     n-s

@@ -11,7 +11,7 @@ import './stuff/page-home';
 import './stuff/page-desktop';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
-import { styleConfig, pageListArray, MenuItem } from './config';
+import { styleConfig, pageListArray, MenuItem, appConfig } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
 import { styleAppResponsive } from './stuff/style-app-responsive';
 import { menuIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon, downloadIconOutlined } from './stuff/icon';
@@ -85,7 +85,7 @@ export class SalavatPWA extends BaseElement {
             </a>
           </div>
 
-          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.7.0</a>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v${appConfig.appVersion}</a>
         </div>
         <div slot="appContent" page="${this._page}">
           <mwc-icon-button
@@ -130,7 +130,7 @@ export class SalavatPWA extends BaseElement {
                 سلامی به شیرینی با تو بودن...
                 به مناسبت ایام پر برکت شعبان و رمضان، تصمیم گرفتیم کمپین نذر "یک میلیون" صلوات به نیت دعا برای سلامتی و ظهور امام زمان (عج الله تعالی فرجه الشریف) را از میلاد حضرتش تا میلاد کریم اهل‌بیت، حضرت امام حسن مجتبی ( علیه السلام) در نیمه رمضان آغاز کنیم.
                 برای هماهنگی و رسیدن به عدد یک میلیون صلوات، خواهشمندیم تعداد صلوات‌های فرستاده شده را در شمارنده وارد کنید.
-                برای حمایت از کمپین با دانلود و اشتراک گذاری پوستر زیر به همراه منشن کردن بیچ اینستاگرامی صلوات همراه این کمپین باشید...
+                برای حمایت از کمپین با دانلود و اشتراک گذاری پوستر زیر به همراه منشن کردن پیچ اینستاگرامی صلوات همراه این کمپین باشید...
               </div>
               <div class="center">
                 <a href="image/salavat-story.jpg" target="_blank" download>

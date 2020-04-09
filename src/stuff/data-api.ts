@@ -5,7 +5,7 @@ import { appConfig } from '../config';
 const debug = true;
 const _log = (message: unknown, ...restParam: unknown[]) => {
   if (debug) {
-    console.log(`%DataAPI%c ${message}`, "color: #4CAF50; font-size: 1.2em;", "color: inherit;font-size: 1em", ...restParam);
+    console.log(`%cDataAPI%c ${message}`, "color: #4CAF50; font-size: 1.2em;", "color: inherit;font-size: 1em", ...restParam);
   }
 };
 

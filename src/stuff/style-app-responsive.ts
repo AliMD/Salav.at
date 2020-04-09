@@ -9,26 +9,38 @@ export const styleAppResponsive = css`
        display: none;
      }
   }
+
   /* mobile */
-  @media screen and (max-width: 426px){
+  @media screen and (max-width: 426px) {
     .page.text-mode {
       padding: 1rem 2rem;
       font-size: 0.74rem;
     }
   }
   /* tablet */
-  @media screen and (min-width: 427px){
+  @media screen and (min-width: 427px) {
     .page.text-mode {
       font-size: 1.1rem;
     }
   }
-  @media screen and (min-width: ${appConfig.maxWith+1}px) {
-      page-desktop {
-        display: flex;
-      }
 
-      mwc-drawer {
-        display: none;
-      }
+  @media screen and (min-width: ${appConfig.maxWith + 1}px) {
+    page-desktop {
+      display: flex;
     }
+
+    mwc-drawer {
+      display: none;
+    }
+  }
+
+  @media screen and (display-mode: standalone) and (min-width: ${appConfig.maxWith + 1}px) {
+    page-desktop {
+      display: none;
+    }
+
+    mwc-drawer {
+      display: flex;
+    }
+  }
 `;

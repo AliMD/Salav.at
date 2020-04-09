@@ -30,7 +30,7 @@ module.exports = {
     },
     {
       urlPattern: /^https:\/\/api.salav.at\//,
-      handler: 'fastest',
+      handler: 'networkFirst',
       options: {
         cache: {
           name: 'api',

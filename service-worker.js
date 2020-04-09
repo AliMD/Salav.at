@@ -1,1 +1,1 @@
-console.info('Service worker disabled for development, will be generated at build time.');
+console.info('SW disabled for development.');

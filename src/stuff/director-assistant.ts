@@ -27,6 +27,30 @@ window.addEventListener('load', () => {
   }
 });
 
+chatRoom.onMessage('window-loaded', async () => {
+  if (! ('serviceWorker' in navigator)) return;
+  console.log("SW registered");
+
+  const registration = await navigator.serviceWorker.register('service-worker.js', { scope: '/' });
+
+  registration.addEventListener('updatefound', () => {
+    const newWorker = registration.installing;
+    if (newWorker == null) return;
+    console.log("SW update found, status: %s", newWorker.state);
+    newWorker.addEventListener('statechange', () => {
+      console.log("SW state changed: %s", newWorker.state);
+      if (newWorker.state === 'installed') {
+        chatRoom.postMessage('service-worker-updated');
+      }
+      else if (newWorker.state === 'redundant') {
+        console.warn("SW redundant!")
+      }
+    })
+  });
+});
+
+
+
 chatRoom.onMessage('scrollTop', () => {
   if (!(window.scrollTo && window.scrollY > 0)) return;
   idlePeriod.run(() => scrollTo({
@@ -53,12 +77,9 @@ window.addEventListener('appinstalled', () => {
 });
 
 window.addEventListener('beforeinstallprompt', (event) => {
-  // Prevent the mini-info-bar from appearing on mobile
-  event.preventDefault();
-  // Stash the event so it can be triggered later.
-  deferredPrompt = event;
-  // Update UI notify the user they can install the PWA
-  // @TODO: install request
+  event.preventDefault(); // Prevent the mini-info-bar from appearing on mobile
+  deferredPrompt = event; // Stash the event so it can be triggered later.
+  chatRoom.postMessage('app-installable');
 });
 
 chatRoom.onMessage('request-install', async () => {

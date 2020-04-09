@@ -53,6 +53,12 @@ chatRoom.onMessage('invalidUri', () => {
 /*
   app install ...
 */
+chatRoom.onMessage('app-installable', () => {
+  if (window.innerWidth > appConfig.maxWith) {
+    chatRoom.postMessage('request-install');
+  }
+});
+
 chatRoom.onMessage('app-installed', () => {
   chatRoom.setProperty('snackbar', <SnackbarOption>{
     open: true,
@@ -154,5 +160,32 @@ const localStorageGetItem = <T>(str: string, defaultValue: T): T => {
 
 const loadFromLocalStorage = () => {
   chatRoom.setProperty('userSalavatCount', localStorageGetItem<number>('userSalavatCount', 0));
+
+  if (localStorageGetItem<Boolean>('service-worker-updated', false)) {
+    localStorage.removeItem('service-worker-updated');
+    chatRoom.setProperty('snackbar', <SnackbarOption>{
+      open: true,
+      text: `به نسخه ${appConfig.appVersion} خوش آمدید.`,
+    });
+  }
 };
 loadFromLocalStorage();
+
+/*
+  Service Worker
+*/
+let refreshing = false;
+chatRoom.onMessage('service-worker-updated', () => {
+  if (refreshing) return;
+
+  localStorage.setItem('service-worker-updated', 'true');
+
+  chatRoom.setProperty('snackbar', <SnackbarOption>{
+    open: true,
+    text: 'در حال نصب و فعال سازی نسخه جدید برنامه ...',
+    timeout: 3000,
+  });
+
+  setTimeout(() => window.location.reload(), 3500);
+  refreshing = true;
+});
