@@ -65,8 +65,8 @@ export const appConfig = {
   apiUri: 'https://api.salav.at',
   apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',
   apiSalavatCountDocId: 'salavat/count',
-  loadSalavatInterval: 30_000,
-  snackbarTimeout: 5000, //ms
+  loadSalavatInterval: 30_000, //ms
+  snackbarTimeout: 5_000, //ms
   // UI
   maxWith: 768, //px
   mainImageHeight: 430, //px

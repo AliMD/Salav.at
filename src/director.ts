@@ -110,7 +110,7 @@ chatRoom.onMessage('submit-salavat', async () => {
     chatRoom.setProperty('snackbar', <SnackbarOption>{
       open: true,
       text: result.ok ?
-        'ذر شما با موفقیت ثبت و اعمال شد.' :
+        'نذر شما با موفقیت ثبت و اعمال شد.' :
         'خطا در ذخیره اصلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
     });
   }
