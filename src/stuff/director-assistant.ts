@@ -27,6 +27,30 @@ window.addEventListener('load', () => {
   }
 });
 
+chatRoom.onMessage('window-loaded', async () => {
+  if (! ('serviceWorker' in navigator)) return;
+  console.log("SW registered");
+
+  const registration = await navigator.serviceWorker.register('service-worker.js', { scope: '/' });
+
+  registration.addEventListener('updatefound', () => {
+    const newWorker = registration.installing;
+    if (newWorker == null) return;
+    console.log("SW update found, status: %s", newWorker.state);
+    newWorker.addEventListener('statechange', () => {
+      console.log("SW state changed: %s", newWorker.state);
+      if (newWorker.state === 'installed') {
+        chatRoom.postMessage('service-worker-updated');
+      }
+      else if (newWorker.state === 'redundant') {
+        console.warn("SW redundant!")
+      }
+    })
+  });
+});
+
+
+
 chatRoom.onMessage('scrollTop', () => {
   if (!(window.scrollTo && window.scrollY > 0)) return;
   idlePeriod.run(() => scrollTo({

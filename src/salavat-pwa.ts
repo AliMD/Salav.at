@@ -11,7 +11,7 @@ import './stuff/page-home';
 import './stuff/page-desktop';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
-import { styleConfig, pageListArray, MenuItem } from './config';
+import { styleConfig, pageListArray, MenuItem, appConfig } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
 import { styleAppResponsive } from './stuff/style-app-responsive';
 import { menuIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon, downloadIconOutlined } from './stuff/icon';
@@ -85,7 +85,7 @@ export class SalavatPWA extends BaseElement {
             </a>
           </div>
 
-          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v0.7.0</a>
+          <a class="drawer-footer" href="https://github.com/AliMD/Salav.at" target="_blank">Salav.at v${appConfig.appVersion}</a>
         </div>
         <div slot="appContent" page="${this._page}">
           <mwc-icon-button
