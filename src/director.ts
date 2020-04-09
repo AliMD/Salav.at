@@ -97,7 +97,7 @@ chatRoom.onMessage('submit-salavat', async () => {
   const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number || 0;
 
   if (userSalavatCountIncrease > 0) {
-    const result = await updateData<SalavatCountInterface>(appConfig.apiSalavatCountDocId, {count: userSalavatCountIncrease})
+    const result = await updateData<SalavatCountInterface>(appConfig.apiSalavatCountDocId, { _id: 'salavatCount', count: userSalavatCountIncrease })
     if (result.ok) {
       chatRoom.setProperty('salavatCount', result.data);
       chatRoom.setProperty('userSalavatCountIncrease', 0);
@@ -120,8 +120,12 @@ chatRoom.onMessage('submit-salavat', async () => {
   API salavatCount
 */
 const loadSalavatCountInterval = async () => {
-  const salavatCount = await loadData<SalavatCountDataApiInterface>(appConfig.apiSalavatCountDocId);
-  if (salavatCount.salavatCount) chatRoom.setProperty('salavatCount', salavatCount.salavatCount);
+  const salavatCountApi = await loadData<SalavatCountDataApiInterface>(appConfig.apiSalavatCountDocId);
+  const salavatCount = salavatCountApi.salavatCount;
+  const oldSalavatCount = chatRoom.getProperty('salavatCount') as SalavatCountInterface;
+  if (salavatCount && salavatCount._lastEditedTime > (oldSalavatCount?._lastEditedTime || 0)) {
+    chatRoom.setProperty('salavatCount', salavatCount);
+  }
   idlePeriod.run(() => setTimeout(() => loadSalavatCountInterval(), appConfig.loadSalavatInterval));
 };
 idlePeriod.run(() => loadSalavatCountInterval()); // load on startup
