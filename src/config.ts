@@ -1,5 +1,5 @@
 import { css, SVGTemplateResult } from "lit-element";
-import { campaignIcon, aboutUsIcon, imageIcon, getAppIcon, helpIcon } from './stuff/icon';
+import { campaignIcon, aboutUsIcon } from './stuff/icon';
 
 export interface MenuItem {
   slug: string;
