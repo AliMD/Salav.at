@@ -2,6 +2,7 @@ import { html, css, customElement, property, TemplateResult, PropertyValues, que
 import { BaseElement } from './base-element';
 import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 import { chatRoom } from './chat-room';
+import { SalavatCountInterface } from '../config';
 
 const commaSeparator: string = (1000).toLocaleString('fa').charAt(1);
 
@@ -20,13 +21,13 @@ export class SalavatCounter extends BaseElement {
   minWidth: number = 110;
 
   @property({ type: Number })
-  startTim: number = (new Date()).setHours(0, 0, 0, 0);
+  startTime?: number;
 
   @property({ type: Number })
-  futureTimePeriod: number = 3 * 60 * 60 * 1000; // 3 hours
+  lastUpdatedTime?: number;
 
   @property({ type: Number })
-  count: number = 10000; // Real salavat count
+  count?: number; // Real salavat count
 
   @property({ type: Number, attribute: false })
   displayCount: number = 0;
@@ -86,8 +87,21 @@ export class SalavatCounter extends BaseElement {
     }
   `];
 
+  constructor () {
+    super();
+    this._log('constructor');
+
+    chatRoom.onPropertyChanged('salavatCount', (salavatCount: SalavatCountInterface | unknown) => {
+      if (!salavatCount) return;
+      const _salavatCount = salavatCount as SalavatCountInterface;
+      this.startTime = _salavatCount._createdTime;
+      this.lastUpdatedTime = _salavatCount._lastEditedTime;
+      this.count = _salavatCount.count;
+    });
+  }
+
   protected shouldUpdate(_changedProperties: PropertyValues) {
-    return super.shouldUpdate(_changedProperties) && this.active;
+    return super.shouldUpdate(_changedProperties) && this.active && this.count != undefined && this.startTime != undefined && this.lastUpdatedTime != undefined;
   }
 
   protected render(): TemplateResult {
@@ -137,10 +151,13 @@ export class SalavatCounter extends BaseElement {
   }
 
   computeDisplayCount() {
-    if (!this.active) return;
+    if (!(this.active && this.count != undefined && this.startTime != undefined && this.lastUpdatedTime != undefined)) return;
     this._log('computeDisplayCount');
     const now = Date.now();
-    this.displayCount = Math.round(this.count * (now - this.startTim) / (now - this.startTim + this.futureTimePeriod));
+    //   c      dc
+    // ----- = -----
+    //  l-s     n-s
+    this.displayCount = Math.round(this.count * (now - this.startTime) / (this.lastUpdatedTime - this.startTime));
   }
 
   updated(_changedProperties: PropertyValues) {

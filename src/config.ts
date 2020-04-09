@@ -62,7 +62,11 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
 
 
 export const appConfig = {
-  snackbarTimeout: 5000, //ms
+  apiUri: 'https://api.salav.at',
+  apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',
+  apiSalavatCountDocId: 'salavat/count',
+  loadSalavatInterval: 30_000, //ms
+  snackbarTimeout: 5_000, //ms
   // UI
   maxWith: 768, //px
   mainImageHeight: 430, //px
@@ -89,3 +93,16 @@ export const styleConfig = css`
     --mdc-icon-button-size: ${appConfig.iconButtonSize}px;
   }
 `;
+
+export interface SalavatCountInterface {
+  _id: string;
+  _owner: string;
+  _createdTime: number;
+  _lastEditedTime: number;
+  _lastEditedBy: string;
+  count: number;
+}
+
+export interface SalavatCountDataApiInterface {
+  salavatCount: SalavatCountInterface;
+}
