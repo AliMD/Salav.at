@@ -90,7 +90,7 @@ export class PageHome extends BaseElement {
         .value="${this._userSalavatCount}"
         min="1"
         max="${this._sliderMax}"
-        step="1"
+        step="10"
         @input="${this._onSliderInput}"
         @change="${this._onSliderChange}"
       ></mwc-slider>
