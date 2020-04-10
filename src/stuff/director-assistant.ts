@@ -49,8 +49,6 @@ chatRoom.onMessage('window-loaded', async () => {
   });
 });
 
-
-
 chatRoom.onMessage('scrollTop', () => {
   if (!(window.scrollTo && window.scrollY > 0)) return;
   idlePeriod.run(() => scrollTo({
@@ -93,3 +91,25 @@ chatRoom.onMessage('request-install', async () => {
   }
 });
 
+/*
+  Local Storage
+*/
+
+const parseJSON = <T>(str: string): T | null => {
+  let parsed: T | null = null;
+  try {
+    parsed = JSON.parse(str) as T;
+  }
+  catch (err) {
+    console.error('parseJSON: %s', str);
+  }
+  return parsed;
+};
+
+export const localStorageGetItem = <T>(str: string, defaultValue: T): T => {
+  const item: string | null = localStorage.getItem(str);
+  if (item == null) return defaultValue;
+  const parsed: T | null = parseJSON<T>(item);
+  if (parsed == null) return defaultValue;
+  else return parsed;
+};

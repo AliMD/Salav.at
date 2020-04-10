@@ -3,7 +3,9 @@ module.exports = {
   debug: true,
   staticFileGlobs: [
     'manifest.json',
-    'js/**/*',
+    "js/**/*",
+    "image/**/*",
+    "font/**/*"
   ],
   runtimeCaching: [
     // https://github.com/GoogleChromeLabs/sw-precache#runtimecaching-arrayobject
@@ -30,7 +32,7 @@ module.exports = {
     },
     {
       urlPattern: /^https:\/\/api.salav.at\//,
-      handler: 'networkFirst',
+      handler: 'fastest',
       options: {
         cache: {
           name: 'api',

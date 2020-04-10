@@ -14,13 +14,13 @@ export class PageHome extends BaseElement {
   protected active: boolean = false;
 
   @property({ type: Number })
-  protected _userSalavatCount: number = 0;
+  protected _userSalavatCount?: number;
 
   @property({ type: Number })
-  protected _userSalavatCountIncrease: number = 0;
+  protected _userSalavatCountIncrease?: number;
 
   @property({ type: Number })
-  protected _sliderMax: number = 1000;
+  protected _sliderMax?: number;
 
   @query('mwc-slider')
   protected _sliderElement!: Slider;
@@ -45,6 +45,7 @@ export class PageHome extends BaseElement {
     }
 
     .label {
+      margin-top: 1rem;
       text-align: center;
       text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12);
     }
@@ -61,69 +62,65 @@ export class PageHome extends BaseElement {
     }
   `;
 
-  constructor () {
-    super();
-    this._log('constructor');
-
-    chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
-      this._userSalavatCount = userSalavatCount as number;
-      // if (this._userSalavatCount === this._sliderMax) {
-      //   this._sliderMax *= 3;
-      // }
-    });
-
-    chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
-      this._userSalavatCountIncrease = userSalavatCountIncrease as number;
-    });
-  }
-
   protected shouldUpdate(_changedProperties: PropertyValues) {
     return super.shouldUpdate(_changedProperties) && this.active;
   }
 
   protected render(): TemplateResult {
     this._log('render');
+    const countSum: number = (this._userSalavatCount || 0) + (this._userSalavatCountIncrease || 0);
     return html`
+      <div class="label">
+        <span class="title">صلوات های من:</span>
+        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">(${this._userSalavatCountIncrease?.toLocaleString('fa')})</span>
+        <span class="salavat-count">${countSum.toLocaleString('fa')}</span>
+      </div>
+
       <mwc-slider
         dir="ltr"
-        ?pin="${this._sliderMax <= 1000}"
         .value="${this._userSalavatCount}"
-        min="1"
-        max="${this._sliderMax}"
-        step="10"
+        .min="${1}"
+        .max="${this._sliderMax}"
+        .step="${this._sliderMax && this._sliderMax > 10_000 ? 100 : 10}"
         @input="${this._onSliderInput}"
         @change="${this._onSliderChange}"
       ></mwc-slider>
-      <div class="label">
-        <span class="title">صلوات های من:</span>
-        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">${this._userSalavatCountIncrease.toLocaleString('fa')}<span class="plus">+</span></span>
-        <span class="salavat-count">${this._userSalavatCount.toLocaleString('fa')}</span>
-      </div>
-      <salavat-counter
-        .debug="${false}"
-        .active="${this.active}"
-        label-before="تا این لحظه"
-        label-after="صلوات نذر شده"
-      >
-      </salavat-counter>
+
+      <salavat-counter .active="${this.active}"></salavat-counter>
     `;
+  }
+
+  firstUpdated () {
+    chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
+      this._userSalavatCount = userSalavatCount as number;
+    });
+
+    chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
+      this._userSalavatCountIncrease = userSalavatCountIncrease as number;
+    });
+
+    chatRoom.onPropertyChanged('sliderMax', (sliderMax: number | unknown) => {
+      this._sliderMax = sliderMax as number;
+    });
   }
 
   protected _onSliderInput() {
     this._log('_onSliderInput');
-    const userSalavatCountIncrease = this._sliderElement.value - this._userSalavatCount;
-    if (userSalavatCountIncrease >= 0) {
+    const userSalavatCountIncrease = this._sliderElement.value - (this._userSalavatCount || 0);
+    if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
       chatRoom.setProperty('userSalavatCountIncrease', userSalavatCountIncrease);
     }
   }
 
   protected _onSliderChange() {
     this._log('_onSliderChange');
-    if (this._sliderElement.value < this._userSalavatCount) {
-      this._sliderElement.value = this._userSalavatCount;
+    const sliderElement = this._sliderElement;
+    const userSalavatCount = this._userSalavatCount || 0;
+    if (sliderElement.value < userSalavatCount) {
+      sliderElement.value = userSalavatCount;
       chatRoom.setProperty('snackbar', <SnackbarOption>{
         open: true,
-        text: 'شما قبلا این تعداد صلوات را نذر کرده‌اید'
+        text: 'شما قبلا این تعداد صلوات را نذر کرده‌اید',
       });
     }
     this._onSliderInput();

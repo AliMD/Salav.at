@@ -4,6 +4,7 @@ import { pageListArray, appConfig, SalavatCountInterface, SalavatCountDataApiInt
 import { SnackbarOption } from './stuff/snack-bar';
 import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 import { loadData, updateData } from './stuff/data-api';
+import { localStorageGetItem } from './stuff/director-assistant';
 
 /*
   routing ....
@@ -83,13 +84,69 @@ chatRoom.onMessage('window-loaded-standalone', () => {
 });
 
 /*
+  testMode
+*/
+let testMode = false;
+chatRoom.onPropertyChanged('testMode', async (_testMode: boolean | unknown) => {
+  testMode = Boolean(_testMode);
+
+  loadFromLocalStorage();
+  await loadSalavatCount(/* force: */ true);
+  chatRoom.postMessage('skipCountAnimation');
+
+  if (testMode as boolean) {
+    chatRoom.setProperty('snackbar', <SnackbarOption>{
+      open: true,
+      text: 'حالت تست فعال شد!',
+    });
+  }
+  else {
+    chatRoom.setProperty('snackbar', <SnackbarOption>{
+      open: true,
+      text: 'حالت تست غیر فعال شد!',
+    });
+  }
+});
+
+/*
+  cheat for testMode
+*/
+
+let lastCheatClickTime = 0;
+let cheatClickCount = 0;
+chatRoom.onMessage('cheatClick', () => {
+  const now = Date.now();
+  const duration = now - lastCheatClickTime;
+  lastCheatClickTime = now;
+
+  if (duration > 2_000) {
+    cheatClickCount = 0;
+    if (testMode) chatRoom.setProperty('testMode', false);
+  }
+
+  if (duration < 400) {
+    cheatClickCount++;
+  }
+  else {
+    cheatClickCount = 0;
+  }
+
+  if (cheatClickCount > 7) {
+    chatRoom.setProperty('testMode', true);
+    cheatClickCount = 0;
+  }
+});
+
+/*
   user salavat count ....
 */
 chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
   chatRoom.setProperty('showSubmit', !!userSalavatCountIncrease);
 });
 
+let saving = false;
 chatRoom.onMessage('submit-salavat', async () => {
+  if (saving) return;
   if (chatRoom.getProperty('offline')) {
     chatRoom.setProperty('snackbar', <SnackbarOption>{
       open: true,
@@ -102,61 +159,68 @@ chatRoom.onMessage('submit-salavat', async () => {
   const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number || 0;
 
   if (userSalavatCountIncrease > 0) {
-    const result = await updateData<SalavatCountInterface>(appConfig.apiSalavatCountDocId, { _id: 'salavatCount', count: userSalavatCountIncrease })
+    saving = true;
+    chatRoom.setProperty('snackbar', <SnackbarOption>{
+      open: true,
+      text: 'در حال ذخیره کردن ...',
+      timeout: 10_000,
+    });
+    const result = await updateData<SalavatCountInterface>(testMode ? appConfig.apiSalavatTestDocId : appConfig.apiSalavatCountDocId, { _id: 'salavatCount', count: userSalavatCountIncrease })
+    saving = false;
     if (result.ok) {
       userSalavatCount += userSalavatCountIncrease;
       chatRoom.setProperty('salavatCount', result.data);
       chatRoom.setProperty('userSalavatCountIncrease', 0);
       chatRoom.setProperty('userSalavatCount', userSalavatCount);
-      localStorage.setItem('userSalavatCount', userSalavatCount + '');
+
+      chatRoom.setProperty('snackbar', <SnackbarOption>{
+        open: true,
+        text: 'نذر شما با موفقیت ثبت و اعمال شد.',
+      });
     }
     else {
       console.error('updateData: %s', result.description);
+      chatRoom.setProperty('snackbar', <SnackbarOption>{
+        open: true,
+        text: 'خطا در ذخیره اصلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
+      });
     }
-    chatRoom.setProperty('snackbar', <SnackbarOption>{
-      open: true,
-      text: result.ok ?
-        'نذر شما با موفقیت ثبت و اعمال شد.' :
-        'خطا در ذخیره اصلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
-    });
+
+  }
+});
+
+// calc sliderMax
+chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
+  const _userSalavatCount = userSalavatCount as number;
+  for (const max of appConfig.sliderMaxRangeList) {
+    if (_userSalavatCount >= max * 0.8) continue;
+    chatRoom.setProperty('sliderMax', max);
+    break;
   }
 });
 
 /*
   API salavatCount
 */
-const loadSalavatCountInterval = async () => {
-  const salavatCountApi = await loadData<SalavatCountDataApiInterface>(appConfig.apiSalavatCountDocId);
+const loadSalavatCount = async (force: boolean = false) => {
+  const salavatCountApi = await loadData<SalavatCountDataApiInterface>(testMode ? appConfig.apiSalavatTestDocId : appConfig.apiSalavatCountDocId);
   const salavatCount = salavatCountApi.salavatCount;
   const oldSalavatCount = chatRoom.getProperty('salavatCount') as SalavatCountInterface;
-  if (salavatCount && salavatCount._lastEditedTime > (oldSalavatCount?._lastEditedTime || 0)) {
+  if (salavatCount && (force || salavatCount._lastEditedTime > (oldSalavatCount?._lastEditedTime || 0) ) ) {
     chatRoom.setProperty('salavatCount', salavatCount);
   }
+}
+
+const loadSalavatCountInterval = () => {
+  loadSalavatCount();
   idlePeriod.run(() => setTimeout(() => loadSalavatCountInterval(), appConfig.loadSalavatInterval));
 };
-idlePeriod.run(() => loadSalavatCountInterval()); // load on startup
+
+loadSalavatCountInterval(); // load on startup
 
 /*
   Localstorage
 */
-const parseJSON = <T>(str: string): T | null => {
-  let parsed: T | null = null;
-  try {
-    parsed = JSON.parse(str) as T;
-  }
-  catch (err) {
-    console.error('parseJSON: %s', str);
-  }
-  return parsed;
-};
-
-const localStorageGetItem = <T>(str: string, defaultValue: T): T => {
-  const item: string | null = localStorage.getItem(str);
-  if (item == null) return defaultValue;
-  const parsed: T | null = parseJSON<T>(item);
-  if (parsed == null) return defaultValue;
-  else return parsed;
-};
 
 const loadFromLocalStorage = () => {
   chatRoom.setProperty('userSalavatCount', localStorageGetItem<number>('userSalavatCount', 0));
@@ -169,7 +233,13 @@ const loadFromLocalStorage = () => {
     });
   }
 };
+
 loadFromLocalStorage();
+
+chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
+  if (testMode) return;
+  localStorage.setItem('userSalavatCount', userSalavatCount + '');
+});
 
 /*
   Service Worker
@@ -183,9 +253,8 @@ chatRoom.onMessage('service-worker-updated', () => {
   chatRoom.setProperty('snackbar', <SnackbarOption>{
     open: true,
     text: 'در حال نصب و فعال سازی نسخه جدید برنامه ...',
-    timeout: 3000,
   });
 
-  setTimeout(() => window.location.reload(), 3500);
+  setTimeout(() => window.location.reload(), 3_000);
   refreshing = true;
 });
