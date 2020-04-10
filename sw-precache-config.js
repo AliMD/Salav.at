@@ -3,7 +3,9 @@ module.exports = {
   debug: true,
   staticFileGlobs: [
     'manifest.json',
-    'js/**/*',
+    "js/**/*",
+    "image/**/*",
+    "font/**/*"
   ],
   runtimeCaching: [
     // https://github.com/GoogleChromeLabs/sw-precache#runtimecaching-arrayobject
