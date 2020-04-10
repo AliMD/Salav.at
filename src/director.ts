@@ -89,7 +89,9 @@ chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease
   chatRoom.setProperty('showSubmit', !!userSalavatCountIncrease);
 });
 
+let saving = false;
 chatRoom.onMessage('submit-salavat', async () => {
+  if (saving) return;
   if (chatRoom.getProperty('offline')) {
     chatRoom.setProperty('snackbar', <SnackbarOption>{
       open: true,
@@ -103,7 +105,14 @@ chatRoom.onMessage('submit-salavat', async () => {
   const userSalavatCountIncrease: number = chatRoom.getProperty('userSalavatCountIncrease') as number || 0;
 
   if (userSalavatCountIncrease > 0) {
+    saving = true;
+    chatRoom.setProperty('snackbar', <SnackbarOption>{
+      open: true,
+      text: 'در حال ذخیره کردن ...',
+      timeout: 10_000,
+    });
     const result = await updateData<SalavatCountInterface>(appConfig.apiSalavatCountDocId, { _id: 'salavatCount', count: userSalavatCountIncrease })
+    saving = false;
     if (result.ok) {
       userSalavatCount += userSalavatCountIncrease;
 
@@ -120,16 +129,21 @@ chatRoom.onMessage('submit-salavat', async () => {
       localStorage.setItem('userSalavatCount', userSalavatCount + '');
       chatRoom.setProperty('sliderMax', sliderMax);
       localStorage.setItem('sliderMax', sliderMax + '');
+
+      chatRoom.setProperty('snackbar', <SnackbarOption>{
+        open: true,
+        text: 'نذر شما با موفقیت ثبت و اعمال شد.',
+        timeout: 4_000,
+      });
     }
     else {
       console.error('updateData: %s', result.description);
+      chatRoom.setProperty('snackbar', <SnackbarOption>{
+        open: true,
+        text: 'خطا در ذخیره اصلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
+      });
     }
-    chatRoom.setProperty('snackbar', <SnackbarOption>{
-      open: true,
-      text: result.ok ?
-        'نذر شما با موفقیت ثبت و اعمال شد.' :
-        'خطا در ذخیره اصلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
-    });
+
   }
 });
 
@@ -170,8 +184,19 @@ const localStorageGetItem = <T>(str: string, defaultValue: T): T => {
 };
 
 const loadFromLocalStorage = () => {
-  chatRoom.setProperty('userSalavatCount', localStorageGetItem<number>('userSalavatCount', 0));
-  chatRoom.setProperty('sliderMax', localStorageGetItem<number>('sliderMax', appConfig.sliderMaxRangeList[0]));
+  const userSalavatCount = localStorageGetItem<number>('userSalavatCount', 0);
+  chatRoom.setProperty('userSalavatCount', userSalavatCount);
+
+  let sliderMax = localStorageGetItem<number>('sliderMax', 0);
+  if (!sliderMax) {
+    // old user
+    for (const max of appConfig.sliderMaxRangeList) {
+      if (userSalavatCount >= max * 0.8) continue;
+      sliderMax = max;
+      break;
+    }
+  }
+  chatRoom.setProperty('sliderMax', sliderMax);
 
   if (localStorageGetItem<Boolean>('service-worker-updated', false)) {
     localStorage.removeItem('service-worker-updated');
@@ -195,9 +220,8 @@ chatRoom.onMessage('service-worker-updated', () => {
   chatRoom.setProperty('snackbar', <SnackbarOption>{
     open: true,
     text: 'در حال نصب و فعال سازی نسخه جدید برنامه ...',
-    timeout: 3000,
   });
 
-  setTimeout(() => window.location.reload(), 3500);
+  setTimeout(() => window.location.reload(), 3_000);
   refreshing = true;
 });
