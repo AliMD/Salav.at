@@ -8,7 +8,7 @@ export const styleAppLayout = css`
     font-size: 1rem;
     font-weight: 300;
     box-sizing: border-box;
-    height: 100vh;
+    height: 100%;
     user-select: none;
     overflow: hidden;
     color: var(--app-primary-text-color);
@@ -129,9 +129,15 @@ export const styleAppLayout = css`
     /* opacity: 0.9; */
   }
 
+  .app-content {
+    height: 100%;
+  }
+
   main {
-    /* Workaround for IE11 displaying <main> as inline */
-    display: block;
+    display: flex;
+    height: inherit;
+    flex-direction: column;
+    align-content: stretch;
   }
 
   .page:not([active]) {
@@ -140,8 +146,9 @@ export const styleAppLayout = css`
 
   .main-image {
     width: auto;
+    flex-grow: 4;
+    flex-shrink: 0;
     margin: 0 ${appConfig.mainImageMargin}px;
-    height: ${appConfig.mainImageHeight}px;
     border-radius: 0 0 200px 200px;
     background-image: url("image/main-image.jpg");
     background-position-x: center;
@@ -154,7 +161,6 @@ export const styleAppLayout = css`
     will-change: transform;
     transition-property: transform; */
     /* TODO: refactor to translate3d for animation performance */
-    height: 250px;
     will-change: height;
     transition-property: height;
 
@@ -169,8 +175,9 @@ export const styleAppLayout = css`
     overflow: hidden;
   }
 
-  [page="home"] .main-image {
-    height: 400px;
+  .page-container {
+    flex-grow: 1;
+    flex-shrink: 0;
   }
 
   .center {
@@ -186,7 +193,7 @@ export const styleAppLayout = css`
     z-index: 100;
   }
 
-  .page.campaign a {
+  .page.campaign a[download] {
     margin-top: 1rem;
     display: inline-block;
   }
@@ -199,7 +206,7 @@ export const styleAppLayout = css`
     height: 28px;
   }
 
-  .guide {
+  /* .guide {
     position: absolute;
     height:100vh;
     width: 100vw;
@@ -230,7 +237,7 @@ export const styleAppLayout = css`
     height:12rem;
     right: 2.2rem;
     bottom: 0.1rem;
-  }
+  } */
 
   .submit-button {
     background-color: var(--app-primary-color);
@@ -248,27 +255,27 @@ export const styleAppLayout = css`
   }
 
   .menu-button {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
   }
 
   a.salavat-small-icon {
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
     --mdc-icon-size: 30px;
   }
 
   .get-app-button {
-    position: absolute;
+    position: fixed;
     right: 1px;
     bottom: 1px;
   }
 
   .footer-text {
-    position: absolute;
+    position: fixed;
     left: 1em;
     bottom: 10px;
     display: flex;

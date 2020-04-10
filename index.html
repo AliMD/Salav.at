@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 
   <title>Salav.at</title>
   <meta name="description" content="www.Salav.at" />
@@ -56,12 +56,16 @@
   <link rel="stylesheet" href="font/font.css" />
 
   <style>
-    body {
+    html, body {
+      height: 100%;
+      box-sizing: border-box;
+      padding: 0;
       margin: 0;
+    }
+    body {
       background-color: #3277b9;
       color: white;
       font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       -moz-osx-font-smoothing: grayscale;
