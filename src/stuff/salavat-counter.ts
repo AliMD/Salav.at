@@ -6,22 +6,17 @@ import { SalavatCountInterface } from '../config';
 
 const commaSeparator: string = (1_000).toLocaleString('fa').charAt(1);
 const step = 1;
+const minWidth = 120;
 
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
   @property({ type: Boolean })
   protected active: boolean = false;
 
-  @property({ type: String, attribute: 'label-before' })
-  labelBefore: string = '';
+  @property({ type: Boolean, attribute: false })
+  protected testMode: boolean = false;
 
-  @property({ type: String, attribute: 'label-after' })
-  labelAfter: string = '';
-
-  @property({ type: Number })
-  minWidth: number = 120;
-
-  @property({ type: Number })
+  @property({ type: Number, attribute: false })
   count?: number; // Real salavat count
 
   @property({ type: Number, attribute: false })
@@ -77,6 +72,10 @@ export class SalavatCounter extends BaseElement {
       color: var(--app-accent-color, #a11);
       padding: 0 5px;
     }
+
+    .highlight {
+      color: var(--app-accent-color, #a11);
+    }
   `];
 
   constructor () {
@@ -88,6 +87,15 @@ export class SalavatCounter extends BaseElement {
       const _salavatCount = salavatCount as SalavatCountInterface;
       this.count = _salavatCount.count;
     });
+
+    chatRoom.onPropertyChanged('testMode', (testMode: boolean | unknown) => {
+      this.testMode = Boolean(testMode);
+    });
+
+    chatRoom.onMessage('skipCountAnimation', () => {
+      this.displayCount = this.count;
+    });
+
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues) {
@@ -95,15 +103,22 @@ export class SalavatCounter extends BaseElement {
   }
 
   protected render(): TemplateResult {
-    this._log('render');
+    // this._log('render');
     return html`
-      <div class="label before">${this.labelBefore}</div>
+      <div class="label before">تا این لحظه</div>
       <div class="display-count">
         <!--  -->
         ${this._styledDisplayCount}
         <!--  -->
       </div>
-      <div class="label after">${this.labelAfter}</div>
+      ${this.testMode ?
+        html`
+          <div class="label after">
+          <span class="highlight">الکی</span> تست شده
+          </div>
+        `
+        : html`<div class="label after">صلوات نذر شده</div>`
+      }
     `;
   }
 
@@ -128,12 +143,16 @@ export class SalavatCounter extends BaseElement {
     chatRoom.onMessage('window-resized', () => {
       this.computePadding();
     });
-    setTimeout(() => this.setAttribute('animate', ''), 1_000);
+    setTimeout(async () => {
+      // FIXME: why timeout!
+      this.computePadding();
+      idlePeriod.run(() => this.setAttribute('animate', ''));
+    }, 1_000);
   }
 
   updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties);
-    this._log('updated');
+    // this._log('updated');
     this.computePadding();
 
     if (this.displayCount !== this.count) {
@@ -166,8 +185,8 @@ export class SalavatCounter extends BaseElement {
     let countWidth: number = displayCountElement.getBoundingClientRect().width;
     countWidth = this._round(countWidth);
 
-    if (countWidth < this.minWidth) {
-      countWidth = this.minWidth;
+    if (countWidth < minWidth) {
+      countWidth = minWidth;
     }
     else if (countWidth > elementWidth) {
       countWidth = elementWidth;

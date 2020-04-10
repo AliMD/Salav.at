@@ -96,7 +96,7 @@ export class SalavatPWA extends BaseElement {
           </mwc-icon-button>
 
           <a href="/" class="salavat-small-icon">
-            <mwc-icon-button>${salavatSmallIcon}</mwc-icon-button>
+            <mwc-icon-button @click="${() => chatRoom.postMessage('cheatClick')}">${salavatSmallIcon}</mwc-icon-button>
           </a>
 
           <div class="main-image">

@@ -86,11 +86,7 @@ export class PageHome extends BaseElement {
         @change="${this._onSliderChange}"
       ></mwc-slider>
 
-      <salavat-counter
-        .active="${this.active}"
-        label-before="تا این لحظه"
-        label-after="صلوات نذر شده"
-      ></salavat-counter>
+      <salavat-counter .active="${this.active}"></salavat-counter>
     `;
   }
 
