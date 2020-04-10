@@ -14,15 +14,15 @@ const _log = (message: unknown, ...restParam: unknown[]) => {
   }
 };
 
-const onMessage = (eventName: string, callback: (detail?: unknown) => void, option: { preserve: boolean } = { preserve: false }) => {
+const onMessage = (eventName: string, callback: (detail?: unknown) => void, option: { preserve: boolean } = { preserve: true }) => {
   _log('onMessage: %s %s', eventName, option.preserve ? '(preserve)' : '');
   eventTarget.addEventListener(eventName, (event: Event) => callback(event['detail']));
-  if (option.preserve && dispatchEventHistory[eventName] !== undefined) {
+  if (option.preserve && eventName in dispatchEventHistory) {
     callback(dispatchEventHistory[eventName]);
   }
 };
 
-const postMessage = (eventName: string, detail?: string | boolean | unknown, option: { preserve: boolean } = { preserve: false }) => {
+const postMessage = (eventName: string, detail?: string | boolean | unknown, option: { preserve: boolean } = { preserve: true }) => {
   dispatchJobList[eventName] = Debouncer.debounce(dispatchJobList[eventName], animationFrame as AsyncInterface, () => {
     _log('postMessage: %s with %o %s', eventName, detail, option.preserve ? '(preserve)' : '');
     eventTarget.dispatchEvent(new CustomEvent(eventName, { detail }));
