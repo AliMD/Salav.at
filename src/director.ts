@@ -176,7 +176,6 @@ chatRoom.onMessage('submit-salavat', async () => {
       chatRoom.setProperty('snackbar', <SnackbarOption>{
         open: true,
         text: 'نذر شما با موفقیت ثبت و اعمال شد.',
-        timeout: 4_000,
       });
     }
     else {

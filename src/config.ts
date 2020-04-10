@@ -73,7 +73,7 @@ export const appConfig = {
   apiSalavatCountDocId: 'salavat/count',
   apiSalavatTestDocId: 'salavat/test',
   loadSalavatInterval: 10_000, //ms
-  snackbarTimeout: 5_000, //ms
+  snackbarTimeout: 4_000, //ms
   sliderMaxRangeList: [200, 500, 1_000, 2_000, 5_000, 10_000, 15_000, 20_000, 50_000, 100_000],
   // UI
   maxWith: 768, //px
