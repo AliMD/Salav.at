@@ -4,8 +4,8 @@ import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 import { chatRoom } from './chat-room';
 import { SalavatCountInterface } from '../config';
 
-const commaSeparator: string = (1000).toLocaleString('fa').charAt(1);
-const timeCalc = 15 * 60 * 1000;
+const commaSeparator: string = (1_000).toLocaleString('fa').charAt(1);
+const step = 1;
 
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
@@ -19,22 +19,13 @@ export class SalavatCounter extends BaseElement {
   labelAfter: string = '';
 
   @property({ type: Number })
-  minWidth: number = 110;
-
-  @property({ type: Number })
-  startTime?: number;
-
-  @property({ type: Number })
-  lastUpdatedTime?: number;
+  minWidth: number = 120;
 
   @property({ type: Number })
   count?: number; // Real salavat count
 
   @property({ type: Number, attribute: false })
-  displayCount: number = 0;
-
-  @property({ type: Number })
-  updateInterval: number = 500;
+  displayCount?: number;
 
   @query('.display-count')
   protected _displayCountElement?: HTMLElement;
@@ -50,11 +41,11 @@ export class SalavatCounter extends BaseElement {
       will-change: padding;
       transition-property: padding;
       transition-duration: 0;
-      transition-timing-function: ease-in-out;
+      transition-timing-function: linear;
     }
 
     :host([animate]) {
-      transition-duration: 2s;
+      transition-duration: 500ms;
     }
 
     .label {
@@ -95,14 +86,12 @@ export class SalavatCounter extends BaseElement {
     chatRoom.onPropertyChanged('salavatCount', (salavatCount: SalavatCountInterface | unknown) => {
       if (!salavatCount) return;
       const _salavatCount = salavatCount as SalavatCountInterface;
-      this.startTime = _salavatCount._createdTime;
-      this.lastUpdatedTime = _salavatCount._lastEditedTime;
       this.count = _salavatCount.count;
     });
   }
 
   protected shouldUpdate(_changedProperties: PropertyValues) {
-    return super.shouldUpdate(_changedProperties) && this.active && this.count != undefined && this.startTime != undefined && this.lastUpdatedTime != undefined;
+    return super.shouldUpdate(_changedProperties) && this.active;
   }
 
   protected render(): TemplateResult {
@@ -119,6 +108,7 @@ export class SalavatCounter extends BaseElement {
   }
 
   protected get _styledDisplayCount(): Array<TemplateResult | string> {
+    if (this.displayCount == undefined) return ['...'];
     const countArrayString: string[] = this.displayCount.toLocaleString('fa').split(commaSeparator);
     if (countArrayString.length < 2) {
       return countArrayString;
@@ -135,45 +125,42 @@ export class SalavatCounter extends BaseElement {
   protected async firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
-
-    this._computeDisplayCountInterval();
-
-    chatRoom.onMessage('window-resized', () => this.computePadding());
-    chatRoom.onMessage('window-loaded', () => {
+    chatRoom.onMessage('window-resized', () => {
       this.computePadding();
-      setTimeout(() => this.setAttribute('animate', ''), this.updateInterval);
     });
-  }
-
-  protected _computeDisplayCountInterval() {
-    this._log('_computeDisplayCountInterval');
-    this.computeDisplayCount();
-    idlePeriod.run(() => setTimeout(() => this._computeDisplayCountInterval(), this.updateInterval))
-  }
-
-  computeDisplayCount() {
-    if (!(this.active && this.count != undefined && this.startTime != undefined && this.lastUpdatedTime != undefined)) return;
-    this._log('computeDisplayCount');
-    let now = Date.now();
-    if (now - this.lastUpdatedTime > timeCalc) {
-      now = this.lastUpdatedTime + timeCalc;
-    }; // 15 min
-    //   c      dc
-    // ----- = -----
-    //  l-s     n-s
-    this.displayCount = Math.round(this.count * (now - this.startTime) / (this.lastUpdatedTime - this.startTime + 1));
+    setTimeout(() => this.setAttribute('animate', ''), 1_000);
   }
 
   updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties);
     this._log('updated');
     this.computePadding();
+
+    if (this.displayCount !== this.count) {
+      idlePeriod.run(() => this.computeDisplayCount());
+    }
+  }
+
+  computeDisplayCount () {
+    if (!(this.active && this.displayCount !== this.count && this.count != undefined)) return;
+    // this._log('computeDisplayCount');
+
+    if (this.displayCount == undefined) {
+      this.displayCount = this.count; // first time
+      return;
+    }
+    else if (Math.abs(this.displayCount - this.count) < step) {
+      this.displayCount = this.count;
+      return;
+    }
+    // else
+    this.displayCount += this.displayCount < this.count ? step : -step;
   }
 
   computePadding(): void {
     const displayCountElement = this._displayCountElement;
     if (!displayCountElement) return;
-    this._log('computeWidth');
+    // this._log('computePadding');
 
     const elementWidth: number = this.getBoundingClientRect().width;
     let countWidth: number = displayCountElement.getBoundingClientRect().width;

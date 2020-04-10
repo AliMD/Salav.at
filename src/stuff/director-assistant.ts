@@ -49,8 +49,6 @@ chatRoom.onMessage('window-loaded', async () => {
   });
 });
 
-
-
 chatRoom.onMessage('scrollTop', () => {
   if (!(window.scrollTo && window.scrollY > 0)) return;
   idlePeriod.run(() => scrollTo({
