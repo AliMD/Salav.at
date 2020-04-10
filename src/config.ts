@@ -67,12 +67,12 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
 ]
 
 export const appConfig = {
-  appVersion: '0.8.1',
+  appVersion: '0.9.0',
   apiUri: 'https://api.salav.at',
   apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',
-  // apiSalavatCountDocId: 'salavat/count',
-  apiSalavatCountDocId: 'salavat/test',
-  loadSalavatInterval: 15_000, //ms
+  apiSalavatCountDocId: 'salavat/count',
+  // apiSalavatCountDocId: 'salavat/test',
+  loadSalavatInterval: 10_000, //ms
   snackbarTimeout: 5_000, //ms
   sliderMaxRangeList: [200, 500, 1_000, 2_000, 5_000, 10_000, 15_000, 20_000, 50_000, 100_000],
   // UI
