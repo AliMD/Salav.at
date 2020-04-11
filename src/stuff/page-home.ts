@@ -81,7 +81,7 @@ export class PageHome extends BaseElement {
         .value="${this._userSalavatCount}"
         .min="${1}"
         .max="${this._sliderMax}"
-        .step="${this._sliderMax && this._sliderMax > 10_000 ? 100 : 10}"
+        .step="${this._sliderMax && this._sliderMax > 2_000 ? 100 : 10}"
         @input="${this._onSliderInput}"
         @change="${this._onSliderChange}"
       ></mwc-slider>
@@ -109,6 +109,7 @@ export class PageHome extends BaseElement {
     const userSalavatCountIncrease = this._sliderElement.value - (this._userSalavatCount || 0);
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
       chatRoom.setProperty('userSalavatCountIncrease', userSalavatCountIncrease);
+      navigator.vibrate(10);
     }
   }
 

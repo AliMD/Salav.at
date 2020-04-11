@@ -1,6 +1,6 @@
 {
   "name": "salavat-pwa",
-  "version": "0.8.1",
+  "version": "1.0.0-beta.2",
   "license": "UNLICENSED",
   "scripts": {
     "c": "yarn clean",
