@@ -86,7 +86,7 @@ chatRoom.onMessage('window-loaded-standalone', () => {
 /*
   testMode
 */
-let testMode = false;
+let testMode = location.host.indexOf('localhost') === 0;
 chatRoom.onPropertyChanged('testMode', async (_testMode: boolean | unknown) => {
   testMode = Boolean(_testMode);
 
