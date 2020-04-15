@@ -142,11 +142,27 @@ chatRoom.onMessage('cheatClick', () => {
   }
 });
 
+// calc sliderMax
+export const calcSliderMax = (sliderValue: number) => {
+  for (const max of appConfig.sliderMaxRangeList) {
+    if (sliderValue >= max * 0.8) continue;
+    chatRoom.setProperty('sliderMax', max);
+    break;
+  }
+}
+
+chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
+  calcSliderMax(userSalavatCount as number);
+});
+
 /*
   user salavat count ....
 */
 chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
-  chatRoom.setProperty('showSubmit', !!userSalavatCountIncrease);
+  const showSubmit: boolean = userSalavatCountIncrease as number > 0;
+  if (chatRoom.getProperty('showSubmit') != showSubmit) {
+    chatRoom.setProperty('showSubmit', showSubmit);
+  }
 });
 
 let saving = false;
@@ -191,16 +207,6 @@ chatRoom.onMessage('submit-salavat', async () => {
       });
     }
 
-  }
-});
-
-// calc sliderMax
-chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
-  const _userSalavatCount = userSalavatCount as number;
-  for (const max of appConfig.sliderMaxRangeList) {
-    if (_userSalavatCount >= max * 0.8) continue;
-    chatRoom.setProperty('sliderMax', max);
-    break;
   }
 });
 
