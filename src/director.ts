@@ -75,13 +75,18 @@ chatRoom.onMessage('request-install-manually', () => {
   });
 });
 
-chatRoom.onMessage('window-loaded-standalone', () => {
+// fixWindowSize
+
+const fixWindowSize = () => {
   if (window.innerWidth >= appConfig.maxWith) {
     idlePeriod.run(() => {
       window.resizeTo(414, 736); // iPhone 8 plus
     });
   }
-});
+}
+
+chatRoom.onMessage('app-installed', fixWindowSize); // after install
+chatRoom.onMessage('window-loaded-standalone', fixWindowSize);
 
 /*
   testMode
