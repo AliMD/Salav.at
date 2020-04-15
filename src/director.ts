@@ -211,15 +211,15 @@ const loadSalavatCount = async (force: boolean = false) => {
   }
 }
 
-const loadSalavatCountInterval = () => {
-  loadSalavatCount();
+const loadSalavatCountInterval = async () => {
+  await loadSalavatCount();
   idlePeriod.run(() => setTimeout(() => loadSalavatCountInterval(), appConfig.loadSalavatInterval));
 };
 
 loadSalavatCountInterval(); // load on startup
 
 /*
-  Localstorage
+  Local storage
 */
 
 const loadFromLocalStorage = () => {
