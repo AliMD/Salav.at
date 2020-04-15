@@ -18,7 +18,7 @@ const onMessage = (eventName: string, callback: (detail?: unknown) => void, opti
   _log('onMessage: %s %s', eventName, option.preserve ? '(preserve)' : '');
   eventTarget.addEventListener(eventName, (event: Event) => callback(event['detail']));
   if (option.preserve && eventName in dispatchEventHistory) {
-    callback(dispatchEventHistory[eventName]);
+    setTimeout(callback, 0, dispatchEventHistory[eventName]); // callback in next micro task
   }
 };
 
