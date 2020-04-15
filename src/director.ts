@@ -75,18 +75,25 @@ chatRoom.onMessage('request-install-manually', () => {
   });
 });
 
-chatRoom.onMessage('window-loaded-standalone', () => {
+// fixWindowSize
+
+const fixWindowSize = () => {
   if (window.innerWidth >= appConfig.maxWith) {
     idlePeriod.run(() => {
       window.resizeTo(414, 736); // iPhone 8 plus
     });
   }
-});
+}
+
+chatRoom.onMessage('app-installed', fixWindowSize); // after install
+chatRoom.onMessage('window-loaded-standalone', fixWindowSize);
 
 /*
   testMode
 */
 let testMode = location.host.indexOf('localhost') === 0;
+if (testMode) chatRoom.setProperty('testMode', testMode);
+
 chatRoom.onPropertyChanged('testMode', async (_testMode: boolean | unknown) => {
   testMode = Boolean(_testMode);
 
@@ -137,11 +144,27 @@ chatRoom.onMessage('cheatClick', () => {
   }
 });
 
+// calc sliderMax
+export const calcSliderMax = (sliderValue: number) => {
+  for (const max of appConfig.sliderMaxRangeList) {
+    if (sliderValue >= max * 0.8) continue;
+    chatRoom.setProperty('sliderMax', max);
+    break;
+  }
+}
+
+chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
+  calcSliderMax(userSalavatCount as number);
+});
+
 /*
   user salavat count ....
 */
 chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
-  chatRoom.setProperty('showSubmit', !!userSalavatCountIncrease);
+  const showSubmit: boolean = userSalavatCountIncrease as number > 0;
+  if (chatRoom.getProperty('showSubmit') != showSubmit) {
+    chatRoom.setProperty('showSubmit', showSubmit);
+  }
 });
 
 let saving = false;
@@ -189,16 +212,6 @@ chatRoom.onMessage('submit-salavat', async () => {
   }
 });
 
-// calc sliderMax
-chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
-  const _userSalavatCount = userSalavatCount as number;
-  for (const max of appConfig.sliderMaxRangeList) {
-    if (_userSalavatCount >= max * 0.8) continue;
-    chatRoom.setProperty('sliderMax', max);
-    break;
-  }
-});
-
 /*
   API salavatCount
 */
@@ -211,15 +224,15 @@ const loadSalavatCount = async (force: boolean = false) => {
   }
 }
 
-const loadSalavatCountInterval = () => {
-  loadSalavatCount();
+const loadSalavatCountInterval = async () => {
+  await loadSalavatCount();
   idlePeriod.run(() => setTimeout(() => loadSalavatCountInterval(), appConfig.loadSalavatInterval));
 };
 
 loadSalavatCountInterval(); // load on startup
 
 /*
-  Localstorage
+  Local storage
 */
 
 const loadFromLocalStorage = () => {

@@ -18,17 +18,17 @@ const onMessage = (eventName: string, callback: (detail?: unknown) => void, opti
   _log('onMessage: %s %s', eventName, option.preserve ? '(preserve)' : '');
   eventTarget.addEventListener(eventName, (event: Event) => callback(event['detail']));
   if (option.preserve && eventName in dispatchEventHistory) {
-    callback(dispatchEventHistory[eventName]);
+    setTimeout(callback, 0, dispatchEventHistory[eventName]); // callback in next micro task
   }
 };
 
 const postMessage = (eventName: string, detail?: string | boolean | unknown, option: { preserve: boolean } = { preserve: true }) => {
+  if (option.preserve) {
+    dispatchEventHistory[eventName] = detail;
+  }
   dispatchJobList[eventName] = Debouncer.debounce(dispatchJobList[eventName], animationFrame as AsyncInterface, () => {
     _log('postMessage: %s with %o %s', eventName, detail, option.preserve ? '(preserve)' : '');
     eventTarget.dispatchEvent(new CustomEvent(eventName, { detail }));
-    if (option.preserve) {
-      dispatchEventHistory[eventName] = detail;
-    }
   });
 };
 
