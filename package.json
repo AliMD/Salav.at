@@ -27,7 +27,8 @@
     "@webcomponents/webcomponentsjs": "^2.4.2",
     "lit-element": "^2.2.1",
     "lit-html": "^1.2.1",
-    "pwa-helpers": "^0.9.0"
+    "pwa-helpers": "^0.9.0",
+    "telegraf": "^3.37.0"
   },
   "devDependencies": {
     "del-cli": "^3.0.0",
