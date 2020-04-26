@@ -185,10 +185,6 @@ export const styleAppLayout = css`
     flex-shrink: 0;
   }
 
-  .center {
-    text-align: center;
-  }
-
     /* All text mode pages */
   .page.text-mode {
     padding: 20px ${appConfig.mainImageMargin}px;
@@ -198,8 +194,12 @@ export const styleAppLayout = css`
     z-index: 100;
   }
 
-  .page.campaign a[download] {
-    margin-top: 1rem;
+  .page.campaign .btn-container {
+    text-align: center;
+  }
+
+  .page.campaign .btn-container a {
+    margin: 1rem 0.5rem;
     display: inline-block;
   }
 

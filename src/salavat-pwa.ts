@@ -122,7 +122,7 @@ export class SalavatPWA extends BaseElement {
               <div class="page campaign text-mode" ?active="${this._page === 'campaign'}">
                 <div>
                   گاهی آنقدر تلخی زندگی‌مان زیاد می شود،که رنگِ خوشِ شادی روزهایمان، در قرنطینه تلخِ روزگار به خاکستری می زند.
-                  اما ما یاد گرفته ایم تا دهانمان را با سلام و صلوات بر محمد و آل او شیرین کنیم تا همه چیز با نشاط شود و غم، از زندگی‌مان رخت ببندد.
+                  اما ما یاد گرفته ایم تا دهانمان را با سلام و صلوات بر محمد و آل او و درخواست فرج فرزندشان شیرین کنیم تا همه چیز با نشاط شود و غم، از زندگی‌مان رخت ببندد.
                   سلامی به شیرینی با تو بودن...
                   به مناسبت ایام پر برکت شعبان و رمضان، تصمیم گرفتیم کمپین نذر "یک میلیون" صلوات به نیت دعا برای سلامتی و ظهور امام زمان (عجل الله تعالی فرجه الشریف) را از میلاد حضرتش تا میلاد کریم اهل‌بیت، حضرت امام حسن مجتبی (علیه السلام) در نیمه رمضان آغاز کنیم.
                   برای هماهنگی و رسیدن به عدد یک میلیون صلوات، خواهشمندیم تعداد صلوات‌های فرستاده شده را در شمارنده وارد کنید.
@@ -130,7 +130,12 @@ export class SalavatPWA extends BaseElement {
                   <a href="https://instagram.com/salav_at_/" target="_blank">@Salav_at_</a>
                   همراه این کمپین باشید...
                 </div>
-                <div class="center">
+                <div class="btn-container">
+                  <a href="/">
+                    <mwc-button>
+                      <div class="button-content">${salavatSmallIcon} ثبت صلوات</div>
+                    </mwc-button>
+                  </a>
                   <a href="image/salavat-story.jpg" target="_blank" download>
                     <mwc-button>
                       <div class="button-content">${downloadIconOutlined} دانلود استوری</div>
@@ -188,6 +193,12 @@ export class SalavatPWA extends BaseElement {
     chatRoom.onPropertyChanged('sideMenuOpened', (sideMenuOpened: boolean | unknown) => {
       if (!(this._drawer && this._drawer.open != sideMenuOpened)) return;
       this._drawer.open = Boolean(sideMenuOpened);
+    });
+
+    chatRoom.onMessage('gotoPage', (page: string | unknown) => {
+      const homeLink = this.renderRoot.querySelector<HTMLElement>(`a[href="/${page}"]`);
+      this._log('gotoPage2: %o', {page, homeLink});
+      if (homeLink) homeLink.click();
     });
   }
 }

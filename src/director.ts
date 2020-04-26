@@ -237,7 +237,13 @@ loadSalavatCountInterval(); // load on startup
 
 const loadFromLocalStorage = () => {
   chatRoom.setProperty('userSalavatCount', localStorageGetItem<number>('userSalavatCount', 0));
-  chatRoom.setProperty('userSalavatCountIncrease', localStorageGetItem<number>('userSalavatCountIncrease', 1));
+  // chatRoom.setProperty('userSalavatCountIncrease', localStorageGetItem<number>('userSalavatCountIncrease', 1));
+
+  // Show campaign on first time
+  if (!localStorageGetItem<Boolean>('visitCampaignPage', false)) {
+    chatRoom.postMessage('gotoPage', 'campaign');
+    localStorage.setItem('visitCampaignPage', 'true');
+  }
 
   if (localStorageGetItem<Boolean>('service-worker-updated', false)) {
     localStorage.removeItem('service-worker-updated');
