@@ -1,6 +1,11 @@
 import { css, SVGTemplateResult } from "lit-element";
 import { campaignIcon, aboutUsIcon, salavatIcon } from './stuff/icon';
 
+export const safeAreaInsetTop = ((): number => {
+  const safeAreaInsetTop = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'), 10);
+  return !isNaN(safeAreaInsetTop) && safeAreaInsetTop > 0 ? safeAreaInsetTop : 0;
+})();
+
 export interface MenuItem {
   slug: string;
   sideMenu: true;
@@ -67,7 +72,7 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
 ]
 
 export const appConfig = {
-  appVersion: '1.0.0-rc',
+  appVersion: '1.0.0',
   apiUri: 'https://api.salav.at',
   apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',
   apiSalavatCountDocId: 'salavat/count',

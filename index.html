@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
 
   <title>Salav.at</title>
   <meta name="description" content="www.Salav.at" />
@@ -20,7 +20,7 @@
 
   <!-- Add to home screen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Salav.at" />
 
   <!-- Home screen icons -->
@@ -58,11 +58,24 @@
   <style>
     html, body {
       height: 100%;
-      box-sizing: border-box;
       padding: 0;
       margin: 0;
+      box-sizing: border-box;
     }
+
+    html {
+      /* iOS Safe Area */
+      --safe-area-inset-top: env(safe-area-inset-top);
+      --safe-area-inset-bottom: env(safe-area-inset-bottom);
+      --safe-area-inset-left: env(safe-area-inset-left);
+      --safe-area-inset-right: env(safe-area-inset-right);
+
+      height: calc(100% + var(--safe-area-inset-top, 0));
+      box-sizing: border-box;
+    }
+
     body {
+      box-sizing: border-box;
       background-color: #3277b9;
       color: white;
       font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";

@@ -11,7 +11,7 @@ import './stuff/page-home';
 import './stuff/page-desktop';
 import { BaseElement } from './stuff/base-element';
 import { chatRoom } from './stuff/chat-room';
-import { styleConfig, pageListArray, MenuItem, appConfig } from './config';
+import { styleConfig, pageListArray, MenuItem, appConfig, safeAreaInsetTop } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
 import { styleAppResponsive } from './stuff/style-app-responsive';
 import { menuIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon, downloadIconOutlined } from './stuff/icon';
@@ -49,6 +49,10 @@ export class SalavatPWA extends BaseElement {
     chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
       this._userSalavatCount = userSalavatCount as number;
     });
+
+    if (safeAreaInsetTop > 0) {
+      this.setAttribute('has-notch', 'true');
+    }
   }
 
   protected render(): TemplateResult {
