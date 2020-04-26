@@ -4,10 +4,9 @@ import { Slider } from'@material/mwc-slider';
 
 import { BaseElement } from './base-element';
 import './salavat-counter';
-import { appConfig } from '../config';
 import { chatRoom } from './chat-room';
-import { SnackbarOption } from './snack-bar';
 import { calcSliderMax } from '../director';
+import { addIcon, removeIcon } from './icon';
 
 @customElement('page-home')
 export class PageHome extends BaseElement {
@@ -18,7 +17,7 @@ export class PageHome extends BaseElement {
   protected _userSalavatCount?: number;
 
   @property({ type: Number })
-  protected _userSalavatCountIncrease?: number;
+  protected _userSalavatCountIncrease: number = 1;
 
   @property({ type: Number })
   protected _sliderMax?: number;
@@ -29,20 +28,33 @@ export class PageHome extends BaseElement {
   static styles = css`
     :host {
       display: none;
-      padding-top: 0.5rem
+      padding-top: 0.5rem;
+      --mdc-icon-size: 20px;
+      --mdc-icon-button-size: 40px;
     }
 
     :host([active]) {
       display: block;
     }
 
+    .slider {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0 1em;
+    }
+
     mwc-slider {
-      display: block;
-      margin: 0 ${appConfig.mainImageMargin}px;
+      flex-grow: 1;
+      margin: 0 6px 1px;
     }
 
     salavat-counter {
       margin: 1rem;
+    }
+
+    mwc-icon-button {
+      color: var(--app-accent-color);
     }
 
     .label {
@@ -58,7 +70,7 @@ export class PageHome extends BaseElement {
     }
 
     .salavat-count-increase {
-      font-size: 1.2rem;
+      /* font-size: 1.2rem; */
       color: var(--app-accent-color);
     }
   `;
@@ -69,23 +81,27 @@ export class PageHome extends BaseElement {
 
   protected render(): TemplateResult {
     this._log('render');
-    const countSum: number = (this._userSalavatCount || 0) + (this._userSalavatCountIncrease || 0);
+    const countSum: number = this._userSalavatCount || 0;
     return html`
       <div class="label">
         <span class="title">صلوات های من:</span>
-        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">(${this._userSalavatCountIncrease?.toLocaleString('fa')})</span>
+        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">${this._userSalavatCountIncrease?.toLocaleString('fa')}+</span>
         <span class="salavat-count">${countSum.toLocaleString('fa')}</span>
       </div>
 
-      <mwc-slider
-        dir="ltr"
-        .value="${this._userSalavatCount}"
-        .min="${1}"
-        .max="${this._sliderMax}"
-        .step="${this._sliderMax && this._sliderMax > 2_000 ? 10 : 5}"
-        @input="${this._onSliderInput}"
-        @change="${this._onSliderChange}"
-      ></mwc-slider>
+      <div class="slider">
+        <mwc-icon-button @click="${this._addIconClick}">${addIcon}</mwc-icon-button>
+        <mwc-slider
+          dir="ltr"
+          .value="${this._userSalavatCountIncrease}"
+          .min="${1}"
+          .max="${this._sliderMax}"
+          .step="${this._sliderMax && this._sliderMax > 2_000 ? 10 : 5}"
+          @input="${this._onSliderInput}"
+          @change="${this._onSliderChange}"
+        ></mwc-slider>
+        <mwc-icon-button @click="${this._removeIconClick}">${removeIcon}</mwc-icon-button>
+      </div>
 
       <salavat-counter .active="${this.active}"></salavat-counter>
     `;
@@ -107,7 +123,7 @@ export class PageHome extends BaseElement {
 
   protected _onSliderInput() {
     this._log('_onSliderInput');
-    const userSalavatCountIncrease = this._sliderElement.value - (this._userSalavatCount || 0);
+    const userSalavatCountIncrease = this._sliderElement.value;
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
       chatRoom.setProperty('userSalavatCountIncrease', userSalavatCountIncrease);
     }
@@ -116,17 +132,34 @@ export class PageHome extends BaseElement {
   protected _onSliderChange() {
     this._log('_onSliderChange');
     const sliderElement = this._sliderElement;
-    const userSalavatCount = this._userSalavatCount || 0;
-    if (sliderElement.value < userSalavatCount) {
-      sliderElement.value = userSalavatCount;
-      chatRoom.setProperty('snackbar', <SnackbarOption>{
-        open: true,
-        text: 'شما قبلا این تعداد صلوات را نذر کرده‌اید',
-      });
+    // const userSalavatCount = this._userSalavatCount || 0;
+    // if (sliderElement.value < userSalavatCount) {
+    //   sliderElement.value = userSalavatCount;
+    //   chatRoom.setProperty('snackbar', <SnackbarOption>{
+    //     open: true,
+    //     text: 'شما قبلا این تعداد صلوات را نذر کرده‌اید',
+    //   });
+    // }
+    // else {
+    this._onSliderInput();
+    calcSliderMax(sliderElement.value);
+  }
+
+  protected _addIconClick() {
+    if (!this._userSalavatCountIncrease) {
+      this._userSalavatCountIncrease = 0;
     }
-    else {
-      this._onSliderInput();
-      calcSliderMax(sliderElement.value);
+    chatRoom.setProperty('userSalavatCountIncrease', this._userSalavatCountIncrease + 1);
+    calcSliderMax(this._userSalavatCountIncrease);
+  }
+
+  protected _removeIconClick() {
+    if (!this._userSalavatCountIncrease) {
+      this._userSalavatCountIncrease = 0;
     }
+    if (this._userSalavatCountIncrease > 0 ) {
+      chatRoom.setProperty('userSalavatCountIncrease', this._userSalavatCountIncrease - 1);
+    }
+    calcSliderMax(this._userSalavatCountIncrease);
   }
 }
