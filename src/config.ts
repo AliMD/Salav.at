@@ -1,6 +1,11 @@
 import { css, SVGTemplateResult } from "lit-element";
 import { campaignIcon, aboutUsIcon, salavatIcon } from './stuff/icon';
 
+export const safeAreaInsetTop = ((): number => {
+  const safeAreaInsetTop = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'), 10);
+  return !isNaN(safeAreaInsetTop) && safeAreaInsetTop > 0 ? safeAreaInsetTop : 0;
+})();
+
 export interface MenuItem {
   slug: string;
   sideMenu: true;
