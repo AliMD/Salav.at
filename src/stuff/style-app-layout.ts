@@ -1,5 +1,5 @@
 import { css } from "lit-element";
-import { appConfig } from '../config';
+import { appConfig, safeAreaInsetTop } from '../config';
 
 export const styleAppLayout = css`
   /* salavat-pwa */
@@ -175,6 +175,11 @@ export const styleAppLayout = css`
     overflow: hidden;
   }
 
+  :host([has-notch]) .main-image {
+    margin-top: ${safeAreaInsetTop > 8 ? safeAreaInsetTop - 8 : safeAreaInsetTop}px;;
+    border-radius: 10px 10px 200px 200px;
+  }
+
   .page-container {
     flex-grow: 1;
     flex-shrink: 0;
@@ -256,14 +261,14 @@ export const styleAppLayout = css`
 
   .menu-button {
     position: fixed;
-    top: 0;
+    top: var(--safe-area-inset-top, 0);
     left: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
   }
 
   a.salavat-small-icon {
     display: block;
     position: fixed;
-    top: 0;
+    top: var(--safe-area-inset-top, 0);
     right: ${(appConfig.mainImageMargin - appConfig.iconButtonSize) / 2}px;
     --mdc-icon-size: 30px;
   }
