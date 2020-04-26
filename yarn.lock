@@ -1176,10 +1176,10 @@
   dependencies:
     "@types/node" ">= 8"
 
-"@open-wc/building-utils@^2.16.1":
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/@open-wc/building-utils/-/building-utils-2.16.1.tgz#093d74881b996fe9497d628cdf55b6757422d894"
-  integrity sha512-0nUktFyelvSbCc8+T4w4PCyIy3i8blOFS0/EiG5xbVJ0HejDPQLTSmRBpZkn6X57tHhwUfjIdv0EAQuo2sbHEw==
+"@open-wc/building-utils@^2.16.4":
+  version "2.16.4"
+  resolved "https://registry.yarnpkg.com/@open-wc/building-utils/-/building-utils-2.16.4.tgz#10d64e0d2b92c017caf47a57991f8b1eef91c634"
+  integrity sha512-ByknIanbo2wSpNs7gHy/hBHmPOO91IOJCDravSNreK88XdTd4vnCkx0DrRltgwvPIg7GVHWv/NFfSfWecRrh4Q==
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"
@@ -1191,7 +1191,7 @@
     clean-css "^4.2.1"
     clone "^2.1.2"
     core-js-bundle "^3.6.0"
-    deepmerge "^3.2.0"
+    deepmerge "^4.2.2"
     es-module-shims "^0.4.6"
     html-minifier "^4.0.0"
     lru-cache "^5.1.1"
@@ -1200,10 +1200,10 @@
     path-is-inside "^1.0.2"
     regenerator-runtime "^0.13.3"
     resolve "^1.11.1"
-    rimraf "^3.0.0"
+    rimraf "^3.0.2"
     shady-css-scoped-element "^0.0.2"
     systemjs "^4.0.0"
-    terser "^4.6.4"
+    terser "^4.6.7"
     valid-url "^1.0.9"
     whatwg-fetch "^3.0.0"
     whatwg-url "^7.0.0"
@@ -1230,16 +1230,16 @@
   resolved "https://registry.yarnpkg.com/@polymer/test-fixture/-/test-fixture-0.0.3.tgz#4443752697d4d9293bbc412ea0b5e4d341f149d9"
   integrity sha1-REN1JpfU2Sk7vEEuoLXk00HxSdk=
 
-"@rollup/plugin-node-resolve@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-6.1.0.tgz#0d2909f4bf606ae34d43a9bc8be06a9b0c850cf0"
-  integrity sha512-Cv7PDIvxdE40SWilY5WgZpqfIUEaDxFxs89zCAHjqyRwlTSuql4M5hjIuc5QYJkOH0/vyiyNXKD72O+LhRipGA==
+"@rollup/plugin-node-resolve@^7.1.1":
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-7.1.3.tgz#80de384edfbd7bfc9101164910f86078151a3eca"
+  integrity sha512-RxtSL3XmdTAE2byxekYLnx+98kEUOrPHF/KRVjLH+DEIHy6kjIw7YINQzn+NXiH/NTrQLAwYs0GWB+csWygA9Q==
   dependencies:
-    "@rollup/pluginutils" "^3.0.0"
+    "@rollup/pluginutils" "^3.0.8"
     "@types/resolve" "0.0.8"
     builtin-modules "^3.1.0"
     is-module "^1.0.0"
-    resolve "^1.11.1"
+    resolve "^1.14.2"
 
 "@rollup/pluginutils@^3.0.0":
   version "3.0.8"
@@ -1247,6 +1247,15 @@
   integrity sha512-rYGeAc4sxcZ+kPG/Tw4/fwJODC3IXHYDH4qusdN/b6aLw5LPUbzpecYbEJh4sVQGPFJxd2dBU4kc1H3oy9/bnw==
   dependencies:
     estree-walker "^1.0.1"
+
+"@rollup/pluginutils@^3.0.8":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.0.9.tgz#aa6adca2c45e5a1b950103a999e3cddfe49fd775"
+  integrity sha512-TLZavlfPAZYI7v33wQh4mTP6zojne14yok3DNSLcjoG/Hirxfkonn6icP5rrNWRn8nZsirJBFFpijVOJzkUHDg==
+  dependencies:
+    "@types/estree" "0.0.39"
+    estree-walker "^1.0.1"
+    micromatch "^4.0.2"
 
 "@types/babel-generator@^6.25.1":
   version "6.25.3"
@@ -1385,6 +1394,11 @@
   version "0.0.44"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.44.tgz#980cc5a29a3ef3bea6ff1f7d021047d7ea575e21"
   integrity sha512-iaIVzr+w2ZJ5HkidlZ3EJM8VTZb2MJLCjw3V+505yVts0gRC4UMvjw0d1HPtGqI/HQC/KdsYtayfzl+AXY2R8g==
+
+"@types/estree@0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
+  integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
 "@types/events@*":
   version "3.0.0"
@@ -3805,10 +3819,10 @@ deep-extend@^0.6.0, deep-extend@~0.6.0:
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
   integrity sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==
 
-deepmerge@^3.2.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.3.0.tgz#d3c47fd6f3a93d517b14426b0628a17b0125f5f7"
-  integrity sha512-GRQOafGHwMHpjPx9iCvTgpu9NojZ49q794EEL94JVEw6VaeA8XTUyBKvAkOOjBX9oJNiV6G3P+T+tihFjo2TqA==
+deepmerge@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
+  integrity sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
 
 default-compare@^1.0.0:
   version "1.0.0"
@@ -4209,10 +4223,10 @@ es-abstract@^1.17.0-next.1, es-abstract@^1.17.5:
     string.prototype.trimleft "^2.1.1"
     string.prototype.trimright "^2.1.1"
 
-es-dev-server@^1.46.0:
-  version "1.46.0"
-  resolved "https://registry.yarnpkg.com/es-dev-server/-/es-dev-server-1.46.0.tgz#6fa8615604d8bfaa6a181f3bfb8b62d9f4b3dd81"
-  integrity sha512-+6RDz/YeBEkEHcf84I2pS+JYY1ov3d24JAda8hVMFQtpI21+G4/t0YA3lZSIYlPZ6AIoTgmb/+pKQh6JzmOUVA==
+es-dev-server@^1.47.0:
+  version "1.47.0"
+  resolved "https://registry.yarnpkg.com/es-dev-server/-/es-dev-server-1.47.0.tgz#d7d257b9a8f1177aa651465b00c47f18bfac6ee7"
+  integrity sha512-5+i5oD+dkE7dl1b+A65uyEky41ee7T85unjsA0S7d0mngOYR9YQjBdqG6lYCDVXNQBwMJ841OlU1WxM4jtWSWA==
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/plugin-proposal-dynamic-import" "^7.8.3"
@@ -4225,8 +4239,8 @@ es-dev-server@^1.46.0:
     "@babel/plugin-syntax-optional-chaining" "^7.8.3"
     "@babel/plugin-transform-template-literals" "^7.8.3"
     "@babel/preset-env" "^7.9.0"
-    "@open-wc/building-utils" "^2.16.1"
-    "@rollup/plugin-node-resolve" "^6.1.0"
+    "@open-wc/building-utils" "^2.16.4"
+    "@rollup/plugin-node-resolve" "^7.1.1"
     "@rollup/pluginutils" "^3.0.0"
     "@types/minimatch" "^3.0.3"
     browserslist "^4.9.1"
@@ -4239,7 +4253,7 @@ es-dev-server@^1.46.0:
     command-line-args "^5.0.2"
     command-line-usage "^6.1.0"
     debounce "^1.2.0"
-    deepmerge "^3.2.0"
+    deepmerge "^4.2.2"
     es-module-lexer "^0.3.13"
     get-stream "^5.1.0"
     is-stream "^2.0.0"
@@ -4253,7 +4267,7 @@ es-dev-server@^1.46.0:
     opn "^5.4.0"
     parse5 "^5.1.1"
     path-is-inside "^1.0.2"
-    polyfills-loader "^1.5.2"
+    polyfills-loader "^1.5.6"
     portfinder "^1.0.21"
     strip-ansi "^5.2.0"
     systemjs "^4.0.0"
@@ -7879,17 +7893,17 @@ plylog@^1.0.0:
     winston "^3.0.0"
     winston-transport "^4.2.0"
 
-polyfills-loader@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/polyfills-loader/-/polyfills-loader-1.5.2.tgz#2fe63063da0d74aa69b611bd189d64ee443358c7"
-  integrity sha512-bcv8Id4Ylae0eSmnlMpKfba36TNr1Mh7uMGN4OEIspHLGR5/IBGSBteQp/NpbZ45T7UWQuTBvVJNQCS16E1N4A==
+polyfills-loader@^1.5.6:
+  version "1.5.6"
+  resolved "https://registry.yarnpkg.com/polyfills-loader/-/polyfills-loader-1.5.6.tgz#5bfd107ebeaaab19da84dfeeb3811fc41a49b29e"
+  integrity sha512-01tVO5O0iEX1Pzhamoy24trXmjS75WsqqtcRvMVeg3FnXcB9BPTtkNtiiPh3LWYDQBS+mlngCDxglXK1629jsQ==
   dependencies:
     "@babel/core" "^7.9.0"
-    "@open-wc/building-utils" "^2.16.1"
+    "@open-wc/building-utils" "^2.16.4"
     "@webcomponents/webcomponentsjs" "^2.4.0"
     abortcontroller-polyfill "^1.4.0"
     core-js-bundle "^3.6.0"
-    deepmerge "^3.2.0"
+    deepmerge "^4.2.2"
     dynamic-import-polyfill "^0.1.1"
     es-module-shims "^0.4.6"
     html-minifier "^4.0.0"
@@ -7898,7 +7912,7 @@ polyfills-loader@^1.5.2:
     regenerator-runtime "^0.13.3"
     resize-observer-polyfill "^1.5.1"
     systemjs "^4.0.0"
-    terser "^4.6.4"
+    terser "^4.6.7"
     whatwg-fetch "^3.0.0"
 
 polymer-analyzer@^3.0.0, polymer-analyzer@^3.1.3, polymer-analyzer@^3.2.2:
@@ -8799,6 +8813,13 @@ resolve@^1.1.6, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.11.1, resolve@^1.3.2
   dependencies:
     path-parse "^1.0.6"
 
+resolve@^1.14.2:
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.17.0.tgz#b25941b54968231cc2d1bb76a79cb7f2c0bf8444"
+  integrity sha512-ic+7JYiV8Vi2yzQGFWOkiZD5Z9z7O2Zhm9XMaTxdJExKasieFCr+yXZ/WmXsckHiKl12ar0y6XiXDx3m4RHn1w==
+  dependencies:
+    path-parse "^1.0.6"
+
 restore-cursor@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/restore-cursor/-/restore-cursor-1.0.1.tgz#34661f46886327fed2991479152252df92daa541"
@@ -8832,7 +8853,7 @@ rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2:
   dependencies:
     glob "^7.1.3"
 
-rimraf@^3.0.0:
+rimraf@^3.0.0, rimraf@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
   integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
@@ -9722,10 +9743,10 @@ ternary-stream@^2.0.1:
     merge-stream "^1.0.0"
     through2 "^2.0.1"
 
-terser@^4.6.4:
-  version "4.6.10"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.6.10.tgz#90f5bd069ff456ddbc9503b18e52f9c493d3b7c2"
-  integrity sha512-qbF/3UOo11Hggsbsqm2hPa6+L4w7bkr+09FNseEe8xrcVD3APGLFqE+Oz1ZKAxjYnFsj80rLOfgAtJ0LNJjtTA==
+terser@^4.6.7:
+  version "4.6.12"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-4.6.12.tgz#44b98aef8703fdb09a3491bf79b43faffc5b4fee"
+  integrity sha512-fnIwuaKjFPANG6MAixC/k1TDtnl1YlPLUlLVIxxGZUn1gfUx2+l3/zGNB72wya+lgsb50QBi2tUV75RiODwnww==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
