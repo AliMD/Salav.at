@@ -1,11 +1,10 @@
 import { html, css, customElement, property, TemplateResult, PropertyValues, query } from 'lit-element';
 import { BaseElement } from './base-element';
-import { idlePeriod } from '@polymer/polymer/lib/utils/async';
+import { idlePeriod, animationFrame } from '@polymer/polymer/lib/utils/async';
 import { chatRoom } from './chat-room';
 import { SalavatCountInterface } from '../config';
 
 const commaSeparator: string = (1_000).toLocaleString('fa').charAt(1);
-const step = 1;
 const minWidth = 120;
 
 @customElement('salavat-counter')
@@ -37,10 +36,11 @@ export class SalavatCounter extends BaseElement {
       transition-property: padding;
       transition-duration: 0;
       transition-timing-function: linear;
+      direction: ltr;
     }
 
     :host([animate]) {
-      transition-duration: 500ms;
+      transition-duration: 700ms;
     }
 
     .label {
@@ -48,6 +48,7 @@ export class SalavatCounter extends BaseElement {
       font-size: 1.4rem;
       font-weight: 300;
       text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12);
+      direction: rtl;
     }
 
     .label.before {
@@ -156,19 +157,21 @@ export class SalavatCounter extends BaseElement {
     this.computePadding();
 
     if (this.displayCount !== this.count) {
-      idlePeriod.run(() => this.computeDisplayCount());
+      animationFrame.run(() => this.computeDisplayCount());
     }
   }
 
   computeDisplayCount () {
     if (!(this.active && this.displayCount !== this.count && this.count != undefined)) return;
     // this._log('computeDisplayCount');
-
     if (this.displayCount == undefined) {
       this.displayCount = this.count; // first time
       return;
     }
-    else if (Math.abs(this.displayCount - this.count) < step) {
+
+    const step = Math.ceil(Math.abs(this.count - this.displayCount) / 200);
+
+    if (Math.abs(this.displayCount - this.count) < step) {
       this.displayCount = this.count;
       return;
     }
