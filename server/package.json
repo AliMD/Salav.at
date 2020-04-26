@@ -1,0 +1,8 @@
+{
+  "name": "salavat-pwa-server",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "prpl-server": "^1.4.0"
+  }
+}

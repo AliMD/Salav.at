@@ -4,14 +4,14 @@ FROM node:13-alpine
 WORKDIR /app
 
 # Install app dependencies
-COPY package-docker.json package.json
+COPY package.json .
 
 # Install dependency
 RUN npm install
 
 # Bundle app source
-COPY dist/ ./
+COPY build/ ./
 
 EXPOSE 8080
 
-CMD yarn serve
+CMD prpl-server --host 0.0.0.0 --port 8080
