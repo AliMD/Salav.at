@@ -109,7 +109,7 @@ export class PageHome extends BaseElement {
     const userSalavatCountIncrease = this._sliderElement.value - (this._userSalavatCount || 0);
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
       chatRoom.setProperty('userSalavatCountIncrease', userSalavatCountIncrease);
-      navigator.vibrate(10);
+      navigator.vibrate(6);
     }
   }
 
