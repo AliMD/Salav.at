@@ -152,6 +152,7 @@ export class PageHome extends BaseElement {
     }
     chatRoom.setProperty('userSalavatCountIncrease', this._userSalavatCountIncrease + 1);
     calcSliderMax(this._userSalavatCountIncrease);
+    navigator.vibrate(6);
   }
 
   protected _removeIconClick() {
@@ -162,5 +163,6 @@ export class PageHome extends BaseElement {
       chatRoom.setProperty('userSalavatCountIncrease', this._userSalavatCountIncrease - 1);
     }
     calcSliderMax(this._userSalavatCountIncrease);
+    navigator.vibrate(6);
   }
 }
