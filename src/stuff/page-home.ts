@@ -6,7 +6,7 @@ import { BaseElement } from './base-element';
 import './salavat-counter';
 import { appConfig } from '../config';
 import { chatRoom } from './chat-room';
-import { SnackbarOption } from './snack-bar';
+// import { SnackbarOption } from './snack-bar';
 import { calcSliderMax } from '../director';
 
 @customElement('page-home')
@@ -58,7 +58,7 @@ export class PageHome extends BaseElement {
     }
 
     .salavat-count-increase {
-      font-size: 1.2rem;
+      /* font-size: 1.2rem; */
       color: var(--app-accent-color);
     }
   `;
@@ -69,17 +69,17 @@ export class PageHome extends BaseElement {
 
   protected render(): TemplateResult {
     this._log('render');
-    const countSum: number = (this._userSalavatCount || 0) + (this._userSalavatCountIncrease || 0);
+    const countSum: number = this._userSalavatCount || 0;
     return html`
       <div class="label">
         <span class="title">صلوات های من:</span>
-        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">(${this._userSalavatCountIncrease?.toLocaleString('fa')})</span>
+        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">${this._userSalavatCountIncrease?.toLocaleString('fa')}+</span>
         <span class="salavat-count">${countSum.toLocaleString('fa')}</span>
       </div>
 
       <mwc-slider
         dir="ltr"
-        .value="${this._userSalavatCount}"
+        .value="${this._userSalavatCountIncrease}"
         .min="${1}"
         .max="${this._sliderMax}"
         .step="${this._sliderMax && this._sliderMax > 2_000 ? 10 : 5}"
@@ -107,7 +107,7 @@ export class PageHome extends BaseElement {
 
   protected _onSliderInput() {
     this._log('_onSliderInput');
-    const userSalavatCountIncrease = this._sliderElement.value - (this._userSalavatCount || 0);
+    const userSalavatCountIncrease = this._sliderElement.value;
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
       chatRoom.setProperty('userSalavatCountIncrease', userSalavatCountIncrease);
     }
@@ -116,17 +116,16 @@ export class PageHome extends BaseElement {
   protected _onSliderChange() {
     this._log('_onSliderChange');
     const sliderElement = this._sliderElement;
-    const userSalavatCount = this._userSalavatCount || 0;
-    if (sliderElement.value < userSalavatCount) {
-      sliderElement.value = userSalavatCount;
-      chatRoom.setProperty('snackbar', <SnackbarOption>{
-        open: true,
-        text: 'شما قبلا این تعداد صلوات را نذر کرده‌اید',
-      });
-    }
-    else {
-      this._onSliderInput();
-      calcSliderMax(sliderElement.value);
-    }
+    // const userSalavatCount = this._userSalavatCount || 0;
+    // if (sliderElement.value < userSalavatCount) {
+    //   sliderElement.value = userSalavatCount;
+    //   chatRoom.setProperty('snackbar', <SnackbarOption>{
+    //     open: true,
+    //     text: 'شما قبلا این تعداد صلوات را نذر کرده‌اید',
+    //   });
+    // }
+    // else {
+    this._onSliderInput();
+    calcSliderMax(sliderElement.value);
   }
 }

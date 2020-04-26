@@ -147,15 +147,15 @@ chatRoom.onMessage('cheatClick', () => {
 // calc sliderMax
 export const calcSliderMax = (sliderValue: number) => {
   for (const max of appConfig.sliderMaxRangeList) {
-    if (sliderValue >= max * 0.8) continue;
+    if (sliderValue >= max * 0.95) continue;
     chatRoom.setProperty('sliderMax', max);
     break;
   }
 }
 
-chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
-  calcSliderMax(userSalavatCount as number);
-});
+// chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
+//   calcSliderMax(userSalavatCount as number);
+// });
 
 /*
   user salavat count ....
@@ -193,12 +193,12 @@ chatRoom.onMessage('submit-salavat', async () => {
     if (result.ok) {
       userSalavatCount += userSalavatCountIncrease;
       chatRoom.setProperty('salavatCount', result.data);
-      chatRoom.setProperty('userSalavatCountIncrease', 0);
+      chatRoom.setProperty('userSalavatCountIncrease', 1);
       chatRoom.setProperty('userSalavatCount', userSalavatCount);
 
       chatRoom.setProperty('snackbar', <SnackbarOption>{
         open: true,
-        text: 'نذر شما با موفقیت ثبت و اعمال شد.',
+        text: userSalavatCountIncrease.toLocaleString('fa') + ' صلوات با موفقیت ثبت و اعمال شد.',
       });
     }
     else {
@@ -237,6 +237,7 @@ loadSalavatCountInterval(); // load on startup
 
 const loadFromLocalStorage = () => {
   chatRoom.setProperty('userSalavatCount', localStorageGetItem<number>('userSalavatCount', 0));
+  chatRoom.setProperty('userSalavatCountIncrease', localStorageGetItem<number>('userSalavatCountIncrease', 1));
 
   if (localStorageGetItem<Boolean>('service-worker-updated', false)) {
     localStorage.removeItem('service-worker-updated');

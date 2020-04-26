@@ -39,20 +39,21 @@ export const loadData = async <T>(docId: string): Promise<T> => {
 export interface UpdateResponse<T> {
   ok: boolean,
   description: string,
-  data: T,
-  apiVersion: string,
+  data?: T,
+  apiVersion?: string,
 }
 
-export const updateData = <T>(docId: string, dataApiItem: Partial<T>, token: string = appConfig.apiToken): Promise<UpdateResponse<T>> => {
-    _log('updateData %s with %o', docId, dataApiItem);
-    const dataApiItemCopy: any = { ...dataApiItem };
+export const updateData = async <T>(docId: string, dataApiItem: Partial<T>, token: string = appConfig.apiToken): Promise<UpdateResponse<T>> => {
+  _log('updateData %s with %o', docId, dataApiItem);
+  const dataApiItemCopy: any = { ...dataApiItem };
 
-    delete dataApiItemCopy._owner;
-    delete dataApiItemCopy._createdTime;
-    delete dataApiItemCopy._lastEditedTime;
-    delete dataApiItemCopy._lastEditedBy;
+  delete dataApiItemCopy._owner;
+  delete dataApiItemCopy._createdTime;
+  delete dataApiItemCopy._lastEditedTime;
+  delete dataApiItemCopy._lastEditedBy;
 
-  return _fetch<UpdateResponse<T>>(`${appConfig.apiUri}/v1/update-data`, {
+  try {
+    return await _fetch<UpdateResponse<T>>(`${appConfig.apiUri}/v1/update-data`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,4 +65,13 @@ export const updateData = <T>(docId: string, dataApiItem: Partial<T>, token: str
         data: dataApiItemCopy,
       })
     });
+  }
+  catch (err) {
+    _log('updateData Error: %o', err);
+    return {
+      ok: false,
+      description: err + '',
+    };
+  }
+
 }
