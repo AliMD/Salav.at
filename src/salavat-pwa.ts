@@ -14,7 +14,7 @@ import { chatRoom } from './stuff/chat-room';
 import { styleConfig, pageListArray, MenuItem, appConfig, safeAreaInsetTop } from './config';
 import { styleAppLayout } from './stuff/style-app-layout';
 import { styleAppResponsive } from './stuff/style-app-responsive';
-import { menuIcon, getAppIcon, plusIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon, downloadIconOutlined } from './stuff/icon';
+import { menuIcon, getAppIcon, addIcon, twitterIcon, instagramIcon, telegramIcon, salavatSmallIcon, downloadIconOutlined } from './stuff/icon';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -98,7 +98,7 @@ export class SalavatPWA extends BaseElement {
           <main role="main">
             <div class="main-image">
               <div class="submit-button" ?show="${this._showSubmit}" @click=${() => chatRoom.postMessage('submit-salavat')}>
-                <mwc-icon-button>${plusIcon}</mwc-icon-button>
+                <mwc-icon-button>${addIcon}</mwc-icon-button>
               </div>
             </div>
             <div class="page-container">
