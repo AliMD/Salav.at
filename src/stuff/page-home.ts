@@ -17,7 +17,7 @@ export class PageHome extends BaseElement {
   protected _userSalavatCount?: number;
 
   @property({ type: Number })
-  protected _userSalavatCountIncrease: number = 1;
+  protected _userSalavatCountIncrease?: number;
 
   @property({ type: Number })
   protected _sliderMax?: number;
