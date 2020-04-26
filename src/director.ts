@@ -162,7 +162,7 @@ export const calcSliderMax = (sliderValue: number) => {
 */
 chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
   const showSubmit: boolean = userSalavatCountIncrease as number > 0;
-  if (chatRoom.getProperty('showSubmit') != showSubmit) {
+  if (chatRoom.getProperty('page') === 'home' && chatRoom.getProperty('showSubmit') != showSubmit) {
     chatRoom.setProperty('showSubmit', showSubmit);
   }
 });
