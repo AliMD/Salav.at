@@ -7,11 +7,11 @@ WORKDIR /app
 COPY package.json .
 
 # Install dependency
-RUN npm install
+RUN yarn install --network-timeout 5000 --no-lockfile  --non-interactive --no-progress && yarn cache clean
 
 # Bundle app source
 COPY build/ ./
 
 EXPOSE 8080
 
-CMD prpl-server --host 0.0.0.0 --port 8080
+CMD yarn start
