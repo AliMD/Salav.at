@@ -15,7 +15,8 @@
     "d": "npm-run-all --serial build:ts dev-server",
     "dev-server": "es-dev-server --node-resolve --preserve-symlinks --app-index index.html  --compatibility none --open",
     "w": "yarn watch",
-    "watch": "npm-run-all --parallel \"dev-server --watch\" \"build:ts --watch --preserveWatchOutput\""
+    "watch": "npm-run-all --parallel \"dev-server --watch\" \"build:ts --watch --preserveWatchOutput\"",
+    "deploy": "yarn build && ./deploy.sh"
   },
   "dependencies": {
     "@material/mwc-button": "^0.14.1",
