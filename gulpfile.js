@@ -16,7 +16,7 @@ gulp.task('build:asset', () => {
       path.dirname = path.dirname.replace(pattern, replacement);
     })))
     .pipe(replace(pattern, replacement))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('server/build'));
 });
 
 gulp.task('build', gulp.series(

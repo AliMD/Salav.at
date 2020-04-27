@@ -7,7 +7,6 @@ thisPath="$(dirname "$0")"
 
 cd $thisPath; # chnage PWD if thisPath != "."
 
-# docker-compose build --no-cache
 docker-compose build
 
 docker-compose up \

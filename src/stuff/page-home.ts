@@ -17,7 +17,7 @@ export class PageHome extends BaseElement {
   protected _userSalavatCount?: number;
 
   @property({ type: Number })
-  protected _userSalavatCountIncrease: number = 1;
+  protected _userSalavatCountIncrease?: number;
 
   @property({ type: Number })
   protected _sliderMax?: number;
@@ -126,6 +126,7 @@ export class PageHome extends BaseElement {
     const userSalavatCountIncrease = this._sliderElement.value;
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
       chatRoom.setProperty('userSalavatCountIncrease', userSalavatCountIncrease);
+      navigator.vibrate(6);
     }
   }
 
@@ -151,6 +152,7 @@ export class PageHome extends BaseElement {
     }
     chatRoom.setProperty('userSalavatCountIncrease', this._userSalavatCountIncrease + 1);
     calcSliderMax(this._userSalavatCountIncrease);
+    navigator.vibrate(6);
   }
 
   protected _removeIconClick() {
@@ -161,5 +163,6 @@ export class PageHome extends BaseElement {
       chatRoom.setProperty('userSalavatCountIncrease', this._userSalavatCountIncrease - 1);
     }
     calcSliderMax(this._userSalavatCountIncrease);
+    navigator.vibrate(6);
   }
 }
