@@ -249,14 +249,17 @@ export const styleAppLayout = css`
     border-radius: 100px 100px 0 0;
     padding: 0 45px 20px;
     opacity: 0.9;
-    transform: translate3d(0px, 85px, 0px);
-    will-change: transform;
-    transition: 500ms transform ease-out;
+    /* transform: translate3d(0px, 85px, 0px); */
+    /* will-change: transform; */
+    transition: 500ms top ease-out;
     --mdc-icon-size: ${appConfig.iconSize * 1.6}px;
+    position: relative;
+    top: 85px;
   }
 
   .submit-button[show] {
-    transform: translate3d(0, 25px, 0);
+    top: 25px;
+    /* transform: translate3d(0, 25px, 0); */
   }
 
   .menu-button {

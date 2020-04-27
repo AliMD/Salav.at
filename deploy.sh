@@ -30,16 +30,7 @@ syncFolder () {
     echoStep "Uploading ..."
     rsync \
       -Pazzh --delete \
-      --exclude=deploy.sh \
-      --exclude=/node_modules \
-      --exclude=/.git \
-      --exclude=/build \
-      --exclude=/design \
-      --exclude=/js \
-      --exclude=/src \
-      --exclude=/font \
-      --exclude=/image \
-      ./ $server:$servicePath/
+      ./server/ $server:$servicePath/
 }
 
 syncAndUp () {
