@@ -6,6 +6,7 @@ import { SalavatCountInterface } from '../config';
 
 const commaSeparator: string = (1_000).toLocaleString('fa').charAt(1);
 const minWidth = 120;
+const firstAnimateGap = 20
 
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
@@ -83,9 +84,13 @@ export class SalavatCounter extends BaseElement {
     super();
     this._log('constructor');
 
-    chatRoom.onPropertyChanged('salavatCount', (salavatCount: SalavatCountInterface | unknown) => {
+    chatRoom.onPropertyChanged('salavatCount', async (salavatCount: SalavatCountInterface | unknown) => {
       if (!salavatCount) return;
       const _salavatCount = salavatCount as SalavatCountInterface;
+      if (this.count === undefined && _salavatCount.count > firstAnimateGap) {
+        this.count = _salavatCount.count - firstAnimateGap;
+        await this.updateComplete;
+      }
       this.count = _salavatCount.count;
     });
 

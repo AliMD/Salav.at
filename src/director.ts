@@ -225,8 +225,13 @@ const loadSalavatCount = async (force: boolean = false) => {
 }
 
 const loadSalavatCountInterval = async () => {
-  await loadSalavatCount();
-  idlePeriod.run(() => setTimeout(() => loadSalavatCountInterval(), appConfig.loadSalavatInterval));
+  try {
+    await loadSalavatCount();
+  }
+  catch(err) {
+    console.warn('loadSalavatCount Error: %o', err);
+  }
+  setTimeout(() => loadSalavatCountInterval(), appConfig.loadSalavatInterval);
 };
 
 loadSalavatCountInterval(); // load on startup

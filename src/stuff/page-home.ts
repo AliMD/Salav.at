@@ -8,6 +8,10 @@ import { chatRoom } from './chat-room';
 import { calcSliderMax } from '../director';
 import { addIcon, removeIcon } from './icon';
 
+if (typeof navigator.vibrate !== 'function') {
+  navigator.vibrate = pattern => !pattern;
+}
+
 @customElement('page-home')
 export class PageHome extends BaseElement {
   @property({ type: Boolean })
@@ -81,12 +85,11 @@ export class PageHome extends BaseElement {
 
   protected render(): TemplateResult {
     this._log('render');
-    const countSum: number = this._userSalavatCount || 0;
     return html`
       <div class="label">
         <span class="title">صلوات های من:</span>
         <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">${this._userSalavatCountIncrease?.toLocaleString('fa')}+</span>
-        <span class="salavat-count">${countSum.toLocaleString('fa')}</span>
+        <span class="salavat-count">${(this._userSalavatCount || 0).toLocaleString('fa')}</span>
       </div>
 
       <div class="slider">
