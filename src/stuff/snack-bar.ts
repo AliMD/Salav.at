@@ -9,7 +9,7 @@ import { chatRoom } from './chat-room';
 import { closeIcon } from './icon';
 
 export interface SnackbarOption {
-  open?: boolean;
+  open: boolean;
   reason?: string;
   text?: string;
   timeout?: number;
@@ -39,12 +39,7 @@ export class SnackBar extends BaseElement {
       const _snackbarOption = snackbarOption as SnackbarOption;
       this.snackbar.labelText = _snackbarOption.text || '';
       this.snackbar.timeoutMs = _snackbarOption.timeout || appConfig.snackbarTimeout;
-      if (_snackbarOption.open) {
-        this.snackbar.open();
-      }
-      else {
-        this.snackbar.close(_snackbarOption.reason);
-      }
+      this.snackbar.open = _snackbarOption.open
     });
   }
 }
