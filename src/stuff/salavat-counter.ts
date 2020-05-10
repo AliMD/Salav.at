@@ -1,6 +1,5 @@
 import { html, css, customElement, property, TemplateResult, PropertyValues, query } from 'lit-element';
 import { BaseElement } from './base-element';
-import { idlePeriod, animationFrame } from '@polymer/polymer/lib/utils/async';
 import { chatRoom } from './chat-room';
 import { SalavatCountInterface } from '../config';
 
@@ -152,7 +151,7 @@ export class SalavatCounter extends BaseElement {
     setTimeout(async () => {
       // FIXME: why timeout!
       this.computePadding();
-      idlePeriod.run(() => this.setAttribute('animate', ''));
+      requestIdleCallback(() => this.setAttribute('animate', ''));
     }, 1_000);
   }
 
@@ -162,7 +161,7 @@ export class SalavatCounter extends BaseElement {
     this.computePadding();
 
     if (this.displayCount !== this.count) {
-      animationFrame.run(() => this.computeDisplayCount());
+      requestAnimationFrame(() => this.computeDisplayCount());
     }
   }
 
