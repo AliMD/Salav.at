@@ -86,10 +86,6 @@ export class SalavatCounter extends BaseElement {
     chatRoom.onPropertyChanged('salavatCount', async (salavatCount: SalavatCountInterface | unknown) => {
       if (!salavatCount) return;
       const _salavatCount = salavatCount as SalavatCountInterface;
-      if (this.count === undefined && _salavatCount.count > firstAnimateGap) {
-        this.count = _salavatCount.count - firstAnimateGap;
-        await this.updateComplete;
-      }
       this.count = _salavatCount.count;
     });
 
@@ -168,8 +164,13 @@ export class SalavatCounter extends BaseElement {
   computeDisplayCount () {
     if (!(this.active && this.displayCount !== this.count && this.count != undefined)) return;
     // this._log('computeDisplayCount');
-    if (this.displayCount == undefined) {
-      this.displayCount = this.count; // first time
+    if (this.displayCount == undefined) { // first time
+      if (this.count > firstAnimateGap) {
+        this.displayCount = this.count - firstAnimateGap;
+      }
+      else {
+        this.displayCount = 0;
+      }
       return;
     }
 
