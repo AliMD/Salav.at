@@ -57,7 +57,9 @@ chatRoom.onMessage('window-loaded', async () => {
     newWorker.addEventListener('statechange', () => {
       console.log("SW state changed: %s", newWorker.state);
       if (newWorker.state === 'installed') {
-        chatRoom.postMessage('service-worker-updated');
+        if (navigator.serviceWorker.controller) { // if old controller available then its update else its new install
+          chatRoom.postMessage('service-worker-updated');
+        }
       }
       else if (newWorker.state === 'redundant') {
         console.warn("SW redundant!")
