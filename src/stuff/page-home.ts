@@ -8,6 +8,10 @@ import { chatRoom } from './chat-room';
 import { calcSliderMax } from '../director';
 import { addIcon, removeIcon } from './icon';
 
+if (typeof navigator.vibrate !== 'function') {
+  navigator.vibrate = pattern => !pattern;
+}
+
 @customElement('page-home')
 export class PageHome extends BaseElement {
   @property({ type: Boolean })
