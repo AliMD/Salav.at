@@ -1,12 +1,13 @@
 import { AsyncInterface } from '@polymer/polymer/interfaces';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce';
 import { animationFrame } from '@polymer/polymer/lib/utils/async';
+import { appConfig } from '../config';
 
 // export const eventTarget: EventTarget = 'EventTarget' in window ? new EventTarget() : document.createElement('span');
 export const eventTarget: EventTarget = document.createElement('span');
 const dispatchEventHistory: Record<string, unknown> = {};
 const dispatchJobList: Record<string, Debouncer> = {};
-const debug = true;
+const debug = appConfig.debug;
 
 const _log = (message: unknown, ...restParam: unknown[]) => {
   if (debug) {
@@ -27,7 +28,7 @@ const postMessage = (eventName: string, detail?: string | boolean | unknown, opt
     dispatchEventHistory[eventName] = detail;
   }
   dispatchJobList[eventName] = Debouncer.debounce(dispatchJobList[eventName], animationFrame as AsyncInterface, () => {
-    _log('postMessage: %s with %o %s', eventName, detail, option.preserve ? '(preserve)' : '');
+    _log('postMessage: %s with %o %s', eventName, detail, option.preserve ? ' (preserve)' : '');
     eventTarget.dispatchEvent(new CustomEvent(eventName, { detail }));
   });
 };

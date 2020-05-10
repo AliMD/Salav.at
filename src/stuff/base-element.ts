@@ -1,8 +1,9 @@
 import { LitElement, property } from 'lit-element';
 import { animationFrame } from '@polymer/polymer/lib/utils/async';
+import { appConfig } from '../config';
 
 export abstract class BaseElement extends LitElement {
-  @property({ type: Boolean, reflect: true }) debug = true;
+  @property({ type: Boolean, reflect: true }) debug = appConfig.debug;
 
   protected async performUpdate() {
     await new Promise ((resolve) => animationFrame.run(() => resolve()));

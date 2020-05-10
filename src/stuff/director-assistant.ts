@@ -2,6 +2,7 @@ import { chatRoom } from './chat-room';
 import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 import { installRouter } from 'pwa-helpers/router';
 import { installOfflineWatcher } from 'pwa-helpers/network';
+import { appConfig } from '../config';
 
 idlePeriod.run(async () => {
   try {
@@ -40,6 +41,15 @@ chatRoom.onMessage('window-loaded', async () => {
 
   const registration = await navigator.serviceWorker.register('service-worker.js', { scope: '/' });
 
+  if (localStorage.getItem('visitCampaignPage') == undefined) { // Use `visitCampaignPage` instead `serviceWorker` for temporary solution (old users)!
+    localStorage.setItem('serviceWorker', JSON.stringify({
+      registered: true,
+      version: appConfig.appVersion,
+    }));
+    return;
+  }
+
+  // else
   registration.addEventListener('updatefound', () => {
     const newWorker = registration.installing;
     if (newWorker == null) return;
