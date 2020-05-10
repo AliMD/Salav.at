@@ -205,10 +205,9 @@ chatRoom.onMessage('submit-salavat', async () => {
       console.error('updateData: %s', result.description);
       chatRoom.setProperty('snackbar', <SnackbarOption>{
         open: true,
-        text: 'خطا در ذخیره اصلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
+        text: 'خطا در ذخیره اطلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
       });
     }
-
   }
 });
 
