@@ -79,7 +79,7 @@ export const appConfig = {
   apiSalavatTestDocId: 'salavat/test',
   loadSalavatInterval: 1_000, //ms
   snackbarTimeout: 4_000, //ms
-  sliderMaxRangeList: [100, 200, 500, 1_000, 2_000, 5_000, 10_000],
+  sliderMaxRangeList: [100, 200, 500, 1_000, 2_000, 5_000],
   // UI
   maxWith: 768, //px
   mainImageHeight: 430, //px
