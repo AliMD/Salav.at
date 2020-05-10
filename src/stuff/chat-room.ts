@@ -1,12 +1,10 @@
-import { AsyncInterface } from '@polymer/polymer/interfaces';
-import { Debouncer } from '@polymer/polymer/lib/utils/debounce';
-import { animationFrame } from '@polymer/polymer/lib/utils/async';
+import { appConfig } from '../config';
+import { isRepeated } from './debounce';
 
-// export const eventTarget: EventTarget = 'EventTarget' in window ? new EventTarget() : document.createElement('span');
-export const eventTarget: EventTarget = document.createElement('span');
+const debug = appConfig.debug;
 const dispatchEventHistory: Record<string, unknown> = {};
-const dispatchJobList: Record<string, Debouncer> = {};
-const debug = true;
+export const eventTarget: EventTarget = document.createElement('span');
+// export const eventTarget: EventTarget = 'EventTarget' in window ? new EventTarget() : document.createElement('span');
 
 const _log = (message: unknown, ...restParam: unknown[]) => {
   if (debug) {
@@ -22,14 +20,17 @@ const onMessage = (eventName: string, callback: (detail?: unknown) => void, opti
   }
 };
 
-const postMessage = (eventName: string, detail?: string | boolean | unknown, option: { preserve: boolean } = { preserve: true }) => {
+const postMessage = async (eventName: string, detail?: string | boolean | unknown, option: { preserve: boolean } = { preserve: true }) => {
   if (option.preserve) {
     dispatchEventHistory[eventName] = detail;
   }
-  dispatchJobList[eventName] = Debouncer.debounce(dispatchJobList[eventName], animationFrame as AsyncInterface, () => {
-    _log('postMessage: %s with %o %s', eventName, detail, option.preserve ? '(preserve)' : '');
-    eventTarget.dispatchEvent(new CustomEvent(eventName, { detail }));
-  });
+
+  if(await isRepeated(eventName)) {
+    return;
+  }
+  // else if first one in animation frame duration
+  _log('postMessage: %s with %o %s', eventName, detail, option.preserve ? ' (preserve)' : '');
+  eventTarget.dispatchEvent(new CustomEvent(eventName, { detail }));
 };
 
 const setProperty = (propertyName: string, newValue: unknown) => {

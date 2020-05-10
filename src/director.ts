@@ -2,7 +2,6 @@ import './stuff/director-assistant';
 import { chatRoom } from './stuff/chat-room';
 import { pageListArray, appConfig, SalavatCountInterface, SalavatCountDataApiInterface } from './config';
 import { SnackbarOption } from './stuff/snack-bar';
-import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 import { loadData, updateData } from './stuff/data-api';
 import { localStorageGetItem } from './stuff/director-assistant';
 
@@ -79,7 +78,7 @@ chatRoom.onMessage('request-install-manually', () => {
 
 const fixWindowSize = () => {
   if (window.innerWidth >= appConfig.maxWith) {
-    idlePeriod.run(() => {
+    requestIdleCallback(() => {
       window.resizeTo(414, 736); // iPhone 8 plus
     });
   }
@@ -205,10 +204,9 @@ chatRoom.onMessage('submit-salavat', async () => {
       console.error('updateData: %s', result.description);
       chatRoom.setProperty('snackbar', <SnackbarOption>{
         open: true,
-        text: 'خطا در ذخیره اصلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
+        text: 'خطا در ذخیره اطلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
       });
     }
-
   }
 });
 

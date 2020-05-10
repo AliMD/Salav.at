@@ -1,10 +1,10 @@
 import { appConfig } from '../config';
 
-const debug = true;
+const debug = appConfig.debug;
 const fetchTimeout = 15_000;
 const _log = (message: unknown, ...restParam: unknown[]) => {
   if (debug) {
-    console.log(`%cDataAPI%c ${message}`, "color: #4CAF50; font-size: 1.2em;", "color: inherit;font-size: 1em", ...restParam);
+    console.log(`%cDataAPI%c ${message}`, "color: #4CAF50; font-size: 1.2em;", "color: inherit; font-size: 1em;", ...restParam);
   }
 };
 

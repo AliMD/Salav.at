@@ -1,6 +1,5 @@
 import { html, css, customElement, property, TemplateResult, PropertyValues, query } from 'lit-element';
 import { BaseElement } from './base-element';
-import { idlePeriod, animationFrame } from '@polymer/polymer/lib/utils/async';
 import { chatRoom } from './chat-room';
 import { SalavatCountInterface } from '../config';
 
@@ -87,10 +86,6 @@ export class SalavatCounter extends BaseElement {
     chatRoom.onPropertyChanged('salavatCount', async (salavatCount: SalavatCountInterface | unknown) => {
       if (!salavatCount) return;
       const _salavatCount = salavatCount as SalavatCountInterface;
-      if (this.count === undefined && _salavatCount.count > firstAnimateGap) {
-        this.count = _salavatCount.count - firstAnimateGap;
-        await this.updateComplete;
-      }
       this.count = _salavatCount.count;
     });
 
@@ -152,7 +147,7 @@ export class SalavatCounter extends BaseElement {
     setTimeout(async () => {
       // FIXME: why timeout!
       this.computePadding();
-      idlePeriod.run(() => this.setAttribute('animate', ''));
+      requestIdleCallback(() => this.setAttribute('animate', ''));
     }, 1_000);
   }
 
@@ -162,15 +157,20 @@ export class SalavatCounter extends BaseElement {
     this.computePadding();
 
     if (this.displayCount !== this.count) {
-      animationFrame.run(() => this.computeDisplayCount());
+      requestAnimationFrame(() => this.computeDisplayCount());
     }
   }
 
   computeDisplayCount () {
     if (!(this.active && this.displayCount !== this.count && this.count != undefined)) return;
     // this._log('computeDisplayCount');
-    if (this.displayCount == undefined) {
-      this.displayCount = this.count; // first time
+    if (this.displayCount == undefined) { // first time
+      if (this.count > firstAnimateGap) {
+        this.displayCount = this.count - firstAnimateGap;
+      }
+      else {
+        this.displayCount = 0;
+      }
       return;
     }
 

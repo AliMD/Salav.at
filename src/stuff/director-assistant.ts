@@ -1,9 +1,20 @@
 import { chatRoom } from './chat-room';
-import { idlePeriod } from '@polymer/polymer/lib/utils/async';
 import { installRouter } from 'pwa-helpers/router';
 import { installOfflineWatcher } from 'pwa-helpers/network';
+import { appConfig } from '../config';
 
-idlePeriod.run(async () => {
+declare global {
+  function requestIdleCallback(callback: FrameRequestCallback): number;
+  interface Window {
+    requestIdleCallback(callback: FrameRequestCallback): number;
+  }
+}
+
+if (!('requestIdleCallback' in window)) {
+  window.requestIdleCallback = window.requestAnimationFrame;
+}
+
+requestAnimationFrame(async () => {
   try {
     const orientation: OrientationLockType = 'portrait';
     screen['lockOrientation'] && await screen['lockOrientation'](orientation);
@@ -40,6 +51,15 @@ chatRoom.onMessage('window-loaded', async () => {
 
   const registration = await navigator.serviceWorker.register('service-worker.js', { scope: '/' });
 
+  if (localStorage.getItem('visitCampaignPage') == undefined) { // Use `visitCampaignPage` instead `serviceWorker` for temporary solution (old users)!
+    localStorage.setItem('serviceWorker', JSON.stringify({
+      registered: true,
+      version: appConfig.appVersion,
+    }));
+    return;
+  }
+
+  // else
   registration.addEventListener('updatefound', () => {
     const newWorker = registration.installing;
     if (newWorker == null) return;
@@ -47,7 +67,9 @@ chatRoom.onMessage('window-loaded', async () => {
     newWorker.addEventListener('statechange', () => {
       console.log("SW state changed: %s", newWorker.state);
       if (newWorker.state === 'installed') {
-        chatRoom.postMessage('service-worker-updated');
+        if (navigator.serviceWorker.controller) { // if old controller available then its update else its new install
+          chatRoom.postMessage('service-worker-updated');
+        }
       }
       else if (newWorker.state === 'redundant') {
         console.warn("SW redundant!")
@@ -58,7 +80,7 @@ chatRoom.onMessage('window-loaded', async () => {
 
 chatRoom.onMessage('scrollTop', () => {
   if (!(window.scrollTo && window.scrollY > 0)) return;
-  idlePeriod.run(() => scrollTo({
+  requestAnimationFrame(() => scrollTo({
     top: 0,
     left: 0,
     behavior: 'smooth'

@@ -18,6 +18,19 @@ export interface MenuItemHidden {
   sideMenu: false;
 }
 
+export interface SalavatCountInterface {
+  _id: string;
+  _owner: string;
+  _createdTime: number;
+  _lastEditedTime: number;
+  _lastEditedBy: string;
+  count: number;
+}
+
+export interface SalavatCountDataApiInterface {
+  salavatCount: SalavatCountInterface;
+}
+
 export const pageListArray: Array<MenuItem | MenuItemHidden> = [
   {
     slug: 'home', // display in url
@@ -69,10 +82,11 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
     slug: '404',
     sideMenu: false,
   },
-]
+];
 
 export const appConfig = {
-  appVersion: '1.3.1',
+  debug: false,
+  appVersion: '1.4.0',
   apiUri: 'https://api.salav.at',
   apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',
   apiSalavatCountDocId: 'salavat/count',
@@ -107,16 +121,3 @@ export const styleConfig = css`
     --mdc-icon-button-size: ${appConfig.iconButtonSize}px;
   }
 `;
-
-export interface SalavatCountInterface {
-  _id: string;
-  _owner: string;
-  _createdTime: number;
-  _lastEditedTime: number;
-  _lastEditedBy: string;
-  count: number;
-}
-
-export interface SalavatCountDataApiInterface {
-  salavatCount: SalavatCountInterface;
-}
