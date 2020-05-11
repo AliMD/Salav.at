@@ -51,15 +51,6 @@ chatRoom.onMessage('window-loaded', async () => {
 
   const registration = await navigator.serviceWorker.register('service-worker.js', { scope: '/' });
 
-  if (localStorage.getItem('visitCampaignPage') == undefined) { // Use `visitCampaignPage` instead `serviceWorker` for temporary solution (old users)!
-    localStorage.setItem('serviceWorker', JSON.stringify({
-      registered: true,
-      version: appConfig.appVersion,
-    }));
-    return;
-  }
-
-  // else
   registration.addEventListener('updatefound', () => {
     const newWorker = registration.installing;
     if (newWorker == null) return;
