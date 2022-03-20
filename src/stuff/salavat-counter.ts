@@ -1,25 +1,25 @@
-import { html, css, customElement, property, TemplateResult, PropertyValues, query } from 'lit-element';
-import { BaseElement } from './base-element';
-import { chatRoom } from './chat-room';
-import { SalavatCountInterface } from '../config';
+import {html, css, customElement, property, TemplateResult, PropertyValues, query} from 'lit-element';
+import {BaseElement} from './base-element';
+import {chatRoom} from './chat-room';
+import {SalavatCountInterface} from '../config';
 
 const commaSeparator: string = (1_000).toLocaleString('fa').charAt(1);
 const minWidth = 120;
-const firstAnimateGap = 20
+const firstAnimateGap = 20;
 
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
-  @property({ type: Boolean })
-  active = false;
+  @property({type: Boolean})
+    active = false;
 
-  @property({ type: Boolean, attribute: false })
-  testMode: boolean = false;
+  @property({type: Boolean, attribute: false})
+    testMode = false;
 
-  @property({ type: Number, attribute: false })
-  count?: number; // Real salavat count
+  @property({type: Number, attribute: false})
+    count?: number; // Real salavat count
 
-  @property({ type: Number, attribute: false })
-  displayCount?: number;
+  @property({type: Number, attribute: false})
+    displayCount?: number;
 
   @query('.display-count')
   protected _displayCountElement?: HTMLElement;
@@ -79,7 +79,7 @@ export class SalavatCounter extends BaseElement {
     }
   `];
 
-  constructor () {
+  constructor() {
     super();
     this._log('constructor');
 
@@ -96,7 +96,6 @@ export class SalavatCounter extends BaseElement {
     chatRoom.onMessage('skipCountAnimation', () => {
       this.displayCount = this.count;
     });
-
   }
 
   protected override shouldUpdate(_changedProperties: PropertyValues) {
@@ -117,9 +116,9 @@ export class SalavatCounter extends BaseElement {
           <div class="label after">
           <span class="highlight">الکی</span> تست شده
           </div>
-        `
-        : html`<div class="label after">صلوات نذر شده</div>`
-      }
+        ` :
+        html`<div class="label after">صلوات نذر شده</div>`
+}
     `;
   }
 
@@ -129,8 +128,8 @@ export class SalavatCounter extends BaseElement {
     if (countArrayString.length < 2) {
       return countArrayString;
     }
-    const countArrayHtml: Array<TemplateResult | string> = []
-    for (let i=0; i < countArrayString.length-1; i++) {
+    const countArrayHtml: Array<TemplateResult | string> = [];
+    for (let i = 0; i < countArrayString.length - 1; i++) {
       countArrayHtml.push(countArrayString[i]);
       countArrayHtml.push(html`<span class="comma">${commaSeparator}</span>`);
     }
@@ -161,14 +160,13 @@ export class SalavatCounter extends BaseElement {
     }
   }
 
-  computeDisplayCount () {
+  computeDisplayCount() {
     if (!(this.active && this.displayCount !== this.count && this.count != undefined)) return;
     // this._log('computeDisplayCount');
     if (this.displayCount == undefined) { // first time
       if (this.count > firstAnimateGap) {
         this.displayCount = this.count - firstAnimateGap;
-      }
-      else {
+      } else {
         this.displayCount = 0;
       }
       return;
@@ -195,8 +193,7 @@ export class SalavatCounter extends BaseElement {
 
     if (countWidth < minWidth) {
       countWidth = minWidth;
-    }
-    else if (countWidth > elementWidth) {
+    } else if (countWidth > elementWidth) {
       countWidth = elementWidth;
     }
 
@@ -204,7 +201,7 @@ export class SalavatCounter extends BaseElement {
     this.style.paddingLeft = this.style.paddingRight = padding > 0 ? `${padding}px` : '0';
   }
 
-  _round (number: number, step: number = 20) {
+  _round(number: number, step = 20) {
     return Math.ceil(number / step) * step;
   }
 }

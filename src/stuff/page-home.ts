@@ -1,33 +1,33 @@
-import { state, customElement, TemplateResult, html, PropertyValues, property, css, query } from 'lit-element';
+import {state, customElement, TemplateResult, html, PropertyValues, property, css, query} from 'lit-element';
 import '@material/mwc-slider';
-import { Slider } from'@material/mwc-slider';
+import {Slider} from '@material/mwc-slider';
 
-import { BaseElement } from './base-element';
+import {BaseElement} from './base-element';
 import './salavat-counter';
-import { chatRoom } from './chat-room';
-import { calcSliderMax } from '../director';
-import { addIcon, removeIcon } from './icon';
+import {chatRoom} from './chat-room';
+import {calcSliderMax} from '../director';
+import {addIcon, removeIcon} from './icon';
 
 if (typeof navigator.vibrate !== 'function') {
-  navigator.vibrate = pattern => !pattern;
+  navigator.vibrate = (pattern) => !pattern;
 }
 
 @customElement('page-home')
 export class PageHome extends BaseElement {
-  @property({ type: Boolean })
-  active: boolean = false;
+  @property({type: Boolean})
+    active = false;
 
-  @property({ type: Number })
+  @property({type: Number})
   public userSalavatCount?: number;
 
   @state()
-  protected _userSalavatCountIncrease: number = 0;
+  protected _userSalavatCountIncrease = 0;
 
   @state()
-  protected _sliderMax: number = 0;
+  protected _sliderMax = 0;
 
   @query('mwc-slider')
-  _sliderElement!: Slider;
+    _sliderElement!: Slider;
 
   static override styles = css`
     :host {
@@ -110,7 +110,7 @@ export class PageHome extends BaseElement {
     `;
   }
 
-  override firstUpdated () {
+  override firstUpdated() {
     chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
       this.userSalavatCount = userSalavatCount as number;
     });

@@ -1,12 +1,12 @@
-import { customElement, query, TemplateResult, html, PropertyValues } from 'lit-element';
+import {customElement, query, TemplateResult, html, PropertyValues} from 'lit-element';
 import '@material/mwc-snackbar';
-import { Snackbar } from '@material/mwc-snackbar';
+import {Snackbar} from '@material/mwc-snackbar';
 import '@material/mwc-button';
 
-import { BaseElement } from './base-element';
-import { appConfig } from '../config';
-import { chatRoom } from './chat-room';
-import { closeIcon } from './icon';
+import {BaseElement} from './base-element';
+import {appConfig} from '../config';
+import {chatRoom} from './chat-room';
+import {closeIcon} from './icon';
 
 export interface SnackbarOption {
   open: boolean;
@@ -18,7 +18,7 @@ export interface SnackbarOption {
 @customElement('snack-bar')
 export class SnackBar extends BaseElement {
   @query('mwc-snackbar')
-  snackbar: Snackbar | undefined;
+    snackbar: Snackbar | undefined;
 
   protected override render(): TemplateResult {
     this._log('render');
@@ -39,7 +39,7 @@ export class SnackBar extends BaseElement {
       const _snackbarOption = snackbarOption as SnackbarOption;
       this.snackbar.labelText = _snackbarOption.text || '';
       this.snackbar.timeoutMs = _snackbarOption.timeout || appConfig.snackbarTimeout;
-      this.snackbar.open = _snackbarOption.open
+      this.snackbar.open = _snackbarOption.open;
     });
   }
 }

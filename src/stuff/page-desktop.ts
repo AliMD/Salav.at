@@ -1,9 +1,9 @@
-import { customElement, TemplateResult, html, css } from 'lit-element';
+import {customElement, TemplateResult, html, css} from 'lit-element';
 import '@material/mwc-slider';
 
-import { BaseElement } from './base-element';
-import { salavatIcon, qrCode } from './icon';
-import { chatRoom } from './chat-room';
+import {BaseElement} from './base-element';
+import {salavatIcon, qrCode} from './icon';
+import {chatRoom} from './chat-room';
 
 @customElement('page-desktop')
 export class PageDesktop extends BaseElement {
