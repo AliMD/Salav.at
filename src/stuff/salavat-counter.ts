@@ -10,10 +10,10 @@ const firstAnimateGap = 20
 @customElement('salavat-counter')
 export class SalavatCounter extends BaseElement {
   @property({ type: Boolean })
-  protected active: boolean = false;
+  active = false;
 
   @property({ type: Boolean, attribute: false })
-  protected testMode: boolean = false;
+  testMode: boolean = false;
 
   @property({ type: Number, attribute: false })
   count?: number; // Real salavat count
@@ -24,7 +24,7 @@ export class SalavatCounter extends BaseElement {
   @query('.display-count')
   protected _displayCountElement?: HTMLElement;
 
-  static styles = [css`
+  static override styles = [css`
     :host {
       display: block;
       line-height: 1;
@@ -99,11 +99,11 @@ export class SalavatCounter extends BaseElement {
 
   }
 
-  protected shouldUpdate(_changedProperties: PropertyValues) {
+  protected override shouldUpdate(_changedProperties: PropertyValues) {
     return super.shouldUpdate(_changedProperties) && this.active;
   }
 
-  protected render(): TemplateResult {
+  protected override render(): TemplateResult {
     // this._log('render');
     return html`
       <div class="label before">تا این لحظه</div>
@@ -138,7 +138,7 @@ export class SalavatCounter extends BaseElement {
     return countArrayHtml;
   }
 
-  protected async firstUpdated(_changedProperties: PropertyValues) {
+  protected override async firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
     chatRoom.onMessage('window-resized', () => {
@@ -151,7 +151,7 @@ export class SalavatCounter extends BaseElement {
     }, 1_000);
   }
 
-  updated(_changedProperties: PropertyValues) {
+  override updated(_changedProperties: PropertyValues) {
     super.updated(_changedProperties);
     // this._log('updated');
     this.computePadding();
@@ -204,7 +204,7 @@ export class SalavatCounter extends BaseElement {
     this.style.paddingLeft = this.style.paddingRight = padding > 0 ? `${padding}px` : '0';
   }
 
-  _round (number, step: number = 20) {
+  _round (number: number, step: number = 20) {
     return Math.ceil(number / step) * step;
   }
 }

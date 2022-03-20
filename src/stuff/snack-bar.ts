@@ -20,7 +20,7 @@ export class SnackBar extends BaseElement {
   @query('mwc-snackbar')
   snackbar: Snackbar | undefined;
 
-  protected render(): TemplateResult {
+  protected override render(): TemplateResult {
     this._log('render');
     return html`
       <mwc-snackbar leading labelText="متن فارسی نمونه ...">
@@ -30,7 +30,7 @@ export class SnackBar extends BaseElement {
     `;
   }
 
-  protected firstUpdated(_changedProperties: PropertyValues) {
+  protected override firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
 

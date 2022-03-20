@@ -1,4 +1,4 @@
-import { html, customElement, property, TemplateResult, query, PropertyValues } from 'lit-element';
+import { state, html, customElement, TemplateResult, query, PropertyValues } from 'lit-element';
 import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import { IconButton } from '@material/mwc-icon-button';
@@ -18,13 +18,13 @@ import { menuIcon, getAppIcon, addIcon, twitterIcon, instagramIcon, telegramIcon
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
-  @property({ type: String })
+  @state()
   protected _page: string = '';
 
-  @property({ type: Boolean })
+  @state()
   protected _showSubmit: boolean = false;
 
-  @property({ type: Number })
+  @state()
   protected _userSalavatCount: number = 0;
 
   @query('mwc-drawer')
@@ -32,7 +32,7 @@ export class SalavatPWA extends BaseElement {
 
   protected _menuListArray: MenuItem[] = pageListArray.filter(menuItem => menuItem.sideMenu) as MenuItem[];
 
-  static styles = [styleConfig, styleAppLayout, styleAppResponsive];
+  static override styles = [styleConfig, styleAppLayout, styleAppResponsive];
 
   constructor() {
     super();
@@ -55,7 +55,7 @@ export class SalavatPWA extends BaseElement {
     }
   }
 
-  protected render(): TemplateResult {
+  protected override render(): TemplateResult {
     this._log('render');
     return html`
       <mwc-drawer type="modal" @MDCDrawer:closed="${() => chatRoom.setProperty('sideMenuOpened', false)}">
@@ -172,7 +172,7 @@ export class SalavatPWA extends BaseElement {
     `;
   }
 
-  protected updated() {
+  protected override updated() {
     this._log('updated');
     const iconButtonList: NodeListOf<IconButton> = this.renderRoot.querySelectorAll('mwc-icon-button');
     for (let i = iconButtonList.length - 1; i >= 0; i--) {
@@ -184,7 +184,7 @@ export class SalavatPWA extends BaseElement {
     }
   }
 
-  protected firstUpdated(_changedProperties: PropertyValues) {
+  protected override firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
 
