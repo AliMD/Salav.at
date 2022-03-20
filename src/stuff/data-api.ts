@@ -2,24 +2,26 @@ import {appConfig} from '../config';
 
 const debug = appConfig.debug;
 const fetchTimeout = 15_000;
-const _log = (message: unknown, ...restParam: unknown[]) => {
+const _log = (message: unknown, ...restParam: unknown[]):void => {
   if (debug) {
-    console.log(`%cDataAPI%c ${message}`, 'color: #4CAF50; font-size: 1.2em;', 'color: inherit; font-size: 1em;', ...restParam);
+    console.log(
+        `%cDataAPI%c ${message}`, 'color: #4CAF50; font-size: 1.2em;', 'color: inherit; font-size: 1em;', ...restParam,
+    );
   }
 };
 
 const _fetch = <T>(path: string, option: RequestInit): Promise<T> => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, reject):Promise<void> => {
     _log('fetch: %s', path);
     let rejected = false;
     const timer = setTimeout(() => {
       rejected = true;
-      reject('timeout');
+      reject(new Error('timeout'));
     }, fetchTimeout);
     const fetchResponse: Response = await fetch(path, option);
     if (rejected) return;
     clearTimeout(timer);
-    if (!fetchResponse.ok) throw 'Cannot load data! ' + await fetchResponse.text();
+    if (!fetchResponse.ok) throw new Error('Cannot load data! ' + await fetchResponse.text());
     resolve(await fetchResponse.json() as T);
   });
 };
@@ -42,7 +44,9 @@ export interface UpdateResponse<T> {
   apiVersion?: string,
 }
 
-export const updateData = async <T>(docId: string, dataApiItem: Partial<T>, token: string = appConfig.apiToken): Promise<UpdateResponse<T>> => {
+export const updateData = async <T>(
+  docId: string, dataApiItem: Partial<T>, token: string = appConfig.apiToken,
+): Promise<UpdateResponse<T>> => {
   _log('updateData %s with %o', docId, dataApiItem);
   const dataApiItemCopy: any = {...dataApiItem};
 

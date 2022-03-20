@@ -72,7 +72,7 @@ installRouter((location) => {
 });
 
 // Install PWA
-let deferredPrompt: any;
+let deferredPrompt;
 
 window.addEventListener('appinstalled', () => {
   chatRoom.postMessage('app-installed');
