@@ -77,9 +77,9 @@ export class PageDesktop extends BaseElement {
         <p>این برنامه <span>فعلا</span> تنها برای موبایل طراحی شده است.</p>
         <p>لطفا این سایت را در <span>موبایل</span> باز کنید.</p>
         <p>درضمن امکان <span class="link" @click="${
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  () => chatRoom.postMessage('request-install')}
-  ">
+  ():void => {
+    chatRoom.postMessage('request-install');
+  }}">
           نصب در دسکتاپ
         </span> را نیز تست کنید.</p>
       </div>
