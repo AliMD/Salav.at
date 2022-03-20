@@ -11,6 +11,7 @@ const _log = (message: unknown, ...restParam: unknown[]):void => {
 };
 
 const _fetch = <T>(path: string, option: RequestInit): Promise<T> => {
+  // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject):Promise<void> => {
     _log('fetch: %s', path);
     let rejected = false;
@@ -48,7 +49,7 @@ export const updateData = async <T>(
   docId: string, dataApiItem: Partial<T>, token: string = appConfig.apiToken,
 ): Promise<UpdateResponse<T>> => {
   _log('updateData %s with %o', docId, dataApiItem);
-  const dataApiItemCopy: any = {...dataApiItem};
+  const dataApiItemCopy: Record<string, unknown> = {...dataApiItem};
 
   delete dataApiItemCopy._owner;
   delete dataApiItemCopy._createdTime;
