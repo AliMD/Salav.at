@@ -98,7 +98,7 @@ export class SalavatCounter extends BaseElement {
     });
   }
 
-  protected override shouldUpdate(_changedProperties: PropertyValues) {
+  protected override shouldUpdate(_changedProperties: PropertyValues):boolean {
     return super.shouldUpdate(_changedProperties) && this.active;
   }
 
@@ -137,7 +137,7 @@ export class SalavatCounter extends BaseElement {
     return countArrayHtml;
   }
 
-  protected override async firstUpdated(_changedProperties: PropertyValues) {
+  protected override async firstUpdated(_changedProperties: PropertyValues):Promise<void> {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
     chatRoom.onMessage('window-resized', () => {
@@ -150,7 +150,7 @@ export class SalavatCounter extends BaseElement {
     }, 1_000);
   }
 
-  override updated(_changedProperties: PropertyValues) {
+  override updated(_changedProperties: PropertyValues):void {
     super.updated(_changedProperties);
     // this._log('updated');
     this.computePadding();
@@ -160,7 +160,7 @@ export class SalavatCounter extends BaseElement {
     }
   }
 
-  computeDisplayCount() {
+  computeDisplayCount():void {
     if (!(this.active && this.displayCount !== this.count && this.count != undefined)) return;
     // this._log('computeDisplayCount');
     if (this.displayCount == undefined) { // first time
@@ -201,7 +201,7 @@ export class SalavatCounter extends BaseElement {
     this.style.paddingLeft = this.style.paddingRight = padding > 0 ? `${padding}px` : '0';
   }
 
-  _round(number: number, step = 20) {
+  _round(number: number, step = 20):number {
     return Math.ceil(number / step) * step;
   }
 }

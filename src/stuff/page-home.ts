@@ -9,7 +9,7 @@ import {calcSliderMax} from '../director';
 import {addIcon, removeIcon} from './icon';
 
 if (typeof navigator.vibrate !== 'function') {
-  navigator.vibrate = (pattern) => !pattern;
+  navigator.vibrate = (pattern):boolean => !pattern;
 }
 
 @customElement('page-home')
@@ -79,7 +79,7 @@ export class PageHome extends BaseElement {
     }
   `;
 
-  protected override shouldUpdate(_changedProperties: PropertyValues) {
+  protected override shouldUpdate(_changedProperties: PropertyValues):boolean {
     return super.shouldUpdate(_changedProperties) && this.active;
   }
 
@@ -88,7 +88,9 @@ export class PageHome extends BaseElement {
     return html`
       <div class="label">
         <span class="title">صلوات های من:</span>
-        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">${this._userSalavatCountIncrease?.toLocaleString('fa')}+</span>
+        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">
+          ${this._userSalavatCountIncrease?.toLocaleString('fa')}+
+        </span>
         <span class="salavat-count">${(this.userSalavatCount || 0).toLocaleString('fa')}</span>
       </div>
 
@@ -110,7 +112,7 @@ export class PageHome extends BaseElement {
     `;
   }
 
-  override firstUpdated() {
+  override firstUpdated():void {
     chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
       this.userSalavatCount = userSalavatCount as number;
     });
@@ -124,7 +126,7 @@ export class PageHome extends BaseElement {
     });
   }
 
-  protected _onSliderInput() {
+  protected _onSliderInput():void {
     this._log('_onSliderInput');
     const userSalavatCountIncrease = this._sliderElement.value;
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
@@ -133,7 +135,7 @@ export class PageHome extends BaseElement {
     }
   }
 
-  protected _onSliderChange() {
+  protected _onSliderChange():void {
     this._log('_onSliderChange');
     const sliderElement = this._sliderElement;
     // const userSalavatCount = this._userSalavatCount || 0;
@@ -149,7 +151,7 @@ export class PageHome extends BaseElement {
     calcSliderMax(sliderElement.value);
   }
 
-  protected _addIconClick() {
+  protected _addIconClick():void {
     if (!this._userSalavatCountIncrease) {
       this._userSalavatCountIncrease = 0;
     }
@@ -158,7 +160,7 @@ export class PageHome extends BaseElement {
     navigator.vibrate(6);
   }
 
-  protected _removeIconClick() {
+  protected _removeIconClick():void {
     if (!this._userSalavatCountIncrease) {
       this._userSalavatCountIncrease = 0;
     }

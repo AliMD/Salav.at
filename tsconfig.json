@@ -52,6 +52,7 @@
     "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
     // "emitDecoratorMetadata": false,        /* Enables experimental support for emitting type metadata for decorators. */
     "forceConsistentCasingInFileNames": true /* Follows the case sensitivity rules of the file system it’s running on. */,
+    "useDefineForClassFields": false, /* Must be disabled for lit, https://lit.dev/docs/components/properties/#avoiding-issues-with-class-fields */
 
     "plugins": [
       {

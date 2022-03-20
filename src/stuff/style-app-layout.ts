@@ -31,7 +31,8 @@ export const styleAppLayout = css`
 
   mwc-button {
     --mdc-theme-primary: var(--app-primary-text-color);
-    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol";
     --mdc-typography-button-text-transform: none;
     --mdc-typography-button-font-weight: 300;
     --mdc-typography-button-letter-spacing: normal;

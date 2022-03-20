@@ -1,4 +1,4 @@
-import { state, html, customElement, TemplateResult, query, PropertyValues } from 'lit-element';
+import {state, html, customElement, TemplateResult, query, PropertyValues} from 'lit-element';
 import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import {IconButton} from '@material/mwc-icon-button';
@@ -34,13 +34,13 @@ import {
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
   @state()
-  protected _page: string = '';
+  protected _page = '';
 
   @state()
-  protected _showSubmit: boolean = false;
+  protected _showSubmit = false;
 
   @state()
-  protected _userSalavatCount: number = 0;
+  protected _userSalavatCount = 0;
 
   @query('mwc-drawer')
   protected _drawer!: Drawer;

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {svg} from 'lit-element';
 
 export const menuIcon = svg`
