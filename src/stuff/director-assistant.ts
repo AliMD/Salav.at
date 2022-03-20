@@ -1,18 +1,6 @@
 import { chatRoom } from './chat-room';
 import { installRouter } from 'pwa-helpers/router';
 import { installOfflineWatcher } from 'pwa-helpers/network';
-import { appConfig } from '../config';
-
-declare global {
-  function requestIdleCallback(callback: FrameRequestCallback): number;
-  interface Window {
-    requestIdleCallback(callback: FrameRequestCallback): number;
-  }
-}
-
-if (!('requestIdleCallback' in window)) {
-  window.requestIdleCallback = window.requestAnimationFrame;
-}
 
 requestAnimationFrame(async () => {
   try {
@@ -70,7 +58,7 @@ chatRoom.onMessage('window-loaded', async () => {
 });
 
 chatRoom.onMessage('scrollTop', () => {
-  if (!(window.scrollTo && window.scrollY > 0)) return;
+  if (!('scrollTo' in window && window.scrollY > 0)) return;
   requestAnimationFrame(() => scrollTo({
     top: 0,
     left: 0,
