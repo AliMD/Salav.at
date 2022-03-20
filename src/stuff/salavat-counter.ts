@@ -1,7 +1,7 @@
 import {html, css, customElement, property, TemplateResult, PropertyValues, query} from 'lit-element';
 import {BaseElement} from './base-element';
 import {chatRoom} from './chat-room';
-import {SalavatCountInterface} from '../config';
+import {SalavatCountInterface, Logger} from '../config';
 
 const commaSeparator: string = (1_000).toLocaleString('fa').charAt(1);
 const minWidth = 120;
@@ -81,7 +81,7 @@ export class SalavatCounter extends BaseElement {
 
   constructor() {
     super();
-    this._log('constructor');
+    Logger.logMethod('constructor');
 
     chatRoom.onPropertyChanged('salavatCount', async (salavatCount: SalavatCountInterface | unknown) => {
       if (!salavatCount) return;
@@ -139,7 +139,7 @@ export class SalavatCounter extends BaseElement {
 
   protected override async firstUpdated(_changedProperties: PropertyValues):Promise<void> {
     super.firstUpdated(_changedProperties);
-    this._log('firstUpdated');
+    Logger.logMethod('firstUpdated');
     chatRoom.onMessage('window-resized', () => {
       this.computePadding();
     });

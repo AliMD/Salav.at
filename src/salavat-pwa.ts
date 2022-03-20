@@ -30,6 +30,7 @@ import {
   salavatSmallIcon,
   downloadIconOutlined,
 } from './stuff/icon';
+import {Logger} from './config';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
@@ -81,7 +82,7 @@ export class SalavatPWA extends BaseElement {
   }
 
   protected override render(): TemplateResult {
-    this._log('render');
+    Logger.logMethod('render');
     return html`
       <mwc-drawer
         type="modal"
@@ -250,7 +251,7 @@ export class SalavatPWA extends BaseElement {
   }
 
   protected override updated():void {
-    this._log('updated');
+    Logger.logMethod('updated');
     const iconButtonList: NodeListOf<IconButton> =
       this.renderRoot.querySelectorAll('mwc-icon-button');
     for (let i = iconButtonList.length - 1; i >= 0; i--) {
@@ -259,7 +260,7 @@ export class SalavatPWA extends BaseElement {
           .renderRoot.querySelector<HTMLElement>('.material-icons');
       if (internalIcon) {
         internalIcon.style.display = 'none';
-        this._log('Remove mwc-icon-button internal material-icon element!');
+        Logger.logMethod('Remove mwc-icon-button internal material-icon element!');
       }
     }
   }
@@ -267,7 +268,7 @@ export class SalavatPWA extends BaseElement {
 
   protected override firstUpdated(_changedProperties: PropertyValues):void {
     super.firstUpdated(_changedProperties);
-    this._log('firstUpdated');
+    Logger.logMethod('firstUpdated');
 
     chatRoom.onPropertyChanged(
         'sideMenuOpened',
@@ -281,7 +282,7 @@ export class SalavatPWA extends BaseElement {
       const homeLink = this.renderRoot.querySelector<HTMLElement>(
           `a[href="/${page}"]`,
       );
-      this._log('gotoPage2: %o', {page, homeLink});
+      Logger.logMethodArgs('gotoPage2: %o', {page, homeLink});
       if (homeLink) homeLink.click();
     });
   }

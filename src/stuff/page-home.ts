@@ -7,6 +7,7 @@ import './salavat-counter';
 import {chatRoom} from './chat-room';
 import {calcSliderMax} from '../director';
 import {addIcon, removeIcon} from './icon';
+import {Logger} from '../config';
 
 if (typeof navigator.vibrate !== 'function') {
   navigator.vibrate = (pattern):boolean => !pattern;
@@ -84,7 +85,7 @@ export class PageHome extends BaseElement {
   }
 
   protected override render(): TemplateResult {
-    this._log('render');
+    Logger.logMethod('render');
     return html`
       <div class="label">
         <span class="title">صلوات های من:</span>
@@ -127,7 +128,7 @@ export class PageHome extends BaseElement {
   }
 
   protected _onSliderInput():void {
-    this._log('_onSliderInput');
+    Logger.logMethod('_onSliderInput');
     const userSalavatCountIncrease = this._sliderElement.value;
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
       chatRoom.setProperty('userSalavatCountIncrease', userSalavatCountIncrease);
@@ -136,7 +137,7 @@ export class PageHome extends BaseElement {
   }
 
   protected _onSliderChange():void {
-    this._log('_onSliderChange');
+    Logger.logMethod('_onSliderChange');
     const sliderElement = this._sliderElement;
     // const userSalavatCount = this._userSalavatCount || 0;
     // if (sliderElement.value < userSalavatCount) {
