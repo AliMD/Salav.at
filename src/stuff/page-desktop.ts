@@ -76,10 +76,7 @@ export class PageDesktop extends BaseElement {
       <div class="message">
         <p>این برنامه <span>فعلا</span> تنها برای موبایل طراحی شده است.</p>
         <p>لطفا این سایت را در <span>موبایل</span> باز کنید.</p>
-        <p>درضمن امکان <span class="link" @click="${
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  () => chatRoom.postMessage('request-install')}
-  ">
+        <p>درضمن امکان <span class="link" @click=${this._requestInstall}>
           نصب در دسکتاپ
         </span> را نیز تست کنید.</p>
       </div>
@@ -89,5 +86,9 @@ export class PageDesktop extends BaseElement {
         www.Salav.at
       </div>
     `;
+  }
+
+  protected _requestInstall(): void {
+    chatRoom.postMessage('request-install');
   }
 }
