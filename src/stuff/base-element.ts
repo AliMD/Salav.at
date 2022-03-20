@@ -5,7 +5,7 @@ export abstract class BaseElement extends LitElement {
   @property({ type: Boolean, reflect: true }) debug = appConfig.debug;
 
   protected async performUpdate() {
-    await new Promise ((resolve) => requestAnimationFrame(() => resolve()));
+    await new Promise ((resolve) => requestAnimationFrame(() => resolve(null)));
     return super.performUpdate();
   }
 
