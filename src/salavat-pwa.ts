@@ -1,11 +1,4 @@
-import {
-  html,
-  customElement,
-  property,
-  TemplateResult,
-  query,
-  PropertyValues,
-} from 'lit-element';
+import { state, html, customElement, TemplateResult, query, PropertyValues } from 'lit-element';
 import '@material/mwc-button';
 import '@material/mwc-icon-button';
 import {IconButton} from '@material/mwc-icon-button';
@@ -40,14 +33,14 @@ import {
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {
-  @property({type: String})
-  protected _page = '';
+  @state()
+  protected _page: string = '';
 
-  @property({type: Boolean})
-  protected _showSubmit = false;
+  @state()
+  protected _showSubmit: boolean = false;
 
-  @property({type: Number})
-  protected _userSalavatCount = 0;
+  @state()
+  protected _userSalavatCount: number = 0;
 
   @query('mwc-drawer')
   protected _drawer!: Drawer;
@@ -56,7 +49,7 @@ export class SalavatPWA extends BaseElement {
       (menuItem) => menuItem.sideMenu,
   ) as MenuItem[];
 
-  static styles = [styleConfig, styleAppLayout, styleAppResponsive];
+  static override styles = [styleConfig, styleAppLayout, styleAppResponsive];
 
   constructor() {
     super();
@@ -87,7 +80,7 @@ export class SalavatPWA extends BaseElement {
     }
   }
 
-  protected render(): TemplateResult {
+  protected override render(): TemplateResult {
     this._log('render');
     return html`
       <mwc-drawer
@@ -256,7 +249,7 @@ export class SalavatPWA extends BaseElement {
     `;
   }
 
-  protected updated():void {
+  protected override updated():void {
     this._log('updated');
     const iconButtonList: NodeListOf<IconButton> =
       this.renderRoot.querySelectorAll('mwc-icon-button');
@@ -271,7 +264,8 @@ export class SalavatPWA extends BaseElement {
     }
   }
 
-  protected firstUpdated(_changedProperties: PropertyValues):void {
+
+  protected override firstUpdated(_changedProperties: PropertyValues):void {
     super.firstUpdated(_changedProperties);
     this._log('firstUpdated');
 

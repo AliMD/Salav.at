@@ -1,13 +1,13 @@
-import { customElement, TemplateResult, html, css } from 'lit-element';
+import {customElement, TemplateResult, html, css} from 'lit-element';
 import '@material/mwc-slider';
 
-import { BaseElement } from './base-element';
-import { salavatIcon, qrCode } from './icon';
-import { chatRoom } from './chat-room';
+import {BaseElement} from './base-element';
+import {salavatIcon, qrCode} from './icon';
+import {chatRoom} from './chat-room';
 
 @customElement('page-desktop')
 export class PageDesktop extends BaseElement {
-  static styles = css`
+  static override styles = css`
     :host {
       display: flex;
       flex-direction: column;
@@ -69,7 +69,7 @@ export class PageDesktop extends BaseElement {
     }
   `;
 
-  protected render(): TemplateResult {
+  protected override render(): TemplateResult {
     this._log('render');
     return html`
       <div class="salavat-icon">${salavatIcon}</div>

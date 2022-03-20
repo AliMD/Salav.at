@@ -1,5 +1,5 @@
-import { css } from "lit-element";
-import { appConfig, safeAreaInsetTop } from '../config';
+import {css} from 'lit-element';
+import {appConfig, safeAreaInsetTop} from '../config';
 
 export const styleAppLayout = css`
   /* salavat-pwa */
