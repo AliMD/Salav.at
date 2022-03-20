@@ -1,6 +1,7 @@
 import {chatRoom} from './chat-room';
 import {installRouter} from 'pwa-helpers/router';
 import {installOfflineWatcher} from 'pwa-helpers/network';
+import {Logger} from '../config';
 
 requestAnimationFrame(async () => {
   try {
@@ -10,7 +11,7 @@ requestAnimationFrame(async () => {
     'msLockOrientation' in screen && await screen['msLockOrientation'](orientation);
     screen.orientation?.lock && await screen.orientation.lock(orientation);
   } catch (err) {
-    console.log('lockOrientation failed: %s', err);
+    Logger.incident('screen', 'lock_orientation', 'lockOrientation failed: %s', err);
   }
 });
 
@@ -32,22 +33,22 @@ window.addEventListener('load', () => {
 
 chatRoom.onMessage('window-loaded', async () => {
   if (! ('serviceWorker' in navigator)) return;
-  console.log('SW registered');
+  Logger.incident('sw', 'registered', 'SW registered');
 
   const registration = await navigator.serviceWorker.register('service-worker.js', {scope: '/'});
 
   registration.addEventListener('updatefound', () => {
     const newWorker = registration.installing;
     if (newWorker == null) return;
-    console.log('SW update found, status: %s', newWorker.state);
+    Logger.incident('sw', 'update_found', 'SW update found, status: %s', newWorker.state);
     newWorker.addEventListener('statechange', () => {
-      console.log('SW state changed: %s', newWorker.state);
+      Logger.incident('sw', 'state_changed', 'SW state changed: %s', newWorker.state);
       if (newWorker.state === 'installed') {
         if (navigator.serviceWorker.controller) { // if old controller available then its update else its new install
           chatRoom.postMessage('service-worker-updated');
         }
       } else if (newWorker.state === 'redundant') {
-        console.warn('SW redundant!');
+        Logger.accident('sw', 'redundant', 'SW redundant!');
       }
     });
   });
@@ -103,7 +104,7 @@ const parseJSON = <T>(str: string): T | null => {
   try {
     parsed = JSON.parse(str) as T;
   } catch (err) {
-    console.error('parseJSON: %s', str);
+    Logger.error('parser', 'parsing_error', (err as Error).stack);
   }
   return parsed;
 };

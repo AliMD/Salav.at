@@ -1,5 +1,6 @@
 import {css, SVGTemplateResult} from 'lit-element';
 import {campaignIcon, aboutUsIcon, salavatIcon} from './stuff/icon';
+import {createLogger} from '@alwatr/logger';
 
 export const safeAreaInsetTop = ((): number => {
   const safeAreaInsetTop = parseInt(
@@ -37,6 +38,8 @@ export interface SalavatCountInterface {
 export interface SalavatCountDataApiInterface {
   salavatCount: SalavatCountInterface;
 }
+
+export const Logger = createLogger('salav.at');
 
 export const pageListArray: Array<MenuItem | MenuItemHidden> = [
   {
