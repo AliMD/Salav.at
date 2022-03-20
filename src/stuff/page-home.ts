@@ -1,4 +1,4 @@
-import { customElement, TemplateResult, html, PropertyValues, property, css, query } from 'lit-element';
+import { state, customElement, TemplateResult, html, PropertyValues, property, css, query } from 'lit-element';
 import '@material/mwc-slider';
 import { Slider } from'@material/mwc-slider';
 
@@ -15,21 +15,21 @@ if (typeof navigator.vibrate !== 'function') {
 @customElement('page-home')
 export class PageHome extends BaseElement {
   @property({ type: Boolean })
-  protected active: boolean = false;
+  active: boolean = false;
 
   @property({ type: Number })
-  protected _userSalavatCount?: number;
+  public userSalavatCount?: number;
 
-  @property({ type: Number })
-  protected _userSalavatCountIncrease?: number;
+  @state()
+  protected _userSalavatCountIncrease: number = 0;
 
-  @property({ type: Number })
-  protected _sliderMax?: number;
+  @state()
+  protected _sliderMax: number = 0;
 
   @query('mwc-slider')
-  protected _sliderElement!: Slider;
+  _sliderElement!: Slider;
 
-  static styles = css`
+  static override styles = css`
     :host {
       display: none;
       padding-top: 0.5rem;
@@ -79,17 +79,17 @@ export class PageHome extends BaseElement {
     }
   `;
 
-  protected shouldUpdate(_changedProperties: PropertyValues) {
+  protected override shouldUpdate(_changedProperties: PropertyValues) {
     return super.shouldUpdate(_changedProperties) && this.active;
   }
 
-  protected render(): TemplateResult {
+  protected override render(): TemplateResult {
     this._log('render');
     return html`
       <div class="label">
         <span class="title">صلوات های من:</span>
         <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">${this._userSalavatCountIncrease?.toLocaleString('fa')}+</span>
-        <span class="salavat-count">${(this._userSalavatCount || 0).toLocaleString('fa')}</span>
+        <span class="salavat-count">${(this.userSalavatCount || 0).toLocaleString('fa')}</span>
       </div>
 
       <div class="slider">
@@ -110,9 +110,9 @@ export class PageHome extends BaseElement {
     `;
   }
 
-  firstUpdated () {
+  override firstUpdated () {
     chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
-      this._userSalavatCount = userSalavatCount as number;
+      this.userSalavatCount = userSalavatCount as number;
     });
 
     chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {

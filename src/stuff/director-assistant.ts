@@ -5,9 +5,9 @@ import { installOfflineWatcher } from 'pwa-helpers/network';
 requestAnimationFrame(async () => {
   try {
     const orientation: OrientationLockType = 'portrait';
-    screen['lockOrientation'] && await screen['lockOrientation'](orientation);
-    screen['mozLockOrientation'] && await screen['mozLockOrientation'](orientation);
-    screen['msLockOrientation'] && await screen['msLockOrientation'](orientation);
+    'lockOrientation' in screen && await screen['lockOrientation'](orientation);
+    'mozLockOrientation' in screen && await screen['mozLockOrientation'](orientation);
+    'msLockOrientation' in screen && await screen['msLockOrientation'](orientation);
     screen.orientation?.lock && await screen.orientation.lock(orientation);
   }
   catch (err) {
@@ -76,13 +76,13 @@ installRouter(location => {
 });
 
 // Install PWA
-let deferredPrompt;
+let deferredPrompt: any;
 
 window.addEventListener('appinstalled', () => {
   chatRoom.postMessage('app-installed');
 });
 
-window.addEventListener('beforeinstallprompt', (event) => {
+window.addEventListener('beforeinstallprompt', (event: Event) => {
   event.preventDefault(); // Prevent the mini-info-bar from appearing on mobile
   deferredPrompt = event; // Stash the event so it can be triggered later.
   chatRoom.postMessage('app-installable');
