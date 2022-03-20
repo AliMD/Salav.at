@@ -1,9 +1,16 @@
-import { css, SVGTemplateResult } from "lit-element";
-import { campaignIcon, aboutUsIcon, salavatIcon } from './stuff/icon';
+import {css, SVGTemplateResult} from 'lit-element';
+import {campaignIcon, aboutUsIcon, salavatIcon} from './stuff/icon';
 
 export const safeAreaInsetTop = ((): number => {
-  const safeAreaInsetTop = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'), 10);
-  return !isNaN(safeAreaInsetTop) && safeAreaInsetTop > 0 ? safeAreaInsetTop : 0;
+  const safeAreaInsetTop = parseInt(
+      window
+          .getComputedStyle(document.documentElement)
+          .getPropertyValue('--safe-area-inset-top'),
+      10,
+  );
+  return !isNaN(safeAreaInsetTop) && safeAreaInsetTop > 0 ?
+    safeAreaInsetTop :
+    0;
 })();
 
 export interface MenuItem {
@@ -91,15 +98,15 @@ export const appConfig = {
   apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',
   apiSalavatCountDocId: 'salavat/count',
   apiSalavatTestDocId: 'salavat/test',
-  loadSalavatInterval: 1_000, //ms
-  snackbarTimeout: 4_000, //ms
+  loadSalavatInterval: 1_000, // ms
+  snackbarTimeout: 4_000, // ms
   sliderMaxRangeList: [100, 200, 500, 1_000, 2_000, 5_000],
   // UI
-  maxWith: 768, //px
-  mainImageHeight: 430, //px
-  mainImageMargin: 60, //px
-  iconSize: 28, //px
-  iconButtonSize: 56, //px
+  maxWith: 768, // px
+  mainImageHeight: 430, // px
+  mainImageMargin: 60, // px
+  iconSize: 28, // px
+  iconButtonSize: 56, // px
 };
 
 export const styleConfig = css`
@@ -111,7 +118,8 @@ export const styleConfig = css`
     --app-light-back-color: #eeeeee;
     --app-dark-background-color: #102f4b;
 
-    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
     --mdc-theme-primary: var(--app-primary-color);
     --mdc-theme-secondary: var(--app-accent-color);
