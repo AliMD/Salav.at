@@ -1,9 +1,39 @@
-import {LitElement, property} from 'lit-element';
-import {appConfig, logger} from '../config';
-
+import {LitElement, PropertyValues} from 'lit-element';
+import {logger} from '../config';
+import {createLogger} from '@alwatr/logger';
 
 export abstract class BaseElement extends LitElement {
-  @property({type: Boolean, reflect: true}) debug = appConfig.debug;
+  protected _logger = createLogger(`<${this.tagName}>`);
+
+  constructor() {
+    super();
+    this._logger.logMethod('constructor');
+  }
+
+  override connectedCallback(): void {
+    this._logger.logMethod('connectedCallback');
+    super.connectedCallback();
+  }
+
+  override disconnectedCallback(): void {
+    this._logger.logMethod('disconnectedCallback');
+    super.disconnectedCallback();
+  }
+
+  protected override update(_changedProperties: PropertyValues): void {
+    this._logger.logMethod('update');
+    super.update(_changedProperties);
+  }
+
+  protected override firstUpdated(_changedProperties: PropertyValues): void {
+    this._logger.logMethod('firstUpdated');
+    super.firstUpdated(_changedProperties);
+  }
+
+  override dispatchEvent(event: CustomEvent | Event): boolean {
+    this._logger.logMethodArgs('dispatchEvent', {type: event.type});
+    return super.dispatchEvent(event);
+  }
 
   protected override async performUpdate(): Promise<void> {
     await new Promise((resolve) => requestAnimationFrame(() => resolve(null)));
