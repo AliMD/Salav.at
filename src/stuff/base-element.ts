@@ -1,5 +1,5 @@
 import {LitElement, property} from 'lit-element';
-import {appConfig, Logger} from '../config';
+import {appConfig, logger} from '../config';
 
 
 export abstract class BaseElement extends LitElement {
@@ -11,7 +11,7 @@ export abstract class BaseElement extends LitElement {
   }
 
   protected _fire(eventName: string, detail: unknown, bubbles = false):void {
-    Logger.incident('event', 'fire_event', 'fire %s {%o}', eventName, detail);
+    logger.logMethodArgs('event', {eventName, detail});
     this.dispatchEvent(new CustomEvent(eventName, {
       detail,
       bubbles,

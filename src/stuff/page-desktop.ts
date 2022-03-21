@@ -1,6 +1,6 @@
 import {customElement, TemplateResult, html, css} from 'lit-element';
 import '@material/mwc-slider';
-import {Logger} from '../config';
+import {logger} from '../config';
 
 import {BaseElement} from './base-element';
 import {salavatIcon, qrCode} from './icon';
@@ -71,7 +71,7 @@ export class PageDesktop extends BaseElement {
   `;
 
   protected override render(): TemplateResult {
-    Logger.logMethod('render');
+    logger.logMethod('render');
     return html`
       <div class="salavat-icon">${salavatIcon}</div>
       <div class="message">

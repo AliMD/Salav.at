@@ -1,7 +1,7 @@
 import {chatRoom} from './chat-room';
 import {installRouter} from 'pwa-helpers/router';
 import {installOfflineWatcher} from 'pwa-helpers/network';
-import {Logger} from '../config';
+import {logger} from '../config';
 
 requestAnimationFrame(async () => {
   try {
@@ -11,7 +11,7 @@ requestAnimationFrame(async () => {
     'msLockOrientation' in screen && await screen['msLockOrientation'](orientation);
     screen.orientation?.lock && await screen.orientation.lock(orientation);
   } catch (err) {
-    Logger.incident('screen', 'lock_orientation', 'lockOrientation failed: %s', err);
+    logger.incident('screen', 'lock_orientation_failed', 'lockOrientation failed: %s', err);
   }
 });
 
@@ -33,22 +33,22 @@ window.addEventListener('load', () => {
 
 chatRoom.onMessage('window-loaded', async () => {
   if (! ('serviceWorker' in navigator)) return;
-  Logger.incident('sw', 'registered', 'SW registered');
+  logger.incident('sw', 'registered', 'SW registered');
 
   const registration = await navigator.serviceWorker.register('service-worker.js', {scope: '/'});
 
   registration.addEventListener('updatefound', () => {
     const newWorker = registration.installing;
     if (newWorker == null) return;
-    Logger.incident('sw', 'update_found', 'SW update found, status: %s', newWorker.state);
+    logger.incident('sw', 'update_found', 'SW update found, status: %s', newWorker.state);
     newWorker.addEventListener('statechange', () => {
-      Logger.incident('sw', 'state_changed', 'SW state changed: %s', newWorker.state);
+      logger.incident('sw', 'state_changed', 'SW state changed: %s', newWorker.state);
       if (newWorker.state === 'installed') {
         if (navigator.serviceWorker.controller) { // if old controller available then its update else its new install
           chatRoom.postMessage('service-worker-updated');
         }
       } else if (newWorker.state === 'redundant') {
-        Logger.accident('sw', 'redundant', 'SW redundant!');
+        logger.accident('sw', 'redundant', 'SW redundant!');
       }
     });
   });
@@ -104,7 +104,7 @@ const parseJSON = <T>(str: string): T | null => {
   try {
     parsed = JSON.parse(str) as T;
   } catch (err) {
-    Logger.error('parser', 'parsing_error', (err as Error).stack);
+    logger.error('parser', 'parsing_error', (err as Error).stack || err);
   }
   return parsed;
 };

@@ -39,7 +39,7 @@ export interface SalavatCountDataApiInterface {
   salavatCount: SalavatCountInterface;
 }
 
-export const Logger = createLogger('salav.at');
+export const logger = createLogger('salav.at');
 
 export const pageListArray: Array<MenuItem | MenuItemHidden> = [
   {

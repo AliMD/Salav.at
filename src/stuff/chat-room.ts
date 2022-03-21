@@ -1,4 +1,4 @@
-import {Logger} from '../config';
+import {logger} from '../config';
 import {isRepeated} from './debounce';
 
 const dispatchEventHistory: Record<string, unknown> = {};
@@ -8,7 +8,7 @@ export const eventTarget: EventTarget = document.createElement('span');
 const onMessage = (
     eventName: string, callback: (detail?: unknown) => void, option: { preserve: boolean } = {preserve: true},
 ):void => {
-  Logger.logMethodArgs('onMessage', {eventName, preserve: option.preserve ?? false});
+  logger.logMethodArgs('onMessage', {eventName, preserve: option.preserve ?? false});
   eventTarget.addEventListener(eventName, (event: Event) => callback(event['detail']));
   if (option.preserve && eventName in dispatchEventHistory) {
     setTimeout(callback, 0, dispatchEventHistory[eventName]); // callback in next micro task
@@ -26,7 +26,7 @@ const postMessage = async (
     return;
   }
   // else if first one in animation frame duration
-  Logger.logMethodArgs('postMessage', {eventName, detail, preserve: option.preserve ?? false});
+  logger.logMethodArgs('postMessage', {eventName, detail, preserve: option.preserve ?? false});
   eventTarget.dispatchEvent(new CustomEvent(eventName, {detail}));
 };
 
