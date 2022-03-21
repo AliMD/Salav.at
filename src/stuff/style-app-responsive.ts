@@ -1,5 +1,5 @@
-import { css } from "lit-element";
-import { appConfig } from '../config';
+import {css} from 'lit-element';
+import {appConfig} from '../config';
 
 export const styleAppResponsive = css`
 

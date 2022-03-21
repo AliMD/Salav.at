@@ -1,13 +1,13 @@
-import { customElement, TemplateResult, html, css } from 'lit-element';
+import {customElement, TemplateResult, html, css} from 'lit-element';
 import '@material/mwc-slider';
 
-import { BaseElement } from './base-element';
-import { salavatIcon, qrCode } from './icon';
-import { chatRoom } from './chat-room';
+import {BaseElement} from './base-element';
+import {salavatIcon, qrCode} from './icon';
+import {chatRoom} from './chat-room';
 
 @customElement('page-desktop')
 export class PageDesktop extends BaseElement {
-  static styles = css`
+  static override styles = css`
     :host {
       display: flex;
       flex-direction: column;
@@ -69,14 +69,16 @@ export class PageDesktop extends BaseElement {
     }
   `;
 
-  protected render(): TemplateResult {
+  protected override render(): TemplateResult {
     this._log('render');
     return html`
       <div class="salavat-icon">${salavatIcon}</div>
       <div class="message">
         <p>این برنامه <span>فعلا</span> تنها برای موبایل طراحی شده است.</p>
         <p>لطفا این سایت را در <span>موبایل</span> باز کنید.</p>
-        <p>درضمن امکان <span class="link" @click="${() => chatRoom.postMessage('request-install')}">نصب در دسکتاپ</span> را نیز تست کنید.</p>
+        <p>درضمن امکان <span class="link" @click=${this._requestInstall}>
+          نصب در دسکتاپ
+        </span> را نیز تست کنید.</p>
       </div>
       <div class="qr-code">
         ${qrCode}
@@ -84,5 +86,9 @@ export class PageDesktop extends BaseElement {
         www.Salav.at
       </div>
     `;
+  }
+
+  protected _requestInstall(): void {
+    chatRoom.postMessage('request-install');
   }
 }

@@ -1,35 +1,35 @@
-import { customElement, TemplateResult, html, PropertyValues, property, css, query } from 'lit-element';
+import {state, customElement, TemplateResult, html, PropertyValues, property, css, query} from 'lit-element';
 import '@material/mwc-slider';
-import { Slider } from'@material/mwc-slider';
+import {Slider} from '@material/mwc-slider';
 
-import { BaseElement } from './base-element';
+import {BaseElement} from './base-element';
 import './salavat-counter';
-import { chatRoom } from './chat-room';
-import { calcSliderMax } from '../director';
-import { addIcon, removeIcon } from './icon';
+import {chatRoom} from './chat-room';
+import {calcSliderMax} from '../director';
+import {addIcon, removeIcon} from './icon';
 
 if (typeof navigator.vibrate !== 'function') {
-  navigator.vibrate = pattern => !pattern;
+  navigator.vibrate = (pattern):boolean => !pattern;
 }
 
 @customElement('page-home')
 export class PageHome extends BaseElement {
-  @property({ type: Boolean })
-  protected active: boolean = false;
+  @property({type: Boolean})
+    active = false;
 
-  @property({ type: Number })
-  protected _userSalavatCount?: number;
+  @property({type: Number})
+  public userSalavatCount?: number;
 
-  @property({ type: Number })
-  protected _userSalavatCountIncrease?: number;
+  @state()
+  protected _userSalavatCountIncrease = 0;
 
-  @property({ type: Number })
-  protected _sliderMax?: number;
+  @state()
+  protected _sliderMax = 0;
 
   @query('mwc-slider')
-  protected _sliderElement!: Slider;
+    _sliderElement!: Slider;
 
-  static styles = css`
+  static override styles = css`
     :host {
       display: none;
       padding-top: 0.5rem;
@@ -79,17 +79,19 @@ export class PageHome extends BaseElement {
     }
   `;
 
-  protected shouldUpdate(_changedProperties: PropertyValues) {
+  protected override shouldUpdate(_changedProperties: PropertyValues):boolean {
     return super.shouldUpdate(_changedProperties) && this.active;
   }
 
-  protected render(): TemplateResult {
+  protected override render(): TemplateResult {
     this._log('render');
     return html`
       <div class="label">
         <span class="title">صلوات های من:</span>
-        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">${this._userSalavatCountIncrease?.toLocaleString('fa')}+</span>
-        <span class="salavat-count">${(this._userSalavatCount || 0).toLocaleString('fa')}</span>
+        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">
+          ${this._userSalavatCountIncrease?.toLocaleString('fa')}+
+        </span>
+        <span class="salavat-count">${(this.userSalavatCount || 0).toLocaleString('fa')}</span>
       </div>
 
       <div class="slider">
@@ -110,9 +112,9 @@ export class PageHome extends BaseElement {
     `;
   }
 
-  firstUpdated () {
+  override firstUpdated():void {
     chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
-      this._userSalavatCount = userSalavatCount as number;
+      this.userSalavatCount = userSalavatCount as number;
     });
 
     chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
@@ -124,7 +126,7 @@ export class PageHome extends BaseElement {
     });
   }
 
-  protected _onSliderInput() {
+  protected _onSliderInput():void {
     this._log('_onSliderInput');
     const userSalavatCountIncrease = this._sliderElement.value;
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
@@ -133,7 +135,7 @@ export class PageHome extends BaseElement {
     }
   }
 
-  protected _onSliderChange() {
+  protected _onSliderChange():void {
     this._log('_onSliderChange');
     const sliderElement = this._sliderElement;
     // const userSalavatCount = this._userSalavatCount || 0;
@@ -149,7 +151,7 @@ export class PageHome extends BaseElement {
     calcSliderMax(sliderElement.value);
   }
 
-  protected _addIconClick() {
+  protected _addIconClick():void {
     if (!this._userSalavatCountIncrease) {
       this._userSalavatCountIncrease = 0;
     }
@@ -158,7 +160,7 @@ export class PageHome extends BaseElement {
     navigator.vibrate(6);
   }
 
-  protected _removeIconClick() {
+  protected _removeIconClick():void {
     if (!this._userSalavatCountIncrease) {
       this._userSalavatCountIncrease = 0;
     }
