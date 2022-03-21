@@ -7,7 +7,6 @@ import {BaseElement} from './base-element';
 import {appConfig} from '../config';
 import {chatRoom} from './chat-room';
 import {closeIcon} from './icon';
-import {logger} from '../config';
 
 export interface SnackbarOption {
   open: boolean;
@@ -22,7 +21,7 @@ export class SnackBar extends BaseElement {
     snackbar: Snackbar | undefined;
 
   protected override render(): TemplateResult {
-    logger.logMethod('render');
+    this._logger.logMethod('render');
     return html`
       <mwc-snackbar leading labelText="متن فارسی نمونه ...">
         <!-- <mwc-button slot="action">خب</mwc-button> -->
@@ -33,7 +32,7 @@ export class SnackBar extends BaseElement {
 
   protected override firstUpdated(_changedProperties: PropertyValues):void {
     super.firstUpdated(_changedProperties);
-    logger.logMethod('firstUpdated');
+    this._logger.logMethod('firstUpdated');
 
     chatRoom.onPropertyChanged('snackbar', (snackbarOption: SnackbarOption | unknown) => {
       if (!(this.snackbar && snackbarOption && 'open' in (snackbarOption as SnackbarOption))) return;
