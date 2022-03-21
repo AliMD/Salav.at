@@ -1,23 +1,14 @@
-import {appConfig} from '../config';
+import {logger} from '../config';
 import {isRepeated} from './debounce';
 
-const debug = appConfig.debug;
 const dispatchEventHistory: Record<string, unknown> = {};
 export const eventTarget: EventTarget = document.createElement('span');
 // export const eventTarget: EventTarget = 'EventTarget' in window ? new EventTarget() : document.createElement('span');
 
-const _log = (message: unknown, ...restParam: unknown[]):void => {
-  if (debug) {
-    console.log(`%cChatRoom%c ${message}`,
-        'color: #4CAF50; font-size: 1.2em;', 'color: inherit;font-size: 1em', ...restParam,
-    );
-  }
-};
-
 const onMessage = (
     eventName: string, callback: (detail?: unknown) => void, option: { preserve: boolean } = {preserve: true},
 ):void => {
-  _log('onMessage: %s %s', eventName, option.preserve ? '(preserve)' : '');
+  logger.logMethodArgs('onMessage', {eventName, preserve: option.preserve ?? false});
   eventTarget.addEventListener(eventName, (event: Event) => callback(event['detail']));
   if (option.preserve && eventName in dispatchEventHistory) {
     setTimeout(callback, 0, dispatchEventHistory[eventName]); // callback in next micro task
@@ -35,7 +26,7 @@ const postMessage = async (
     return;
   }
   // else if first one in animation frame duration
-  _log('postMessage: %s with %o %s', eventName, detail, option.preserve ? ' (preserve)' : '');
+  logger.logMethodArgs('postMessage', {eventName, detail, preserve: option.preserve ?? false});
   eventTarget.dispatchEvent(new CustomEvent(eventName, {detail}));
 };
 

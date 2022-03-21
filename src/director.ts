@@ -9,6 +9,7 @@ import {
 import {SnackbarOption} from './stuff/snack-bar';
 import {loadData, updateData} from './stuff/data-api';
 import {localStorageGetItem} from './stuff/director-assistant';
+import {logger} from './config';
 
 /*
   routing ....
@@ -222,7 +223,7 @@ chatRoom.onMessage('submit-salavat', async () => {
           ' صلوات با موفقیت ثبت و اعمال شد.',
       });
     } else {
-      console.error('updateData: %s', result.description);
+      logger.error('sync', 'error_sync_data', result.data);
       chatRoom.setProperty('snackbar', <SnackbarOption>{
         open: true,
         text: 'خطا در ذخیره اطلاعات! لطفا وضعیت اتصال به اینترنت را بررسی کنید.',
@@ -255,7 +256,7 @@ const loadSalavatCountInterval = async (): Promise<void> => {
   try {
     await loadSalavatCount();
   } catch (err) {
-    console.warn('loadSalavatCount Error: %o', err);
+    logger.accident('sync', 'error_sync_count', 'loadSalavatCount Error: %o', err);
   }
   setTimeout(() => loadSalavatCountInterval(), appConfig.loadSalavatInterval);
 };

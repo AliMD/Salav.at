@@ -81,7 +81,7 @@ export class SalavatCounter extends BaseElement {
 
   constructor() {
     super();
-    this._log('constructor');
+    this._logger.logMethod('constructor');
 
     chatRoom.onPropertyChanged('salavatCount', async (salavatCount: SalavatCountInterface | unknown) => {
       if (!salavatCount) return;
@@ -139,7 +139,7 @@ export class SalavatCounter extends BaseElement {
 
   protected override async firstUpdated(_changedProperties: PropertyValues):Promise<void> {
     super.firstUpdated(_changedProperties);
-    this._log('firstUpdated');
+    this._logger.logMethod('firstUpdated');
     chatRoom.onMessage('window-resized', () => {
       this.computePadding();
     });

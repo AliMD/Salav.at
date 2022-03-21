@@ -70,7 +70,7 @@ export class PageDesktop extends BaseElement {
   `;
 
   protected override render(): TemplateResult {
-    this._log('render');
+    this._logger.logMethod('render');
     return html`
       <div class="salavat-icon">${salavatIcon}</div>
       <div class="message">

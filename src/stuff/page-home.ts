@@ -84,7 +84,7 @@ export class PageHome extends BaseElement {
   }
 
   protected override render(): TemplateResult {
-    this._log('render');
+    this._logger.logMethod('render');
     return html`
       <div class="label">
         <span class="title">صلوات های من:</span>
@@ -127,7 +127,7 @@ export class PageHome extends BaseElement {
   }
 
   protected _onSliderInput():void {
-    this._log('_onSliderInput');
+    this._logger.logMethod('_onSliderInput');
     const userSalavatCountIncrease = this._sliderElement.value;
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
       chatRoom.setProperty('userSalavatCountIncrease', userSalavatCountIncrease);
@@ -136,7 +136,7 @@ export class PageHome extends BaseElement {
   }
 
   protected _onSliderChange():void {
-    this._log('_onSliderChange');
+    this._logger.logMethod('_onSliderChange');
     const sliderElement = this._sliderElement;
     // const userSalavatCount = this._userSalavatCount || 0;
     // if (sliderElement.value < userSalavatCount) {

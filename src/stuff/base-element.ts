@@ -1,45 +1,47 @@
-import {LitElement, property} from 'lit-element';
-import {appConfig} from '../config';
-
-type consoleLogLevel = 'log' | 'info' | 'clear' | 'debug' | 'error' | 'warn' | 'trace'
+import {LitElement, PropertyValues} from 'lit-element';
+import {logger} from '../config';
+import {createLogger} from '@alwatr/logger';
 
 export abstract class BaseElement extends LitElement {
-  @property({type: Boolean, reflect: true}) debug = appConfig.debug;
+  protected _logger = createLogger(`<${this.tagName}>`);
+
+  constructor() {
+    super();
+    this._logger.logMethod('constructor');
+  }
+
+  override connectedCallback(): void {
+    this._logger.logMethod('connectedCallback');
+    super.connectedCallback();
+  }
+
+  override disconnectedCallback(): void {
+    this._logger.logMethod('disconnectedCallback');
+    super.disconnectedCallback();
+  }
+
+  protected override update(_changedProperties: PropertyValues): void {
+    this._logger.logMethod('update');
+    super.update(_changedProperties);
+  }
+
+  protected override firstUpdated(_changedProperties: PropertyValues): void {
+    this._logger.logMethod('firstUpdated');
+    super.firstUpdated(_changedProperties);
+  }
+
+  override dispatchEvent(event: CustomEvent | Event): boolean {
+    this._logger.logMethodArgs('dispatchEvent', {type: event.type});
+    return super.dispatchEvent(event);
+  }
 
   protected override async performUpdate(): Promise<void> {
     await new Promise((resolve) => requestAnimationFrame(() => resolve(null)));
     super.performUpdate();
   }
 
-  private __logger(logLevel: consoleLogLevel, message: unknown, ...restParam: unknown[]):void {
-    // first args must be separated as keyPattern for fix issue of `this._log('a=%s', a)`
-    const tagName = (this.tagName + '').toLowerCase();
-    console[logLevel](
-        `%c<%s>%c ${message}`, 'color: #4CAF50; font-size: 1.2em;',
-        tagName, 'color: inherit;font-size: 1em', ...restParam,
-    );
-  }
-
-  protected log(message: unknown, ...restParam: unknown[]):void {
-    this.__logger('log', message, ...restParam);
-  }
-
-  protected _log(message: unknown, ...restParam: unknown[]):void {
-    if (this.debug) {
-      this.log(message, ...restParam);
-    }
-  }
-
-  protected _warn(message: unknown, ...restParam: unknown[]):void {
-    this.__logger('warn', message, ...restParam);
-  }
-
-  protected _error(message: unknown, ...restParam: unknown[]):void {
-    this.__logger('error', message, ...restParam);
-  }
-
   protected _fire(eventName: string, detail: unknown, bubbles = false):void {
-    this._log('fire %s {%o}', eventName, detail);
+    logger.logMethodArgs('event', {eventName, detail});
     this.dispatchEvent(new CustomEvent(eventName, {
       detail,
       bubbles,
