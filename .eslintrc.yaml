@@ -24,10 +24,6 @@ plugins:
   - wc
 
 settings:
-  import/resolver:
-    typescript:
-      alwaysTryTypes: true
-      project: "package/*/tsconfig.json"
   wc:
     elementBaseClasses:
       - LitElement
