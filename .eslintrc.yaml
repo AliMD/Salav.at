@@ -6,8 +6,6 @@ extends:
   - plugin:@typescript-eslint/eslint-recommended
   - plugin:@typescript-eslint/recommended
   - plugin:wc/recommended
-  - plugin:import/recommended
-  - plugin:import/typescript
 
 env:
   browser: true
@@ -20,14 +18,9 @@ parserOptions:
 
 plugins:
   - "@typescript-eslint"
-  - import
   - wc
 
 settings:
-  import/resolver:
-    typescript:
-      alwaysTryTypes: true
-      project: "package/*/tsconfig.json"
   wc:
     elementBaseClasses:
       - LitElement
@@ -43,22 +36,7 @@ rules:
   no-floating-decimal: error
   space-infix-ops: error
   "@typescript-eslint/explicit-function-return-type": error
-  "import/order":
-    - error
-    - groups:
-        - "builtin"
-        - "external"
-        - "internal"
-        - - "parent"
-          - "sibling"
-          - "index"
-        - "type"
-      "newlines-between": "always"
-      alphabetize:
-        order: asc
-        caseInsensitive: true
 
   # TODO: Enable in future
-  import/no-unresolved: off
   require-jsdoc: off
   valid-jsdoc: off
