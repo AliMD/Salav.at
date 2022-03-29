@@ -1,7 +1,8 @@
 import {html, css, customElement, property, TemplateResult, PropertyValues, query} from 'lit-element';
+
+import {SalavatCountInterface} from '../config';
 import {BaseElement} from './base-element';
 import {chatRoom} from './chat-room';
-import {SalavatCountInterface} from '../config';
 
 const commaSeparator: string = (1_000).toLocaleString('fa').charAt(1);
 const minWidth = 120;
