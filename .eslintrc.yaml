@@ -20,10 +20,14 @@ parserOptions:
 
 plugins:
   - "@typescript-eslint"
-  - wc
   - import
+  - wc
 
 settings:
+  import/resolver:
+    typescript:
+      alwaysTryTypes: true
+      project: "package/*/tsconfig.json"
   wc:
     elementBaseClasses:
       - LitElement
@@ -40,22 +44,21 @@ rules:
   space-infix-ops: error
   "@typescript-eslint/explicit-function-return-type": error
   "import/order":
-    [
-      "error",
-      {
-        groups:
-          [
-            "type",
-            "builtin",
-            "external",
-            "internal",
-            ["parent", "sibling", "index"],
-          ],
-        "newlines-between": "always",
-        alphabetize: { order: "asc" },
-      },
-    ]
+    - error
+    - groups:
+        - "builtin"
+        - "external"
+        - "internal"
+        - - "parent"
+          - "sibling"
+          - "index"
+        - "type"
+      "newlines-between": "always"
+      alphabetize:
+        order: asc
+        caseInsensitive: true
 
   # TODO: Enable in future
+  import/no-unresolved: off
   require-jsdoc: off
   valid-jsdoc: off
