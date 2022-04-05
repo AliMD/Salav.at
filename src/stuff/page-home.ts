@@ -1,6 +1,3 @@
-import './salavat-counter';
-import '@material/mwc-slider';
-
 import {state, customElement, TemplateResult, html, PropertyValues, property, css, query} from 'lit-element';
 
 import {calcSliderMax} from '../director';
@@ -10,6 +7,8 @@ import {addIcon, removeIcon} from './icon';
 
 import type {Slider} from '@material/mwc-slider';
 
+import './salavat-counter';
+import '@material/mwc-slider';
 
 if (typeof navigator.vibrate !== 'function') {
   navigator.vibrate = (pattern):boolean => !pattern;

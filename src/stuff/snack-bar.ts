@@ -1,4 +1,3 @@
-import '@material/mwc-button';
 import {customElement, query, TemplateResult, html, PropertyValues} from 'lit-element';
 
 import {appConfig} from '../config';
@@ -7,6 +6,8 @@ import {chatRoom} from './chat-room';
 import {closeIcon} from './icon';
 
 import type {Snackbar} from '@material/mwc-snackbar';
+
+import '@material/mwc-button';
 
 export interface SnackbarOption {
   open: boolean;
