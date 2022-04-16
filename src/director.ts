@@ -1,15 +1,13 @@
-import './stuff/director-assistant';
-import {chatRoom} from './stuff/chat-room';
 import {
   pageListArray,
   appConfig,
   SalavatCountInterface,
   SalavatCountDataApiInterface,
-} from './config';
-import {SnackbarOption} from './stuff/snack-bar';
+  logger} from './config';
+import {chatRoom} from './stuff/chat-room';
 import {loadData, updateData} from './stuff/data-api';
 import {localStorageGetItem} from './stuff/director-assistant';
-import {logger} from './config';
+import {SnackbarOption} from './stuff/snack-bar';
 
 /*
   routing ....

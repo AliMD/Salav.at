@@ -1,12 +1,13 @@
 import {customElement, query, TemplateResult, html, PropertyValues} from 'lit-element';
-import '@material/mwc-snackbar';
-import {Snackbar} from '@material/mwc-snackbar';
-import '@material/mwc-button';
 
-import {BaseElement} from './base-element';
 import {appConfig} from '../config';
+import {BaseElement} from './base-element';
 import {chatRoom} from './chat-room';
 import {closeIcon} from './icon';
+
+import type {Snackbar} from '@material/mwc-snackbar';
+
+import '@material/mwc-button';
 
 export interface SnackbarOption {
   open: boolean;

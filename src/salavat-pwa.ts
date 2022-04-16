@@ -1,16 +1,5 @@
 import {state, html, customElement, TemplateResult, query, PropertyValues} from 'lit-element';
-import '@material/mwc-button';
-import '@material/mwc-icon-button';
-import {IconButton} from '@material/mwc-icon-button';
-import '@material/mwc-drawer';
-import {Drawer} from '@material/mwc-drawer';
 
-import './director';
-import './stuff/snack-bar';
-import './stuff/page-home';
-import './stuff/page-desktop';
-import {BaseElement} from './stuff/base-element';
-import {chatRoom} from './stuff/chat-room';
 import {
   styleConfig,
   pageListArray,
@@ -18,8 +7,8 @@ import {
   appConfig,
   safeAreaInsetTop,
 } from './config';
-import {styleAppLayout} from './stuff/style-app-layout';
-import {styleAppResponsive} from './stuff/style-app-responsive';
+import {BaseElement} from './stuff/base-element';
+import {chatRoom} from './stuff/chat-room';
 import {
   menuIcon,
   getAppIcon,
@@ -30,6 +19,17 @@ import {
   salavatSmallIcon,
   downloadIconOutlined,
 } from './stuff/icon';
+import {styleAppLayout} from './stuff/style-app-layout';
+import {styleAppResponsive} from './stuff/style-app-responsive';
+
+import type {Drawer} from '@material/mwc-drawer';
+import type {IconButton} from '@material/mwc-icon-button';
+
+import './director';
+import './stuff/snack-bar';
+import './stuff/page-home';
+import './stuff/page-desktop';
+import '@material/mwc-button';
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends BaseElement {

@@ -1,7 +1,8 @@
-import {chatRoom} from './chat-room';
-import {installRouter} from 'pwa-helpers/router';
 import {installOfflineWatcher} from 'pwa-helpers/network';
+import {installRouter} from 'pwa-helpers/router';
+
 import {logger} from '../config';
+import {chatRoom} from './chat-room';
 
 requestAnimationFrame(async () => {
   try {

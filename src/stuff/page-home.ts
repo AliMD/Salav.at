@@ -1,12 +1,14 @@
 import {state, customElement, TemplateResult, html, PropertyValues, property, css, query} from 'lit-element';
-import '@material/mwc-slider';
-import {Slider} from '@material/mwc-slider';
 
-import {BaseElement} from './base-element';
-import './salavat-counter';
-import {chatRoom} from './chat-room';
 import {calcSliderMax} from '../director';
+import {BaseElement} from './base-element';
+import {chatRoom} from './chat-room';
 import {addIcon, removeIcon} from './icon';
+
+import type {Slider} from '@material/mwc-slider';
+
+import './salavat-counter';
+import '@material/mwc-slider';
 
 if (typeof navigator.vibrate !== 'function') {
   navigator.vibrate = (pattern):boolean => !pattern;

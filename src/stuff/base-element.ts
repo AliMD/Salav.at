@@ -1,6 +1,7 @@
-import {LitElement, PropertyValues} from 'lit-element';
-import {logger} from '../config';
 import {createLogger} from '@alwatr/logger';
+import {LitElement, PropertyValues} from 'lit-element';
+
+import {logger} from '../config';
 
 export abstract class BaseElement extends LitElement {
   protected _logger = createLogger(`<${this.tagName}>`);
