@@ -11,7 +11,7 @@ import './salavat-counter';
 import '@material/mwc-slider';
 
 if (typeof navigator.vibrate !== 'function') {
-  navigator.vibrate = (pattern):boolean => !pattern;
+  navigator.vibrate = (pattern): boolean => !pattern;
 }
 
 @customElement('page-home')
@@ -81,7 +81,7 @@ export class PageHome extends BaseElement {
     }
   `;
 
-  protected override shouldUpdate(_changedProperties: PropertyValues):boolean {
+  protected override shouldUpdate(_changedProperties: PropertyValues): boolean {
     return super.shouldUpdate(_changedProperties) && this.active;
   }
 
@@ -114,7 +114,7 @@ export class PageHome extends BaseElement {
     `;
   }
 
-  override firstUpdated():void {
+  override firstUpdated(): void {
     chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
       this.userSalavatCount = userSalavatCount as number;
     });
@@ -128,7 +128,7 @@ export class PageHome extends BaseElement {
     });
   }
 
-  protected _onSliderInput():void {
+  protected _onSliderInput(): void {
     this._logger.logMethod('_onSliderInput');
     const userSalavatCountIncrease = this._sliderElement.value;
     if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
@@ -137,7 +137,7 @@ export class PageHome extends BaseElement {
     }
   }
 
-  protected _onSliderChange():void {
+  protected _onSliderChange(): void {
     this._logger.logMethod('_onSliderChange');
     const sliderElement = this._sliderElement;
     // const userSalavatCount = this._userSalavatCount || 0;
@@ -153,7 +153,7 @@ export class PageHome extends BaseElement {
     calcSliderMax(sliderElement.value);
   }
 
-  protected _addIconClick():void {
+  protected _addIconClick(): void {
     if (!this._userSalavatCountIncrease) {
       this._userSalavatCountIncrease = 0;
     }
@@ -162,11 +162,11 @@ export class PageHome extends BaseElement {
     navigator.vibrate(6);
   }
 
-  protected _removeIconClick():void {
+  protected _removeIconClick(): void {
     if (!this._userSalavatCountIncrease) {
       this._userSalavatCountIncrease = 0;
     }
-    if (this._userSalavatCountIncrease > 0 ) {
+    if (this._userSalavatCountIncrease > 0) {
       chatRoom.setProperty('userSalavatCountIncrease', this._userSalavatCountIncrease - 1);
     }
     calcSliderMax(this._userSalavatCountIncrease);

@@ -2,17 +2,20 @@ import {appConfig} from '../config';
 
 const debug = appConfig.debug;
 const fetchTimeout = 15_000;
-const _log = (message: unknown, ...restParam: unknown[]):void => {
+const _log = (message: unknown, ...restParam: unknown[]): void => {
   if (debug) {
     console.log(
-        `%cDataAPI%c ${message}`, 'color: #4CAF50; font-size: 1.2em;', 'color: inherit; font-size: 1em;', ...restParam,
+        `%cDataAPI%c ${message}`,
+        'color: #4CAF50; font-size: 1.2em;',
+        'color: inherit; font-size: 1em;',
+        ...restParam,
     );
   }
 };
 
 const _fetch = <T>(path: string, option: RequestInit): Promise<T> => {
   // eslint-disable-next-line no-async-promise-executor
-  return new Promise(async (resolve, reject):Promise<void> => {
+  return new Promise(async (resolve, reject): Promise<void> => {
     _log('fetch: %s', path);
     let rejected = false;
     const timer = setTimeout(() => {
@@ -22,8 +25,8 @@ const _fetch = <T>(path: string, option: RequestInit): Promise<T> => {
     const fetchResponse: Response = await fetch(path, option);
     if (rejected) return;
     clearTimeout(timer);
-    if (!fetchResponse.ok) throw new Error('Cannot load data! ' + await fetchResponse.text());
-    resolve(await fetchResponse.json() as T);
+    if (!fetchResponse.ok) throw new Error('Cannot load data! ' + (await fetchResponse.text()));
+    resolve((await fetchResponse.json()) as T);
   });
 };
 
@@ -39,14 +42,16 @@ export const loadData = async <T>(docId: string): Promise<T> => {
 };
 
 export interface UpdateResponse<T> {
-  ok: boolean,
-  description: string,
-  data?: T,
-  apiVersion?: string,
+  ok: boolean;
+  description: string;
+  data?: T;
+  apiVersion?: string;
 }
 
 export const updateData = async <T>(
-  docId: string, dataApiItem: Partial<T>, token: string = appConfig.apiToken,
+  docId: string,
+  dataApiItem: Partial<T>,
+  token: string = appConfig.apiToken,
 ): Promise<UpdateResponse<T>> => {
   _log('updateData %s with %o', docId, dataApiItem);
   const dataApiItemCopy: Record<string, unknown> = {...dataApiItem};

@@ -3,16 +3,15 @@ import {css} from 'lit-element';
 import {appConfig} from '../config';
 
 export const styleAppResponsive = css`
-
   page-desktop {
     display: none;
   }
 
   /* Installed app */
   @media all and (display-mode: standalone) {
-     .get-app-button {
-       display: none;
-     }
+    .get-app-button {
+      display: none;
+    }
   }
 
   /* mobile */

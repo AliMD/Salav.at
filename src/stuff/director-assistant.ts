@@ -7,10 +7,10 @@ import {chatRoom} from './chat-room';
 requestAnimationFrame(async () => {
   try {
     const orientation: OrientationLockType = 'portrait';
-    'lockOrientation' in screen && await screen['lockOrientation'](orientation);
-    'mozLockOrientation' in screen && await screen['mozLockOrientation'](orientation);
-    'msLockOrientation' in screen && await screen['msLockOrientation'](orientation);
-    screen.orientation?.lock && await screen.orientation.lock(orientation);
+    'lockOrientation' in screen && (await screen['lockOrientation'](orientation));
+    'mozLockOrientation' in screen && (await screen['mozLockOrientation'](orientation));
+    'msLockOrientation' in screen && (await screen['msLockOrientation'](orientation));
+    screen.orientation?.lock && (await screen.orientation.lock(orientation));
   } catch (err) {
     logger.incident('screen', 'lock_orientation_failed', 'lockOrientation failed: %s', err);
   }
@@ -33,7 +33,7 @@ window.addEventListener('load', () => {
 });
 
 chatRoom.onMessage('window-loaded', async () => {
-  if (! ('serviceWorker' in navigator)) return;
+  if (!('serviceWorker' in navigator)) return;
   logger.incident('sw', 'registered', 'SW registered');
 
   const registration = await navigator.serviceWorker.register('service-worker.js', {scope: '/'});
@@ -45,7 +45,8 @@ chatRoom.onMessage('window-loaded', async () => {
     newWorker.addEventListener('statechange', () => {
       logger.incident('sw', 'state_changed', 'SW state changed: %s', newWorker.state);
       if (newWorker.state === 'installed') {
-        if (navigator.serviceWorker.controller) { // if old controller available then its update else its new install
+        if (navigator.serviceWorker.controller) {
+          // if old controller available then its update else its new install
           chatRoom.postMessage('service-worker-updated');
         }
       } else if (newWorker.state === 'redundant') {
@@ -57,11 +58,13 @@ chatRoom.onMessage('window-loaded', async () => {
 
 chatRoom.onMessage('scrollTop', () => {
   if (!('scrollTo' in window && window.scrollY > 0)) return;
-  requestAnimationFrame(() => scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth',
-  }));
+  requestAnimationFrame(() =>
+    scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    }),
+  );
 });
 
 installOfflineWatcher((offline: boolean) => {

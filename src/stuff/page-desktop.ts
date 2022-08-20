@@ -20,7 +20,7 @@ export class PageDesktop extends BaseElement {
       font-weight: 300;
       text-align: center;
 
-      background-image: url("image/background-desktop.jpg");
+      background-image: url('image/background-desktop.jpg');
       background-position-x: right;
       background-position-y: bottom;
       background-repeat: no-repeat;
@@ -77,13 +77,11 @@ export class PageDesktop extends BaseElement {
       <div class="message">
         <p>این برنامه <span>فعلا</span> تنها برای موبایل طراحی شده است.</p>
         <p>لطفا این سایت را در <span>موبایل</span> باز کنید.</p>
-        <p>درضمن امکان <span class="link" @click=${this._requestInstall}>
-          نصب در دسکتاپ
-        </span> را نیز تست کنید.</p>
+        <p>درضمن امکان <span class="link" @click=${this._requestInstall}> نصب در دسکتاپ </span> را نیز تست کنید.</p>
       </div>
       <div class="qr-code">
         ${qrCode}
-        <br/>
+        <br />
         www.Salav.at
       </div>
     `;
