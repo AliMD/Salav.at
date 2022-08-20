@@ -1,6 +1,6 @@
 module.exports = {
   // https://googlechromelabs.github.io/sw-toolbox/api.html
-  debug: false,
+  debug: true,
   staticFileGlobs: [
     'manifest.json',
     "js/**/*",

@@ -1,5 +1,5 @@
 import {createLogger} from '@alwatr/logger';
-import {LitElement, PropertyValues} from 'lit-element';
+import {LitElement, PropertyValues} from 'lit';
 
 import {logger} from '../config';
 

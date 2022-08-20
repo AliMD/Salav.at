@@ -1,4 +1,6 @@
-import {state, html, customElement, TemplateResult, query, PropertyValues} from 'lit-element';
+import {html, TemplateResult, PropertyValues} from 'lit';
+import {state, query} from 'lit/decorators.js';
+import {customElement} from 'lit/decorators/custom-element.js';
 
 import {styleConfig, pageListArray, MenuItem, appConfig, safeAreaInsetTop} from './config';
 import {BaseElement} from './stuff/base-element';

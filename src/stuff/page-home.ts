@@ -1,4 +1,6 @@
-import {state, customElement, TemplateResult, html, PropertyValues, property, css, query} from 'lit-element';
+import {TemplateResult, html, PropertyValues, css} from 'lit';
+import {query, state, property} from 'lit/decorators.js';
+import {customElement} from 'lit/decorators/custom-element.js';
 
 import {calcSliderMax} from '../director';
 import {BaseElement} from './base-element';

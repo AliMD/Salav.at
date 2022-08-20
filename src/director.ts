@@ -89,7 +89,7 @@ chatRoom.onMessage('window-loaded-standalone', fixWindowSize);
 /*
   testMode
 */
-let testMode = location.host.indexOf('localhost') === 0;
+let testMode = true;
 if (testMode) chatRoom.setProperty('testMode', testMode);
 
 chatRoom.onPropertyChanged('testMode', async (_testMode: boolean | unknown) => {
