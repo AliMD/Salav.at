@@ -6,21 +6,21 @@ export const eventTarget: EventTarget = document.createElement('span');
 // export const eventTarget: EventTarget = 'EventTarget' in window ? new EventTarget() : document.createElement('span');
 
 const onMessage = (
-  eventName: string,
-  callback: (detail?: unknown) => void,
-  option: {preserve: boolean} = {preserve: true}
+    eventName: string,
+    callback: (detail?: unknown) => void,
+    option: {preserve: boolean} = {preserve: true},
 ): void => {
   logger.logMethodArgs('onMessage', {eventName, preserve: option.preserve ?? false});
-  eventTarget.addEventListener(eventName, (event: Event) => callback(event['detail']));
+  eventTarget.addEventListener(eventName, (event: Event) => callback((<CustomEvent>event).detail));
   if (option.preserve && eventName in dispatchEventHistory) {
     setTimeout(callback, 0, dispatchEventHistory[eventName]); // callback in next micro task
   }
 };
 
 const postMessage = async (
-  eventName: string,
-  detail?: string | boolean | unknown,
-  option: {preserve: boolean} = {preserve: true}
+    eventName: string,
+    detail?: string | boolean | unknown,
+    option: {preserve: boolean} = {preserve: true},
 ): Promise<void> => {
   if (option.preserve) {
     dispatchEventHistory[eventName] = detail;

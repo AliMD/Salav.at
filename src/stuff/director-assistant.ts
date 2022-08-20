@@ -7,9 +7,9 @@ import {chatRoom} from './chat-room';
 requestAnimationFrame(async () => {
   try {
     const orientation: OrientationLockType = 'portrait';
-    'lockOrientation' in screen && (await screen['lockOrientation'](orientation));
-    'mozLockOrientation' in screen && (await screen['mozLockOrientation'](orientation));
-    'msLockOrientation' in screen && (await screen['msLockOrientation'](orientation));
+    'lockOrientation' in screen && (await (<any>screen)['lockOrientation'](orientation));
+    'mozLockOrientation' in screen && (await (<any>screen)['mozLockOrientation'](orientation));
+    'msLockOrientation' in screen && (await (<any>screen)['msLockOrientation'](orientation));
     screen.orientation?.lock && (await screen.orientation.lock(orientation));
   } catch (err) {
     logger.incident('screen', 'lock_orientation_failed', 'lockOrientation failed: %s', err);
@@ -23,7 +23,7 @@ window.addEventListener('resize', () => {
 window.addEventListener('load', () => {
   chatRoom.postMessage('window-loaded');
 
-  if (navigator['standalone']) {
+  if ((<any>navigator).standalone) {
     chatRoom.postMessage('window-loaded-standalone', {ios: true}); // Launched: Installed (iOS)
   } else if (matchMedia('(display-mode: standalone)').matches) {
     chatRoom.postMessage('window-loaded-standalone', {ios: false}); // 'Launched: Installed'
@@ -77,7 +77,7 @@ installRouter((location) => {
 });
 
 // Install PWA
-let deferredPrompt;
+let deferredPrompt: any;
 
 window.addEventListener('appinstalled', () => {
   chatRoom.postMessage('app-installed');
