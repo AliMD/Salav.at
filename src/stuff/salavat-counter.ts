@@ -1,4 +1,7 @@
-import {html, css, customElement, property, TemplateResult, PropertyValues, query} from 'lit-element';
+import {html, css, TemplateResult, PropertyValues} from 'lit';
+import {query, property} from 'lit/decorators.js';
+import {customElement} from 'lit/decorators/custom-element.js';
+
 
 import {SalavatCountInterface} from '../config';
 import {BaseElement} from './base-element';
@@ -14,7 +17,7 @@ export class SalavatCounter extends BaseElement {
     active = false;
 
   @property({type: Boolean, attribute: false})
-    testMode = false;
+    testMode = true;
 
   @property({type: Number, attribute: false})
     count?: number; // Real salavat count

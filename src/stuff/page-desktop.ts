@@ -1,6 +1,7 @@
 import '@material/mwc-slider';
 
-import {customElement, TemplateResult, html, css} from 'lit-element';
+import {TemplateResult, html, css} from 'lit';
+import {customElement} from 'lit/decorators/custom-element.js';
 
 import {BaseElement} from './base-element';
 import {chatRoom} from './chat-room';

@@ -1,5 +1,5 @@
 import {createLogger} from '@alwatr/logger';
-import {css, SVGTemplateResult} from 'lit-element';
+import {css, SVGTemplateResult} from 'lit';
 
 import {campaignIcon, aboutUsIcon, salavatIcon} from './stuff/icon';
 
@@ -92,7 +92,7 @@ export const pageListArray: Array<MenuItem | MenuItemHidden> = [
 ];
 
 export const appConfig = {
-  debug: false,
+  debug: true,
   appVersion: '1.4.0',
   apiUri: 'https://api.salav.at',
   apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',

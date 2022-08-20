@@ -1,107 +1,106 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
-    />
 
-    <title>Salav.at</title>
-    <meta name="description" content="www.Salav.at" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
 
-    <base href="/" />
+  <title>Salav.at</title>
+  <meta name="description" content="www.Salav.at" />
 
-    <link rel="icon" href="image/favicon.ico" />
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#3277b9" />
+  <base href="/" />
 
-    <!-- Add to home screen for Chrome on Android. Fallback for manifest.json -->
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="Salav.at" />
+  <link rel="icon" href="image/favicon.ico" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#3277b9" />
 
-    <!-- Add to home screen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Salav.at" />
-    <link rel="apple-touch-startup-image" href="image/splash.jpg" />
+  <!-- Add to home screen for Chrome on Android. Fallback for manifest.json -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="Salav.at" />
 
-    <!-- Home screen icons -->
-    <link rel="apple-touch-icon" href="image/manifest/icon-192x192.jpg" />
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Salav.at" />
+  <link rel="apple-touch-startup-image" href="image/splash.jpg" />
 
-    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="image/manifest/icon-192x192.jpg" />
-    <meta name="msapplication-TileColor" content="#3277b9" />
-    <meta name="msapplication-tap-highlight" content="no" />
+  <!-- Home screen icons -->
+  <link rel="apple-touch-icon" href="image/manifest/icon-192x192.jpg" />
 
-    <!-- <link rel="canonical" href="https://Salav.at/" /> -->
+  <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="image/manifest/icon-192x192.jpg" />
+  <meta name="msapplication-TileColor" content="#3277b9" />
+  <meta name="msapplication-tap-highlight" content="no" />
 
-    <!-- Open Graph cards -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Salav.at" />
-    <meta property="og:description" content="Salav.at Description" />
-    <meta property="og:site_name" content="Salav.at" />
-    <meta property="og:image" content="image/manifest/icon-192x192.jpg" />
-    <meta property="og:url" content="https://Salav.at/" />
-    <meta property="og:locale" content="fa" />
+  <!-- <link rel="canonical" href="https://Salav.at/" /> -->
 
-    <link rel="preconnect" href="https://polyfill.io/" crossorigin />
+  <!-- Open Graph cards -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Salav.at" />
+  <meta property="og:description" content="Salav.at Description" />
+  <meta property="og:site_name" content="Salav.at" />
+  <meta property="og:image" content="image/manifest/icon-192x192.jpg" />
+  <meta property="og:url" content="https://Salav.at/" />
+  <meta property="og:locale" content="fa" />
 
-    <script>
-      window.polymerSkipLoadingFontRoboto = true;
-      window.process = {env: {NODE_ENV: 'production'}};
-    </script>
+  <link rel="preconnect" href="https://polyfill.io/" crossorigin />
 
-    <link rel="stylesheet" href="font/font.css" />
+  <script>
+    window.polymerSkipLoadingFontRoboto = true;
+    window.process = { env: { NODE_ENV: 'production' } };
+  </script>
 
-    <style>
-      html,
-      body {
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
+  <link rel="stylesheet" href="font/font.css" />
 
-      html {
-        /* iOS Safe Area */
-        --safe-area-inset-top: env(safe-area-inset-top);
-        --safe-area-inset-bottom: env(safe-area-inset-bottom);
-        --safe-area-inset-left: env(safe-area-inset-left);
-        --safe-area-inset-right: env(safe-area-inset-right);
+  <style>
+    html,
+    body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
 
-        height: calc(100% + var(--safe-area-inset-top, 0));
-        box-sizing: border-box;
-      }
+    html {
+      /* iOS Safe Area */
+      --safe-area-inset-top: env(safe-area-inset-top);
+      --safe-area-inset-bottom: env(safe-area-inset-bottom);
+      --safe-area-inset-left: env(safe-area-inset-left);
+      --safe-area-inset-right: env(safe-area-inset-right);
 
-      body {
-        box-sizing: border-box;
-        background-color: #3277b9;
-        color: white;
-        font-family: 'Iran Sans', 'Roboto', 'Tahoma', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-          'Segoe UI Symbol';
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-        -moz-osx-font-smoothing: grayscale;
-      }
-    </style>
-  </head>
+      height: calc(100% + var(--safe-area-inset-top, 0));
+      box-sizing: border-box;
+    }
 
-  <body>
-    <salavat-pwa></salavat-pwa>
+    body {
+      box-sizing: border-box;
+      background-color: #3277b9;
+      color: white;
+      font-family: 'Iran Sans', 'Roboto', 'Tahoma', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol';
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+</head>
 
-    <!-- https://polyfill.io/v3/url-builder/ -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=requestAnimationFrame,requestIdleCallback,scrollY,CustomEvent,document.querySelector,localStorage,fetch"></script>
-    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script type="module" src="js/salavat-pwa.js"></script>
+<body>
+  <salavat-pwa></salavat-pwa>
 
-    <noscript>
-      <p style="text-align: center; margin-top: 1em; font-size: 1.1em" dir="ltr">
-        Please enable JavaScript to view this website.
-      </p>
-      <p style="text-align: center; margin-top: 0.2em; font-size: 1.1em" dir="rtl">
-        لطفا JavaScript را برای مشاهده این وب سایت فعال کنید.
-      </p>
-    </noscript>
-  </body>
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="node_modules/lit/polyfill-support.js"></script>
+  <script type="module" src="js/salavat-pwa.js"></script>
+
+  <noscript>
+    <p style="text-align: center; margin-top: 1em; font-size: 1.1em" dir="ltr">
+      Please enable JavaScript to view this website.
+    </p>
+    <p style="text-align: center; margin-top: 0.2em; font-size: 1.1em" dir="rtl">
+      لطفا JavaScript را برای مشاهده این وب سایت فعال کنید.
+    </p>
+  </noscript>
+</body>
+
 </html>

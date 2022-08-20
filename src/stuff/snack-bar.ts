@@ -1,4 +1,7 @@
-import {customElement, query, TemplateResult, html, PropertyValues} from 'lit-element';
+import {TemplateResult, html, PropertyValues} from 'lit';
+import {query} from 'lit/decorators.js';
+import {customElement} from 'lit/decorators/custom-element.js';
+
 
 import {appConfig} from '../config';
 import {BaseElement} from './base-element';
