@@ -31,7 +31,7 @@ export class SnackBar extends BaseElement {
     `;
   }
 
-  protected override firstUpdated(_changedProperties: PropertyValues):void {
+  protected override firstUpdated(_changedProperties: PropertyValues): void {
     super.firstUpdated(_changedProperties);
     this._logger.logMethod('firstUpdated');
 

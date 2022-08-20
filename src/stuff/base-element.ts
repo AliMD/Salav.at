@@ -41,12 +41,14 @@ export abstract class BaseElement extends LitElement {
     super.performUpdate();
   }
 
-  protected _fire(eventName: string, detail: unknown, bubbles = false):void {
+  protected _fire(eventName: string, detail: unknown, bubbles = false): void {
     logger.logMethodArgs('event', {eventName, detail});
-    this.dispatchEvent(new CustomEvent(eventName, {
-      detail,
-      bubbles,
-      composed: bubbles,
-    }));
+    this.dispatchEvent(
+        new CustomEvent(eventName, {
+          detail,
+          bubbles,
+          composed: bubbles,
+        }),
+    );
   }
 }

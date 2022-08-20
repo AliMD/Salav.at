@@ -6,8 +6,10 @@ export const eventTarget: EventTarget = document.createElement('span');
 // export const eventTarget: EventTarget = 'EventTarget' in window ? new EventTarget() : document.createElement('span');
 
 const onMessage = (
-    eventName: string, callback: (detail?: unknown) => void, option: { preserve: boolean } = {preserve: true},
-):void => {
+  eventName: string,
+  callback: (detail?: unknown) => void,
+  option: {preserve: boolean} = {preserve: true}
+): void => {
   logger.logMethodArgs('onMessage', {eventName, preserve: option.preserve ?? false});
   eventTarget.addEventListener(eventName, (event: Event) => callback(event['detail']));
   if (option.preserve && eventName in dispatchEventHistory) {
@@ -16,8 +18,10 @@ const onMessage = (
 };
 
 const postMessage = async (
-    eventName: string, detail?: string | boolean | unknown, option: { preserve: boolean } = {preserve: true},
-):Promise<void> => {
+  eventName: string,
+  detail?: string | boolean | unknown,
+  option: {preserve: boolean} = {preserve: true}
+): Promise<void> => {
   if (option.preserve) {
     dispatchEventHistory[eventName] = detail;
   }
@@ -30,7 +34,7 @@ const postMessage = async (
   eventTarget.dispatchEvent(new CustomEvent(eventName, {detail}));
 };
 
-const setProperty = (propertyName: string, newValue: unknown):void => {
+const setProperty = (propertyName: string, newValue: unknown): void => {
   postMessage(`appProperty_${propertyName}_changed`, newValue, {preserve: true});
 };
 
@@ -39,7 +43,7 @@ const getProperty = (propertyName: string): unknown => {
   return dispatchEventHistory[eventName];
 };
 
-const onPropertyChanged = (propertyName: string, callback: (newVal?: unknown) => void):void => {
+const onPropertyChanged = (propertyName: string, callback: (newVal?: unknown) => void): void => {
   onMessage(`appProperty_${propertyName}_changed`, callback, {preserve: true});
 };
 

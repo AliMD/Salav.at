@@ -13,7 +13,7 @@
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "sourceMap": true /* Generates corresponding '.map' file. */,
     "declarationMap": false /* Generates a sourcemap for each corresponding '.d.ts' file. */,
-    "outDir": "js",                        /* Redirect output structure to the directory. */
+    "outDir": "js" /* Redirect output structure to the directory. */,
     // "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
     // "composite": true,                        /* Enable project compilation */
     // "incremental": true,                   /* Enable incremental compilation */
@@ -25,7 +25,7 @@
 
     /* Strict Type-Checking Options */
     "strict": true /* Enable all strict type-checking options. */,
-    "noImplicitAny": false,                 /* Raise error on expressions and declarations with an implied 'any' type. */
+    "noImplicitAny": false /* Raise error on expressions and declarations with an implied 'any' type. */,
     // "strictNullChecks": true,              /* Enable strict null checks. */
     // "strictFunctionTypes": true,           /* Enable strict checking of function types. */
     // "strictBindCallApply": true,           /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
@@ -52,7 +52,7 @@
     "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
     // "emitDecoratorMetadata": false,        /* Enables experimental support for emitting type metadata for decorators. */
     "forceConsistentCasingInFileNames": true /* Follows the case sensitivity rules of the file system it’s running on. */,
-    "useDefineForClassFields": false, /* Must be disabled for lit, https://lit.dev/docs/components/properties/#avoiding-issues-with-class-fields */
+    "useDefineForClassFields": false /* Must be disabled for lit, https://lit.dev/docs/components/properties/#avoiding-issues-with-class-fields */,
 
     "plugins": [
       {
@@ -86,8 +86,6 @@
     ]
   },
 
-  "include": [
-    "src/**/*.ts"
-  ] /* Specifies a list of glob patterns that match files to be included in compilation. */,
+  "include": ["src/**/*.ts"] /* Specifies a list of glob patterns that match files to be included in compilation. */,
   "exclude": [] /* Specifies a list of files to be excluded from compilation. */
 }

@@ -1,9 +1,4 @@
-import {
-  pageListArray,
-  appConfig,
-  SalavatCountInterface,
-  SalavatCountDataApiInterface,
-  logger} from './config';
+import {pageListArray, appConfig, SalavatCountInterface, SalavatCountDataApiInterface, logger} from './config';
 import {chatRoom} from './stuff/chat-room';
 import {loadData, updateData} from './stuff/data-api';
 import {localStorageGetItem} from './stuff/director-assistant';
@@ -12,16 +7,13 @@ import {SnackbarOption} from './stuff/snack-bar';
 /*
   routing ....
 */
-chatRoom.onPropertyChanged(
-    'locationPath',
-    async (locationPath: string | unknown) => {
-      if (!(typeof locationPath === 'string')) return;
-      const splitPath = locationPath.slice(1).split('/');
-      const pageName: string = splitPath.shift() || 'home';
-      chatRoom.setProperty('page', pageName);
-      chatRoom.setProperty(`locationPath_${pageName}`, splitPath);
-    },
-);
+chatRoom.onPropertyChanged('locationPath', async (locationPath: string | unknown) => {
+  if (!(typeof locationPath === 'string')) return;
+  const splitPath = locationPath.slice(1).split('/');
+  const pageName: string = splitPath.shift() || 'home';
+  chatRoom.setProperty('page', pageName);
+  chatRoom.setProperty(`locationPath_${pageName}`, splitPath);
+});
 
 chatRoom.onPropertyChanged('page', async (pageName: string | unknown) => {
   if (!(typeof pageName === 'string')) return;
@@ -50,10 +42,7 @@ chatRoom.onPropertyChanged('page', (pageName: string | unknown) => {
   // Scroll to top on page changed
   chatRoom.postMessage('scrollTop');
 
-  chatRoom.setProperty(
-      'showSubmit',
-      pageName === 'home' && chatRoom.getProperty('userSalavatCountIncrease'),
-  );
+  chatRoom.setProperty('showSubmit', pageName === 'home' && chatRoom.getProperty('userSalavatCountIncrease'));
 });
 
 chatRoom.onMessage('invalidUri', () => {
@@ -167,18 +156,12 @@ export const calcSliderMax = (sliderValue: number): void => {
 /*
   user salavat count ....
 */
-chatRoom.onPropertyChanged(
-    'userSalavatCountIncrease',
-    (userSalavatCountIncrease: number | unknown) => {
-      const showSubmit: boolean = (userSalavatCountIncrease as number) > 0;
-      if (
-        chatRoom.getProperty('page') === 'home' &&
-      chatRoom.getProperty('showSubmit') != showSubmit
-      ) {
-        chatRoom.setProperty('showSubmit', showSubmit);
-      }
-    },
-);
+chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
+  const showSubmit: boolean = (userSalavatCountIncrease as number) > 0;
+  if (chatRoom.getProperty('page') === 'home' && chatRoom.getProperty('showSubmit') != showSubmit) {
+    chatRoom.setProperty('showSubmit', showSubmit);
+  }
+});
 
 let saving = false;
 chatRoom.onMessage('submit-salavat', async () => {
@@ -191,10 +174,8 @@ chatRoom.onMessage('submit-salavat', async () => {
     return;
   }
 
-  let userSalavatCount: number =
-    (chatRoom.getProperty('userSalavatCount') as number) || 0;
-  const userSalavatCountIncrease: number =
-    (chatRoom.getProperty('userSalavatCountIncrease') as number) || 0;
+  let userSalavatCount: number = (chatRoom.getProperty('userSalavatCount') as number) || 0;
+  const userSalavatCountIncrease: number = (chatRoom.getProperty('userSalavatCountIncrease') as number) || 0;
 
   if (userSalavatCountIncrease > 0) {
     saving = true;
@@ -216,9 +197,7 @@ chatRoom.onMessage('submit-salavat', async () => {
 
       chatRoom.setProperty('snackbar', <SnackbarOption>{
         open: true,
-        text:
-          userSalavatCountIncrease.toLocaleString('fa') +
-          ' صلوات با موفقیت ثبت و اعمال شد.',
+        text: userSalavatCountIncrease.toLocaleString('fa') + ' صلوات با موفقیت ثبت و اعمال شد.',
       });
     } else {
       logger.error('sync', 'error_sync_data', result.data);
@@ -238,14 +217,8 @@ const loadSalavatCount = async (force = false): Promise<void> => {
     testMode ? appConfig.apiSalavatTestDocId : appConfig.apiSalavatCountDocId,
   );
   const salavatCount = salavatCountApi.salavatCount;
-  const oldSalavatCount = chatRoom.getProperty(
-      'salavatCount',
-  ) as SalavatCountInterface;
-  if (
-    salavatCount &&
-    (force ||
-      salavatCount._lastEditedTime > (oldSalavatCount?._lastEditedTime || 0))
-  ) {
+  const oldSalavatCount = chatRoom.getProperty('salavatCount') as SalavatCountInterface;
+  if (salavatCount && (force || salavatCount._lastEditedTime > (oldSalavatCount?._lastEditedTime || 0))) {
     chatRoom.setProperty('salavatCount', salavatCount);
   }
 };
@@ -266,14 +239,8 @@ loadSalavatCountInterval(); // load on startup
 */
 
 const loadFromLocalStorage = (): void => {
-  chatRoom.setProperty(
-      'userSalavatCount',
-      localStorageGetItem<number>('userSalavatCount', 0),
-  );
-  chatRoom.setProperty(
-      'userSalavatCountIncrease',
-      localStorageGetItem<number>('userSalavatCountIncrease', 1),
-  );
+  chatRoom.setProperty('userSalavatCount', localStorageGetItem<number>('userSalavatCount', 0));
+  chatRoom.setProperty('userSalavatCountIncrease', localStorageGetItem<number>('userSalavatCountIncrease', 1));
 
   // Show campaign on first time
   if (!localStorageGetItem<boolean>('visitCampaignPage', false)) {
@@ -292,13 +259,10 @@ const loadFromLocalStorage = (): void => {
 
 loadFromLocalStorage();
 
-chatRoom.onPropertyChanged(
-    'userSalavatCount',
-    (userSalavatCount: number | unknown) => {
-      if (testMode) return;
-      localStorage.setItem('userSalavatCount', userSalavatCount + '');
-    },
-);
+chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
+  if (testMode) return;
+  localStorage.setItem('userSalavatCount', userSalavatCount + '');
+});
 
 /*
   Service Worker

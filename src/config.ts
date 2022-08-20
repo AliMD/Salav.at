@@ -5,14 +5,10 @@ import {campaignIcon, aboutUsIcon, salavatIcon} from './stuff/icon';
 
 export const safeAreaInsetTop = ((): number => {
   const safeAreaInsetTop = parseInt(
-      window
-          .getComputedStyle(document.documentElement)
-          .getPropertyValue('--safe-area-inset-top'),
+      window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'),
       10,
   );
-  return !isNaN(safeAreaInsetTop) && safeAreaInsetTop > 0 ?
-    safeAreaInsetTop :
-    0;
+  return !isNaN(safeAreaInsetTop) && safeAreaInsetTop > 0 ? safeAreaInsetTop : 0;
 })();
 
 export interface MenuItem {
@@ -122,8 +118,8 @@ export const styleConfig = css`
     --app-light-back-color: #eeeeee;
     --app-dark-background-color: #102f4b;
 
-    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma", sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --mdc-typography-font-family: 'Iran Sans', 'Roboto', 'Tahoma', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+      'Segoe UI Symbol';
 
     --mdc-theme-primary: var(--app-primary-color);
     --mdc-theme-secondary: var(--app-accent-color);

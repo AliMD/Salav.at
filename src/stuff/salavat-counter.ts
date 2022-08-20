@@ -25,60 +25,62 @@ export class SalavatCounter extends BaseElement {
   @query('.display-count')
   protected _displayCountElement?: HTMLElement;
 
-  static override styles = [css`
-    :host {
-      display: block;
-      line-height: 1;
-      box-sizing: border-box;
-      white-space: nowrap;
-      text-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
-      text-align: left;
-      will-change: padding;
-      transition-property: padding;
-      transition-duration: 0;
-      transition-timing-function: linear;
-      direction: ltr;
-    }
+  static override styles = [
+    css`
+      :host {
+        display: block;
+        line-height: 1;
+        box-sizing: border-box;
+        white-space: nowrap;
+        text-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
+        text-align: left;
+        will-change: padding;
+        transition-property: padding;
+        transition-duration: 0;
+        transition-timing-function: linear;
+        direction: ltr;
+      }
 
-    :host([animate]) {
-      transition-duration: 700ms;
-    }
+      :host([animate]) {
+        transition-duration: 700ms;
+      }
 
-    .label {
-      word-spacing: -4px;
-      font-size: 1.4rem;
-      font-weight: 300;
-      text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12);
-      direction: rtl;
-    }
+      .label {
+        word-spacing: -4px;
+        font-size: 1.4rem;
+        font-weight: 300;
+        text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12);
+        direction: rtl;
+      }
 
-    .label.before {
-      text-align: right;
-      margin-right: 10px;
-    }
+      .label.before {
+        text-align: right;
+        margin-right: 10px;
+      }
 
-    .label.after {
-      text-align: left;
-    }
+      .label.after {
+        text-align: left;
+      }
 
-    .display-count {
-      display: inline-block;
-      font-size: 5rem;
-      font-size: 1.8rem;
-      font-size: 5rem;
-      font-weight: 700;
-      /* border: 1px dashed gray; */
-    }
+      .display-count {
+        display: inline-block;
+        font-size: 5rem;
+        font-size: 1.8rem;
+        font-size: 5rem;
+        font-weight: 700;
+        /* border: 1px dashed gray; */
+      }
 
-    .comma {
-      color: var(--app-accent-color, #a11);
-      padding: 0 5px;
-    }
+      .comma {
+        color: var(--app-accent-color, #a11);
+        padding: 0 5px;
+      }
 
-    .highlight {
-      color: var(--app-accent-color, #a11);
-    }
-  `];
+      .highlight {
+        color: var(--app-accent-color, #a11);
+      }
+    `,
+  ];
 
   constructor() {
     super();
@@ -99,7 +101,7 @@ export class SalavatCounter extends BaseElement {
     });
   }
 
-  protected override shouldUpdate(_changedProperties: PropertyValues):boolean {
+  protected override shouldUpdate(_changedProperties: PropertyValues): boolean {
     return super.shouldUpdate(_changedProperties) && this.active;
   }
 
@@ -113,13 +115,8 @@ export class SalavatCounter extends BaseElement {
         <!--  -->
       </div>
       ${this.testMode ?
-        html`
-          <div class="label after">
-          <span class="highlight">الکی</span> تست شده
-          </div>
-        ` :
-        html`<div class="label after">صلوات نذر شده</div>`
-}
+         html` <div class="label after"><span class="highlight">الکی</span> تست شده</div> ` :
+         html`<div class="label after">صلوات نذر شده</div>`}
     `;
   }
 
@@ -138,7 +135,7 @@ export class SalavatCounter extends BaseElement {
     return countArrayHtml;
   }
 
-  protected override async firstUpdated(_changedProperties: PropertyValues):Promise<void> {
+  protected override async firstUpdated(_changedProperties: PropertyValues): Promise<void> {
     super.firstUpdated(_changedProperties);
     this._logger.logMethod('firstUpdated');
     chatRoom.onMessage('window-resized', () => {
@@ -151,7 +148,7 @@ export class SalavatCounter extends BaseElement {
     }, 1_000);
   }
 
-  override updated(_changedProperties: PropertyValues):void {
+  override updated(_changedProperties: PropertyValues): void {
     super.updated(_changedProperties);
     // this._log('updated');
     this.computePadding();
@@ -161,10 +158,11 @@ export class SalavatCounter extends BaseElement {
     }
   }
 
-  computeDisplayCount():void {
+  computeDisplayCount(): void {
     if (!(this.active && this.displayCount !== this.count && this.count != undefined)) return;
     // this._log('computeDisplayCount');
-    if (this.displayCount == undefined) { // first time
+    if (this.displayCount == undefined) {
+      // first time
       if (this.count > firstAnimateGap) {
         this.displayCount = this.count - firstAnimateGap;
       } else {
@@ -202,7 +200,7 @@ export class SalavatCounter extends BaseElement {
     this.style.paddingLeft = this.style.paddingRight = padding > 0 ? `${padding}px` : '0';
   }
 
-  _round(number: number, step = 20):number {
+  _round(number: number, step = 20): number {
     return Math.ceil(number / step) * step;
   }
 }

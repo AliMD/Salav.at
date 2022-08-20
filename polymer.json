@@ -1,10 +1,7 @@
 {
   "entrypoint": "index.html",
   "shell": "js/salavat-pwa.js",
-  "sources": [
-    "image/**/*",
-    "font/**/*"
-  ],
+  "sources": ["image/**/*", "font/**/*"],
   "extraDependencies": [
     "manifest.json",
     "push-manifest.json",
@@ -16,10 +13,7 @@
   "builds": [
     {
       "name": "esm-bundled",
-      "browserCapabilities": [
-        "es2015",
-        "modules"
-      ],
+      "browserCapabilities": ["es2015", "modules"],
       "js": {
         "minify": true
       },
@@ -34,9 +28,7 @@
     },
     {
       "name": "es6-bundled",
-      "browserCapabilities": [
-        "es2015"
-      ],
+      "browserCapabilities": ["es2015"],
       "js": {
         "compile": "es2015",
         "minify": true,

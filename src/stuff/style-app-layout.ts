@@ -14,7 +14,7 @@ export const styleAppLayout = css`
     overflow: hidden;
     color: var(--app-primary-text-color);
     background-color: var(--app-primary-color);
-    background-image: url("image/background.jpg");
+    background-image: url('image/background.jpg');
     background-position-x: right;
     background-position-y: bottom;
     background-repeat: no-repeat;
@@ -32,8 +32,8 @@ export const styleAppLayout = css`
 
   mwc-button {
     --mdc-theme-primary: var(--app-primary-text-color);
-    --mdc-typography-font-family: "Iran Sans", "Roboto", "Tahoma",
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol";
+    --mdc-typography-font-family: 'Iran Sans', 'Roboto', 'Tahoma', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+      'Segoe UI Symbol';
     --mdc-typography-button-text-transform: none;
     --mdc-typography-button-font-weight: 300;
     --mdc-typography-button-letter-spacing: normal;
@@ -53,7 +53,7 @@ export const styleAppLayout = css`
     height: 100%;
     color: var(--app-primary-text-color);
     background-color: var(--app-primary-color);
-    background-image: url("image/background.jpg");
+    background-image: url('image/background.jpg');
     background-position-x: left;
     background-position-y: bottom;
     background-repeat: no-repeat;
@@ -67,7 +67,7 @@ export const styleAppLayout = css`
     margin-right: 1.8rem;
     padding: 1.8rem 3rem;
     background-color: var(--app-dark-background-color);
-    box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 20px -6px rgba(0, 0, 0, 0.75);
   }
 
   .drawer-content a.salavat-badge .title {
@@ -152,12 +152,12 @@ export const styleAppLayout = css`
     flex-shrink: 0;
     margin: 0 ${appConfig.mainImageMargin}px;
     border-radius: 0 0 200px 200px;
-    background-image: url("image/main-image.jpg");
+    background-image: url('image/main-image.jpg');
     background-position-x: center;
     background-position-y: top;
     background-repeat: no-repeat;
     background-size: cover;
-    box-shadow: 2px 4px 50px #37474F;
+    box-shadow: 2px 4px 50px #37474f;
 
     /* transform: translate3d(0, 0, 0);
     will-change: transform;
@@ -178,7 +178,7 @@ export const styleAppLayout = css`
   }
 
   :host([has-notch]) .main-image {
-    margin-top: ${safeAreaInsetTop > 8 ? safeAreaInsetTop - 8 : safeAreaInsetTop}px;;
+    margin-top: ${safeAreaInsetTop > 8 ? safeAreaInsetTop - 8 : safeAreaInsetTop}px;
     border-radius: 10px 10px 200px 200px;
   }
 
@@ -187,7 +187,7 @@ export const styleAppLayout = css`
     flex-shrink: 0;
   }
 
-    /* All text mode pages */
+  /* All text mode pages */
   .page.text-mode {
     padding: 20px ${appConfig.mainImageMargin}px;
     font-size: 0.75rem;
