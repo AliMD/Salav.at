@@ -42,21 +42,20 @@ export class AppIndex extends AppElement {
         contain: layout size style;
         overflow: hidden;
         z-index: 0;
+        user-select: none;
+        background-image: url('image/background.jpg');
+        background-position-x: right;
+        background-position-y: bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
       }
+
       .page-container {
         position: relative;
         flex-grow: 1;
         flex-shrink: 1;
         flex-basis: 0%;
         contain: size layout style;
-      }
-      ion-tab-bar {
-        height: 56px;
-      }
-      ion-tab-button {
-        letter-spacing: 0;
-        font-size: 12px;
-        font-weight: 400;
       }
       /* This will be displayed only on lazy loading. */
       [unresolved]::after {
