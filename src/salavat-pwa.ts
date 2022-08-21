@@ -14,14 +14,19 @@ import type {RoutesConfig} from '@alwatr/router';
 import type {Drawer} from '@material/mwc-drawer';
 import type {IconButton} from '@material/mwc-icon-button';
 
-import './director';
-import './stuff/snack-bar';
-import './stuff/page-home';
+import './components/snack-bar';
+import './pages/page-home';
 import './pages/page-404';
 import './pages/page-about';
 import './pages/page-campaign';
 import './pages/page-desktop';
 import '@material/mwc-button';
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'salavat-pwa': SalavatPWA;
+  }
+}
 
 @customElement('salavat-pwa')
 export class SalavatPWA extends AppElement {

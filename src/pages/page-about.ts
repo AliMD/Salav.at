@@ -10,6 +10,12 @@ declare global {
   }
 }
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'page-campaign': PageCampaign;
+  }
+}
+
 @customElement('page-campaign')
 export class PageCampaign extends AppElement {
   static override styles = css``;

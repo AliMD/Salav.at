@@ -17,6 +17,12 @@ if (typeof navigator.vibrate !== 'function') {
   navigator.vibrate = (pattern): boolean => !pattern;
 }
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'page-home': PageHome;
+  }
+}
+
 @customElement('page-home')
 export class PageHome extends AppElement {
   @property({type: Boolean})
