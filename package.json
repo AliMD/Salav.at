@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@alwatr/logger": "^0.8.0",
+    "@alwatr/router": "^0.14.0",
     "@material/mwc-button": "^0.15.0",
     "@material/mwc-drawer": "^0.15.0",
     "@material/mwc-icon-button": "^0.15.0",
