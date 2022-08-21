@@ -12,7 +12,7 @@ export declare class LoggableMixinInterface extends LitElement {
 }
 
 export function LoggableMixin<ClassType extends Constructor<LitElement>>(
-    superClass: ClassType,
+  superClass: ClassType
 ): Constructor<LoggableMixinInterface> & ClassType {
   class LoggableMixinClass extends superClass {
     protected _logger = createLogger(`<${this.tagName.toLowerCase()}>`);

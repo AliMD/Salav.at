@@ -5,10 +5,10 @@ const fetchTimeout = 15_000;
 const _log = (message: unknown, ...restParam: unknown[]): void => {
   if (debug) {
     console.log(
-        `%cDataAPI%c ${message}`,
-        'color: #4CAF50; font-size: 1.2em;',
-        'color: inherit; font-size: 1em;',
-        ...restParam,
+      `%cDataAPI%c ${message}`,
+      'color: #4CAF50; font-size: 1.2em;',
+      'color: inherit; font-size: 1em;',
+      ...restParam
     );
   }
 };
@@ -51,7 +51,7 @@ export interface UpdateResponse<T> {
 export const updateData = async <T>(
   docId: string,
   dataApiItem: Partial<T>,
-  token: string = appConfig.apiToken,
+  token: string = appConfig.apiToken
 ): Promise<UpdateResponse<T>> => {
   _log('updateData %s with %o', docId, dataApiItem);
   const dataApiItemCopy: Record<string, unknown> = {...dataApiItem};

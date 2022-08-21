@@ -2,11 +2,35 @@
 # yarn lockfile v1
 
 
+"@alwatr/logger@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@alwatr/logger/-/logger-0.14.0.tgz#93dc6c827ed08da284679b7e5f61e3d5a3e3c97c"
+  integrity sha512-XX5wZ3hf1CsZnBWSAZwruYVvsoPA4jf11fmDxehHoMMx8WfSAjh60WjltqGu+40X4T30yM87md4/TKBqkog++w==
+  dependencies:
+    tslib "^2.3.1"
+
 "@alwatr/logger@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@alwatr/logger/-/logger-0.8.0.tgz#4e521d9262a3825969ea2ff6aadcded2296089c7"
   integrity sha512-cAGgtBCGqvcbOLNFywNCwLACX1jQC7HZKYt/INGbpxNUBeUAS42aunmV/SoAV4sypOv7LT2BVeaR65psUp+Zdw==
   dependencies:
+    tslib "^2.3.1"
+
+"@alwatr/router@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@alwatr/router/-/router-0.14.0.tgz#7bc51a9ddd99af5161f260360409b3f27292cda1"
+  integrity sha512-vFzMUrvZNcm03FFefFZDy3oREGefQngS3o6jADmHQ6r71EcMOheUov6dbXEmHvJoy56IJL95Nk1EJsPCasFlVQ==
+  dependencies:
+    "@alwatr/logger" "^0.14.0"
+    "@alwatr/signal" "^0.14.0"
+    tslib "^2.3.1"
+
+"@alwatr/signal@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@alwatr/signal/-/signal-0.14.0.tgz#a6fb23319e1d20a6d7c812e5c3ae9cbacf61802e"
+  integrity sha512-kFmNegiE7oSBkeWPqyZBpBcBDOiqAbSi/LT65v+BLBGGVUPDkv67RqmcLjz65799pCp3ABuMTVzhltSafIKi/Q==
+  dependencies:
+    "@alwatr/logger" "^0.14.0"
     tslib "^2.3.1"
 
 "@ampproject/remapping@^2.1.0":

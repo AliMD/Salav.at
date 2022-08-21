@@ -2,7 +2,6 @@ import {TemplateResult, html, PropertyValues} from 'lit';
 import {query} from 'lit/decorators.js';
 import {customElement} from 'lit/decorators/custom-element.js';
 
-
 import {AppElement} from '../app-debt/app-element';
 import {appConfig} from '../config';
 import {chatRoom} from '../utilities/chat-room';
@@ -19,10 +18,16 @@ export interface SnackbarOption {
   timeout?: number;
 }
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'snack-bar': SnackBar;
+  }
+}
+
 @customElement('snack-bar')
 export class SnackBar extends AppElement {
   @query('mwc-snackbar')
-    snackbar: Snackbar | undefined;
+  snackbar: Snackbar | undefined;
 
   protected override render(): TemplateResult {
     this._logger.logMethod('render');
