@@ -26,16 +26,9 @@
     "watch:ts": "yarn build:ts --watch --preserveWatchOutput"
   },
   "dependencies": {
-    "@alwatr/logger": "^0.8.0",
+    "@alwatr/logger": "^0.14.0",
     "@alwatr/router": "^0.14.0",
-    "@material/mwc-button": "^0.15.0",
-    "@material/mwc-drawer": "^0.15.0",
-    "@material/mwc-icon-button": "^0.15.0",
-    "@material/mwc-slider": "^0.14.1",
-    "@material/mwc-snackbar": "^0.15.0",
-    "@webcomponents/webcomponentsjs": "^2.6.0",
-    "lit": "^2.3.1",
-    "pwa-helpers": "^0.9.1"
+    "lit": "^2.3.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.10",

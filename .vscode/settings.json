@@ -8,6 +8,19 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
+  "cSpell.language": "en,fa",
+  "cSpell.words": [
+    "alwatr",
+    "eslintignore",
+    "khafan",
+    "Loggable",
+    "mastmalize",
+    "Mihandoost",
+    "noncallable",
+    "tsbuildinfo",
+    "webcomponents",
+    "webcomponentsjs"
+  ],
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "files.exclude": {
     "src/**/*.map": true,

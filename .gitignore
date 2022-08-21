@@ -2,6 +2,7 @@
 # http://git-scm.com/docs/gitignore
 
 # OSX
+.DS_STORE
 .DS_Store
 ._*
 
@@ -10,28 +11,26 @@ Thumbs.db
 Desktop.ini
 
 # Logs
-logs
-*.log
-npm-debug.log*
+*.log*
 
-# Compiled
+# Build
+build
+android
+.tsbuildinfo
 src/**/*.js
 src/**/*.map
 src/**/*.d.ts
-dist
-server/build
-data/**/*.js
-.tsbuildinfo
-
-# Optional npm cache directory
-/.npm
-
-# temp
-/.tmp
 
 # Dependencies
 node_modules
-bower_components
+package-lock.json
 
-# Design
-*.psd
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
