@@ -11,6 +11,12 @@ const commaSeparator: string = (1_000).toLocaleString('fa').charAt(1);
 const minWidth = 120;
 const firstAnimateGap = 20;
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'salavat-counter': SalavatCounter;
+  }
+}
+
 @customElement('salavat-counter')
 export class SalavatCounter extends AppElement {
   @property({type: Boolean})

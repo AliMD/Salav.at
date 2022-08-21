@@ -19,6 +19,12 @@ export interface SnackbarOption {
   timeout?: number;
 }
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'snack-bar': SnackBar;
+  }
+}
+
 @customElement('snack-bar')
 export class SnackBar extends AppElement {
   @query('mwc-snackbar')

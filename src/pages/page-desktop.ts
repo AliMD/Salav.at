@@ -4,8 +4,14 @@ import {TemplateResult, html, css} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
 
 import {AppElement} from '../app-debt/app-element';
-import {chatRoom} from '../utilities/chat-room';
 import {salavatIcon, qrCode} from '../components/icon';
+import {chatRoom} from '../utilities/chat-room';
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'page-desktop': PageDesktop;
+  }
+}
 
 @customElement('page-desktop')
 export class PageDesktop extends AppElement {

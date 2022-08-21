@@ -9,6 +9,12 @@ declare global {
   }
 }
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'page-about': PageAbout;
+  }
+}
+
 @customElement('page-about')
 export class PageAbout extends AppElement {
   static override styles = css``;
