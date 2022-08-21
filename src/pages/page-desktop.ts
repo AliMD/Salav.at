@@ -3,12 +3,12 @@ import '@material/mwc-slider';
 import {TemplateResult, html, css} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
 
-import {BaseElement} from './base-element';
-import {chatRoom} from './chat-room';
-import {salavatIcon, qrCode} from './icon';
+import {AppElement} from '../app-debt/app-element';
+import {chatRoom} from '../utilities/chat-room';
+import {salavatIcon, qrCode} from '../components/icon';
 
 @customElement('page-desktop')
-export class PageDesktop extends BaseElement {
+export class PageDesktop extends AppElement {
   static override styles = css`
     :host {
       display: flex;

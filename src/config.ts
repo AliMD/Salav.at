@@ -1,7 +1,7 @@
 import {createLogger} from '@alwatr/logger';
 import {css, SVGTemplateResult} from 'lit';
 
-import {campaignIcon, aboutUsIcon, salavatIcon} from './stuff/icon';
+import {campaignIcon, aboutUsIcon, salavatIcon} from './components/icon';
 
 export const safeAreaInsetTop = ((): number => {
   const safeAreaInsetTop = parseInt(

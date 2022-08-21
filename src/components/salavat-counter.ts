@@ -3,16 +3,16 @@ import {query, property} from 'lit/decorators.js';
 import {customElement} from 'lit/decorators/custom-element.js';
 
 
+import {AppElement} from '../app-debt/app-element';
 import {SalavatCountInterface} from '../config';
-import {BaseElement} from './base-element';
-import {chatRoom} from './chat-room';
+import {chatRoom} from '../utilities/chat-room';
 
 const commaSeparator: string = (1_000).toLocaleString('fa').charAt(1);
 const minWidth = 120;
 const firstAnimateGap = 20;
 
 @customElement('salavat-counter')
-export class SalavatCounter extends BaseElement {
+export class SalavatCounter extends AppElement {
   @property({type: Boolean})
     active = false;
 

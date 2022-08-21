@@ -2,22 +2,23 @@ import {TemplateResult, html, PropertyValues, css} from 'lit';
 import {query, state, property} from 'lit/decorators.js';
 import {customElement} from 'lit/decorators/custom-element.js';
 
-import {calcSliderMax} from '../director';
-import {BaseElement} from './base-element';
-import {chatRoom} from './chat-room';
-import {addIcon, removeIcon} from './icon';
+import '@material/mwc-slider';
 
-import type {Slider} from '@material/mwc-slider';
+import {AppElement} from '../app-debt/app-element';
+import {addIcon, removeIcon} from '../components/icon';
+import {calcSliderMax} from '../director';
+import {chatRoom} from '../utilities/chat-room';
 
 import './salavat-counter';
-import '@material/mwc-slider';
+
+import type {Slider} from '@material/mwc-slider';
 
 if (typeof navigator.vibrate !== 'function') {
   navigator.vibrate = (pattern): boolean => !pattern;
 }
 
 @customElement('page-home')
-export class PageHome extends BaseElement {
+export class PageHome extends AppElement {
   @property({type: Boolean})
     active = false;
 
