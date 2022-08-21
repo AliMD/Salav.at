@@ -1,34 +1,18 @@
 {
-  "cSpell.words": [
-    "Pazh",
-    "Salav",
-    "appinstalled",
-    "beforeinstallprompt",
-    "crossorigin",
-    "entrypoint",
-    "fullwidth",
-    "installable",
-    "msapplication",
-    "nowrap",
-    "polyserve",
-    "prpl",
-    "roboto",
-    "salav.at",
-    "salavat",
-    "statechange",
-    "traefik",
-    "updatefound",
-    "webcomponents",
-    "webcomponentsjs",
-    "woff",
-    "برنامه",
-    "حمایت",
-    "داستان",
-    "دانلود",
-    "راهنما",
-    "ساخته",
-    "صلوات",
-    "والپیپر",
-    "کمپین"
-  ]
+  "eslint.packageManager": "yarn",
+  "npm.packageManager": "yarn",
+  "lit-plugin.strict": true,
+  "editor.wordWrapColumn": 120,
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "files.exclude": {
+    "src/**/*.map": true,
+    "src/**/*.js": true,
+    "src/**/*.d.ts": true,
+    "src/**/*.tsbuildinfo": true
+  }
 }
