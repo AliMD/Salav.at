@@ -2,33 +2,51 @@ import {TemplateResult, html, css} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
 
 import {AppElement} from '../app-debt/app-element';
+import {downloadIconOutlined, salavatSmallIcon} from '../components/icon';
 
 declare global {
   interface HTMLElementTagNameMap {
-    'page-about': PageAbout;
+    'page-campaign': PageCampaign;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'page-about': PageAbout;
+    'page-campaign': PageCampaign;
   }
 }
 
-@customElement('page-about')
-export class PageAbout extends AppElement {
+@customElement('page-campaign')
+export class PageCampaign extends AppElement {
   static override styles = css``;
 
   override render(): TemplateResult {
     return html`
       <ion-content>
-        به نظر ما یه سری اتفاقات تو تاریخ موندگار میشه، به این جهت که می تونه کل دنیا رو درگیر خودش کنه. مثل بیماری
-        کرونا که مدتیه درگیرش هستیم. هر سال به نیمه شعبان که می‌رسیدیم دور هم جمع می‌شدیم تا بتونیم با گرفتن یه جشن
-        کوچیک، شاد باشیم از بودنش، شادی کنیم برای داشتنش و یادمون بمونه که وظیفه داریم تلاش کنیم برای اومدنش. اما کرونا
-        امسال رو برامون متفاوت کرد. واسه همین تصمیم گرفتیم نیمه شعبان ۹۹ در بستر فضای مجازی فعالیت کنیم و نتیجش شد همین
-        صلوات‌شماری که می بینید. خط به خط کدهای برنامه نویسی "صلوات"، پیکسل به پیکسل طراحی های گرافیکی "صلوات"، و ثانیه
-        به ثانیه زمان هایی که برای ایجاد این بستر گذاشته شده، با عشق و به یاد کسی بوده که منتظریم با اومدنش تمام روزهای
-        بعد از بودنش رو برامون، "با خاطره خوش"، به یادموندنی کنه... تقدیم به حجة بن الحسن (عجل الله تعالی فرجه الشریف)
+        <ion-header>page campaign</ion-header>
+        <div>
+          گاهی آنقدر تلخی زندگی‌مان زیاد می شود،که رنگِ خوشِ شادی روزهایمان، در قرنطینه تلخِ روزگار به خاکستری می زند.
+          اما ما یاد گرفته ایم تا دهانمان را با سلام و صلوات بر محمد و آل او و درخواست فرج فرزندشان شیرین کنیم تا همه
+          چیز با نشاط شود و غم، از زندگی‌مان رخت ببندد. سلامی به شیرینی با تو بودن... به مناسبت ایام پر برکت شعبان و
+          رمضان، تصمیم گرفتیم کمپین نذر "یک میلیون" صلوات به نیت دعا برای سلامتی و ظهور امام زمان (عجل الله تعالی فرجه
+          الشریف) را از میلاد حضرتش تا میلاد کریم اهل‌بیت، حضرت امام حسن مجتبی (علیه السلام) در نیمه رمضان آغاز کنیم.
+          برای هماهنگی و رسیدن به عدد یک میلیون صلوات، خواهشمندیم تعداد صلوات‌های فرستاده شده را در شمارنده وارد کنید.
+          برای حمایت از کمپین، با دانلود و اشتراک‌گذاری پوستر زیر، به همراه منشن کردن پیج اینستاگرامی صلوات
+          <a href="https://instagram.com/salav_at_/" target="_blank">@Salav_at_</a>
+          همراه این کمپین باشید...
+        </div>
+        <div class="btn-container">
+          <a href="/">
+            <mwc-button>
+              <div class="button-content">${salavatSmallIcon} ثبت صلوات</div>
+            </mwc-button>
+          </a>
+          <a href="image/salavat-story.jpg" target="_blank" download>
+            <mwc-button>
+              <div class="button-content">${downloadIconOutlined} دانلود استوری</div>
+            </mwc-button>
+          </a>
+        </div>
       </ion-content>
     `;
   }

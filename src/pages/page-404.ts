@@ -1,4 +1,4 @@
-import {TemplateResult, html, css} from 'lit';
+import {TemplateResult, html} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
 
 import {AppElement} from '../app-debt/app-element';
@@ -12,11 +12,10 @@ declare global {
 
 @customElement('page-404')
 export class Page404 extends AppElement {
-  static override styles = css``;
-
   override render(): TemplateResult {
     return html`
       <ion-content>
+        <ion-header>page 404</ion-header>
         <div>
           گاهی آنقدر تلخی زندگی‌مان زیاد می شود،که رنگِ خوشِ شادی روزهایمان، در قرنطینه تلخِ روزگار به خاکستری می زند.
           اما ما یاد گرفته ایم تا دهانمان را با سلام و صلوات بر محمد و آل او و درخواست فرج فرزندشان شیرین کنیم تا همه

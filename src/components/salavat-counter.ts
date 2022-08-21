@@ -2,7 +2,6 @@ import {html, css, TemplateResult, PropertyValues} from 'lit';
 import {query, property} from 'lit/decorators.js';
 import {customElement} from 'lit/decorators/custom-element.js';
 
-
 import {AppElement} from '../app-debt/app-element';
 import {SalavatCountInterface} from '../config';
 import {chatRoom} from '../utilities/chat-room';
@@ -20,16 +19,16 @@ declare global {
 @customElement('salavat-counter')
 export class SalavatCounter extends AppElement {
   @property({type: Boolean})
-    active = false;
+  active = false;
 
   @property({type: Boolean, attribute: false})
-    testMode = true;
+  testMode = true;
 
   @property({type: Number, attribute: false})
-    count?: number; // Real salavat count
+  count?: number; // Real salavat count
 
   @property({type: Number, attribute: false})
-    displayCount?: number;
+  displayCount?: number;
 
   @query('.display-count')
   protected _displayCountElement?: HTMLElement;
@@ -123,9 +122,9 @@ export class SalavatCounter extends AppElement {
         ${this._styledDisplayCount}
         <!--  -->
       </div>
-      ${this.testMode ?
-         html` <div class="label after"><span class="highlight">الکی</span> تست شده</div> ` :
-         html`<div class="label after">صلوات نذر شده</div>`}
+      ${this.testMode
+        ? html` <div class="label after"><span class="highlight">الکی</span> تست شده</div> `
+        : html`<div class="label after">صلوات نذر شده</div>`}
     `;
   }
 

@@ -1,4 +1,4 @@
-import {TemplateResult, html, PropertyValues, css} from 'lit';
+import {TemplateResult, html, css} from 'lit';
 import {query, state, property} from 'lit/decorators.js';
 import {customElement} from 'lit/decorators/custom-element.js';
 
@@ -9,7 +9,7 @@ import {addIcon, removeIcon} from '../components/icon';
 import {calcSliderMax} from '../director';
 import {chatRoom} from '../utilities/chat-room';
 
-import './salavat-counter';
+import '../components/salavat-counter';
 
 import type {Slider} from '@material/mwc-slider';
 
@@ -26,7 +26,7 @@ declare global {
 @customElement('page-home')
 export class PageHome extends AppElement {
   @property({type: Boolean})
-    active = false;
+  active = true;
 
   @property({type: Number})
   public userSalavatCount?: number;
@@ -38,19 +38,19 @@ export class PageHome extends AppElement {
   protected _sliderMax = 0;
 
   @query('mwc-slider')
-    _sliderElement!: Slider;
+  _sliderElement!: Slider;
 
   static override styles = css`
     :host {
-      display: none;
+      /* display: none; */
       padding-top: 0.5rem;
       --mdc-icon-size: 20px;
       --mdc-icon-button-size: 40px;
     }
 
-    :host([active]) {
+    /* :host([active]) {
       display: block;
-    }
+    } */
 
     .slider {
       display: flex;
@@ -90,13 +90,14 @@ export class PageHome extends AppElement {
     }
   `;
 
-  protected override shouldUpdate(_changedProperties: PropertyValues): boolean {
-    return super.shouldUpdate(_changedProperties) && this.active;
-  }
+  // protected override shouldUpdate(_changedProperties: PropertyValues): boolean {
+  //   return super.shouldUpdate(_changedProperties) && this.active;
+  // }
 
   protected override render(): TemplateResult {
     this._logger.logMethod('render');
     return html`
+      <ion-header>page home</ion-header>
       <div class="label">
         <span class="title">صلوات های من:</span>
         <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">

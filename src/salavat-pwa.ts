@@ -3,7 +3,6 @@ import {html, TemplateResult, PropertyValues} from 'lit';
 import {state, query} from 'lit/decorators.js';
 import {customElement} from 'lit/decorators/custom-element.js';
 
-
 import {AppElement} from './app-debt/app-element';
 import {styleConfig, pageListArray, MenuItem, safeAreaInsetTop} from './config';
 import {styleAppLayout} from './stylesheets/style-app-layout';
@@ -31,9 +30,6 @@ declare global {
 @customElement('salavat-pwa')
 export class SalavatPWA extends AppElement {
   @state()
-  protected _page = '';
-
-  @state()
   protected _showSubmit = false;
 
   @state()
@@ -50,11 +46,6 @@ export class SalavatPWA extends AppElement {
     super();
 
     router.initial();
-
-    chatRoom.onPropertyChanged('page', (pageName: string | unknown) => {
-      if (!(typeof pageName === 'string')) return;
-      this._page = pageName;
-    });
 
     chatRoom.onPropertyChanged('showSubmit', (showSubmit: boolean | unknown) => {
       this._showSubmit = Boolean(showSubmit);
@@ -74,26 +65,38 @@ export class SalavatPWA extends AppElement {
   protected _activePage = 'home';
 
   protected _routes: RoutesConfig = {
-    // TODO: refactor route, we need to get active page!
-    // TODO: ability to redirect!
     map: (route) => (this._activePage = route.sectionList[0]?.toString().trim() || 'home'),
     list: {
-      home: {
-        render: () => html`<page-home></page-home>`,
+      'home': {
+        render: () => html`<page-home>home</page-home>`,
       },
-      about: {
+      'about': {
         render: () => html`<page-about></page-about>`,
       },
-      campaign: {
+      'campaign': {
         render: () => html`<page-campaign></page-campaign>`,
       },
-      404: {
+      '404': {
         render: () => html`<page-404></page-404>`,
       },
     },
   };
 
   protected _listenerList: Array<unknown> = [];
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this._listenerList.push(
+        router.signal.addListener(
+            (route) => {
+              this._logger.logMethodArgs('routeChanged', {route});
+              this.requestUpdate();
+            },
+            {receivePrevious: true},
+        ),
+    );
+    // TODO: make `hide-tab-bar` signal and bind to this._hideTabBar
+  }
 
   protected override render(): TemplateResult {
     this._logger.logMethod('render');
