@@ -1,131 +1,102 @@
-import {createLogger} from '@alwatr/logger';
-import {css, SVGTemplateResult} from 'lit';
+export type locale = {code: 'fa' | 'en'; dir: 'rtl' | 'ltr'; $code: string};
+export type color = 'blue' | 'indigo' | 'purple' | 'pink' | 'red' | 'orange' | 'yellow' | 'green' | 'teal' | 'cyan';
+export type themeColor = {
+  name: color;
+  colorPrimary: `#${string}`;
+  colorPrimaryContrast: `#${string}`;
+};
 
-import {campaignIcon, aboutUsIcon, salavatIcon} from './components/icon';
-
-export const safeAreaInsetTop = ((): number => {
-  const safeAreaInsetTop = parseInt(
-      window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'),
-      10,
-  );
-  return !isNaN(safeAreaInsetTop) && safeAreaInsetTop > 0 ? safeAreaInsetTop : 0;
-})();
-
-export interface MenuItem {
-  slug: string;
-  sideMenu: true;
-  title: string;
-  icon: SVGTemplateResult;
-}
-
-export interface MenuItemHidden {
-  slug: string;
-  sideMenu: false;
-}
-
-export interface SalavatCountInterface {
-  _id: string;
-  _owner: string;
-  _createdTime: number;
-  _lastEditedTime: number;
-  _lastEditedBy: string;
-  count: number;
-}
-
-export interface SalavatCountDataApiInterface {
-  salavatCount: SalavatCountInterface;
-}
-
-export const logger = createLogger('salav.at');
-
-export const pageListArray: Array<MenuItem | MenuItemHidden> = [
+export const mainNavigation = [
   {
-    slug: 'home', // display in url
-    sideMenu: true, // display in side menu
-    title: 'Salav.at', // menu label
-    icon: salavatIcon, // svg icon object from icon.ts
+    id: 'home',
+    icon: 'home-2',
   },
   {
-    slug: 'campaign', // display in url
-    sideMenu: true, // display in side menu
-    title: 'کمپین', // menu label
-    icon: campaignIcon, // svg icon object from icon.ts
+    id: 'settings',
+    icon: 'setting-2',
   },
   {
-    slug: 'about',
-    sideMenu: true,
-    title: 'داستان ما',
-    icon: aboutUsIcon,
+    id: 'about',
+    icon: 'info-circle',
   },
-  // {
-  //   slug: 'support',
-  //   sideMenu: true,
-  //   title: 'حمایت',
-  //   icon: supportIcon,
-  // },
-  // {
-  //   slug: 'download-wallpaper',
-  //   sideMenu: true,
-  //   title: 'دانلود والپیپر',
-  //   icon: imageIcon,
-  // },
-  // {
-  //   slug: 'install',
-  //   sideMenu: true,
-  //   title: 'نصب برنامه',
-  //   icon: getAppIcon,
-  // },
-  // {
-  //   slug: 'help',
-  //   sideMenu: true,
-  //   title: 'راهنما',
-  //   icon: helpIcon,
-  // },
+] as const;
+
+export const locales: locale[] = [
+  {code: 'fa', dir: 'rtl', $code: 'فارسی'},
+  {code: 'en', dir: 'ltr', $code: 'English'},
+];
+
+export const themeColors: themeColor[] = [
   {
-    slug: 'home',
-    sideMenu: false,
+    name: 'blue',
+    colorPrimary: '#0d6efd',
+    colorPrimaryContrast: '#ffffff',
   },
   {
-    slug: '404',
-    sideMenu: false,
+    name: 'indigo',
+    colorPrimary: '#6610f2',
+    colorPrimaryContrast: '#ffffff',
+  },
+  {
+    name: 'purple',
+    colorPrimary: '#6f42c1',
+    colorPrimaryContrast: '#ffffff',
+  },
+  {
+    name: 'pink',
+    colorPrimary: '#d63384',
+    colorPrimaryContrast: '#ffffff',
+  },
+  {
+    name: 'red',
+    colorPrimary: '#dc3545',
+    colorPrimaryContrast: '#ffffff',
+  },
+  {
+    name: 'orange',
+    colorPrimary: '#fd7e14',
+    colorPrimaryContrast: '#000000',
+  },
+  {
+    name: 'yellow',
+    colorPrimary: '#ffc107',
+    colorPrimaryContrast: '#000000',
+  },
+  {
+    name: 'green',
+    colorPrimary: '#198754',
+    colorPrimaryContrast: '#ffffff',
+  },
+  {
+    name: 'teal',
+    colorPrimary: '#20c997',
+    colorPrimaryContrast: '#000000',
+  },
+  {
+    name: 'cyan',
+    colorPrimary: '#0dcaf0',
+    colorPrimaryContrast: '#000000',
   },
 ];
 
-export const appConfig = {
-  debug: true,
-  appVersion: '1.4.0',
-  apiUri: 'https://api.salav.at',
-  apiToken: 'pazh-vxah4f79o2ir97evva9ts7p5ya94zyx2-fjt',
-  apiSalavatCountDocId: 'salavat/count',
-  apiSalavatTestDocId: 'salavat/test',
-  loadSalavatInterval: 1_000, // ms
-  snackbarTimeout: 4_000, // ms
-  sliderMaxRangeList: [100, 200, 500, 1_000, 2_000, 5_000],
-  // UI
-  maxWith: 768, // px
-  mainImageHeight: 430, // px
-  mainImageMargin: 60, // px
-  iconSize: 28, // px
-  iconButtonSize: 56, // px
+export const themeColorsCode: Record<color, string> = {
+  blue: '#0d6efd',
+  indigo: '#6610f2',
+  purple: '#6f42c1',
+  pink: '#d63384',
+  red: '#dc3545',
+  orange: '#fd7e14',
+  yellow: '#ffc107',
+  green: '#198754',
+  teal: '#20c997',
+  cyan: '#0dcaf0',
 };
 
-export const styleConfig = css`
-  :host {
-    --app-primary-color: #3277b9;
-    /* --app-accent-color: #cf7a59; */
-    --app-accent-color: #f57c00;
-    --app-primary-text-color: #ffffff;
-    --app-light-back-color: #eeeeee;
-    --app-dark-background-color: #102f4b;
-
-    --mdc-typography-font-family: 'Iran Sans', 'Roboto', 'Tahoma', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-      'Segoe UI Symbol';
-
-    --mdc-theme-primary: var(--app-primary-color);
-    --mdc-theme-secondary: var(--app-accent-color);
-    --mdc-theme-on-primary: var(--app-primary-text-color);
-    --mdc-theme-text-primary-on-dark: var(--app-primary-text-color);
-    --mdc-icon-size: ${appConfig.iconSize}px;
-    --mdc-icon-button-size: ${appConfig.iconButtonSize}px;
-  }
-`;
+export const developerTeam: {name: string; description: string; link?: string; image: string}[] = [
+  {
+    name: 'mohammadmahdi_zamanian',
+    description: 'web_developer_project_maintainer',
+    link: 'https://mm25zamanian.ir',
+    image: '/images/developer_team/mohammadmahdi_zamanian.jpg',
+  },
+];

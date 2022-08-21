@@ -1,178 +1,206 @@
-import {TemplateResult, html, PropertyValues, css} from 'lit';
-import {query, state, property} from 'lit/decorators.js';
+import {router} from '@alwatr/router';
+import {SignalInterface} from '@alwatr/signal';
+import {pickerController} from '@ionic/core';
+import {html} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
-
-import '@material/mwc-slider';
+import {range} from 'lit/directives/range.js';
 
 import {AppElement} from '../app-debt/app-element';
-import {addIcon, removeIcon} from '../components/icon';
-import {calcSliderMax} from '../director';
-import {chatRoom} from '../utilities/chat-room';
 
-import './salavat-counter';
+import type {ListenerInterface} from '@alwatr/signal';
+import type {TemplateResult, CSSResult} from 'lit';
 
-import type {Slider} from '@material/mwc-slider';
+import '@erbium/iconsax';
 
-if (typeof navigator.vibrate !== 'function') {
-  navigator.vibrate = (pattern): boolean => !pattern;
+declare global {
+  interface HTMLElementTagNameMap {
+    'page-home': PageHome;
+  }
 }
 
+/**
+ * APP PWA Home Page Element
+ *
+ * ```html
+ * <page-home></page-home>
+ * ```
+ */
 @customElement('page-home')
 export class PageHome extends AppElement {
-  @property({type: Boolean})
-    active = false;
+  static override styles = [...(<CSSResult[]>AppElement.styles)];
 
-  @property({type: Number})
-  public userSalavatCount?: number;
+  protected _settings: settings = {players: 3, spies: 1, time: 5};
+  protected _listenerList: Array<unknown> = [];
+  protected _settingsSignal = new SignalInterface('game-settings');
+  protected _wordsSignal = new SignalInterface('game-words');
 
-  @state()
-  protected _userSalavatCountIncrease = 0;
-
-  @state()
-  protected _sliderMax = 0;
-
-  @query('mwc-slider')
-    _sliderElement!: Slider;
-
-  static override styles = css`
-    :host {
-      display: none;
-      padding-top: 0.5rem;
-      --mdc-icon-size: 20px;
-      --mdc-icon-button-size: 40px;
-    }
-
-    :host([active]) {
-      display: block;
-    }
-
-    .slider {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin: 0 1em;
-    }
-
-    mwc-slider {
-      flex-grow: 1;
-      margin: 0 6px 1px;
-    }
-
-    salavat-counter {
-      margin: 1rem;
-    }
-
-    mwc-icon-button {
-      color: var(--app-accent-color);
-    }
-
-    .label {
-      margin-top: 1rem;
-      text-align: center;
-      text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12);
-    }
-
-    .salavat-count,
-    .salavat-count-increase {
-      font-weight: 500;
-      font-size: 1.3rem;
-    }
-
-    .salavat-count-increase {
-      /* font-size: 1.2rem; */
-      color: var(--app-accent-color);
-    }
-  `;
-
-  protected override shouldUpdate(_changedProperties: PropertyValues): boolean {
-    return super.shouldUpdate(_changedProperties) && this.active;
+  override connectedCallback(): void {
+    super.connectedCallback();
+    this._wordsSignal.dispatch(<string[]> this._localize.term('words'));
+    // this._listenerList.push(router.signal.addListener(() => this.requestUpdate()));
   }
 
-  protected override render(): TemplateResult {
-    this._logger.logMethod('render');
+  override disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this._listenerList.forEach((listener) => (listener as ListenerInterface<keyof AlwatrSignals>).remove());
+  }
+
+  override render(): TemplateResult {
     return html`
-      <div class="label">
-        <span class="title">صلوات های من:</span>
-        <span class="salavat-count-increase" ?hidden="${!this._userSalavatCountIncrease}">
-          ${this._userSalavatCountIncrease?.toLocaleString('fa')}+
-        </span>
-        <span class="salavat-count">${(this.userSalavatCount || 0).toLocaleString('fa')}</span>
-      </div>
-
-      <div class="slider">
-        <mwc-icon-button @click="${this._addIconClick}">${addIcon}</mwc-icon-button>
-        <mwc-slider
-          dir="ltr"
-          .value="${this._userSalavatCountIncrease}"
-          .min="${1}"
-          .max="${this._sliderMax}"
-          .step="${this._sliderMax && this._sliderMax > 2_000 ? 10 : 5}"
-          @input="${this._onSliderInput}"
-          @change="${this._onSliderChange}"
-        ></mwc-slider>
-        <mwc-icon-button @click="${this._removeIconClick}">${removeIcon}</mwc-icon-button>
-      </div>
-
-      <salavat-counter .active="${this.active}"></salavat-counter>
+      <section>
+        <div class="box">
+          <ion-row>
+            <ion-col size="2" class="center">
+              <ion-text color="dark">
+                <er-iconsax name="people" category="broken"></er-iconsax>
+              </ion-text>
+            </ion-col>
+            <ion-col size="4" class="start">
+              <ion-text color="dark"> ${this._localize.term('number_of_players')}:</ion-text>
+            </ion-col>
+            <ion-col size="6" class="center">
+              <ion-button
+                color="dark"
+                expand="block"
+                fill="outline"
+                @click=${(): Promise<void> => this._changeSettings('players')}
+              >
+                <er-iconsax class="select__opt-icon" name="arrow-down" category="bold" slot="end"></er-iconsax>
+                <ion-label slot="start">
+                  ${this._localize.number(this._settings.players)} ${this._localize.term('$players_unit')}
+                </ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2" class="center">
+              <ion-text color="dark">
+                <er-iconsax name="user-remove" category="broken"></er-iconsax>
+              </ion-text>
+            </ion-col>
+            <ion-col size="4" class="start">
+              <ion-text color="dark"> ${this._localize.term('number_of_spies')}: </ion-text>
+            </ion-col>
+            <ion-col size="6" class="center">
+              <ion-button
+                color="dark"
+                expand="block"
+                fill="outline"
+                @click=${(): Promise<void> => this._changeSettings('spies')}
+              >
+                <er-iconsax class="select__opt-icon" name="arrow-down" category="bold" slot="end"></er-iconsax>
+                <ion-label slot="start">
+                  ${this._localize.number(this._settings.spies)} ${this._localize.term('$spies_unit')}
+                </ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2" class="center">
+              <ion-text color="dark">
+                <er-iconsax name="timer-1" category="broken"></er-iconsax>
+              </ion-text>
+            </ion-col>
+            <ion-col size="4" class="start">
+              <ion-text color="dark"> ${this._localize.term('time')}: </ion-text>
+            </ion-col>
+            <ion-col size="6" class="center">
+              <ion-button
+                color="dark"
+                expand="block"
+                fill="outline"
+                @click=${(): Promise<void> => this._changeSettings('time')}
+              >
+                <er-iconsax class="select__opt-icon" name="arrow-down" category="bold" slot="end"></er-iconsax>
+                <ion-label slot="start">
+                  ${this._localize.number(this._settings.time)} ${this._localize.term('$time_unit')}
+                </ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-padding-top">
+            <ion-col size="12">
+              <ion-button
+                color=${this._startButtonStyle.color}
+                ?disabled="${this._startButtonStyle.disabled}"
+                @click="${this._startGame}"
+              >
+                ${this._startButtonStyle.text}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </section>
     `;
   }
 
-  override firstUpdated(): void {
-    chatRoom.onPropertyChanged('userSalavatCount', (userSalavatCount: number | unknown) => {
-      this.userSalavatCount = userSalavatCount as number;
+  protected async _changeSettings(setting: 'spies' | 'players' | 'time'): Promise<void> {
+    let rangeArray: number[] = Array(...range(30));
+
+    switch (setting) {
+      case 'players':
+        rangeArray = Array(...range(3, 31));
+        break;
+      case 'spies':
+        rangeArray = Array(...range(1, 16));
+        break;
+      case 'time':
+        rangeArray = Array(...range(5, 46, 5));
+        break;
+    }
+
+    const picker = await pickerController.create({
+      cssClass: 'settings__select',
+      columns: [
+        {
+          name: setting,
+          prefix: this._localize.term(`$${setting}_unit`),
+          selectedIndex: rangeArray.indexOf(this._settings[setting]),
+          options: rangeArray.map((number: number) => ({
+            text: this._localize.number(number),
+            value: number,
+          })),
+        },
+      ],
+      buttons: [
+        {
+          text: this._localize.term('ok'),
+          handler: (value: {[setting: string]: {text: string; value: number}}): boolean => {
+            this._settings[setting] = value[setting].value;
+            this.requestUpdate();
+            return true;
+          },
+        },
+        {text: this._localize.term('cancel'), role: 'cancel'},
+      ],
     });
 
-    chatRoom.onPropertyChanged('userSalavatCountIncrease', (userSalavatCountIncrease: number | unknown) => {
-      this._userSalavatCountIncrease = userSalavatCountIncrease as number;
-    });
+    await picker.present();
+  }
+  protected _startGame(): void {
+    this._settingsSignal.dispatch(this._settings);
+    if (!this._wordsSignal.dispatched) {
+      return;
+    }
 
-    chatRoom.onPropertyChanged('sliderMax', (sliderMax: number | unknown) => {
-      this._sliderMax = sliderMax as number;
-    });
+    router.signal.request({pathname: router.makeUrl({sectionList: ['game']})});
   }
 
-  protected _onSliderInput(): void {
-    this._logger.logMethod('_onSliderInput');
-    const userSalavatCountIncrease = this._sliderElement.value;
-    if (!isNaN(userSalavatCountIncrease) && userSalavatCountIncrease >= 0) {
-      chatRoom.setProperty('userSalavatCountIncrease', userSalavatCountIncrease);
-      navigator.vibrate(6);
-    }
-  }
+  protected get _startButtonStyle(): {
+    text: string;
+    color: 'primary' | 'danger' | 'warning' | 'success';
+    disabled: boolean;
+    } {
+    const playersRatio = Math.round(this._settings.players / 3);
+    const isDisabled = Math.round(this._settings.players / 2) <= this._settings.spies;
 
-  protected _onSliderChange(): void {
-    this._logger.logMethod('_onSliderChange');
-    const sliderElement = this._sliderElement;
-    // const userSalavatCount = this._userSalavatCount || 0;
-    // if (sliderElement.value < userSalavatCount) {
-    //   sliderElement.value = userSalavatCount;
-    //   chatRoom.setProperty('snackbar', <SnackbarOption>{
-    //     open: true,
-    //     text: 'شما قبلا این تعداد صلوات را نذر کرده‌اید',
-    //   });
-    // }
-    // else {
-    this._onSliderInput();
-    calcSliderMax(sliderElement.value);
-  }
-
-  protected _addIconClick(): void {
-    if (!this._userSalavatCountIncrease) {
-      this._userSalavatCountIncrease = 0;
+    if (playersRatio === this._settings.spies) {
+      return {text: this._localize.term('all_settings_are_good'), color: 'success', disabled: isDisabled};
+    } else if (playersRatio >= this._settings.spies) {
+      return {text: this._localize.term('the_citizen_is_more_likely_to_win'), color: 'warning', disabled: isDisabled};
+    } else if (playersRatio <= this._settings.spies) {
+      return {text: this._localize.term('the_spy_is_more_likely_to_win'), color: 'danger', disabled: isDisabled};
     }
-    chatRoom.setProperty('userSalavatCountIncrease', this._userSalavatCountIncrease + 1);
-    calcSliderMax(this._userSalavatCountIncrease);
-    navigator.vibrate(6);
-  }
-
-  protected _removeIconClick(): void {
-    if (!this._userSalavatCountIncrease) {
-      this._userSalavatCountIncrease = 0;
-    }
-    if (this._userSalavatCountIncrease > 0) {
-      chatRoom.setProperty('userSalavatCountIncrease', this._userSalavatCountIncrease - 1);
-    }
-    calcSliderMax(this._userSalavatCountIncrease);
-    navigator.vibrate(6);
+    return {text: this._localize.term('all_settings_are_good'), color: 'primary', disabled: isDisabled};
   }
 }

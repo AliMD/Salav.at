@@ -1,0 +1,44 @@
+{
+  "short_name": "Spy",
+  "name": "Spy Game",
+  "description": "A Spy Progressive Web Application",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#6301da",
+  "background_color": "#6301da",
+  "orientation": "portrait",
+  "default_locale": "en",
+  "icons": [
+    {
+      "src": "/images/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

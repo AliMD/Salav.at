@@ -3,9 +3,11 @@ import {polyfillsLoader} from '@web/rollup-plugin-polyfills-loader';
 import resolve from '@rollup/plugin-node-resolve';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import summary from 'rollup-plugin-summary';
-import { getBabelOutputPlugin } from '@rollup/plugin-babel';
-import { terser } from 'rollup-plugin-terser';
-import { copy } from '@web/rollup-plugin-copy';
+import {getBabelOutputPlugin} from '@rollup/plugin-babel';
+import {terser} from 'rollup-plugin-terser';
+import {copy} from '@web/rollup-plugin-copy';
+import {generateSW} from 'rollup-plugin-workbox';
+import workboxConfig from './workbox-config.js';
 
 function onwarn(warning) {
   if (warning.code !== 'THIS_IS_UNDEFINED') {
@@ -30,7 +32,8 @@ export default {
 
     minifyHTML(), // Minify HTML template literals
 
-    terser({ // Minify JS
+    terser({
+      // Minify JS
       ecma: 2020,
       module: true,
       warnings: true,
@@ -72,10 +75,14 @@ export default {
       },
     }),
 
-    summary({ showMinifiedSize: false }), // Print bundle summary
+    summary({showMinifiedSize: false}), // Print bundle summary
 
     copy({
-      patterns: ['localization/**/*'],
+      patterns: ['images/**/*'],
+    }),
+
+    generateSW(workboxConfig, function render({swDest, count, size}) {
+      console.log('📦', swDest, '#️⃣', count, '🐘', size);
     }),
   ],
 
@@ -85,7 +92,7 @@ export default {
       format: 'esm',
       chunkFileNames: '[name]-[hash].js',
       entryFileNames: '[name]-[hash].js',
-      dir: 'dist',
+      dir: 'build',
       plugins: [htmlPlugin.api.addOutput('modern')],
     },
     {
@@ -93,7 +100,7 @@ export default {
       format: 'esm',
       chunkFileNames: 'legacy-[name]-[hash].js',
       entryFileNames: 'legacy-[name]-[hash].js',
-      dir: 'dist',
+      dir: 'build',
       plugins: [
         htmlPlugin.api.addOutput('legacy'),
         // Uses babel to compile JS to ES5 and modules to SystemJS
