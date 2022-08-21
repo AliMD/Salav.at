@@ -2,9 +2,7 @@ import {html, TemplateResult, PropertyValues} from 'lit';
 import {state, query} from 'lit/decorators.js';
 import {customElement} from 'lit/decorators/custom-element.js';
 
-import {styleConfig, pageListArray, MenuItem, appConfig, safeAreaInsetTop} from './config';
-import {BaseElement} from './stuff/base-element';
-import {chatRoom} from './stuff/chat-room';
+import {AppElement} from './app-debt/app-element';
 import {
   menuIcon,
   getAppIcon,
@@ -14,9 +12,11 @@ import {
   telegramIcon,
   salavatSmallIcon,
   downloadIconOutlined,
-} from './stuff/icon';
-import {styleAppLayout} from './stuff/style-app-layout';
-import {styleAppResponsive} from './stuff/style-app-responsive';
+} from './components/icon';
+import {styleConfig, pageListArray, MenuItem, appConfig, safeAreaInsetTop} from './config';
+import {styleAppLayout} from './stylesheets/style-app-layout';
+import {styleAppResponsive} from './stylesheets/style-app-responsive';
+import {chatRoom} from './utilities/chat-room';
 
 import type {Drawer} from '@material/mwc-drawer';
 import type {IconButton} from '@material/mwc-icon-button';
@@ -24,11 +24,11 @@ import type {IconButton} from '@material/mwc-icon-button';
 import './director';
 import './stuff/snack-bar';
 import './stuff/page-home';
-import './stuff/page-desktop';
+import './pages/page-desktop';
 import '@material/mwc-button';
 
 @customElement('salavat-pwa')
-export class SalavatPWA extends BaseElement {
+export class SalavatPWA extends AppElement {
   @state()
   protected _page = '';
 

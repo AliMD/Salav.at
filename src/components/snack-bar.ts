@@ -3,9 +3,9 @@ import {query} from 'lit/decorators.js';
 import {customElement} from 'lit/decorators/custom-element.js';
 
 
+import {AppElement} from '../app-debt/app-element';
 import {appConfig} from '../config';
-import {BaseElement} from './base-element';
-import {chatRoom} from './chat-room';
+import {chatRoom} from '../utilities/chat-room';
 import {closeIcon} from './icon';
 
 import type {Snackbar} from '@material/mwc-snackbar';
@@ -20,7 +20,7 @@ export interface SnackbarOption {
 }
 
 @customElement('snack-bar')
-export class SnackBar extends BaseElement {
+export class SnackBar extends AppElement {
   @query('mwc-snackbar')
     snackbar: Snackbar | undefined;
 

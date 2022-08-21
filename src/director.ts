@@ -1,8 +1,8 @@
+import {SnackbarOption} from './components/snack-bar';
 import {pageListArray, appConfig, SalavatCountInterface, SalavatCountDataApiInterface, logger} from './config';
-import {chatRoom} from './stuff/chat-room';
-import {loadData, updateData} from './stuff/data-api';
-import {localStorageGetItem} from './stuff/director-assistant';
-import {SnackbarOption} from './stuff/snack-bar';
+import {chatRoom} from './utilities/chat-room';
+import {loadData, updateData} from './utilities/data-api';
+import {localStorageGetItem} from './utilities/director-assistant';
 
 /*
   routing ....
